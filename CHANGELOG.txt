@@ -1,0 +1,4 @@
+CHANGELOG:
+Autorig_v05_23102017:
+Arturo
+	Se dividieron en metodos, se agregó interfaz para ajustar los controles de los pulgares antes de que se aplique el constraint
