@@ -1,5 +1,6 @@
 import maya.cmds as cmds
 import maya.mel as mel
+import os
 
 #HUESOS CREAR CADENA DEL ROOT HACIA ARRIBA, HE IR ACOMPLETANDO LA CADENA HACIA ABAJO , LA MANO DE IZQUIERDA A DERECHA Y NO OLVIDAR EL REVERESE
 
@@ -2557,8 +2558,8 @@ def rigUpgrades(*args):
 	import Rigging.MKF_Autorig.Autorig_v05_23102017.updateClavicleSwitch
 	reload(Rigging.MKF_Autorig.Autorig_v05_23102017.updateClavicleSwitch) 
 
-	#import Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00
-	#reload(Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00)
+	import Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00
+	reload(Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00)
 
 	cmds.button('upgradesBtn', e=True, en=False)
 
@@ -2577,6 +2578,8 @@ def importRig(*args):
 	'''
 	namespace=':' to delete namespaces
 	'''
-	cmds.file('//Master/master/RnD/Pipeline/Maya/Scripts/Rigging/MKF_Autorig/Autorig_v05_23102017/RIGG_BASE_i_V02.ma', type='mayaAscii', ignoreVersion=True, ra=True, mergeNamespacesOnClash=True, namespace= ':', pr=True, i=True)
+	file = findEnv.findEnv_('MAYA_SCRIPT_PATH', 'Scripts', 'MKF', 'RND')
+
+	cmds.file(file + '/Rigging/MKF_Autorig/Autorig_v05_23102017/RIGG_BASE_i_V02.ma', type='mayaAscii', ignoreVersion=True, ra=True, mergeNamespacesOnClash=True, namespace= ':', pr=True, i=True)
 
 windowSlider()

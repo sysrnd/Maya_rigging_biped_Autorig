@@ -1,12 +1,21 @@
 import maya.cmds as cmds
+import Utils.findEnv as findEnv
+import Utils.maintainShape as shape
+
 AXIS = ['X', 'Y', 'Z']
 class updateRig(object):
 	def __init__(self):
 		self.wiresList = ['LABIO_SUPERIOR_ESQ_DER', 'LABIO_INFERIOR_ESQ_DER', 'LABIO_SUPERIOR_DER', 'LABIO_INFERIOR_DER']
 		self.clavicleList = ['DRIVER_CLAVICULA_DER']
+		self.clavicleJntList = ['CLAVICULA_DER']
+		self.codoCtrls = ['DRIVER_CODO_DER_FK', 'DRIVER_CODO_IZQ_FK']
 		self.fingers = ['DRIVER_MIDDLE', 'DRIVER_CANCEL', 'DRIVER_INDEX', 'DRIVER_PINKY', 'DRIVER_THUMB']
 		self.keywords = ['CABEZA', 'OJO', 'ESCLERA', 'CEJAS', 'DIENTES', 'LENGUA', 'ENCIA', 'CABELLO']
 		self.latNames = {'squash': [True, 'Y'], 'stretch': [False, 'Y'], 'left': [False, 'X'], 'right': [True, 'X']}
+	def elbow(self):
+		for codo in self.codoCtrls:
+			cmds.setAttr(codo + '.rotateX', lock=True, keyable=True)
+			cmds.setAttr(codo + '.rotateZ', lock=True, keyable=True)
 	def mainWires(self, ctrls):
 		for ctrl in ctrls:
 			handle = self.getConn(ctrl, 'transform')
@@ -14,13 +23,18 @@ class updateRig(object):
 			grp = self.group(ctrl)
 			self.setGroup(grp, 0)
 	def mainClavicle(self, ctrls):
-		for ctrl in ctrls:
-			cons = self.getConn(ctrl, 'orientConstraint')
+		for ctrl in range(0, len(ctrls)):
+			cons = self.getConn(self.clavicleList[ctrl], 'orientConstraint')
 			jnt = self.getConn(cons, 'joint')
 			cmds.delete(cons)
-			grp = self.group(ctrl)
+
+			grp = self.group(self.clavicleList[ctrl])
+			tempGrp = shape.shapeToDummy(self.clavicleList[ctrl])
 			self.setGroup(grp, 1)
-			self.orientCons(ctrl, jnt)
+			self.orientCons(self.clavicleList[ctrl], jnt)
+			shape.shapeToCtrl(self.clavicleList[ctrl], tempGrp)
+			pos = cmds.xform(self.clavicleJntList[ctrl], q=True, ws=True, piv=True)
+			cmds.xform(self.clavicleList[ctrl], ws=True, piv=(pos[0], pos[1], pos[2]))
 	def mainFingers(self, ctrls):
 
 		sides = ['_DER_', '_IZQ_']
@@ -58,9 +72,7 @@ class updateRig(object):
 			if 0 == option:
 				cmds.setAttr(grp + '.rotateY', 180)
 			elif 1 == option:
-				cmds.setAttr(grp + '.rotateX', -10)
 				cmds.setAttr(grp + '.rotateY', -180)
-				cmds.setAttr(grp + '.rotateZ', 30)
 	def deleteCons(self, cons):
 
 		cmds.delete(cons)
@@ -111,7 +123,6 @@ class updateRig(object):
 		return geo
 	def lattice(self, geo, name):
 		cmds.select(geo)
-		print geo
 		latticesNode = cmds.lattice(n = name + '_lat', objectCentered=True, dv=(3, 3, 3))
 		cmds.select(cl=True)
 		return latticesNode
@@ -120,6 +131,7 @@ class updateRig(object):
 		clampNode = cmds.shadingNode('clamp', asUtility=True, n=name + '_clamp')
 		cmds.setAttr(clampNode + '.maxR', 1)
 		cmds.connectAttr(clampNode + '.outputR', lattice + '.envelope', f=True)
+
 		if self.latNames[name][0]:
 			invNode = cmds.shadingNode('multiplyDivide', asUtility=True, n=name + '_inv')
 			cmds.setAttr(invNode + '.input2X', -1)
@@ -128,10 +140,15 @@ class updateRig(object):
 		else:
 			cmds.connectAttr(ctrl + '.translate' + self.latNames[name][1], clampNode + '.inputR', f=True)
 	def importCtrl(self):
-		ctrl = cmds.file("Z:/RnD/Pipeline/Maya/Scripts/Rigging/MKF_Autorig/Autorig_v06_01122017/base_FaceCtrls.ma", i=True, rnn=True)
-		print '####'
-		print ctrl
-		return ctrl[3]
+		file = findEnv.findEnv_('MAYA_SCRIPT_PATH', 'Scripts', 'MKF', 'RND')
+		ctrls = cmds.file(file + "/Rigging/Maya_rigging_biped_Autorig/maya_files/base_FaceCtrls.ma", i=True, rnn=True)
+		squetchCtrl = ''
+		
+		for ctrl in ctrls:
+			if ctrl.endswith('Squetch_ctrl'):
+				squetchCtrl = ctrl
+
+		return squetchCtrl
 	def latsToHierarchy(self, lats, headCtrl, squetchCtrl):
 		squetchCtrlGrp = cmds.listRelatives(squetchCtrl, p=True)[0]
 		cmds.group(lats)
@@ -140,6 +157,6 @@ class updateRig(object):
 
 uRig = updateRig()
 uRig.mainWires(uRig.wiresList)
-#uRig.mainClavicle(uRig.clavicleList)
+uRig.mainClavicle(uRig.clavicleList)
 uRig.mainFingers(uRig.fingers)
 uRig.mainHeadSquetch()
