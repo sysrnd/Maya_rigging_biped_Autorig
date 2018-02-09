@@ -1,7 +1,7 @@
 import maya.cmds as cmds
 import maya.mel as mel
 import os
-
+import Utils.os_Find_Env.findEnv_app as findEnv
 #HUESOS CREAR CADENA DEL ROOT HACIA ARRIBA, HE IR ACOMPLETANDO LA CADENA HACIA ABAJO , LA MANO DE IZQUIERDA A DERECHA Y NO OLVIDAR EL REVERESE
 
 
@@ -765,8 +765,8 @@ def autoRigAnderPte1(*args):
 	cmds.pointConstraint( 'CODO_DER', 'DRIVER_CODO_DER')
 	cmds.pointConstraint( 'RODILLA_DER', 'DRIVER_RODILLA_DER')
 	cmds.pointConstraint( 'RODILLA_IZQ', 'DRIVER_RODILLA_IZQ')
-	cmds.pointConstraint( 'REV_DER_1', 'DRIVER_PIE_DER')
-	cmds.pointConstraint( 'REV_IZQ_1', 'DRIVER_PIE_IZQ')
+	cmds.pointConstraint( 'TALON_DER', 'DRIVER_PIE_DER')
+	cmds.pointConstraint( 'TALON_IZQ', 'DRIVER_PIE_IZQ')
 	cmds.pointConstraint( 'LENGUA_2', 'DRIVER_LENGUA')
 	cmds.pointConstraint( 'PINKY_SEC_IZQ', 'DRIVER_PINKY_SEC_IZQ')
 	cmds.pointConstraint( 'PINKY_SEC_DER', 'DRIVER_PINKY_SEC_DER')
@@ -2538,7 +2538,7 @@ def falangeta(*args):
 	'''
 	value = cmds.floatSlider('falangetaSlider', q=True, v=True)
 	cmds.setAttr('GRP_DRIVER_THUMB_IZQ_3' + '.rotateX', value)
-	cmds.setAttr('GRP_DRIVER_THUMB_DER_3' + '.rotateX', (value - 180))
+	#cmds.setAttr('GRP_DRIVER_THUMB_DER_3' + '.rotateX', (value - 180))
 
 def falangina(*args):
 	'''
@@ -2547,19 +2547,23 @@ def falangina(*args):
 	value = cmds.floatSlider('falanginaSlider', q=True, v=True)
 
 	cmds.setAttr('GRP_DRIVER_THUMB_IZQ_2' + '.rotateX', value)
-	cmds.setAttr('GRP_DRIVER_THUMB_DER_2' + '.rotateX', (value - 180))
+	#cmds.setAttr('GRP_DRIVER_THUMB_DER_2' + '.rotateX', (value - 180))
 
 
 
 def rigUpgrades(*args):
-	import Rigging.MKF_Autorig.Autorig_v05_23102017.SCRIPT_CORRECCION_03
-	reload(Rigging.MKF_Autorig.Autorig_v05_23102017.SCRIPT_CORRECCION_03)
+	
+	#import Rigging.Maya_rigging_biped_Autorig.SCRIPT_CORRECCION_03
+	#reload(Rigging.Maya_rigging_biped_Autorig.SCRIPT_CORRECCION_03)
 
-	import Rigging.MKF_Autorig.Autorig_v05_23102017.updateClavicleSwitch
-	reload(Rigging.MKF_Autorig.Autorig_v05_23102017.updateClavicleSwitch) 
+	#import Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch
+	#reload(Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch)
 
-	import Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00
-	reload(Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00)
+	import Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation
+	reload(Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation)
+
+	#import Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00
+	#reload(Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00)
 
 	cmds.button('upgradesBtn', e=True, en=False)
 
@@ -2578,8 +2582,7 @@ def importRig(*args):
 	'''
 	namespace=':' to delete namespaces
 	'''
-	file = findEnv.findEnv_('MAYA_SCRIPT_PATH', 'Scripts', 'MKF', 'RND')
+	file = findEnv.findEnvVar_('MAYA_SCRIPT_PATH', 'Scripts', 'MKF', 'RND')
 
-	cmds.file(file + '/Rigging/MKF_Autorig/Autorig_v05_23102017/RIGG_BASE_i_V02.ma', type='mayaAscii', ignoreVersion=True, ra=True, mergeNamespacesOnClash=True, namespace= ':', pr=True, i=True)
-
+	cmds.file(file + '/Rigging/Maya_rigging_biped_Autorig/RIGG_BASE.ma', type='mayaAscii', ignoreVersion=True, ra=True, mergeNamespacesOnClash=True, namespace= ':', pr=True, i=True)
 windowSlider()

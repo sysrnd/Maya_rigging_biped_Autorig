@@ -1,3 +1,5 @@
+import maya.cmds as cmds
+
 CTRL_DER = 'DRIVER_THUMB_DER_'
 CTRL_IZQ = 'DRIVER_THUMB_IZQ_'
 JNT_DER = 'THUMB_DER_'
