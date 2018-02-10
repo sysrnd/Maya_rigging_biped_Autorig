@@ -2561,19 +2561,19 @@ def rigUpgrades(*args):
 	reload(Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch)
 
 
-	import Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00
-	reload(Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00)
+	import Rigging.Maya_rigging_biped_Autorig.Rig_update2_00
+	reload(Rigging.Maya_rigging_biped_Autorig.Rig_update2_00)
 
 	cmds.button('upgradesBtn', e=True, en=False)
 
 def facialRig(*args):
 
 
-	import Rigging.MKF_Autorig.Autorig_v05_23102017.wrapCejas
-	reload(Rigging.MKF_Autorig.Autorig_v05_23102017.wrapCejas)
+	import Rigging.Maya_rigging_biped_Autorig.wrapCejas
+	reload(Rigging.Maya_rigging_biped_Autorig.wrapCejas)
 
-	import Rigging.MKF_Autorig.Autorig_v05_23102017.RIGG_FACIAL_03
-	reload(Rigging.MKF_Autorig.Autorig_v05_23102017.RIGG_FACIAL_03) 
+	import Rigging.Maya_rigging_biped_Autorig.RIGG_FACIAL_03
+	reload(Rigging.Maya_rigging_biped_Autorig.RIGG_FACIAL_03) 
 
 	cmds.button('facialBtn', e=True, en=False)
 
