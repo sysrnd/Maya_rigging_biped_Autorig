@@ -3,7 +3,7 @@ import maya.cmds as cmds
 import maya.mel as mel
 
 
-lados = ['IZQ', 'DER']
+lados = ['DER', 'IZQ']
 
 for lado in lados:
 
@@ -57,60 +57,11 @@ for lado in lados:
 	cmds.setAttr( 'DRIVER_RODILLA_%s.SWITCH_RODILLA_%s' %(lado, lado), 0 )
 	#cmds.setAttr( 'DRIVER_PIE_%s.SWITCH_RODILLA_%s' %(lado, lado), 0 )
 
-	#CORRECION SWITCH RODILLA (TERMINA)
-
-
-
-	#CORRECION SWITCH HOMBROS (COMIENZA)
-	'''
-	cmds.spaceLocator(n='LOC_HOMBRO_%s' %lado)
-
-	cmds.pointConstraint( 'HOMBRO_%s' %lado, 'LOC_HOMBRO_%s' %lado, name = 'POINT_CONSTRAIN_HOMBRO_%s' %lado)
-
-	cmds.parent('DRIVER_HOMBRO_%s_FK' %lado, w=True)
-
-	cmds.group('DRIVER_HOMBRO_%s_FK' %lado, n='GRP_DRIVER_HOMBRO_%s_FK' %lado)
-
-	PX = cmds.getAttr('LOC_HOMBRO_%s.tx' %lado)
-	PY = cmds.getAttr('LOC_HOMBRO_%s.ty' %lado)
-	PZ = cmds.getAttr('LOC_HOMBRO_%s.tz' %lado)
-
-	cmds.move(PX, PY, PZ, "GRP_DRIVER_HOMBRO_%s_FK.scalePivot" %lado,"GRP_DRIVER_HOMBRO_%s_FK.rotatePivot" %lado, absolute=True)
-
-	cmds.parent( 'GRP_DRIVER_HOMBRO_%s_FK' %lado, 'DRIVER_COLUMNA_TOP')
-
-	cmds.parentConstraint( 'LOC_HOMBRO_%s' %lado, 'GRP_DRIVER_HOMBRO_%s_FK' %lado, mo=1, sr=["x","z","y"], name = 'PARENT_CONSTRAIN_HOMBRO_%s_TRANSLATE' %lado)
-
-	cmds.parentConstraint( 'DRIVER_CLAVICULA_%s' %lado, 'GRP_DRIVER_HOMBRO_%s_FK' %lado, mo=1, st=["x","z","y"], name = 'PARENT_CONSTRAIN_HOMBRO_%s_ROTATE' %lado)
-
-	cmds.select('DRIVER_HOMBRO_%s_FK' %lado)
-
-	cmds.addAttr(longName='SWITCH', defaultValue=0, minValue=0, maxValue=1, k=True)
-
-
-	cmds.setAttr( 'PARENT_CONSTRAIN_HOMBRO_%s_ROTATE.DRIVER_CLAVICULA_%sW0' %(lado,lado), 0)
-
-	cmds.setDrivenKeyframe( 'PARENT_CONSTRAIN_HOMBRO_%s_ROTATE.DRIVER_CLAVICULA_%sW0' %(lado,lado), cd='DRIVER_HOMBRO_%s_FK.SWITCH' %lado)
-
-	cmds.setAttr( 'DRIVER_HOMBRO_%s_FK.SWITCH' %lado, 1 )
-	cmds.setAttr( 'PARENT_CONSTRAIN_HOMBRO_%s_ROTATE.DRIVER_CLAVICULA_%sW0' %(lado,lado), 1)
-
-	cmds.setDrivenKeyframe( 'PARENT_CONSTRAIN_HOMBRO_%s_ROTATE.DRIVER_CLAVICULA_%sW0' %(lado,lado), cd='DRIVER_HOMBRO_%s_FK.SWITCH' %lado)
-
-	cmds.setAttr( 'DRIVER_HOMBRO_%s_FK.SWITCH' %lado, 0 )
-	'''
-	#CORRECION SWITCH HOMBROS (TERMINA)
-
-
-
 cmds.setAttr( 'DRIVER_HOMBRO_IZQ_FK.overrideEnabled', 1 )
 cmds.setAttr( 'DRIVER_HOMBRO_IZQ_FK.overrideColor', 6 )
 
 cmds.setAttr( 'DRIVER_HOMBRO_DER_FK.overrideEnabled', 1 )
 cmds.setAttr( 'DRIVER_HOMBRO_DER_FK.overrideColor', 13 )
-
-#cmds.editDisplayLayerMembers( 'no_tocar', 'LOC_HOMBRO_IZQ', 'LOC_HOMBRO_DER')
-
 
 
 #CORRECION SWITCH CABEZA (COMIENZA)

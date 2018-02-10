@@ -2501,6 +2501,8 @@ def autoRigAnderPte2(*args):
 	cmds.parent( 'DRIVER_CARA', 'MASTER')
 
 	#EMPARENTAMIENTO Y CREACION DE BLENDS CARA(TERMINA)
+	import Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation
+	reload(Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation)
 
 def windowSlider():
 	'''
@@ -2552,18 +2554,15 @@ def falangina(*args):
 
 
 def rigUpgrades(*args):
-	
 	#import Rigging.Maya_rigging_biped_Autorig.SCRIPT_CORRECCION_03
 	#reload(Rigging.Maya_rigging_biped_Autorig.SCRIPT_CORRECCION_03)
+	
+	import Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch
+	reload(Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch)
 
-	#import Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch
-	#reload(Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch)
 
-	import Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation
-	reload(Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation)
-
-	#import Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00
-	#reload(Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00)
+	import Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00
+	reload(Rigging.MKF_Autorig.Autorig_v05_23102017.Rig_update2_00)
 
 	cmds.button('upgradesBtn', e=True, en=False)
 

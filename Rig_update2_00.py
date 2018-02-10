@@ -1,8 +1,10 @@
 import maya.cmds as cmds
-import Utils.findEnv as findEnv
-import Utils.maintainShape as shape
+import Utils.os_Find_Env.findEnv_app as findEnv
+import Utils.Maya_Maintain_Shape.maintainShape_app as shape
 
 AXIS = ['X', 'Y', 'Z']
+print 'cqe'
+
 class updateRig(object):
 	def __init__(self):
 		self.wiresList = ['LABIO_SUPERIOR_ESQ_DER', 'LABIO_INFERIOR_ESQ_DER', 'LABIO_SUPERIOR_DER', 'LABIO_INFERIOR_DER']
@@ -18,8 +20,8 @@ class updateRig(object):
 			cmds.setAttr(codo + '.rotateZ', lock=True, keyable=True)
 	def mainWires(self, ctrls):
 		for ctrl in ctrls:
-			handle = self.getConn(ctrl, 'transform')
-			self.replaceConn(handle, ctrl)
+			#handle = self.getConn(ctrl, 'transform')
+			#self.replaceConn(handle, ctrl)
 			grp = self.group(ctrl)
 			self.setGroup(grp, 0)
 	def mainClavicle(self, ctrls):
@@ -74,7 +76,6 @@ class updateRig(object):
 			elif 1 == option:
 				cmds.setAttr(grp + '.rotateY', -180)
 	def deleteCons(self, cons):
-
 		cmds.delete(cons)
 	def orientCons(self, ctrl, jnt):
 
@@ -86,7 +87,8 @@ class updateRig(object):
 
 		cmds.pointConstraint(ctrl, jnt, mo=True)
 	def getConn(self, ctrl, typeCons):
-		cmds.select(ctrl)
+		
+		#cmds.select(ctrl)
 		handle = cmds.listConnections(ctrl, type=typeCons)[0]
 		return handle
 	def replaceConn(self, handle, ctrl):
@@ -140,7 +142,7 @@ class updateRig(object):
 		else:
 			cmds.connectAttr(ctrl + '.translate' + self.latNames[name][1], clampNode + '.inputR', f=True)
 	def importCtrl(self):
-		file = findEnv.findEnv_('MAYA_SCRIPT_PATH', 'Scripts', 'MKF', 'RND')
+		file = findEnv.findEnvVar_('MAYA_SCRIPT_PATH', 'Scripts', 'MKF', 'RND')
 		ctrls = cmds.file(file + "/Rigging/Maya_rigging_biped_Autorig/maya_files/base_FaceCtrls.ma", i=True, rnn=True)
 		squetchCtrl = ''
 		
@@ -160,3 +162,4 @@ uRig.mainWires(uRig.wiresList)
 uRig.mainClavicle(uRig.clavicleList)
 uRig.mainFingers(uRig.fingers)
 uRig.mainHeadSquetch()
+
