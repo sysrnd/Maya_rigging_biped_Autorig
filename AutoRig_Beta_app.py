@@ -2581,7 +2581,7 @@ def importRig(*args):
 	'''
 	namespace=':' to delete namespaces
 	'''
-	file = findEnv.findEnvVar_('MAYA_SCRIPT_PATH', 'Scripts', 'MKF', 'RND')
+	fileEnv = findEnv.findEnvVar_()
 
-	cmds.file(file + '/Rigging/Maya_rigging_biped_Autorig/RIGG_BASE.ma', type='mayaAscii', ignoreVersion=True, ra=True, mergeNamespacesOnClash=True, namespace= ':', pr=True, i=True)
+	cmds.file(fileEnv + '/Rigging/Maya_rigging_biped_Autorig/RIGG_BASE.ma', type='mayaAscii', ignoreVersion=True, ra=True, mergeNamespacesOnClash=True, namespace= ':', pr=True, i=True)
 windowSlider()
