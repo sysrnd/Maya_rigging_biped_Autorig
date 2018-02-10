@@ -142,7 +142,7 @@ class updateRig(object):
 		else:
 			cmds.connectAttr(ctrl + '.translate' + self.latNames[name][1], clampNode + '.inputR', f=True)
 	def importCtrl(self):
-		file = findEnv.findEnvVar_('MAYA_SCRIPT_PATH', 'Scripts', 'MKF', 'RND')
+		file = findEnv.findEnvVar_()
 		ctrls = cmds.file(file + "/Rigging/Maya_rigging_biped_Autorig/maya_files/base_FaceCtrls.ma", i=True, rnn=True)
 		squetchCtrl = ''
 		
