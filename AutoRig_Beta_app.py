@@ -2502,7 +2502,7 @@ def autoRigAnderPte2(*args):
 
 	#EMPARENTAMIENTO Y CREACION DE BLENDS CARA(TERMINA)
 	import Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation
-	reload(Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation)
+	#reload(Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation)
 
 def windowSlider():
 	'''
