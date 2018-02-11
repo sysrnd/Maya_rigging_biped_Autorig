@@ -2554,15 +2554,15 @@ def falangina(*args):
 
 
 def rigUpgrades(*args):
-	#import Rigging.Maya_rigging_biped_Autorig.SCRIPT_CORRECCION_03
+	import Rigging.Maya_rigging_biped_Autorig.SCRIPT_CORRECCION_03
 	#reload(Rigging.Maya_rigging_biped_Autorig.SCRIPT_CORRECCION_03)
 	
 	import Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch
-	reload(Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch)
+	#reload(Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch)
 
 
 	import Rigging.Maya_rigging_biped_Autorig.Rig_update2_00
-	reload(Rigging.Maya_rigging_biped_Autorig.Rig_update2_00)
+	#reload(Rigging.Maya_rigging_biped_Autorig.Rig_update2_00)
 
 	cmds.button('upgradesBtn', e=True, en=False)
 
@@ -2570,10 +2570,10 @@ def facialRig(*args):
 
 
 	import Rigging.Maya_rigging_biped_Autorig.wrapCejas
-	reload(Rigging.Maya_rigging_biped_Autorig.wrapCejas)
+	#reload(Rigging.Maya_rigging_biped_Autorig.wrapCejas)
 
 	import Rigging.Maya_rigging_biped_Autorig.RIGG_FACIAL_03
-	reload(Rigging.Maya_rigging_biped_Autorig.RIGG_FACIAL_03) 
+	#reload(Rigging.Maya_rigging_biped_Autorig.RIGG_FACIAL_03) 
 
 	cmds.button('facialBtn', e=True, en=False)
 
