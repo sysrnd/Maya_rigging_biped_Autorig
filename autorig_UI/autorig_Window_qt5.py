@@ -308,8 +308,7 @@ class Ui_AutoRig_window(object):
         self.retranslateUi(AutoRig_window)
 
         self.widget_tabs.setCurrentIndex(0)
-
-        self.slider_falangeta.valueChanged[int].connect(self.lbl_falangeta_int.setNum)
+        
         self.slider_falangina.valueChanged[int].connect(self.lbl_falangina_int.setNum)
         QtCore.QMetaObject.connectSlotsByName(AutoRig_window)
 
