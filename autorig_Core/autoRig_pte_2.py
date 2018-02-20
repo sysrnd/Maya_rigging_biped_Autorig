@@ -1,3 +1,4 @@
+import maya.cmds as cmds
 
 def autoRigAnderPte2(*args):
 	#FREEZE DRIVERS(COMIENZA)

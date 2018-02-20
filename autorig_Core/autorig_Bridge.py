@@ -35,9 +35,9 @@ class BridgeActions():
         self.btn_importRig.clicked.connect(self.importRig)
         self.btn_reset.clicked.connect(self.resetUI)
         self.btn_startAutorig.clicked.connect(self.autoRig_pte1)
+        self.btn_finishAutorig.clicked.connect(self.autoRig_pte2)
+        self.btn_facialRig.clicked.connect(self.facialRig)
         '''
-        self.btn_finishAutorig.clicked.connect(self.test)
-        self.btn_facialRig.clicked.connect(self.test)
         self.btn_apply.clicked.connect(self.test)
         '''
 
@@ -58,16 +58,26 @@ class BridgeActions():
 
     def importRig(self):
         self.btn_importRig.setDisabled(True)
-        self.slider_falangina.setDisabled(True)
         self.mainCore.importRig()
         self.lbl_status.setText('Imported Rig')
 
     def autoRig_pte1(self):
         import Rigging.Maya_rigging_biped_Autorig.autorig_Core.autoRig_pte_1 as pteUno
         pteUno.autoRigAnderPte1()
+
     def autoRig_pte2(self):
         import Rigging.Maya_rigging_biped_Autorig.autorig_Core.autoRig_pte_2 as pteDos
+
         pteDos.autoRigAnderPte2()
 
+        import Rigging.Maya_rigging_biped_Autorig.SCRIPT_CORRECCION_03
+        import Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch
+        import Rigging.Maya_rigging_biped_Autorig.Rig_update2_00
+
+    def facialRig(self):
+
+        import Rigging.Maya_rigging_biped_Autorig.wrapCejas
+        import Rigging.Maya_rigging_biped_Autorig.RIGG_FACIAL_03
+        
     def slider(self, argumentirri, value):
         cmds.setAttr(argumentirri + '.rotateX', value)
