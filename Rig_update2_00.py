@@ -3,7 +3,6 @@ import Utils.os_Find_Env.findEnv_app as findEnv
 import Utils.Maya_Maintain_Shape.maintainShape_app as shape
 
 AXIS = ['X', 'Y', 'Z']
-print 'cqe'
 
 class updateRig(object):
 	def __init__(self):

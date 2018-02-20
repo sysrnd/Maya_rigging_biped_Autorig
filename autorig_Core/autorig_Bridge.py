@@ -69,11 +69,25 @@ class BridgeActions():
         import Rigging.Maya_rigging_biped_Autorig.autorig_Core.autoRig_pte_2 as pteDos
 
         pteDos.autoRigAnderPte2()
-        import Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation
+        
+        import Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation as fixThumb
+        fixThumb.mainThumbs()
 
-        import Rigging.Maya_rigging_biped_Autorig.SCRIPT_CORRECCION_03
-        import Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch
-        import Rigging.Maya_rigging_biped_Autorig.Rig_update2_00
+        import Rigging.Maya_rigging_biped_Autorig.SCRIPT_CORRECCION_03 as corr
+        corr.mainCorrection()
+
+        import Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch as clav
+        clav.spaceSwitchClavicle('DRIVER_HOMBRO_IZQ_FK', 'IZQ')
+        clav.spaceSwitchClavicle('DRIVER_HOMBRO_DER_FK', 'DER')
+
+        from Rigging.Maya_rigging_biped_Autorig.Rig_update2_00 import updateRig as UpdateRig
+        uRig = UpdateRig()
+        uRig.mainWires(uRig.wiresList)
+        uRig.mainClavicle(uRig.clavicleList)
+        uRig.mainFingers(uRig.fingers)
+        uRig.mainHeadSquetch()
+
+
 
     def facialRig(self):
 

@@ -37,5 +37,3 @@ def spaceSwitchClavicle(clav_ctrl, side):
 	
 
 
-spaceSwitchClavicle('DRIVER_HOMBRO_IZQ_FK', 'IZQ')
-spaceSwitchClavicle('DRIVER_HOMBRO_DER_FK', 'DER')
