@@ -69,6 +69,7 @@ class BridgeActions():
         import Rigging.Maya_rigging_biped_Autorig.autorig_Core.autoRig_pte_2 as pteDos
 
         pteDos.autoRigAnderPte2()
+        import Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation
 
         import Rigging.Maya_rigging_biped_Autorig.SCRIPT_CORRECCION_03
         import Rigging.Maya_rigging_biped_Autorig.updateClavicleSwitch
@@ -78,6 +79,6 @@ class BridgeActions():
 
         import Rigging.Maya_rigging_biped_Autorig.wrapCejas
         import Rigging.Maya_rigging_biped_Autorig.RIGG_FACIAL_03
-        
+
     def slider(self, argumentirri, value):
         cmds.setAttr(argumentirri + '.rotateX', value)
