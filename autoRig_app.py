@@ -4,7 +4,6 @@ StandAlone pyqt4
 """
 import sys
 import platform
-import maya.cmds as cmds
 from Modules.Qt  import QtCore, QtGui, QtWidgets
 
 import Rigging.Maya_rigging_biped_Autorig.autorig_UI.autorig_Window_qt5
@@ -34,8 +33,6 @@ if __name__ != "__main__":
 	window.setWindowFlags(
 		window.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
 	interfaceMacho = BridgeActions(window_interface=window)
-	if cmds.window('AutoRig_window', exists=True):
-		cmds.deleteUI('AutoRig_window')
 	window.show()
 
 	try:
