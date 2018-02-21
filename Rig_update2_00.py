@@ -155,10 +155,3 @@ class updateRig(object):
 		cmds.group(lats)
 		cmds.parent(lats, headCtrl)
 		cmds.parent(squetchCtrlGrp, headCtrl)
-
-uRig = updateRig()
-uRig.mainWires(uRig.wiresList)
-uRig.mainClavicle(uRig.clavicleList)
-uRig.mainFingers(uRig.fingers)
-uRig.mainHeadSquetch()
-

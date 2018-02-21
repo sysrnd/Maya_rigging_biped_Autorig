@@ -65,10 +65,14 @@ class BridgeActions():
         import Rigging.Maya_rigging_biped_Autorig.autorig_Core.autoRig_pte_1 as pteUno
         pteUno.autoRigAnderPte1()
 
+        self.btn_startAutorig.setDisabled(True)
+
     def autoRig_pte2(self):
         import Rigging.Maya_rigging_biped_Autorig.autorig_Core.autoRig_pte_2 as pteDos
 
         pteDos.autoRigAnderPte2()
+
+
         
         import Rigging.Maya_rigging_biped_Autorig.fix_ThumbOrientation as fixThumb
         fixThumb.mainThumbs()
@@ -87,12 +91,14 @@ class BridgeActions():
         uRig.mainFingers(uRig.fingers)
         uRig.mainHeadSquetch()
 
-
+        self.btn_finishAutorig.setDisabled(True)
 
     def facialRig(self):
 
         import Rigging.Maya_rigging_biped_Autorig.wrapCejas
         import Rigging.Maya_rigging_biped_Autorig.RIGG_FACIAL_03
+
+        self.btn_facialRig.setDisabled(True)
 
     def slider(self, argumentirri, value):
         cmds.setAttr(argumentirri + '.rotateX', value)
