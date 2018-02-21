@@ -24,20 +24,22 @@ class MyApplication(QtWidgets.QMainWindow, Ui_AutoRig_window):
 
 if __name__ != "__main__":
 	try:
-	
 		app = QtWidgets.QApplication(sys.argv)
-        
 	except:
 		app = QtCore.QCoreApplication.instance()
+	
+	#in case there are two open
+	try:
+		window.close()
+
+	except:
+		print "error al intentar salir"
 	window = MyApplication()
 	window.setWindowFlags(
 		window.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
 	interfaceMacho = BridgeActions(window_interface=window)
+	
 	window.show()
 
-	try:
-		sys.exit(app.exec_())
-	except:
-		"error al intentar salir"
 
 
