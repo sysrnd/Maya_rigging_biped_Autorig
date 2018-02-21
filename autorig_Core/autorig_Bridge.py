@@ -2,6 +2,7 @@ from Modules.Qt import QtCore
 import maya.cmds as cmds
 from functools import partial
 
+
 import Rigging.Maya_rigging_biped_Autorig.autorig_Core.autorig_MainCore
 reload(Rigging.Maya_rigging_biped_Autorig.autorig_Core.autorig_MainCore)
 from Rigging.Maya_rigging_biped_Autorig.autorig_Core.autorig_MainCore import autoRig_mainCore
@@ -43,6 +44,7 @@ class BridgeActions():
 
         self.slider_falangina.valueChanged[int].connect(partial(self.slider, 'GRP_DRIVER_THUMB_IZQ_2'))
         self.slider_falangeta.valueChanged[int].connect(partial(self.slider, 'GRP_DRIVER_THUMB_IZQ_3'))
+
 
 
 
@@ -102,3 +104,4 @@ class BridgeActions():
 
     def slider(self, argumentirri, value):
         cmds.setAttr(argumentirri + '.rotateX', value)
+
