@@ -20,7 +20,7 @@ def wrap(geo):
 	
 	
 
-	md_CejasWrap = cmds.duplicate(geo, rr=True, n='CEJAS_WRAP_MD')[0]
+	md_CejasWrap = cmds.duplicate(geo, rr=True, n='CEJAS_WRAP_BS')[0]
 
 	bs_rootPos = cmds.xform('ROOT_BS', q=True, ws=True, t=True)
 
