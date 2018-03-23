@@ -10,7 +10,7 @@ def rename():
 			if geo.find('MD_') != -1:
 				if wrapped == False:
 					geoParent = cmds.listRelatives(geo, p=True)[0]
-					geoParent = cmds.rename(geoParent, 'MD_CEJAS')
+					geoParent = cmds.rename(geoParent, 'CEJAS_MD')
 					wrap(geoParent)
 
 					wrapped = True
@@ -20,15 +20,15 @@ def wrap(geo):
 	
 	
 
-	md_CejasWrap = cmds.duplicate(geo, rr=True, n='MD_CEJAS_WRAP')[0]
+	md_CejasWrap = cmds.duplicate(geo, rr=True, n='CEJAS_WRAP_MD')[0]
 
-	bs_rootPos = cmds.xform('BS_ROOT', q=True, ws=True, t=True)
+	bs_rootPos = cmds.xform('ROOT_BS', q=True, ws=True, t=True)
 
 	for ax in range(0, len(AXIS)):
 		cmds.setAttr(md_CejasWrap + '.translate' + AXIS[ax], bs_rootPos[ax])
 
 	cmds.select(cl=True)
-	cmds.select(md_CejasWrap, 'BS_ROOT')
+	cmds.select(md_CejasWrap, 'ROOT_BS')
 	cmds.CreateWrap()
 	cmds.select(cl=True)
 
