@@ -71,7 +71,6 @@ class BridgeActions():
 
     def autoRig_pte2(self):
         import Rigging.Maya_rigging_biped_Autorig.autorig_Core.autoRig_pte_2 as pteDos
-
         pteDos.autoRigAnderPte2()
 
 

@@ -7,7 +7,7 @@ def rename():
 
 	for geo in cmds.ls(et='mesh'):
 		if geo.find('CEJAS') != -1:
-			if geo.find('MD_') != -1:
+			if geo.find('_MD') != -1:
 				if wrapped == False:
 					geoParent = cmds.listRelatives(geo, p=True)[0]
 					geoParent = cmds.rename(geoParent, 'CEJAS_MD')
