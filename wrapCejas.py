@@ -1,6 +1,7 @@
 import maya.cmds as cmds
 
 AXIS = ['X','Y','Z']
+ATTR = ['.translate', '.rotate', '.scale']
 
 def rename():
 	wrapped = False
@@ -32,4 +33,16 @@ def wrap(geo):
 	cmds.CreateWrap()
 	cmds.select(cl=True)
 
+def block():
+
+	for geo in cmds.ls(et='nurbsCurve'):
+		if geo.find('DEFORM_CURV') != -1:
+			geoParent = cmds.listRelatives(geo, p=True)[0]
+
+			for attrib in ATTR:
+				for ax in AXIS:
+					cmds.setAttr(geoParent  + attrib + ax, l=True, k=False, cb=False)
+
+
 rename()
+block()
