@@ -155,3 +155,10 @@ class updateRig(object):
 		cmds.group(lats)
 		cmds.parent(lats, headCtrl)
 		cmds.parent(squetchCtrlGrp, headCtrl)
+
+
+for cons in cmds.ls(et='orientConstraint'):
+	cmds.setAttr(cons + '.interpType', 2)
+
+for cons in cmds.ls(et='parentConstraint'):
+	cmds.setAttr(cons + '.interpType', 2)

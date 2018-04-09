@@ -15,7 +15,8 @@ def autoRigAnderPte2(*args):
 		'DRIVER_PINKY_IZQ_3','DRIVER_THUMB_DER_1','DRIVER_THUMB_DER_2','DRIVER_THUMB_DER_3','DRIVER_INDEX_DER_1','DRIVER_INDEX_DER_2',
 		'DRIVER_INDEX_DER_3','DRIVER_MIDDLE_DER_1','DRIVER_MIDDLE_DER_2','DRIVER_MIDDLE_DER_3','DRIVER_CANCEL_DER_1','DRIVER_CANCEL_DER_2',
 		'DRIVER_CANCEL_DER_3','DRIVER_PINKY_DER_1','DRIVER_PINKY_DER_2','DRIVER_PINKY_DER_3')
-	#cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
+	cmds.select("DRIVER_TOE_FINGERS_IZQ")
+	cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
 	#FREEZE DRIVERS(TERMINA)
 
 
@@ -1647,3 +1648,9 @@ def autoRigAnderPte2(*args):
 	cmds.parent( 'DRIVER_CARA', 'MASTER')
 
 	#EMPARENTAMIENTO Y CREACION DE BLENDS CARA(TERMINA)
+
+
+	cmds.setAttr("DRIVER_CODO_IZQ_FK.rotateX", l=True)
+	cmds.setAttr("DRIVER_CODO_IZQ_FK.rotateZ", l=True)
+	cmds.setAttr("DRIVER_CODO_IZQ_FK.rotateX", l=True)
+	cmds.setAttr("DRIVER_CODO_IZQ_FK.rotateZ", l=True)

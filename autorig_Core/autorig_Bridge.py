@@ -96,8 +96,10 @@ class BridgeActions():
 
     def facialRig(self):
 
-        import Rigging.Maya_rigging_biped_Autorig.wrapCejas
-        import Rigging.Maya_rigging_biped_Autorig.RIGG_FACIAL_03
+        import Rigging.Maya_rigging_biped_Autorig.wrapCejas as wrap
+        wrap.rename()
+        import Rigging.Maya_rigging_biped_Autorig.RIGG_FACIAL_03 as facial
+        facial.rigFacial()
 
         self.btn_facialRig.setDisabled(True)
 
