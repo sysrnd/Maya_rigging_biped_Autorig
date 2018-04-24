@@ -277,6 +277,7 @@ def rigFacial():
 
 	#CREAR BLEND SHAPES (COMIENZA)
 
+	'''
 	cmds.select('BOCA_SONRISA_ABIERTA_BS', 'BOCA_F_BS', 'BOCA_E_BS', 'BOCA_A_BS', 'BOCA_I_BS', 'BOCA_U_BS', 'BOCA_O_BS', 'BOCA_M_BS', 'BOCA_BESO_BS', 'BOCA_CHICA_BS',
 				'FELIZ_BS', 'TRISTE_BS', 'ENOJADO_BS', 'SORPRENDIDO_BS', 'CENO_ENOJADO_BS', 'PARPADO_UP_CERRADO_DER_BS', 
 				'PARPADO_UP_CERRADO_IZQ_BS', 'PARPADO_DOWN_CERRADO_DER_BS', 'PARPADO_DOWN_CERRADO_IZQ_BS', 'CACHETE_INFLADO_IZQ_BS', 
@@ -285,7 +286,6 @@ def rigFacial():
 				'ROOT_BS')
 
 	cmds.blendShape(n='BLEND_GENERAL')
-
 
 	cmds.select('CEJAS_WRAP_BS', 'CEJAS_MD')
 
@@ -388,11 +388,12 @@ def rigFacial():
 	cmds.setAttr('PARPADO_INFERIOR_DER.translateY', 0)
 
 	#CONECTAR BLEND SHAPES CON PARPADOS(TERMINA)
+	
 
-
+	'''
 
 	#AGREGAR MIEMBROS AL GRUPO NO TOCAR (COMEINZA)
-
+	'''
 	cmds.editDisplayLayerMembers( 'no_tocar', 'IK_BRAZO_IZQ', 'IK_BRAZO_DER', 'IK_TALON_IZQ', 'IK_TALON_DER',
 	 	'IK_PIE_IZQ', 'IK_PIE_DER', 'IK_DEDOS_PIE_IZQ', 'IK_DEDOS_PIE_DER', 'CLR_CODO_IZQ_1', 'CLR_CODO_IZQ_2',
 	  	'CLR_CODO_DER_1', 'CLR_CODO_DER_2', 'REV_IZQ_1', 'REV_DER_1', 'CLR_RODILLA_IZQ_1', 'CLR_RODILLA_DER_1', 
@@ -413,7 +414,7 @@ def rigFacial():
 	  	'CLR_CURV_NARIZ_1Handle', 'CLR_CURV_NARIZ_2Handle', 'CLR_CURV_BOCA_SUP_0Handle', 'CLR_CURV_BOCA_SUP_1Handle', 
 	  	'CLR_CURV_BOCA_SUP_2Handle', 'CLR_CURV_BOCA_SUP_3Handle', 'CLR_CURV_BOCA_SUP_4Handle', 'CLR_CURV_BOCA_INF_0Handle', 
 	  	'CLR_CURV_BOCA_INF_1Handle', 'CLR_CURV_BOCA_INF_2Handle', 'CLR_CURV_BOCA_INF_3Handle', 'CLR_CURV_BOCA_INF_4Handle')
-
+	'''
 	#AGREGAR MIEMBROS AL GRUPO NO TOCAR (COMEINZA)
 
 	AXIS = ['X','Y','Z']
@@ -431,3 +432,4 @@ def block():
 						cmds.setAttr(geoParent  + attrib + ax, l=True, k=False, cb=False)
 					except:
 						pass
+rigFacial()

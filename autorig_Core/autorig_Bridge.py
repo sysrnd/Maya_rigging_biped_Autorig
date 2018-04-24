@@ -101,6 +101,10 @@ class BridgeActions():
         import Rigging.Maya_rigging_biped_Autorig.RIGG_FACIAL_03 as facial
         facial.rigFacial()
 
+        import Rigging.Maya_rigging_biped_Autorig.bsConnecter as bsConn
+        bs = bsConn.BSconnecter()
+        bs.main()
+
         self.btn_facialRig.setDisabled(True)
 
     def slider(self, argumentirri, value):
