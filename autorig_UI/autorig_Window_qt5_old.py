@@ -2,7 +2,7 @@
 
 
 
-# Form implementation generated from reading ui file 'Resources\autorig_Window_v002.ui'
+# Form implementation generated from reading ui file 'C:/Users/ASUSarturo/Desktop/RnD/MKF/Rigging/Maya_rigging_biped_Autorig/UI/Resources/autorig_Window.ui'
 
 #
 
@@ -41,7 +41,7 @@ class Ui_AutoRig_window(object):
 
         AutoRig_window.setEnabled(True)
 
-        AutoRig_window.resize(276, 350)
+        AutoRig_window.resize(348, 305)
 
         AutoRig_window.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
 
@@ -82,34 +82,6 @@ class Ui_AutoRig_window(object):
         self.btn_importRig.setObjectName("btn_importRig")
 
         self.lyt_vertical_basicTab.addWidget(self.btn_importRig)
-
-        self.frame = QtWidgets.QFrame(self.lyt_horizontal_Basic_tab)
-
-        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-
-        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-
-        self.frame.setObjectName("frame")
-
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame)
-
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-
-        self.rdo_hombre_2 = QtWidgets.QRadioButton(self.frame)
-
-        self.rdo_hombre_2.setChecked(True)
-
-        self.rdo_hombre_2.setObjectName("rdo_hombre_2")
-
-        self.horizontalLayout_2.addWidget(self.rdo_hombre_2)
-
-        self.rdo_mujer_2 = QtWidgets.QRadioButton(self.frame)
-
-        self.rdo_mujer_2.setObjectName("rdo_mujer_2")
-
-        self.horizontalLayout_2.addWidget(self.rdo_mujer_2)
-
-        self.lyt_vertical_basicTab.addWidget(self.frame)
 
         self.btn_startAutorig = QtWidgets.QPushButton(self.lyt_horizontal_Basic_tab)
 
@@ -293,13 +265,13 @@ class Ui_AutoRig_window(object):
 
         self.btn_apply = QtWidgets.QPushButton(self.lyt_horizontal_Advanced_Tab)
 
-        self.btn_apply.setObjectName("btn_apply")
+        self.btn_apply.setObjectName("Apply")
 
         self.lyt_horizontal_Advanced_Tab_2.addWidget(self.btn_apply)
 
         self.btn_reset = QtWidgets.QPushButton(self.lyt_horizontal_Advanced_Tab)
 
-        self.btn_reset.setObjectName("btn_reset")
+        self.btn_reset.setObjectName("Reset")
 
         self.lyt_horizontal_Advanced_Tab_2.addWidget(self.btn_reset)
 
@@ -319,7 +291,7 @@ class Ui_AutoRig_window(object):
 
         self.menubar = QtWidgets.QMenuBar(AutoRig_window)
 
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 276, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 348, 21))
 
         self.menubar.setObjectName("menubar")
 
@@ -336,8 +308,7 @@ class Ui_AutoRig_window(object):
         self.retranslateUi(AutoRig_window)
 
         self.widget_tabs.setCurrentIndex(0)
-
-        self.slider_falangeta.valueChanged[int].connect(self.lbl_falangeta_int.setNum)
+        
         self.slider_falangina.valueChanged[int].connect(self.lbl_falangina_int.setNum)
         QtCore.QMetaObject.connectSlotsByName(AutoRig_window)
 
@@ -348,10 +319,6 @@ class Ui_AutoRig_window(object):
         AutoRig_window.setWindowTitle(_translate("AutoRig_window", "MKF - AutoRig", None))
 
         self.btn_importRig.setText(_translate("AutoRig_window", "Import Rig", None))
-
-        self.rdo_hombre_2.setText(_translate("AutoRig_window", "Hombre", None))
-
-        self.rdo_mujer_2.setText(_translate("AutoRig_window", "Mujer", None))
 
         self.btn_startAutorig.setText(_translate("AutoRig_window", "Start Autorig", None))
 

@@ -32,6 +32,11 @@ class BridgeActions():
         self.btn_apply = window_interface.btn_apply
         self.btn_reset = window_interface.btn_reset
 
+        self.radialHombre = window_interface.rdo_hombre_2
+        self.radialMujer = window_interface.rdo_mujer_2
+
+        self.masculino = self.radialHombre.isChecked()
+
         #btns connections
         self.btn_importRig.clicked.connect(self.importRig)
         self.btn_reset.clicked.connect(self.resetUI)
@@ -44,6 +49,8 @@ class BridgeActions():
 
         self.slider_falangina.valueChanged[int].connect(partial(self.slider, 'GRP_DRIVER_THUMB_IZQ_2'))
         self.slider_falangeta.valueChanged[int].connect(partial(self.slider, 'GRP_DRIVER_THUMB_IZQ_3'))
+
+
 
 
 

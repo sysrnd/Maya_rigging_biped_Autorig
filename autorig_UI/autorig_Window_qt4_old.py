@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Resources\autorig_Window_v002.ui'
+# Form implementation generated from reading ui file 'C:/Users/ASUSarturo/Desktop/RnD/MKF/Rigging/Maya_rigging_biped_Autorig/UI/Resources/autorig_Window.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
@@ -26,7 +26,7 @@ class Ui_AutoRig_window(object):
     def setupUi(self, AutoRig_window):
         AutoRig_window.setObjectName(_fromUtf8("AutoRig_window"))
         AutoRig_window.setEnabled(True)
-        AutoRig_window.resize(276, 350)
+        AutoRig_window.resize(348, 305)
         AutoRig_window.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.centralwidget = QtGui.QWidget(AutoRig_window)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
@@ -47,20 +47,6 @@ class Ui_AutoRig_window(object):
         self.btn_importRig = QtGui.QPushButton(self.lyt_horizontal_Basic_tab)
         self.btn_importRig.setObjectName(_fromUtf8("btn_importRig"))
         self.lyt_vertical_basicTab.addWidget(self.btn_importRig)
-        self.frame = QtGui.QFrame(self.lyt_horizontal_Basic_tab)
-        self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtGui.QFrame.Raised)
-        self.frame.setObjectName(_fromUtf8("frame"))
-        self.horizontalLayout_2 = QtGui.QHBoxLayout(self.frame)
-        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.rdo_hombre_2 = QtGui.QRadioButton(self.frame)
-        self.rdo_hombre_2.setChecked(True)
-        self.rdo_hombre_2.setObjectName(_fromUtf8("rdo_hombre_2"))
-        self.horizontalLayout_2.addWidget(self.rdo_hombre_2)
-        self.rdo_mujer_2 = QtGui.QRadioButton(self.frame)
-        self.rdo_mujer_2.setObjectName(_fromUtf8("rdo_mujer_2"))
-        self.horizontalLayout_2.addWidget(self.rdo_mujer_2)
-        self.lyt_vertical_basicTab.addWidget(self.frame)
         self.btn_startAutorig = QtGui.QPushButton(self.lyt_horizontal_Basic_tab)
         self.btn_startAutorig.setObjectName(_fromUtf8("btn_startAutorig"))
         self.lyt_vertical_basicTab.addWidget(self.btn_startAutorig)
@@ -151,12 +137,9 @@ class Ui_AutoRig_window(object):
         self.verticalLayout_4.setObjectName(_fromUtf8("verticalLayout_4"))
         self.lyt_horizontal_Advanced_Tab_2 = QtGui.QVBoxLayout()
         self.lyt_horizontal_Advanced_Tab_2.setObjectName(_fromUtf8("lyt_horizontal_Advanced_Tab_2"))
-        self.btn_apply = QtGui.QPushButton(self.lyt_horizontal_Advanced_Tab)
-        self.btn_apply.setObjectName(_fromUtf8("btn_apply"))
-        self.lyt_horizontal_Advanced_Tab_2.addWidget(self.btn_apply)
-        self.btn_reset = QtGui.QPushButton(self.lyt_horizontal_Advanced_Tab)
-        self.btn_reset.setObjectName(_fromUtf8("btn_reset"))
-        self.lyt_horizontal_Advanced_Tab_2.addWidget(self.btn_reset)
+        self.Apply = QtGui.QPushButton(self.lyt_horizontal_Advanced_Tab)
+        self.Apply.setObjectName(_fromUtf8("Apply"))
+        self.lyt_horizontal_Advanced_Tab_2.addWidget(self.Apply)
         self.verticalLayout_4.addLayout(self.lyt_horizontal_Advanced_Tab_2)
         self.widget_tabs.addTab(self.lyt_horizontal_Advanced_Tab, _fromUtf8(""))
         self.verticalLayout.addWidget(self.widget_tabs)
@@ -165,7 +148,7 @@ class Ui_AutoRig_window(object):
         self.verticalLayout.addWidget(self.lbl_status)
         AutoRig_window.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(AutoRig_window)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 276, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 348, 21))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         AutoRig_window.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(AutoRig_window)
@@ -181,8 +164,6 @@ class Ui_AutoRig_window(object):
     def retranslateUi(self, AutoRig_window):
         AutoRig_window.setWindowTitle(_translate("AutoRig_window", "MKF - AutoRig", None))
         self.btn_importRig.setText(_translate("AutoRig_window", "Import Rig", None))
-        self.rdo_hombre_2.setText(_translate("AutoRig_window", "Hombre", None))
-        self.rdo_mujer_2.setText(_translate("AutoRig_window", "Mujer", None))
         self.btn_startAutorig.setText(_translate("AutoRig_window", "Start Autorig", None))
         self.lbl_falangina.setText(_translate("AutoRig_window", "Falangina  ", None))
         self.lbl_falangina_int.setText(_translate("AutoRig_window", "0", None))
@@ -191,8 +172,7 @@ class Ui_AutoRig_window(object):
         self.btn_finishAutorig.setText(_translate("AutoRig_window", "Finish Autorig", None))
         self.btn_facialRig.setText(_translate("AutoRig_window", "Facial Rig", None))
         self.widget_tabs.setTabText(self.widget_tabs.indexOf(self.lyt_horizontal_Basic_tab), _translate("AutoRig_window", "Basic", None))
-        self.btn_apply.setText(_translate("AutoRig_window", "Apply", None))
-        self.btn_reset.setText(_translate("AutoRig_window", "Reset", None))
+        self.Apply.setText(_translate("AutoRig_window", "Apply", None))
         self.widget_tabs.setTabText(self.widget_tabs.indexOf(self.lyt_horizontal_Advanced_Tab), _translate("AutoRig_window", "Advanced", None))
         self.lbl_status.setText(_translate("AutoRig_window", "//", None))
 
