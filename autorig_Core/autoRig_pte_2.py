@@ -1,1656 +1,643 @@
 import maya.cmds as cmds
+from copy import deepcopy
 
-def autoRigAnderPte2(*args):
-	#FREEZE DRIVERS(COMIENZA)
+class autoRig_02():
 
-	cmds.select('DRIVER_CABEZA', 'DRIVER_MANO_IZQ','DRIVER_MANO_DER','DRIVER_CODO_IZQ','DRIVER_CODO_DER',
-		'DRIVER_CLAVICULA_IZQ','DRIVER_CLAVICULA_DER','DRIVER_DIENTES_TOP','DRIVER_DIENTES_BOTTOM','DRIVER_BOCA',
-		'DRIVER_COLUMNA_TOP','DRIVER_COLUMNA_BOTTOM','DRIVER_COLUMNA_MIDDLE','DRIVER_ROOT','DRIVER_CINTURA',
-		'DRIVER_PIE_IZQ','DRIVER_PIE_DER','DRIVER_RODILLA_IZQ','DRIVER_RODILLA_DER','MOVE_ALL','MASTER', 'DRIVER_LENGUA',
-		'DRIVER_PINKY_SEC_DER','DRIVER_PINKY_SEC_IZQ', 'DRIVER_OJO_DER', 'DRIVER_OJO_DER', 'DRIVER_HEEL_DER', 'DRIVER_BALL_DER', 
-		'DRIVER_TOE_DER', 'DRIVER_HEEL_IZQ', 'DRIVER_BALL_IZQ', 'DRIVER_TOE_IZQ', 'DRIVER_HOMBRO_IZQ_FK', 'DRIVER_CODO_IZQ_FK', 
-		'DRIVER_MANO_IZQ_FK', 'DRIVER_HOMBRO_DER_FK', 'DRIVER_CODO_DER_FK', 'DRIVER_MANO_DER_FK','DRIVER_THUMB_IZQ_1','DRIVER_THUMB_IZQ_2',
-		'DRIVER_THUMB_IZQ_3','DRIVER_INDEX_IZQ_1','DRIVER_INDEX_IZQ_2','DRIVER_INDEX_IZQ_3','DRIVER_MIDDLE_IZQ_1','DRIVER_MIDDLE_IZQ_2',
-		'DRIVER_MIDDLE_IZQ_3','DRIVER_CANCEL_IZQ_1','DRIVER_CANCEL_IZQ_2','DRIVER_CANCEL_IZQ_3','DRIVER_PINKY_IZQ_1','DRIVER_PINKY_IZQ_2',
-		'DRIVER_PINKY_IZQ_3','DRIVER_THUMB_DER_1','DRIVER_THUMB_DER_2','DRIVER_THUMB_DER_3','DRIVER_INDEX_DER_1','DRIVER_INDEX_DER_2',
-		'DRIVER_INDEX_DER_3','DRIVER_MIDDLE_DER_1','DRIVER_MIDDLE_DER_2','DRIVER_MIDDLE_DER_3','DRIVER_CANCEL_DER_1','DRIVER_CANCEL_DER_2',
-		'DRIVER_CANCEL_DER_3','DRIVER_PINKY_DER_1','DRIVER_PINKY_DER_2','DRIVER_PINKY_DER_3')
-	cmds.select("DRIVER_TOE_FINGERS_IZQ")
-	cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
-	#FREEZE DRIVERS(TERMINA)
+	def __init__(self,lst_drivers, lst_grupos_dedos, sexo):
 
+		self.sex = sexo
+		self.lst_drivers= lst_drivers
+		self.lst_grupos_dedos = lst_grupos_dedos
+		self.lst_drivers_faltantes = ['DRIVER_THUMB_IZQ_1','DRIVER_THUMB_IZQ_2','DRIVER_THUMB_IZQ_3','DRIVER_INDEX_IZQ_1','DRIVER_INDEX_IZQ_2','DRIVER_INDEX_IZQ_3','DRIVER_MIDDLE_IZQ_1',
+		'DRIVER_MIDDLE_IZQ_2','DRIVER_MIDDLE_IZQ_3','DRIVER_CANCEL_IZQ_1','DRIVER_CANCEL_IZQ_2','DRIVER_CANCEL_IZQ_3','DRIVER_PINKY_IZQ_1','DRIVER_PINKY_IZQ_2','DRIVER_PINKY_IZQ_3', 
+		'MOVE_ALL', 'MASTER', 'DRIVER_OJOS', 'DRIVER_CABEZA','DRIVER_CUELLO']
 
+	def principal(self):
 
+		#Si el personaje es femenino
+		if self.sex.isChecked():
+			try:
+				self.lst_drivers.remove('DRIVER_BUSTO_IZQ')
+				self.lst_drivers.remove('DRIVER_BUSTO_DER')
+			except Exception as e:
+				pass
+		else:
+			pass
 
-	#POSICIONA DRIVER RODILLAS Y CODOS(COMIENZA)
 
-	cmds.move( 2.5, 'DRIVER_RODILLA_DER', z=True )
-	cmds.move( 2.5, 'DRIVER_RODILLA_IZQ', z=True )
-	cmds.move( -2.5, 'DRIVER_CODO_IZQ', z=True )
-	cmds.move( -2.5, 'DRIVER_CODO_DER', z=True )
+		#Prende todas las curvas de la escena
+		for curva in cmds.ls(et='nurbsCurve'):
+		    curvaParent = cmds.listRelatives(curva, p=True)[0]
+		    try:
+		        cmds.setAttr(curvaParent + '.visibility', 1)
+		    
+		    except Exception as e:
+		        pass
 
+		#Agrega los drivers faltantes a la lista de drivers
+		for agregar in xrange(0 ,len(self.lst_drivers_faltantes)):
 
-	cmds.select('DRIVER_RODILLA_DER', 'DRIVER_RODILLA_IZQ','DRIVER_CODO_IZQ','DRIVER_CODO_DER', 'DRIVER_OJO_DER', 'DRIVER_OJO_IZQ')
-	cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
+			self.lst_drivers.append(self.lst_drivers_faltantes[agregar])
 
+			if self.lst_drivers_faltantes[agregar].find('IZQ') != -1:
+				self.lst_drivers.append(self.lst_drivers_faltantes[agregar].replace('IZQ', 'DER'))
 
-	cmds.move( 4, 'DRIVER_OJO_DER', z=True )
-	cmds.move( 4, 'DRIVER_OJO_IZQ', z=True )
+		self.freeze(obj = self.lst_drivers)
+	
+		#REACOMODA DRIVER RODILLAS, CODOS Y DRIVER OJOS
+		lst_poleas_drivers = ['DRIVER_RODILLA_DER','DRIVER_RODILLA_IZQ','DRIVER_CODO_IZQ','DRIVER_CODO_DER', 'DRIVER_OJO_DER', 'DRIVER_OJO_IZQ']
+		lst_poleas_valores = ['2.5','2.5','-2.5','-2.5','4','4']
 
-	cmds.select('DRIVER_OJO_DER', 'DRIVER_OJO_IZQ')
-	cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
+		for valores in xrange(0, len(lst_poleas_drivers)):
+			cmds.move( lst_poleas_valores[valores], lst_poleas_drivers[valores], z=True )
 
+		cmds.group( 'DRIVER_OJO_DER', 'DRIVER_OJO_IZQ' , n='GRP_TEMP' )
+		cmds.pointConstraint( 'GRP_TEMP', 'DRIVER_OJOS', n='CONST_TEMP')
+		cmds.delete('CONST_TEMP')
+		cmds.ungroup( 'GRP_TEMP' )
 
-	cmds.group( 'DRIVER_OJO_DER', 'DRIVER_OJO_IZQ' , n='GRP_TEMP' )
-	cmds.pointConstraint( 'GRP_TEMP', 'DRIVER_OJOS', n='CONST_TEMP')
-	cmds.delete('CONST_TEMP')
-	cmds.ungroup( 'GRP_TEMP' )
+		self.multi(conexion = 'poc', lst_01 = ['OJO_IZQ'], lst_02=['OJO_IZQ_REFERENCIA'], lst_03=['CONST_TEMP_OJO_IZQ'], offset=0)
+		cmds.delete('CONST_TEMP_OJO_IZQ','CONST_TEMP_OJO_DER')
+		self.multi(conexion='p', lst_01= ['OJO_IZQ_REFERENCIA'],lst_02=['OJO_IZQ'])
+		self.freeze(obj = ['OJO_IZQ_REFERENCIA','OJO_DER_REFERENCIA'])
 
-	cmds.select('DRIVER_OJOS')
-	cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
+		self.freeze(obj = self.lst_drivers)
 
-	#POSICIONA DRIVER RODILLAS Y CODOS(TERMINA)
+		self.multi(conexion = 'p', lst_01 = ['DRIVER_OJO_IZQ','DRIVER_OJOS'], lst_02 =['DRIVER_OJOS','MOVE_ALL'])
 
+		cmds.group( 'DRIVER_OJOS', n='GRP_DRIVER_OJOS' )
 
+		#CREAR IK PIERNAS
+		self.multi(conexion = 'ik', lst_01 = ['PIERNA_IZQ'], lst_02 =['TALON_IZQ'], solver = 'RP')
+		self.multi(conexion = 'ik', lst_01 = ['TALON_IZQ','DEDOS_PIE_IZQ'], lst_02 =['DEDOS_PIE_IZQ','PUNTA_PIE_IZQ_INUTIL'], solver = 'SC')
 
-	#Crear atributos (COMIENZA)
+		# Crear parents entre los ik y los huesos de rev, ademas crea los parent de los propios drivers del pie
+		# Crear pointConstraint entre lo ik y los drivers del pie
+		# Crea los constrains orients de los pies
+		# Crear los pol vectors de las rodillas
+		lista_01 = ['IK_DEDOS_PIE_IZQ_SC','IK_PUNTA_PIE_IZQ_INUTIL_SC','REV_IZQ_1','DRIVER_TOE_FINGERS_IZQ','DRIVER_HEEL_IZQ','DRIVER_TOE_IZQ','DRIVER_BALL_IZQ']
+		lista_02 = ['REV_IZQ_3','REV_IZQ_2','DRIVER_PIE_IZQ','DRIVER_HEEL_IZQ','DRIVER_PIE_IZQ','DRIVER_HEEL_IZQ','DRIVER_TOE_IZQ']
+		self.multi(conexion = 'p', lst_01 = lista_01, lst_02 =lista_02)
 
-	cmds.addAttr('DRIVER_COLUMNA_TOP', nn='SWT IK FK IZQ', longName='SWITCH_IK_FK_IZQ', defaultValue=0, minValue=0, maxValue=1)
-	cmds.setAttr('DRIVER_COLUMNA_TOP.SWITCH_IK_FK_IZQ', channelBox = 0, keyable=1)
+		self.multi(conexion = 'poc', lst_01 = ['REV_IZQ_4','DRIVER_TOE_FINGERS_IZQ'], lst_02 =['IK_TALON_IZQ_RP','IK_PUNTA_PIE_IZQ_INUTIL_SC'])
 
-	cmds.addAttr('DRIVER_COLUMNA_TOP', nn='SWT IK FK DER', longName='SWITCH_IK_FK_DER', defaultValue=0, minValue=0, maxValue=1)
-	cmds.setAttr('DRIVER_COLUMNA_TOP.SWITCH_IK_FK_DER', channelBox = 0, keyable=1)
+		self.multi(conexion = 'or', lst_01 = ['DRIVER_HEEL_IZQ','DRIVER_BALL_IZQ','DRIVER_TOE_IZQ'], lst_02 =['REV_IZQ_1','REV_IZQ_3','REV_IZQ_2'])
 
-	cmds.addAttr('DRIVER_CABEZA', nn='SWT OJOS', longName='SWITCH_OJOS', defaultValue=0, minValue=0, maxValue=1)
-	cmds.setAttr('DRIVER_CABEZA.SWITCH_OJOS', channelBox = 0, keyable=1)
+		self.multi(conexion = 'pvc', lst_01 = ['DRIVER_RODILLA_IZQ'], lst_02 =['IK_TALON_IZQ_RP'])
 
+		# Acomoda las curvas de referencia de las rodillas Y BRAZOS IK
+		self.multi(conexion='poc',lst_01=['RODILLA_IZQ','DRIVER_RODILLA_IZQ','CODO_IZQ','DRIVER_CODO_IZQ'],lst_02=['CLR_RODILLA_IZQ_1','CLR_RODILLA_IZQ_2','CLR_CODO_IZQ_1','CLR_CODO_IZQ_2'],offset = 0)
 
+		#CREAR UNIONES ENTRE LOS HUESOS DE LOS BRAZOS Y SWITCH(COMIENZA)
+		lista_01 = ['HOMBRO_IZQ_IK','CODO_IZQ_IK','CODO_SEC_IZQ_IK','MANO_IZQ_IK','HOMBRO_IZQ_FK','CODO_IZQ_FK','CODO_SEC_IZQ_FK','MANO_IZQ_FK']
+		lista_02 = ['HOMBRO_IZQ','CODO_IZQ','CODO_SEC_IZQ','MANO_IZQ','HOMBRO_IZQ','CODO_IZQ','CODO_SEC_IZQ','MANO_IZQ']
+		lista_03 = ['PC_HOMBRO_IZQ_IK','PC_CODO_IZQ_IK','PC_CODO_SEC_IZQ_IK','PC_MANO_IZQ_IK','PC_HOMBRO_IZQ_IK_FK','PC_CODO_IZQ_IK_FK',
+		'PC_CODO_SEC_IZQ_IK_FK','PC_MANO_IZQ_IK_FK']
+		self.multi(conexion = 'pac', lst_01 = lista_01, lst_02 =lista_02, lst_03 = lista_03)
 
 
-	cmds.addAttr('DRIVER_MANO_IZQ', nn='CORRECION CODO', longName='CORRECION_CODO', defaultValue=0)
-	cmds.setAttr('DRIVER_MANO_IZQ.CORRECION_CODO', channelBox = 0, keyable=1)
+		lista_01_IK_FK= ['PC_HOMBRO_IZQ_IK_FK','PC_CODO_IZQ_IK_FK','PC_CODO_SEC_IZQ_IK_FK','PC_MANO_IZQ_IK_FK','crv_refr_brazo_IZQ','HOMBRO_IZQ_IK',
+		'DRIVER_CODO_IZQ','DRIVER_MANO_IZQ']
+		lista_02_IK_FK= ['HOMBRO_IZQ_IKW0','CODO_IZQ_IKW0','CODO_SEC_IZQ_IKW0','MANO_IZQ_IKW0','visibility','visibility','visibility','visibility']
 
-	cmds.addAttr('DRIVER_MANO_DER', nn='CORRECION CODO', longName='CORRECION_CODO', defaultValue=0)
-	cmds.setAttr('DRIVER_MANO_DER.CORRECION_CODO', channelBox = 0, keyable=1)
+		lista_01_FKW= ['PC_HOMBRO_IZQ_IK_FK','PC_CODO_IZQ_IK_FK','PC_CODO_SEC_IZQ_IK_FK','PC_MANO_IZQ_IK_FK']
+		lista_02_FKW= ['HOMBRO_IZQ_FKW1','CODO_IZQ_FKW1','CODO_SEC_IZQ_FKW1','MANO_IZQ_FKW1']
+		
+		lista_01_FK= ['HOMBRO_IZQ_FK','DRIVER_HOMBRO_IZQ_FK','DRIVER_CODO_IZQ_FK','DRIVER_MANO_IZQ_FK']
+		lista_02_FK= ['visibility','visibility','visibility','visibility']
 
+		#Cambia los atributos de visibilidad de los IK a '0', y los FK a '1', tambien apaga los constrains de los huesos IK
+		self.multi(conexion = 'set', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, attr=0)
+		self.multi(conexion = 'set', lst_01 = lista_01_FK, lst_02 =lista_02_FK, attr=1)
 
-	cmds.addAttr('DRIVER_MANO_IZQ_FK', nn='CORRECION CODO', longName='CORRECION_CODO', defaultValue=0)
-	cmds.setAttr('DRIVER_MANO_IZQ_FK.CORRECION_CODO', channelBox = 0, keyable=1)
+		#Crea los set Driven Key de visibilidad hacia los switch de DRIVER_COLUMNA_TOP.SWITCH_IK_FK_(IZQ_DER)
+		self.multi(conexion = 'sdk', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
+		self.multi(conexion = 'sdk', lst_01 = lista_01_FKW, lst_02 =lista_02_FKW, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_') 
+		self.multi(conexion = 'sdk', lst_01 = lista_01_FK, lst_02 =lista_02_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
 
-	cmds.addAttr('DRIVER_MANO_DER_FK', nn='CORRECION CODO', longName='CORRECION_CODO', defaultValue=0)
-	cmds.setAttr('DRIVER_MANO_DER_FK.CORRECION_CODO', channelBox = 0, keyable=1)
+		#Cambia los atributos SWITCH_IK_FK_IZQ de DRIVER_COLUMNA_TOP a 1
+		self.multi(conexion = 'set', lst_01 = ['DRIVER_COLUMNA_TOP'], lst_02 =['SWITCH_IK_FK_IZQ'], attr=1)
 
-	#Crear atributos (TERMINA)
+		#Cambia los atributos de visibilidad de los IK a '1', y los FK a '0', tambien apaga los constrains de los huesos FK
+		self.multi(conexion = 'set', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, attr=1)
+		self.multi(conexion = 'set', lst_01 = lista_01_FKW, lst_02 =lista_02_FKW, attr=0)
+		self.multi(conexion = 'set', lst_01 = lista_01_FK, lst_02 =lista_02_FK, attr=0)
 
+		#Crea los set Driven Key de visibilidad hacia los switch de DRIVER_COLUMNA_TOP.SWITCH_IK_FK_(IZQ_DER)
+		self.multi(conexion = 'sdk', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
+		self.multi(conexion = 'sdk', lst_01 = lista_01_FKW, lst_02 =lista_02_FKW, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
+		self.multi(conexion = 'sdk', lst_01 = lista_01_FK, lst_02 =lista_02_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
 
 
+		#CREAR IK BRAZOS, (COMIENZAN BRAZOS)
+		for i in [0, 1]:
+			if i == 0:
+				lado = 'IZQ'
+				effector = 'effector7'
 
+			else:
+				lado = 'DER'
+				effector = 'effector8'
 
-	cmds.delete ('BONES_REFERENCIA')
+			#CREAR IK DE LOS BRAZOS
+			cmds.ikHandle( sj='HOMBRO_%s_IK' %lado, ee='CODO_SEC_%s_IK' %lado, sol = 'ikRPsolver', name = 'IK_BRAZO_%s' %lado )
 
+			cmds.parentConstraint( 'DRIVER_MANO_%s' %lado, 'MANO_%s_IK' %lado, mo=1, st=["x","z","y"])
 
+			cmds.spaceLocator(n='LOC_BRAZO_%s' %lado)
+			cmds.pointConstraint( 'MANO_%s_IK' %lado, 'LOC_BRAZO_%s' %lado )
 
+			PX = cmds.getAttr('LOC_BRAZO_%s.tx' %lado)
+			PY = cmds.getAttr('LOC_BRAZO_%s.ty' %lado)
+			PZ = cmds.getAttr('LOC_BRAZO_%s.tz' %lado)
 
+			cmds.move(PX, PY, PZ, effector + ".scalePivot", effector + ".rotatePivot", absolute=True)
 
-	nombredriver = 'DRIVER_PIE_IZQ'
+			cmds.move(PX, PY, PZ, 'IK_BRAZO_%s' %lado)
 
-	lado = 'IZQ'
+			cmds.delete('LOC_BRAZO_%s' %lado)
 
-	#FREEZE DRIVERS(COMIENZA)
+			cmds.poleVectorConstraint( 'DRIVER_CODO_%s' %lado, 'IK_BRAZO_%s' %lado, w=1, n='POLEA_BRAZO_%s' %lado)
 
-	cmds.select('DRIVER_CABEZA', 'DRIVER_MANO_IZQ','DRIVER_MANO_DER','DRIVER_CODO_IZQ','DRIVER_CODO_DER',
-		'DRIVER_CLAVICULA_IZQ','DRIVER_CLAVICULA_DER','DRIVER_DIENTES_TOP','DRIVER_DIENTES_BOTTOM','DRIVER_BOCA',
-		'DRIVER_COLUMNA_TOP','DRIVER_COLUMNA_BOTTOM','DRIVER_COLUMNA_MIDDLE','DRIVER_ROOT','DRIVER_CINTURA',
-		'DRIVER_PIE_IZQ','DRIVER_PIE_DER','DRIVER_RODILLA_IZQ','DRIVER_RODILLA_DER','MOVE_ALL','MASTER', 'DRIVER_LENGUA',
-		'DRIVER_PINKY_SEC_DER','DRIVER_PINKY_SEC_IZQ', 'DRIVER_OJO_DER', 'DRIVER_OJO_DER', 'DRIVER_HEEL_DER', 'DRIVER_BALL_DER', 
-		'DRIVER_TOE_DER', 'DRIVER_HEEL_IZQ', 'DRIVER_BALL_IZQ', 'DRIVER_TOE_IZQ', 'DRIVER_HOMBRO_IZQ_FK', 'DRIVER_CODO_IZQ_FK', 
-		'DRIVER_MANO_IZQ_FK', 'DRIVER_HOMBRO_DER_FK', 'DRIVER_CODO_DER_FK', 'DRIVER_MANO_DER_FK')
-	cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
 
-	#FREEZE DRIVERS(TERMINA)
+		#CREAR FK DE LOS BRAZOS (COMIENZA)
+		self.multi(conexion = 'pac', lst_01 = ['DRIVER_HOMBRO_IZQ_FK','DRIVER_CODO_IZQ_FK','DRIVER_MANO_IZQ_FK'], lst_02 =['HOMBRO_IZQ_FK','CODO_IZQ_FK','MANO_IZQ_FK'], sint =["x","z","y"])
 
+		#Emparentar drivers de los dedos 
+		lista_01 = ['DRIVER_MANO_IZQ_FK','DRIVER_CODO_IZQ_FK','GRP_DRIVER_INDEX_IZQ_1','GRP_DRIVER_MIDDLE_IZQ_1','GRP_DRIVER_CANCEL_IZQ_1','GRP_DRIVER_PINKY_IZQ_1','GRP_DRIVER_THUMB_IZQ_1',
+		'GRP_DRIVER_INDEX_IZQ_2','GRP_DRIVER_MIDDLE_IZQ_2','GRP_DRIVER_CANCEL_IZQ_2','GRP_DRIVER_PINKY_IZQ_2','GRP_DRIVER_THUMB_IZQ_2','GRP_DRIVER_INDEX_IZQ_3','GRP_DRIVER_MIDDLE_IZQ_3',
+		'GRP_DRIVER_CANCEL_IZQ_3','GRP_DRIVER_PINKY_IZQ_3','GRP_DRIVER_THUMB_IZQ_3']
+		lista_02 = ['DRIVER_CODO_IZQ_FK','DRIVER_HOMBRO_IZQ_FK','MANO_IZQ','MANO_IZQ','MANO_IZQ','MANO_IZQ','MANO_IZQ','DRIVER_INDEX_IZQ_1','DRIVER_MIDDLE_IZQ_1','DRIVER_CANCEL_IZQ_1',
+		'DRIVER_PINKY_IZQ_1','DRIVER_THUMB_IZQ_1','DRIVER_INDEX_IZQ_2','DRIVER_MIDDLE_IZQ_2','DRIVER_CANCEL_IZQ_2','DRIVER_PINKY_IZQ_2','DRIVER_THUMB_IZQ_2']
+		self.multi(conexion = 'p', lst_01 = lista_01, lst_02 =lista_02)
 
 
+		cmds.select('DRIVER_INDEX_IZQ_1', 'DRIVER_MIDDLE_IZQ_1', 'DRIVER_CANCEL_IZQ_1', 'DRIVER_PINKY_IZQ_1','DRIVER_THUMB_IZQ_1','DRIVER_INDEX_DER_1', 'DRIVER_MIDDLE_DER_1', 
+			'DRIVER_CANCEL_DER_1', 'DRIVER_PINKY_DER_1','DRIVER_THUMB_DER_1')
+		cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
 
-	#CREAR IK PIERNAS (COMIENZA)
+		#Orient Constrain dedos
+		lista_01 = ['DRIVER_INDEX_IZQ_1','DRIVER_INDEX_IZQ_2','DRIVER_INDEX_IZQ_3','DRIVER_MIDDLE_IZQ_1','DRIVER_MIDDLE_IZQ_2','DRIVER_MIDDLE_IZQ_3','DRIVER_CANCEL_IZQ_1',
+		'DRIVER_CANCEL_IZQ_2','DRIVER_CANCEL_IZQ_3','DRIVER_PINKY_IZQ_1','DRIVER_PINKY_IZQ_2','DRIVER_PINKY_IZQ_3','DRIVER_THUMB_IZQ_1','DRIVER_THUMB_IZQ_2','DRIVER_THUMB_IZQ_3']
+		lista_02 = ['INDEX_IZQ_1','INDEX_IZQ_2','INDEX_IZQ_3','MIDDLE_IZQ_1','MIDDLE_IZQ_2','MIDDLE_IZQ_3','CANCEL_IZQ_1','CANCEL_IZQ_2','CANCEL_IZQ_3','PINKY_IZQ_1','PINKY_IZQ_2',
+		'PINKY_IZQ_3','THUMB_IZQ_1','THUMB_IZQ_2','THUMB_IZQ_3']
+		self.multi(conexion = 'or', lst_01 = lista_01, lst_02 =lista_02)
 
-	cmds.ikHandle( sj='PIERNA_%s' %lado, ee='TALON_%s' %lado, sol = 'ikRPsolver', name = 'IK_TALON_%s' %lado )
 
-	cmds.ikHandle( sj='TALON_%s' %lado, ee='DEDOS_PIE_%s' %lado, sol = 'ikSCsolver', name = 'IK_PIE_%s' %lado )
+		#CONECTAR LA ROTACION SECUNDARIA DEL CODO
+		self.multi(conexion = 'cat', lst_01 = ['DRIVER_MANO_IZQ.CORRECION_CODO'], lst_02 =['CODO_SEC_IZQ_IK.rotateX'])
+		self.multi(conexion = 'cat', lst_01 = ['DRIVER_MANO_IZQ_FK.CORRECION_CODO'], lst_02 =['CODO_SEC_IZQ_FK.rotateX'])
 
-	cmds.ikHandle( sj='DEDOS_PIE_%s' %lado, ee='PUNTA_PIE_%s' %lado, sol = 'ikSCsolver', name = 'IK_DEDOS_PIE_%s' %lado )
+		#(TERMINAN BRAZOS)
 
-	#CREAR IK PIERNAS (TERMINA)
 
+		#CONECTAR ATRIBUTOS DE VISIBILIDAD CON DRIVERS
+		lista_01 = ['MASTER.CUERPO','MASTER.CUERPO','MASTER.CUERPO','MASTER.PIERNAS','MASTER.PIERNAS','DRIVER_CABEZA.VISIBILITY_BS','DRIVER_CABEZA.LENTES_VISIBILIDAD','DRIVER_CABEZA.SOMBRERO_VISIBILIDAD']
+		lista_02 = ['DRIVER_ROOT.visibility','DRIVER_DIENTES_TOP.visibility','DRIVER_BOCA.visibility','DRIVER_PIE_IZQ.visibility','DRIVER_RODILLA_IZQ.visibility','DRIVER_CARA.visibility','DRIVER_LENTES.visibility','DRIVER_SOMBRERO.visibility']
+		self.multi(conexion = 'cat', lst_01 = lista_01, lst_02 =lista_02)
 
+		#CONSTRAINS GENEALES
+		self.multi(conexion = 'p', lst_01=['DRIVER_PINKY_SEC_IZQ','DRIVER_DIENTES_TOP','DRIVER_BOCA','GRP_DRIVER_SOMBRERO','GRP_DRIVER_LENTES','GRP_DRIVER_CARA'], lst_02=['MANO_IZQ','CABEZA','CABEZA','MOVE_ALL','MOVE_ALL','MASTER'])
 
+		cmds.select('DRIVER_PINKY_SEC_IZQ', 'DRIVER_PINKY_SEC_DER','DRIVER_BOCA', 'DRIVER_DIENTES_TOP')
+		cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
 
-	#CONECTAR IK CON JOINTS (COMIENZA)
 
-	cmds.pointConstraint( 'REV_%s_4' %lado, 'IK_TALON_%s' %lado, mo =1 )
+		lista_01 = ['DRIVER_HOMBRO_IZQ_FK','GRP_DRIVER_PINKY_IZQ_1','DRIVER_DIENTES_BOTTOM','DRIVER_LENGUA','GRP_DRIVER_CABEZA','DRIVER_CLAVICULA_IZQ','DRIVER_MANO_IZQ','DRIVER_CODO_IZQ',
+		'DRIVER_COLUMNA_TOP','DRIVER_COLUMNA_MIDDLE','DRIVER_COLUMNA_BOTTOM','DRIVER_CINTURA','DRIVER_RODILLA_IZQ','DRIVER_PIE_IZQ','DRIVER_ROOT','MOVE_ALL','IK_BRAZO_IZQ','IK_TALON_IZQ_RP',
+		'ROOT','GRP_DRIVER_CUELLO']
+		lista_02 = ['DRIVER_CLAVICULA_IZQ','DRIVER_PINKY_SEC_IZQ','DRIVER_BOCA','DRIVER_BOCA','DRIVER_CUELLO','DRIVER_COLUMNA_TOP','MOVE_ALL','MOVE_ALL','DRIVER_COLUMNA_MIDDLE',
+		'DRIVER_COLUMNA_BOTTOM','DRIVER_ROOT','DRIVER_ROOT','MOVE_ALL','MOVE_ALL','MOVE_ALL','MASTER','MOVE_ALL','MOVE_ALL','MOVE_ALL','DRIVER_COLUMNA_TOP']
+		self.multi(conexion = 'p', lst_01 = lista_01, lst_02 =lista_02)
 
-	cmds.parent( 'IK_PIE_%s' %lado, 'REV_%s_3'%lado )
+		lista_01 = ['DRIVER_CINTURA','DRIVER_COLUMNA_BOTTOM','DRIVER_COLUMNA_MIDDLE','DRIVER_COLUMNA_TOP','DRIVER_CABEZA','DRIVER_BOCA','DRIVER_PINKY_SEC_IZQ','DRIVER_CLAVICULA_IZQ','DRIVER_CUELLO']
+		lista_02 = ['CINTURA','COLUMNA_BAJA','COLUMNA_MEDIA','COLUMNA_ALTA','CABEZA','MANDIBULA_INUTIL','PINKY_SEC_IZQ','CLAVICULA_IZQ','CUELLO']
+		self.multi(conexion = 'or', lst_01 = lista_01, lst_02 =lista_02)
 
-	cmds.parent( 'IK_DEDOS_PIE_%s' %lado, 'REV_%s_2'%lado )
+		self.multi(conexion = 'pac', lst_01=['DRIVER_LENGUA','DRIVER_ROOT','DRIVER_DIENTES_TOP','DRIVER_DIENTES_BOTTOM'],lst_02=['LENGUA_2','ROOT','DIENTES_ARRIBA','DIENTES_BAJA'])
+		self.multi(conexion = 'aim', lst_01 = ['DRIVER_OJO_IZQ'], lst_02 =['OJO_IZQ'])
+		self.multi(conexion = 'poc', lst_01 = ['DRIVER_MANO_IZQ'], lst_02 =['IK_BRAZO_IZQ'])
 
-	cmds.parent( 'REV_%s_1' %lado, '%s' %nombredriver)
 
-	cmds.parent( 'DRIVER_TOE_FINGERS_%s' %lado, 'DRIVER_HEEL_%s' %lado )
+		#BLOQUEAR Y OCULTAR ATRIBUTOS(COMIENZA)
+		lst_drivers_block_ts = ['DRIVER_TOE_IZQ','DRIVER_BALL_IZQ','DRIVER_HEEL_IZQ','DRIVER_MANO_IZQ_FK','DRIVER_CODO_IZQ_FK','DRIVER_HOMBRO_IZQ_FK','DRIVER_CINTURA','DRIVER_COLUMNA_BOTTOM'
+		,'DRIVER_COLUMNA_MIDDLE','DRIVER_COLUMNA_TOP','DRIVER_BOCA','DRIVER_CABEZA','DRIVER_CUELLO']
+		self.atributos(bloquear = 'ts', lst_drivers_block = lst_drivers_block_ts)
 
-	cmds.pointConstraint( 'DRIVER_TOE_FINGERS_%s' %lado, 'IK_DEDOS_PIE_%s' %lado, mo =1 )
+		lst_drivers_block_s = ['DRIVER_LENGUA','DRIVER_DIENTES_TOP','DRIVER_DIENTES_BOTTOM','DRIVER_MANO_IZQ','DRIVER_ROOT','DRIVER_PIE_IZQ','MOVE_ALL',
+		'DRIVER_CLAVICULA_IZQ']
+		self.atributos(bloquear = 's', lst_drivers_block = lst_drivers_block_s)
 
-	#CONECTAR IK CON JOINTS (TERMINA)
+		lst_drivers_block_rs = ['DRIVER_CODO_IZQ','DRIVER_RODILLA_IZQ','DRIVER_TOE_FINGERS_IZQ','DRIVER_OJO_IZQ']
+		self.atributos(bloquear = 'rs', lst_drivers_block = lst_drivers_block_rs)
 
+		lst_drivers_block_v = ['MASTER','DRIVER_THUMB_IZQ_1','DRIVER_THUMB_IZQ_2','DRIVER_THUMB_IZQ_3','DRIVER_INDEX_IZQ_1','DRIVER_INDEX_IZQ_2','DRIVER_INDEX_IZQ_3','DRIVER_MIDDLE_IZQ_1',
+		'DRIVER_MIDDLE_IZQ_2','DRIVER_MIDDLE_IZQ_3','DRIVER_CANCEL_IZQ_1','DRIVER_CANCEL_IZQ_2','DRIVER_CANCEL_IZQ_3','DRIVER_PINKY_IZQ_1','DRIVER_PINKY_IZQ_2','DRIVER_PINKY_IZQ_3']
+		self.atributos(bloquear = 'v', lst_drivers_block = lst_drivers_block_v)
 
+		# Bloquear X y Z de la rotacion en el FK codo
+		self.atributos(bloquear = 'r', lst_drivers_block = ['DRIVER_CODO_IZQ_FK','DRIVER_CODO_IZQ_FK'], eje_attr=['x', 'z'])
+		self.atributos(bloquear = 'tsr', lst_drivers_block = ['OJO_IZQ_REFERENCIA'])
 
-	#CREAR POLE VECTOR RODILLA (COMIENZA)
+		#CAMBIA COLORES OVERRIDES 
+		lista_01 = ['DRIVER_THUMB_IZQ_1','DRIVER_INDEX_IZQ_1','DRIVER_MIDDLE_IZQ_1','DRIVER_CANCEL_IZQ_1','DRIVER_PINKY_SEC_IZQ','DRIVER_MANO_IZQ','DRIVER_CODO_IZQ',
+		'DRIVER_CLAVICULA_IZQ','DRIVER_PIE_IZQ','DRIVER_RODILLA_IZQ','DRIVER_OJO_IZQ', 'DRIVER_HOMBRO_IZQ_FK','OJO_IZQ_REFERENCIA']
+		self.multi(conexion = 'set', lst_01 = lista_01, offset=6, ampliar_lst=0)
 
-	cmds.poleVectorConstraint( 'DRIVER_RODILLA_%s' %lado, 'IK_TALON_%s' %lado, w =  1)
+		lista_01 = ['DRIVER_THUMB_DER_1','DRIVER_INDEX_DER_1','DRIVER_MIDDLE_DER_1','DRIVER_CANCEL_DER_1','DRIVER_PINKY_SEC_DER','DRIVER_MANO_DER','DRIVER_CODO_DER',
+		'DRIVER_CLAVICULA_DER','DRIVER_PIE_DER','DRIVER_RODILLA_DER','DRIVER_OJO_DER', 'DRIVER_HOMBRO_DER_FK','OJO_DER_REFERENCIA']
+		self.multi(conexion = 'set', lst_01 = lista_01, offset=13, ampliar_lst=0)
 
-	#CREAR POLE VECTOR RODILLA (TERMINA)
+		lista_01 = ['DRIVER_BOCA','DRIVER_DIENTES_TOP','MOVE_ALL','DRIVER_CINTURA','DRIVER_COLUMNA_BOTTOM','DRIVER_SOMBRERO','DRIVER_LENTES']
+		self.multi(conexion = 'set', lst_01 = lista_01, offset=18, ampliar_lst=0)
 
+		lista_01 = ['MASTER','DRIVER_ROOT','DRIVER_COLUMNA_TOP']
+		self.multi(conexion = 'set', lst_01 = lista_01, offset=17, ampliar_lst=0)
 
+		self.multi(conexion = 'set', lst_01 = ['ROOT'], offset=1, ampliar_lst=0)
 
-	#CURVA DE REFERENCIA DE LAS RODILLAS (COMIENZA)
 
-	cmds.nurbsSquare( nr=(0, 0, 1), d=1, c=(0, 0, 0), sl1=1, sl2=1, n = 'cuadradotemp')
+		#Cambia todos los orient y parent Constrains a shortest
+		for cons in cmds.ls(et='orientConstraint'):
+		   cmds.setAttr(cons + '.interpType', 2)
 
-	cmds.ungroup( 'cuadradotemp' )
+		for cons in cmds.ls(et='parentConstraint'):
+		   cmds.setAttr(cons + '.interpType', 2)
+		
 
-	cmds.delete( 'rightcuadradotemp', 'leftcuadradotemp', 'bottomcuadradotemp' )
+		#Crea los grupos
+		cmds.group('CRV_REFR_RODILLA_IZQ', 'CLR_RODILLA_IZQ_1', 'CLR_RODILLA_IZQ_2', 'crv_refr_brazo_IZQ', 'CLR_CODO_IZQ_1', 'CLR_CODO_IZQ_2', 'CRV_REFR_RODILLA_DER',
+			'CLR_RODILLA_DER_1', 'CLR_RODILLA_DER_2', 'crv_refr_brazo_DER', 'CLR_CODO_DER_1','CLR_CODO_DER_2', n='GRP_CURVS_REFERENCIA')
+		
+		cmds.group('DEFORM_CURV_PARPADO_DER','DEFORM_CURV_OREJA_DER','DEFORM_CURV_DER','DEFORM_CURV_BOCA_INF','DEFORM_CURV_BOCA_SUP','DEFORM_CURV_NARIZ', n='GRP_CURVS_CARA')
+		
+		cmds.group( 'GRP_CURVS_REFERENCIA','GRP_CURVS_CARA','MASTER', n='GRP_RIGG' )
 
-	cmds.rename('topcuadradotemp', 'CRV_REFR_RODILLA_%s' %lado)
+		#CREAR LAYER Y OCULTAR BASURA(COMIENZA)
+		cmds.select( d=True )
+		cmds.createDisplayLayer( noRecurse=True, name='no_tocar' )
+		cmds.editDisplayLayerMembers( 'no_tocar', 'IK_BRAZO_IZQ', 'IK_BRAZO_DER', 'IK_TALON_IZQ_RP', 'IK_TALON_DER_RP','IK_DEDOS_PIE_IZQ_SC', 'IK_DEDOS_PIE_DER_SC', 
+			'IK_PUNTA_PIE_IZQ_INUTIL_SC', 'IK_PUNTA_PIE_DER_INUTIL_SC', 'CLR_CODO_IZQ_1', 'CLR_CODO_IZQ_2','CLR_CODO_DER_1', 'CLR_CODO_DER_2', 'REV_IZQ_1', 'REV_DER_1', 
+			'CLR_RODILLA_IZQ_1', 'CLR_RODILLA_DER_1', 'CLR_RODILLA_IZQ_2', 'CLR_RODILLA_DER_2')
 
-	cmds.select( 'CRV_REFR_RODILLA_%s.cv[1]' %lado, visible=True )
 
-	cmds.cluster( rel=True, name = 'CLR_RODILLA_1' )
 
-	cmds.rename('CLR_RODILLA_1Handle', 'CLR_RODILLA_%s_1' %lado)
 
-	cmds.select( 'CRV_REFR_RODILLA_%s.cv[0]' %lado, visible=True )
 
-	cmds.cluster( rel=True, name = 'CLR_RODILLA_2' )
+		lado = 'IZQ'
+		var_lado = 0
 
-	cmds.rename('CLR_RODILLA_2Handle', 'CLR_RODILLA_%s_2' %lado)
+		while var_lado < 2:
 
-	cmds.pointConstraint( 'RODILLA_%s' %lado, 'CLR_RODILLA_%s_1' %lado )
+			if var_lado == 1:
+				lado = 'DER'
 
-	cmds.pointConstraint( 'DRIVER_RODILLA_%s' %lado, 'CLR_RODILLA_%s_2' %lado )
+			#CREACION DE LOCATORS (COMIENZA)
+			cmds.setAttr('DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado, 0)
 
-	cmds.setAttr( 'CRV_REFR_RODILLA_%s.template' %lado, 1)
+			cmds.spaceLocator(n='LOC_HOMBRO_%s_FK' %lado)
+			cmds.spaceLocator(n='LOC_CODO_%s_FK' %lado)
+			cmds.spaceLocator(n='LOC_MANO_%s_FK' %lado)
 
-	#CURVA DE REFERENCIA DE LAS RODILLAS (TERMINA)
+			cmds.parentConstraint('DRIVER_HOMBRO_%s_FK' %lado, 'LOC_HOMBRO_%s_FK' %lado, name = 'LOCATOR_CONSTRAIN_HOMBRO_%s' %lado)
+			cmds.parentConstraint('DRIVER_CODO_%s_FK' %lado, 'LOC_CODO_%s_FK' %lado, name = 'LOCATOR_CONSTRAIN_CODO_%s' %lado)
+			cmds.parentConstraint('DRIVER_MANO_%s_FK' %lado, 'LOC_MANO_%s_FK' %lado, name = 'LOCATOR_CONSTRAIN_MANO_%s' %lado)
 
+			cmds.delete('LOCATOR_CONSTRAIN_HOMBRO_%s' %lado, 'LOCATOR_CONSTRAIN_CODO_%s' %lado, 'LOCATOR_CONSTRAIN_MANO_%s' %lado)
 
+			cmds.select('LOC_HOMBRO_%s_FK' %lado, 'LOC_CODO_%s_FK' %lado, 'LOC_MANO_%s_FK' %lado)
+			cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
 
+			cmds.parent( 'LOC_MANO_%s_FK' %lado, 'LOC_CODO_%s_FK' %lado)
+			cmds.parent( 'LOC_CODO_%s_FK' %lado, 'LOC_HOMBRO_%s_FK' %lado)
 
-	#CONECTA LAS CURVAS DEL PIE(COMIENZA)
+			cmds.parentConstraint('HOMBRO_%s_IK' %lado, 'LOC_HOMBRO_%s_FK' %lado, st=["x","z","y"], name = 'LOCATOR_CONSTRAIN_HOMBRO_%s_ROTATE' %lado, mo =1)
+			cmds.parentConstraint('CODO_%s_IK' %lado, 'LOC_CODO_%s_FK' %lado, st=["x","z","y"], name = 'LOCATOR_CONSTRAIN_CODO_%s_ROTATE' %lado, mo =1)
+			cmds.parentConstraint('MANO_%s_IK' %lado, 'LOC_MANO_%s_FK' %lado, st=["x","z","y"], name = 'LOCATOR_CONSTRAIN_MANO_%s_ROTATE' %lado, mo =1)
 
-	cmds.parent( 'DRIVER_HEEL_%s' %lado, 'DRIVER_PIE_%s' %lado)
-	cmds.parent( 'DRIVER_TOE_%s' %lado, 'DRIVER_HEEL_%s' %lado)
-	cmds.parent( 'DRIVER_BALL_%s' %lado, 'DRIVER_TOE_%s' %lado)
 
-	cmds.orientConstraint( 'DRIVER_HEEL_%s' %lado, 'REV_%s_1' %lado, mo=1 )
-	cmds.orientConstraint( 'DRIVER_BALL_%s' %lado, 'REV_%s_3' %lado, mo=1 )
-	cmds.orientConstraint( 'DRIVER_TOE_%s' %lado, 'REV_%s_2' %lado, mo=1 )
 
-	#CONECTA LAS CURVAS DEL PIE(TERMINA)
+			cmds.setAttr('DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado, 1)
 
+			cmds.spaceLocator(n='LOC_CODO_%s_IK' %lado)
+			cmds.spaceLocator(n='LOC_MANO_%s_IK' %lado)
 
+			cmds.parentConstraint('DRIVER_CODO_%s' %lado, 'LOC_CODO_%s_IK' %lado, name = 'LOCATOR_CONSTRAIN_CODO_%s' %lado)
+			cmds.parentConstraint('DRIVER_MANO_%s' %lado, 'LOC_MANO_%s_IK' %lado, name = 'LOCATOR_CONSTRAIN_MANO_%s' %lado)
 
+			cmds.delete('LOCATOR_CONSTRAIN_CODO_%s' %lado, 'LOCATOR_CONSTRAIN_MANO_%s' %lado)
 
-	#COMIENZAN LAS MANOS
+			cmds.select('LOC_CODO_%s_IK' %lado, 'LOC_MANO_%s_IK' %lado)
+			cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
 
-	nombredriver = 'DRIVER_MANO_IZQ'
+			cmds.pointConstraint('CODO_%s_FK' %lado, 'LOC_CODO_%s_IK' %lado, name = 'LOCATOR_CONSTRAIN_CODO_%s_ROTATE_IK' %lado)
+			cmds.parentConstraint('MANO_%s_FK' %lado, 'LOC_MANO_%s_IK' %lado, name = 'LOCATOR_CONSTRAIN_MANO_%s_ROTATE_IK' %lado, mo =1)
 
+			cmds.editDisplayLayerMembers( 'no_tocar', 'LOC_HOMBRO_%s_FK' %lado, 'LOC_CODO_%s_FK' %lado, 'LOC_MANO_%s_FK' %lado, 'LOC_CODO_%s_IK' %lado, 'LOC_MANO_%s_IK' %lado)
+			#CREACION DE LOCATORS (TERMINA)
 
 
-	#CREAR CURVA DE REFERENCIA BRAZO_IK(COMIENZA)
 
-	cmds.nurbsSquare( nr=(0, 0, 1), d=1, c=(0, 0, 0), sl1=1, sl2=1, n = 'cuadradotemp')
+			#CORRECION SWITCH RODILLA (COMIENZA)
+			cmds.group('DRIVER_RODILLA_%s' %lado, n='GRP_DRIVER_RODILLA_%s' %lado)
+			cmds.group('GRP_DRIVER_RODILLA_%s' %lado, n='GRP_PRC_DRIVER_RODILLA_%s' %lado)
 
-	cmds.ungroup( 'cuadradotemp' )
 
-	cmds.delete( 'rightcuadradotemp', 'leftcuadradotemp', 'bottomcuadradotemp' )
+			cmds.parentConstraint( 'DRIVER_PIE_%s' %lado, 'GRP_DRIVER_RODILLA_%s' %lado, mo=1, sr=["x","z","y"], name = 'PARENT_CONSTRAIN_RODILLA_%s' %lado)
+			cmds.parentConstraint( 'DRIVER_ROOT', 'GRP_PRC_DRIVER_RODILLA_%s' %lado, mo=1, name = 'PARENT_CONSTRAIN_CINTURA_RODILLA_%s' %lado)
 
-	cmds.rename('topcuadradotemp', 'crv_refr_brazo_%s' %lado)
 
-	cmds.select( 'crv_refr_brazo_%s.cv[1]' %lado, visible=True )
+			cmds.setAttr( 'PARENT_CONSTRAIN_RODILLA_%s.DRIVER_PIE_%sW0' %(lado, lado), 0)
+			cmds.setAttr( 'PARENT_CONSTRAIN_CINTURA_RODILLA_%s.DRIVER_ROOTW0' %lado, 0)
 
-	cmds.cluster( rel=True, name = 'CLR_CODO_1' )
+			cmds.setDrivenKeyframe( 'PARENT_CONSTRAIN_RODILLA_%s.DRIVER_PIE_%sW0' %(lado, lado), cd='DRIVER_RODILLA_%s.SWITCH_RODILLA_%s' %(lado, lado))
+			cmds.setDrivenKeyframe( 'PARENT_CONSTRAIN_CINTURA_RODILLA_%s.DRIVER_ROOTW0' %lado, cd='DRIVER_RODILLA_%s.SWITCH_RODILLA_%s' %(lado, lado))
 
-	cmds.rename('CLR_CODO_1Handle', 'CLR_CODO_%s_1' %lado)
+			cmds.setAttr( 'DRIVER_RODILLA_%s.SWITCH_RODILLA_%s' %(lado, lado), 1 )
+			cmds.setAttr( 'PARENT_CONSTRAIN_RODILLA_%s.DRIVER_PIE_%sW0' %(lado, lado), 1)
 
-	cmds.select( 'crv_refr_brazo_%s.cv[0]' %lado, visible=True )
+			cmds.setDrivenKeyframe( 'PARENT_CONSTRAIN_RODILLA_%s.DRIVER_PIE_%sW0' %(lado, lado), cd='DRIVER_RODILLA_%s.SWITCH_RODILLA_%s' %(lado, lado))
+			cmds.setDrivenKeyframe( 'PARENT_CONSTRAIN_CINTURA_RODILLA_%s.DRIVER_ROOTW0' %lado, cd='DRIVER_RODILLA_%s.SWITCH_RODILLA_%s' %(lado, lado))
 
-	cmds.cluster( rel=True, name = 'CLR_CODO_2' )
+			cmds.setAttr( 'DRIVER_RODILLA_%s.SWITCH_RODILLA_%s' %(lado, lado), 2 )
+			cmds.setAttr( 'PARENT_CONSTRAIN_RODILLA_%s.DRIVER_PIE_%sW0' %(lado, lado), 0)
+			cmds.setAttr( 'PARENT_CONSTRAIN_CINTURA_RODILLA_%s.DRIVER_ROOTW0' %lado, 1)
 
-	cmds.rename('CLR_CODO_2Handle', 'CLR_CODO_%s_2' %lado)
+			cmds.setDrivenKeyframe( 'PARENT_CONSTRAIN_RODILLA_%s.DRIVER_PIE_%sW0' %(lado, lado), cd='DRIVER_RODILLA_%s.SWITCH_RODILLA_%s' %(lado, lado))
+			cmds.setDrivenKeyframe( 'PARENT_CONSTRAIN_CINTURA_RODILLA_%s.DRIVER_ROOTW0' %lado, cd='DRIVER_RODILLA_%s.SWITCH_RODILLA_%s' %(lado, lado))
 
-	cmds.pointConstraint( 'CODO_%s' %lado, 'CLR_CODO_%s_1' %lado )
+			cmds.setAttr( 'DRIVER_RODILLA_%s.SWITCH_RODILLA_%s' %(lado, lado), 0 )
+			#CORRECION SWITCH RODILLA (TERMINA)
 
-	cmds.pointConstraint( 'DRIVER_CODO_%s' %lado, 'CLR_CODO_%s_2' %lado )
+			var_lado = var_lado+1
 
-	cmds.setAttr( 'crv_refr_brazo_%s.template' %lado, 1)
+			pass
+		cmds.group('LOC_HOMBRO_IZQ_FK','LOC_CODO_IZQ_IK','LOC_MANO_IZQ_IK','LOC_HOMBRO_DER_FK','LOC_CODO_DER_IK','LOC_MANO_DER_IK', n='LOCATORS_MATCH')
+		cmds.parent('LOCATORS_MATCH', 'GRP_RIGG')
 
-	#CREAR CURVA DE REFERENCIA BRAZO_IK(TERMINA)
 
+		#SWITCH OJOS,CABEZA, CUELLO, LENTES Y SOMBRERO (COMIENZA)
+		lista_01 = ['DRIVER_CUELLO','DRIVER_COLUMNA_TOP']
+		lista_02 = ['GRP_DRIVER_CABEZA','GRP_DRIVER_CUELLO']
+		lista_03 = ['PARENT_CONSTRAIN_CABEZA_TRANSLATE','PARENT_CONSTRAIN_CUELLO_TRANSLATE']
+		self.multi(conexion = 'pac', lst_01 = lista_01, lst_02 =lista_02, lst_03 = lista_03, sinr =["x","z","y"])
 
+		lista_01 = ['DRIVER_CUELLO','MOVE_ALL','DRIVER_COLUMNA_TOP','MOVE_ALL']
+		lista_02 = ['GRP_DRIVER_CABEZA','GRP_DRIVER_CABEZA','GRP_DRIVER_CUELLO','GRP_DRIVER_CUELLO']
+		lista_03 = ['PARENT_CONSTRAIN_CABEZA_ROTATE','PARENT_CONSTRAIN_CABEZA_ROTATE','PARENT_CONSTRAIN_CUELLO_ROTATE','PARENT_CONSTRAIN_CUELLO_ROTATE']
+		self.multi(conexion = 'pac', lst_01 = lista_01, lst_02 =lista_02, lst_03 = lista_03, sint =["x","z","y"])
 
+		self.multi(conexion = 'pac', lst_01 =['CABEZA_INUTIL','MOVE_ALL'], lst_02 =['GRP_DRIVER_OJOS','GRP_DRIVER_OJOS'], lst_03 =['PARENT_CONSTRAIN_OJOS','PARENT_CONSTRAIN_OJOS'])
+		
+		lista_01 = ['CABEZA_INUTIL','CABEZA_INUTIL','MOVE_ALL','MOVE_ALL']
+		lista_02 = ['GRP_DRIVER_LENTES','GRP_DRIVER_SOMBRERO','GRP_DRIVER_LENTES','GRP_DRIVER_SOMBRERO']
+		lista_03 = ['PARENT_CONSTRAIN_LENTES','PARENT_CONSTRAIN_SOMBRERO','PARENT_CONSTRAIN_LENTES','PARENT_CONSTRAIN_SOMBRERO']
+		self.multi(conexion='pac',lst_01=lista_01,lst_02=lista_02,lst_03=lista_03)
 
-	#CREAR UNIONES ENTRE LOS HUESOS DE LOS BRAZOS Y SWITCH(COMIENZA)
+		lista_01 = ['PARENT_CONSTRAIN_CABEZA_ROTATE','PARENT_CONSTRAIN_CUELLO_ROTATE','PARENT_CONSTRAIN_OJOS','PARENT_CONSTRAIN_LENTES','PARENT_CONSTRAIN_SOMBRERO']
+		self.multi(conexion = 'set', lst_01 = lista_01, lst_02 =['DRIVER_CUELLOW0','DRIVER_COLUMNA_TOPW0','CABEZA_INUTILW0','CABEZA_INUTILW0','CABEZA_INUTILW0'], attr=0)
+		self.multi(conexion = 'set', lst_01 = lista_01, lst_02 =['MOVE_ALLW1','MOVE_ALLW1','MOVE_ALLW1','MOVE_ALLW1','MOVE_ALLW1'], attr=1)
 
-	cmds.parentConstraint( 'HOMBRO_%s_IK' %lado, 'HOMBRO_%s' %lado, mo=1, n='PC_HOMBRO_%s_IK' %lado)
-	cmds.parentConstraint( 'CODO_%s_IK' %lado, 'CODO_%s' %lado, mo=1, n='PC_CODO_%s_IK' %lado)
-	cmds.parentConstraint( 'CODO_SEC_%s_IK' %lado, 'CODO_SEC_%s' %lado, mo=1, n='PC_CODO_SEC_%s_IK' %lado)
-	cmds.parentConstraint( 'MANO_%s_IK' %lado, 'MANO_%s' %lado, mo=1, n='PC_MANO_%s_IK' %lado)
 
+		self.multi(conexion = 'sdk', lst_01 = ['PARENT_CONSTRAIN_OJOS','PARENT_CONSTRAIN_OJOS'], lst_02 =['CABEZA_INUTILW0','MOVE_ALLW1'], solver='DRIVER_CABEZA.SWITCH_OJOS')
+		self.multi(conexion = 'sdk', lst_01 = ['PARENT_CONSTRAIN_CABEZA_ROTATE','PARENT_CONSTRAIN_CABEZA_ROTATE'], lst_02 =['DRIVER_CUELLOW0','MOVE_ALLW1'], solver='DRIVER_CABEZA.SWITCH_CABEZA_FOLLOW')
+		self.multi(conexion = 'sdk', lst_01 = ['PARENT_CONSTRAIN_CUELLO_ROTATE','PARENT_CONSTRAIN_CUELLO_ROTATE'], lst_02 =['DRIVER_COLUMNA_TOPW0','MOVE_ALLW1'], solver='DRIVER_CUELLO.SWITCH_CUELLO_FOLLOW')
+		self.multi(conexion = 'sdk', lst_01 = ['PARENT_CONSTRAIN_LENTES','PARENT_CONSTRAIN_LENTES'], lst_02 =['CABEZA_INUTILW0','MOVE_ALLW1'], solver='DRIVER_CABEZA.SWITCH_LENTES')
+		self.multi(conexion = 'sdk', lst_01 = ['PARENT_CONSTRAIN_SOMBRERO','PARENT_CONSTRAIN_SOMBRERO'], lst_02 =['CABEZA_INUTILW0','MOVE_ALLW1'], solver='DRIVER_CABEZA.SWITCH_SOMBRERO')
 
-	cmds.parentConstraint( 'HOMBRO_%s_FK' %lado, 'HOMBRO_%s' %lado, mo=1, n='PC_HOMBRO_%s_FK' %lado)
-	cmds.parentConstraint( 'CODO_%s_FK' %lado, 'CODO_%s' %lado, mo=1, n='PC_HOMBRO_%s_FK' %lado)
-	cmds.parentConstraint( 'CODO_SEC_%s_FK' %lado, 'CODO_SEC_%s' %lado, mo=1, n='PC_HOMBRO_%s_FK' %lado)
-	cmds.parentConstraint( 'MANO_%s_FK' %lado, 'MANO_%s' %lado, mo=1, n='PC_HOMBRO_%s_FK' %lado)
 
+		lista_01 = ['DRIVER_CABEZA','DRIVER_CUELLO','DRIVER_CABEZA','DRIVER_CABEZA','DRIVER_CABEZA','PARENT_CONSTRAIN_CABEZA_ROTATE','PARENT_CONSTRAIN_CUELLO_ROTATE','PARENT_CONSTRAIN_OJOS',
+		'PARENT_CONSTRAIN_LENTES','PARENT_CONSTRAIN_SOMBRERO']
+		lista_02 = ['SWITCH_CABEZA_FOLLOW','SWITCH_CUELLO_FOLLOW','SWITCH_OJOS','SWITCH_LENTES','SWITCH_SOMBRERO','DRIVER_CUELLOW0','DRIVER_COLUMNA_TOPW0','CABEZA_INUTILW0','CABEZA_INUTILW0',
+		'CABEZA_INUTILW0']
+		self.multi(conexion = 'set', lst_01 = lista_01, lst_02 =lista_02, attr=1)
 
+		lista_01 = ['PARENT_CONSTRAIN_CABEZA_ROTATE','PARENT_CONSTRAIN_CUELLO_ROTATE','PARENT_CONSTRAIN_OJOS','PARENT_CONSTRAIN_LENTES','PARENT_CONSTRAIN_SOMBRERO']
+		lista_02 = ['MOVE_ALLW1','MOVE_ALLW1','MOVE_ALLW1','MOVE_ALLW1','MOVE_ALLW1']
+		self.multi(conexion='set',lst_01=lista_01,lst_02=lista_02,attr=0)
 
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.HOMBRO_%s_IKW0' %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_%s_IKW0'  %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_IKW0'  %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.MANO_%s_IKW0'  %(lado, lado), 0 )
 
+		self.multi(conexion = 'sdk', lst_01 = ['PARENT_CONSTRAIN_OJOS','PARENT_CONSTRAIN_OJOS'], lst_02 =['CABEZA_INUTILW0','MOVE_ALLW1'], solver='DRIVER_CABEZA.SWITCH_OJOS')
+		self.multi(conexion = 'sdk', lst_01 = ['PARENT_CONSTRAIN_CABEZA_ROTATE','PARENT_CONSTRAIN_CABEZA_ROTATE'], lst_02 =['DRIVER_CUELLOW0','MOVE_ALLW1'], solver='DRIVER_CABEZA.SWITCH_CABEZA_FOLLOW')
+		self.multi(conexion = 'sdk', lst_01 = ['PARENT_CONSTRAIN_CUELLO_ROTATE','PARENT_CONSTRAIN_CUELLO_ROTATE'], lst_02 =['DRIVER_COLUMNA_TOPW0','MOVE_ALLW1'], solver='DRIVER_CUELLO.SWITCH_CUELLO_FOLLOW')
+		self.multi(conexion = 'sdk', lst_01 = ['PARENT_CONSTRAIN_LENTES','PARENT_CONSTRAIN_LENTES'], lst_02 =['CABEZA_INUTILW0','MOVE_ALLW1'], solver='DRIVER_CABEZA.SWITCH_LENTES')
+		self.multi(conexion = 'sdk', lst_01 = ['PARENT_CONSTRAIN_SOMBRERO','PARENT_CONSTRAIN_SOMBRERO'], lst_02 =['CABEZA_INUTILW0','MOVE_ALLW1'], solver='DRIVER_CABEZA.SWITCH_SOMBRERO')
 
 
-	cmds.setAttr( 'crv_refr_brazo_%s.visibility' %lado, 0)
-	cmds.setAttr( 'HOMBRO_%s_IK.visibility' %lado, 0)
-	cmds.setAttr( 'DRIVER_CODO_%s.visibility' %lado, 0)
-	cmds.setAttr( 'DRIVER_MANO_%s.visibility' %lado, 0)
+		lista_01 = ['DRIVER_CABEZA','DRIVER_CABEZA','DRIVER_CUELLO','DRIVER_CABEZA','DRIVER_CABEZA']
+		lista_02 = ['SWITCH_OJOS','SWITCH_CABEZA_FOLLOW','SWITCH_CUELLO_FOLLOW','SWITCH_LENTES','SWITCH_SOMBRERO']
+		self.multi(conexion = 'set', lst_01 =lista_01, lst_02 =lista_02, attr=0)
+		#SWITCH OJOS,CABEZA, CUELLO, LENTES Y SOMBRERO (TERMINA)
 
-	cmds.setAttr( 'HOMBRO_%s_FK.visibility' %lado, 1 )
-	cmds.setAttr( 'DRIVER_HOMBRO_%s_FK.visibility' %lado, 1)
-	cmds.setAttr( 'DRIVER_CODO_%s_FK.visibility' %lado, 1)
-	cmds.setAttr( 'DRIVER_MANO_%s_FK.visibility' %lado, 1)
+		#Agrega el switch del hombro
+		self.spaceSwitchClavicle('DRIVER_HOMBRO_IZQ_FK', 'IZQ')
+		self.spaceSwitchClavicle('DRIVER_HOMBRO_DER_FK', 'DER')
 
+		#Desbloquea los wires
+		elements = cmds.listRelatives('GRP_CURVS_CARA', children=True)
+		for curv in xrange(0, len(elements)):
+			cmds.setAttr(elements[curv]+ '.template', 0)
 
 
+		#Si el personaje es femenino
+		if self.sex.isChecked():
+			pass
 
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.HOMBRO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.MANO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
+		else:
+			cmds.group( 'DRIVER_BUSTO_IZQ', 'DRIVER_BUSTO_DER' , n='GRP_TEMP' )
+			cmds.pointConstraint( 'GRP_TEMP', 'DRIVER_BUSTO', n='CONST_TEMP')
+			cmds.delete('CONST_TEMP')
+			cmds.ungroup( 'GRP_TEMP' )
 
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.HOMBRO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.MANO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
+			self.multi(conexion = 'p', lst_01=['DRIVER_BUSTO','DRIVER_BUSTO_IZQ'], lst_02=['DRIVER_COLUMNA_TOP','DRIVER_BUSTO'])
 
+			cmds.select('DRIVER_BUSTO')
+			cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1)
 
-	cmds.setDrivenKeyframe( 'crv_refr_brazo_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado)
-	cmds.setDrivenKeyframe( 'HOMBRO_%s_IK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'HOMBRO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
+			self.multi(conexion = 'pac', lst_01=['DRIVER_BUSTO_IZQ'], lst_02=['BUSTO_IZQ'])
 
-	cmds.setDrivenKeyframe( 'DRIVER_HOMBRO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_CODO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_MANO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_CODO_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_MANO_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
+			self.multi(conexion = 'cat', lst_01=['DRIVER_BUSTO_IZQ.scale'], lst_02=['BUSTO_IZQ.scale'])
 
+			self.multi(conexion = 'set', lst_01 = ['DRIVER_BUSTO_IZQ'], offset=6, ampliar_lst=0)
+			self.multi(conexion = 'set', lst_01 = ['DRIVER_BUSTO_DER'], offset=13, ampliar_lst=0)
 
 
-	cmds.setAttr( 'DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado, 1 )
 
 
+	def freeze(self, obj):
+		cmds.select(obj)
+		cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1)
 
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.HOMBRO_%s_IKW0' %(lado, lado), 1 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_%s_IKW0'  %(lado, lado), 1 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_IKW0'  %(lado, lado), 1 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.MANO_%s_IKW0'  %(lado, lado), 1 )
+	''' Si conexion es 'p' se crea un parent si es,  'or' = se crea un orientConstraint si es, 'pac' = parentConstraint si es, 'aim' = aimConstraint si es, 'poc' = pointConstraint y si es 
+	'ik' = ikHandle, como dato se puede mandar con solver 'SC' o 'RP' y los constrains con maintain offset si no pones offset es igual a con maintain si quieres desactivarlo manda 0
+	* La conexion 'set' = crear setAttr tienes que mandar el valor a cambiar con attr =
+	* Adicional puede generar conexion de atributos si ocupamos 'cat' = connectAttr, 'pcv' = poleVectorConstraint
+	* Mostrar te imprime las listas que se estan uniendo y offset te ofrece cambiar el maintain offset de los constrains, '0' = sin maintain y '1' o nada es igual a con maintain'''
+	def multi (self, conexion, lst_01, lst_02=None, mostrar=None, offset =None, lst_03 = None ,solver = None, attr=None, ampliar_lst=None, sinr=None, sint=None):
+		myoffset = 1
+		if offset != None:
+			myoffset = offset
+		if sinr == None:
+			sinr = 'none'
+		if sint == None:
+			sint = 'none'
 
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.HOMBRO_%s_FKW1' %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_%s_FKW1'  %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_FKW1'  %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.MANO_%s_FKW1'  %(lado, lado), 0 )
+		l2_aux = None
+		l3_aux = None
+		l1_aux = deepcopy(lst_01)
+		if lst_02 != None:
+			l2_aux = deepcopy(lst_02)
+		if lst_03 != None:
+			l3_aux = deepcopy(lst_03)
 
 
+		if ampliar_lst == None:
+			for element in xrange(0, len(l1_aux)):
+				if l1_aux[element].find('IZQ') != -1:
+					l1_aux.append(l1_aux[element].replace('IZQ', 'DER'))
+					if l2_aux!=None:
+						if  l2_aux[element].find('IZQ') != -1:
+							l2_aux.append(l2_aux[element].replace('IZQ', 'DER'))
+							if l3_aux!=None:
+								if  l3_aux[element].find('IZQ') != -1:
+									l3_aux.append(l3_aux[element].replace('IZQ', 'DER'))
+								else:
+									l3_aux.append(l3_aux[element])
+						else :
+							l2_aux.append(l2_aux[element])
+							if l3_aux!=None:
+								if l3_aux[element].find('IZQ') != -1:
+									l3_aux.append(l3_aux[element].replace('IZQ', 'DER'))
+								else:
+									l3_aux.append(l3_aux[element])
+				elif l2_aux!=None:
+					if l2_aux[element].find('IZQ') != -1:
+						l1_aux.append(l1_aux[element])
+						l2_aux.append(l2_aux[element].replace('IZQ', 'DER'))
+						if l3_aux!=None:
+							if l3_aux[element].find('IZQ') != -1:
+								l3_aux.append(l3_aux[element].replace('IZQ', 'DER'))
+							else:
+								l3_aux.append(l3_aux[element])
+				elif l3_aux!=None:
+					if l3_aux[element].find('IZQ') != -1:
+						l1_aux.append(l1_aux[element])
+						l2_aux.append(l2_aux[element])
+						l3_aux.append(l3_aux[element].replace('IZQ', 'DER'))
 
+			
+		if mostrar ==1:
+			for imprimir in xrange(0, len(l1_aux)):
+				if l3_aux == None:
+					if l2_aux == None:
+						print l1_aux[imprimir] + ' '+ conexion 
+					else:
+						print l1_aux[imprimir] + ' '+ conexion + ' ' + l2_aux[imprimir]
+				else:
+					print l1_aux[imprimir] + ' '+ conexion + ' ' + l2_aux[imprimir] + ' ' + l3_aux[imprimir]
 
-	cmds.setAttr( 'crv_refr_brazo_%s.visibility' %lado, 1)
-	cmds.setAttr( 'HOMBRO_%s_IK.visibility' %lado, 1 )
-	cmds.setAttr( 'DRIVER_CODO_%s.visibility' %lado, 1)
-	cmds.setAttr( 'DRIVER_MANO_%s.visibility' %lado, 1)
 
+		for conect in xrange(0, len(l1_aux)):
 
-	cmds.setAttr( 'HOMBRO_%s_FK.visibility' %lado, 0)
-	cmds.setAttr( 'DRIVER_HOMBRO_%s_FK.visibility' %lado, 0)
-	cmds.setAttr( 'DRIVER_CODO_%s_FK.visibility' %lado, 0)
-	cmds.setAttr( 'DRIVER_MANO_%s_FK.visibility' %lado, 0)
+			if conexion == 'p':
+				cmds.parent( l1_aux[conect], l2_aux[conect])
 
+			elif conexion == 'or':
+				cmds.orientConstraint( l1_aux[conect], l2_aux[conect], mo=myoffset)
 
+			elif conexion == 'pac':
+				if l3_aux == None:
+					cmds.parentConstraint( l1_aux[conect], l2_aux[conect], mo=myoffset, sr=sinr, st=sint)
+				else:
+					cmds.parentConstraint( l1_aux[conect], l2_aux[conect], mo=myoffset, sr=sinr, st=sint, n= l3_aux[conect])
 
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.HOMBRO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.MANO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
+			elif conexion == 'aim':
+				cmds.aimConstraint( l1_aux[conect], l2_aux[conect], mo=myoffset)
 
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.HOMBRO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.MANO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
+			elif conexion == 'poc':
+				if l3_aux == None:
+					cmds.pointConstraint( l1_aux[conect], l2_aux[conect], mo=myoffset )
+				else:
+					cmds.pointConstraint( l1_aux[conect], l2_aux[conect], mo=myoffset, n=l3_aux[conect] )
 
+			elif conexion == 'cat':
+				cmds.connectAttr(l1_aux[conect], l2_aux[conect])
 
-	cmds.setDrivenKeyframe( 'crv_refr_brazo_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado)
-	cmds.setDrivenKeyframe( 'HOMBRO_%s_IK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'HOMBRO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
+			elif conexion == 'pvc':
+				cmds.poleVectorConstraint( l1_aux[conect], l2_aux[conect], w =  1)
 
-	cmds.setDrivenKeyframe( 'DRIVER_HOMBRO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_CODO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_MANO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_CODO_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_MANO_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
+			elif conexion == 'ik':
+				cmds.ikHandle( sj=l1_aux[conect], ee=l2_aux[conect], sol = 'ik'+solver+'solver', name = 'IK_'+l2_aux[conect]+'_'+solver )
 
-	#CREAR UNIONES ENTRE LOS HUESOS DE LOS BRAZOS Y SWITCH(TERMINA)
+			elif conexion == 'set':
+				
+				if offset !=None:
+					cmds.setAttr( l1_aux[conect]+'.overrideEnabled', 1 )
+					cmds.setAttr( l1_aux[conect]+'.overrideColor', myoffset )
+				else:
+					cmds.setAttr( l1_aux[conect]+'.'+l2_aux[conect], attr )
 
+			elif conexion == 'sdk':
+				lado =''
+				if l1_aux[conect].find('IZQ') != -1 or l2_aux[conect].find('IZQ') != -1:
+					lado = 'IZQ'
+					cmds.setDrivenKeyframe( l1_aux[conect]+'.'+l2_aux[conect], cd=solver + lado)
+				elif l1_aux[conect].find('DER') != -1 or l2_aux[conect].find('DER') != -1:
+					lado = 'DER'
+					cmds.setDrivenKeyframe( l1_aux[conect]+'.'+l2_aux[conect], cd=solver + lado)
+				else:
+					cmds.setDrivenKeyframe( l1_aux[conect]+'.'+l2_aux[conect], cd=solver)
 
+	#Si tu valor es 's' = bloquear escala, si es 'ts' = bloquea translacion y escala, si es 'rs' = bloquea rotacion y escala, si es 'v' = solo visibilidad, todos bloquean visibilidad
+	def atributos(self, bloquear, lst_drivers_block, eje_attr=None):
+		eje = ['x','y','z']
 
+		if eje_attr != None:
+			eje = deepcopy(eje_attr)
 
-	#CREAR IK DE LOS BRAZOS y curva de refrencia (COMIENZA)
+		for repetir in xrange(0, len(lst_drivers_block)):
 
-	cmds.ikHandle( sj='HOMBRO_%s_IK' %lado, ee='CODO_SEC_%s_IK' %lado, sol = 'ikRPsolver', name = 'IK_BRAZO_%s' %lado )
+			cmds.setAttr(lst_drivers_block[repetir] + '.v', channelBox = 0, keyable=0, l=1)
+			if lst_drivers_block[repetir].find('IZQ') != -1:
+				cmds.setAttr(lst_drivers_block[repetir].replace('IZQ', 'DER') + '.v', channelBox = 0, keyable=0, l=1)
+	
+			if bloquear != 'v' :
+				for block in xrange(0, len(bloquear)):
+					for blocksec in xrange(0, len(eje)):
+						cmds.setAttr(lst_drivers_block[repetir] + '.' + bloquear[block] + eje[blocksec], channelBox = 0, keyable=0, l=1)
+						
+						if lst_drivers_block[repetir].find('IZQ') != -1:
+							cmds.setAttr(lst_drivers_block[repetir].replace('IZQ', 'DER') + '.' + bloquear[block] + eje[blocksec], channelBox = 0, keyable=0, l=1)
 
-	cmds.orientConstraint( 'DRIVER_MANO_%s' %lado, 'MANO_%s_IK' %lado, mo=1 )
 
-	cmds.spaceLocator(n='LOC_BRAZO_%s' %lado)
-	cmds.pointConstraint( 'MANO_%s_IK' %lado, 'LOC_BRAZO_%s' %lado )
 
-	PX = cmds.getAttr('LOC_BRAZO_%s.tx' %lado)
-	PY = cmds.getAttr('LOC_BRAZO_%s.ty' %lado)
-	PZ = cmds.getAttr('LOC_BRAZO_%s.tz' %lado)
+	def spaceSwitchClavicle(self, clav_ctrl, side):
+		AXIS = ['X','Y','Z']
+		
+		clavicleLoc = cmds.spaceLocator(n = 'clavicleLoc_' + side)[0]
+		clavicleLoc = cmds.parent(clavicleLoc, 'HOMBRO_' + side)[0]
+		grp_ClavicleCtrl = cmds.group(clav_ctrl, n= 'GRP_CTRL_CLAV_' + side)
 
-	cmds.move(PX, PY, PZ, "effector4.scalePivot","effector4.rotatePivot", absolute=True)
+		for ax in range(0, len(AXIS)):
+			cmds.setAttr(clavicleLoc + '.translate' + AXIS[ax], 0)
 
-	cmds.move(PX, PY, PZ, 'IK_BRAZO_%s' %lado)
+		clavicleLoc = cmds.parent(clavicleLoc, 'CLAVICULA_' + side)[0]
+		posLoc = cmds.xform(clavicleLoc, q=True, ws=True, t=True)
+		
+		for ax in range(0, len(AXIS)):
+			cmds.setAttr(grp_ClavicleCtrl + '.rotatePivot' + AXIS[ax], posLoc[ax])
+			cmds.setAttr(grp_ClavicleCtrl + '.scalePivot' + AXIS[ax], posLoc[ax])
 
-	cmds.delete('LOC_BRAZO_%s' %lado)
 
-	cmds.poleVectorConstraint( 'DRIVER_CODO_%s' %lado, 'IK_BRAZO_%s' %lado, w=1, n='POLEA_BRAZO_%s' %lado)
+		cmds.parent(grp_ClavicleCtrl, 'DRIVER_COLUMNA_TOP')
+		orientCons = cmds.parentConstraint('MASTER', clavicleLoc, grp_ClavicleCtrl, st =('x', 'y', 'z'), mo=True)[0]
+		cmds.parentConstraint(clavicleLoc, grp_ClavicleCtrl, sr =('x', 'y', 'z'), mo=True)
 
-	#CREAR IK DE LOS BRAZOS (TERMINA)
+		cmds.addAttr(clav_ctrl, longName='SWT_CLAVICULA', defaultValue=0, minValue=0, maxValue=1, at='double')
+		cmds.setAttr(clav_ctrl + '.SWT_CLAVICULA', e=True, keyable=True)
 
-
-
-
-	#CREAR FK DE LOS BRAZOS (COMIENZA)
-
-	cmds.orientConstraint( 'DRIVER_HOMBRO_%s_FK' %lado, 'HOMBRO_%s_FK' %lado, mo=1 )
-	cmds.orientConstraint( 'DRIVER_CODO_%s_FK' %lado, 'CODO_%s_FK' %lado, mo=1 )
-	cmds.orientConstraint( 'DRIVER_MANO_%s_FK' %lado, 'MANO_%s_FK' %lado, mo=1 )
-
-
-	cmds.parent( 'DRIVER_MANO_%s_FK' %lado, 'DRIVER_CODO_%s_FK' %lado)
-	cmds.parent( 'DRIVER_CODO_%s_FK' %lado, 'DRIVER_HOMBRO_%s_FK' %lado)
-
-	#CREAR FK DE LOS BRAZOS (TERMINA)
-
-
-
-
-	#CONSTRAINS DEDOS(COMIENZA)
-
-	cmds.parent( 'GRP_DRIVER_INDEX_%s_1' %lado, 'MANO_%s' %lado)
-	cmds.parent( 'GRP_DRIVER_MIDDLE_%s_1' %lado, 'MANO_%s' %lado)
-	cmds.parent( 'GRP_DRIVER_CANCEL_%s_1' %lado, 'MANO_%s' %lado)
-	cmds.parent( 'GRP_DRIVER_PINKY_%s_1' %lado, 'MANO_%s' %lado)
-	cmds.parent( 'GRP_DRIVER_THUMB_%s_1' %lado, 'MANO_%s' %lado)
-
-	cmds.parent( 'GRP_DRIVER_INDEX_%s_2' %lado, 'DRIVER_INDEX_%s_1' %lado)
-	cmds.parent( 'GRP_DRIVER_MIDDLE_%s_2' %lado, 'DRIVER_MIDDLE_%s_1' %lado)
-	cmds.parent( 'GRP_DRIVER_CANCEL_%s_2' %lado, 'DRIVER_CANCEL_%s_1' %lado)
-	cmds.parent( 'GRP_DRIVER_PINKY_%s_2' %lado, 'DRIVER_PINKY_%s_1' %lado)
-	#cmds.parent( 'GRP_DRIVER_THUMB_%s_2' %lado, 'DRIVER_THUMB_%s_1' %lado)
-
-	cmds.parent( 'GRP_DRIVER_INDEX_%s_3' %lado, 'DRIVER_INDEX_%s_2' %lado)
-	cmds.parent( 'GRP_DRIVER_MIDDLE_%s_3' %lado, 'DRIVER_MIDDLE_%s_2' %lado)
-	cmds.parent( 'GRP_DRIVER_CANCEL_%s_3' %lado, 'DRIVER_CANCEL_%s_2' %lado)
-	cmds.parent( 'GRP_DRIVER_PINKY_%s_3' %lado, 'DRIVER_PINKY_%s_2' %lado)
-	#cmds.parent( 'GRP_DRIVER_THUMB_%s_3' %lado, 'DRIVER_THUMB_%s_2' %lado)
-
-
-
-
-
-	cmds.select('DRIVER_INDEX_%s_1' %lado, 'DRIVER_MIDDLE_%s_1' %lado, 'DRIVER_CANCEL_%s_1' %lado, 'DRIVER_PINKY_%s_1' %lado,
-		'DRIVER_THUMB_%s_1' %lado)
-
-	cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
-
-
-
-
-
-	cmds.orientConstraint( 'DRIVER_INDEX_%s_1' %lado, 'INDEX_%s_1' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_INDEX_%s_2' %lado, 'INDEX_%s_2' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_INDEX_%s_3' %lado, 'INDEX_%s_3' %lado, mo=1)
-
-	cmds.orientConstraint( 'DRIVER_MIDDLE_%s_1' %lado, 'MIDDLE_%s_1' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_MIDDLE_%s_2' %lado, 'MIDDLE_%s_2' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_MIDDLE_%s_3' %lado, 'MIDDLE_%s_3' %lado, mo=1)
-
-	cmds.orientConstraint( 'DRIVER_CANCEL_%s_1' %lado, 'CANCEL_%s_1' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_CANCEL_%s_2' %lado, 'CANCEL_%s_2' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_CANCEL_%s_3' %lado, 'CANCEL_%s_3' %lado, mo=1)
-
-	cmds.orientConstraint( 'DRIVER_PINKY_%s_1' %lado, 'PINKY_%s_1' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_PINKY_%s_2' %lado, 'PINKY_%s_2' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_PINKY_%s_3' %lado, 'PINKY_%s_3' %lado, mo=1)
-
-	cmds.orientConstraint( 'DRIVER_THUMB_%s_1' %lado, 'THUMB_%s_1' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_THUMB_%s_2' %lado, 'THUMB_%s_2' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_THUMB_%s_3' %lado, 'THUMB_%s_3' %lado, mo=1)
-
-	#CONSTRAINS DEDOS(COMIENZA)
-
-
-
-
-	#CONECTAR LA ROTACION SECUNDARIA DEL CODO(COMIENZA)
-
-	cmds.connectAttr( 'DRIVER_MANO_%s.CORRECION_CODO' %lado, 'CODO_SEC_%s_IK.rotateX' %lado)
-
-	cmds.connectAttr( 'DRIVER_MANO_%s_FK.CORRECION_CODO' %lado, 'CODO_SEC_%s_FK.rotateX' %lado)
-
-	#CONECTAR LA ROTACION SECUNDARIA DEL CODO(COMIENZA)
-	cmds.parent( 'GRP_DRIVER_THUMB_%s_2' %lado, 'DRIVER_THUMB_%s_1' %lado)
-	cmds.parent( 'GRP_DRIVER_THUMB_%s_3' %lado, 'DRIVER_THUMB_%s_2' %lado)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	nombredriver = 'DRIVER_PIE_DER'
-
-	lado = 'DER'
-
-
-
-
-	#CREAR IK PIERNAS (COMIENZA)
-
-	cmds.ikHandle( sj='PIERNA_%s' %lado, ee='TALON_%s' %lado, sol = 'ikRPsolver', name = 'IK_TALON_%s' %lado )
-
-	cmds.ikHandle( sj='TALON_%s' %lado, ee='DEDOS_PIE_%s' %lado, sol = 'ikSCsolver', name = 'IK_PIE_%s' %lado )
-
-	cmds.ikHandle( sj='DEDOS_PIE_%s' %lado, ee='PUNTA_PIE_%s' %lado, sol = 'ikSCsolver', name = 'IK_DEDOS_PIE_%s' %lado )
-
-	#CREAR IK PIERNAS (TERMINA)
-
-
-
-
-	#CONECTAR IK CON JOINTS (COMIENZA)
-
-	cmds.pointConstraint( 'REV_%s_4' %lado, 'IK_TALON_%s' %lado, mo =1 )
-
-	cmds.parent( 'IK_PIE_%s' %lado, 'REV_%s_3'%lado )
-
-	cmds.parent( 'IK_DEDOS_PIE_%s' %lado, 'REV_%s_2'%lado )
-
-	cmds.parent( 'REV_%s_1' %lado, '%s' %nombredriver)
-
-	cmds.parent( 'DRIVER_TOE_FINGERS_%s' %lado, 'DRIVER_HEEL_%s' %lado )
-
-	cmds.pointConstraint( 'DRIVER_TOE_FINGERS_%s' %lado, 'IK_DEDOS_PIE_%s' %lado, mo =1 )
-
-	#CONECTAR IK CON JOINTS (TERMINA)
-
-
-
-	#CREAR POLE VECTOR RODILLA (COMIENZA)
-
-	cmds.poleVectorConstraint( 'DRIVER_RODILLA_%s' %lado, 'IK_TALON_%s' %lado, w =  1)
-
-	#CREAR POLE VECTOR RODILLA (TERMINA)
-
-
-
-	#CURVA DE REFERENCIA DE LAS RODILLAS (COMIENZA)
-
-	cmds.nurbsSquare( nr=(0, 0, 1), d=1, c=(0, 0, 0), sl1=1, sl2=1, n = 'cuadradotemp')
-
-	cmds.ungroup( 'cuadradotemp' )
-
-	cmds.delete( 'rightcuadradotemp', 'leftcuadradotemp', 'bottomcuadradotemp' )
-
-	cmds.rename('topcuadradotemp', 'CRV_REFR_RODILLA_%s' %lado)
-
-	cmds.select( 'CRV_REFR_RODILLA_%s.cv[1]' %lado, visible=True )
-
-	cmds.cluster( rel=True, name = 'CLR_RODILLA_1' )
-
-	cmds.rename('CLR_RODILLA_1Handle', 'CLR_RODILLA_%s_1' %lado)
-
-	cmds.select( 'CRV_REFR_RODILLA_%s.cv[0]' %lado, visible=True )
-
-	cmds.cluster( rel=True, name = 'CLR_RODILLA_2' )
-
-	cmds.rename('CLR_RODILLA_2Handle', 'CLR_RODILLA_%s_2' %lado)
-
-	cmds.pointConstraint( 'RODILLA_%s' %lado, 'CLR_RODILLA_%s_1' %lado )
-
-	cmds.pointConstraint( 'DRIVER_RODILLA_%s' %lado, 'CLR_RODILLA_%s_2' %lado )
-
-	cmds.setAttr( 'CRV_REFR_RODILLA_%s.template' %lado, 1)
-
-	#CURVA DE REFERENCIA DE LAS RODILLAS (TERMINA)
-
-
-
-
-	#CONECTA LAS CURVAS DEL PIE(COMIENZA)
-
-	cmds.parent( 'DRIVER_HEEL_%s' %lado, 'DRIVER_PIE_%s' %lado)
-	cmds.parent( 'DRIVER_TOE_%s' %lado, 'DRIVER_HEEL_%s' %lado)
-	cmds.parent( 'DRIVER_BALL_%s' %lado, 'DRIVER_TOE_%s' %lado)
-
-	cmds.orientConstraint( 'DRIVER_HEEL_%s' %lado, 'REV_%s_1' %lado, mo=1 )
-	cmds.orientConstraint( 'DRIVER_BALL_%s' %lado, 'REV_%s_3' %lado, mo=1 )
-	cmds.orientConstraint( 'DRIVER_TOE_%s' %lado, 'REV_%s_2' %lado, mo=1 )
-
-	#CONECTA LAS CURVAS DEL PIE(TERMINA)
-
-
-
-	#COMIENZAN LAS MANOS
-
-	nombredriver = 'DRIVER_MANO_DER'
-
-
-
-	#CREAR CURVA DE REFERENCIA BRAZO_IK(COMIENZA)
-
-	cmds.nurbsSquare( nr=(0, 0, 1), d=1, c=(0, 0, 0), sl1=1, sl2=1, n = 'cuadradotemp')
-
-	cmds.ungroup( 'cuadradotemp' )
-
-	cmds.delete( 'rightcuadradotemp', 'leftcuadradotemp', 'bottomcuadradotemp' )
-
-	cmds.rename('topcuadradotemp', 'crv_refr_brazo_%s' %lado)
-
-	cmds.select( 'crv_refr_brazo_%s.cv[1]' %lado, visible=True )
-
-	cmds.cluster( rel=True, name = 'CLR_CODO_1' )
-
-	cmds.rename('CLR_CODO_1Handle', 'CLR_CODO_%s_1' %lado)
-
-	cmds.select( 'crv_refr_brazo_%s.cv[0]' %lado, visible=True )
-
-	cmds.cluster( rel=True, name = 'CLR_CODO_2' )
-
-	cmds.rename('CLR_CODO_2Handle', 'CLR_CODO_%s_2' %lado)
-
-	cmds.pointConstraint( 'CODO_%s' %lado, 'CLR_CODO_%s_1' %lado )
-
-	cmds.pointConstraint( 'DRIVER_CODO_%s' %lado, 'CLR_CODO_%s_2' %lado )
-
-	cmds.setAttr( 'crv_refr_brazo_%s.template' %lado, 1)
-
-	#CREAR CURVA DE REFERENCIA BRAZO_IK(TERMINA)
-
-
-
-
-	#CREAR UNIONES ENTRE LOS HUESOS DE LOS BRAZOS Y SWITCH(COMIENZA)
-
-	cmds.parentConstraint( 'HOMBRO_%s_IK' %lado, 'HOMBRO_%s' %lado, mo=1, n='PC_HOMBRO_%s_IK' %lado)
-	cmds.parentConstraint( 'CODO_%s_IK' %lado, 'CODO_%s' %lado, mo=1, n='PC_CODO_%s_IK' %lado)
-	cmds.parentConstraint( 'CODO_SEC_%s_IK' %lado, 'CODO_SEC_%s' %lado, mo=1, n='PC_CODO_SEC_%s_IK' %lado)
-	cmds.parentConstraint( 'MANO_%s_IK' %lado, 'MANO_%s' %lado, mo=1, n='PC_MANO_%s_IK' %lado)
-
-
-	cmds.parentConstraint( 'HOMBRO_%s_FK' %lado, 'HOMBRO_%s' %lado, mo=1, n='PC_HOMBRO_%s_FK' %lado)
-	cmds.parentConstraint( 'CODO_%s_FK' %lado, 'CODO_%s' %lado, mo=1, n='PC_HOMBRO_%s_FK' %lado)
-	cmds.parentConstraint( 'CODO_SEC_%s_FK' %lado, 'CODO_SEC_%s' %lado, mo=1, n='PC_HOMBRO_%s_FK' %lado)
-	cmds.parentConstraint( 'MANO_%s_FK' %lado, 'MANO_%s' %lado, mo=1, n='PC_HOMBRO_%s_FK' %lado)
-
-
-
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.HOMBRO_%s_IKW0' %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_%s_IKW0'  %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_IKW0'  %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.MANO_%s_IKW0'  %(lado, lado), 0 )
-
-
-
-	cmds.setAttr( 'crv_refr_brazo_%s.visibility' %lado, 0)
-	cmds.setAttr( 'HOMBRO_%s_IK.visibility' %lado, 0)
-	cmds.setAttr( 'DRIVER_CODO_%s.visibility' %lado, 0)
-	cmds.setAttr( 'DRIVER_MANO_%s.visibility' %lado, 0)
-
-	cmds.setAttr( 'HOMBRO_%s_FK.visibility' %lado, 1 )
-	cmds.setAttr( 'DRIVER_HOMBRO_%s_FK.visibility' %lado, 1)
-	cmds.setAttr( 'DRIVER_CODO_%s_FK.visibility' %lado, 1)
-	cmds.setAttr( 'DRIVER_MANO_%s_FK.visibility' %lado, 1)
-
-
-
-
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.HOMBRO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.MANO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.HOMBRO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.MANO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-
-
-	cmds.setDrivenKeyframe( 'crv_refr_brazo_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado)
-	cmds.setDrivenKeyframe( 'HOMBRO_%s_IK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'HOMBRO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-
-	cmds.setDrivenKeyframe( 'DRIVER_HOMBRO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_CODO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_MANO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_CODO_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_MANO_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-
-
-
-	cmds.setAttr( 'DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado, 1 )
-
-
-
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.HOMBRO_%s_IKW0' %(lado, lado), 1 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_%s_IKW0'  %(lado, lado), 1 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_IKW0'  %(lado, lado), 1 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.MANO_%s_IKW0'  %(lado, lado), 1 )
-
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.HOMBRO_%s_FKW1' %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_%s_FKW1'  %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_FKW1'  %(lado, lado), 0 )
-	cmds.setAttr( 'PC_HOMBRO_%s_FK.MANO_%s_FKW1'  %(lado, lado), 0 )
-
-
-
-
-	cmds.setAttr( 'crv_refr_brazo_%s.visibility' %lado, 1)
-	cmds.setAttr( 'HOMBRO_%s_IK.visibility' %lado, 1 )
-	cmds.setAttr( 'DRIVER_CODO_%s.visibility' %lado, 1)
-	cmds.setAttr( 'DRIVER_MANO_%s.visibility' %lado, 1)
-
-
-	cmds.setAttr( 'HOMBRO_%s_FK.visibility' %lado, 0)
-	cmds.setAttr( 'DRIVER_HOMBRO_%s_FK.visibility' %lado, 0)
-	cmds.setAttr( 'DRIVER_CODO_%s_FK.visibility' %lado, 0)
-	cmds.setAttr( 'DRIVER_MANO_%s_FK.visibility' %lado, 0)
-
-
-
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.HOMBRO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.MANO_%s_IKW0' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.HOMBRO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.CODO_SEC_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'PC_HOMBRO_%s_FK.MANO_%s_FKW1' %(lado, lado), cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-
-
-	cmds.setDrivenKeyframe( 'crv_refr_brazo_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado)
-	cmds.setDrivenKeyframe( 'HOMBRO_%s_IK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'HOMBRO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-
-	cmds.setDrivenKeyframe( 'DRIVER_HOMBRO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_CODO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_MANO_%s_FK.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_CODO_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-	cmds.setDrivenKeyframe( 'DRIVER_MANO_%s.visibility' %lado, cd='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_%s' %lado )
-
-	#CREAR UNIONES ENTRE LOS HUESOS DE LOS BRAZOS Y SWITCH(TERMINA)
-
-
-
-
-	#CREAR IK DE LOS BRAZOS y curva de refrencia (COMIENZA)
-
-	cmds.ikHandle( sj='HOMBRO_%s_IK' %lado, ee='CODO_SEC_%s_IK' %lado, sol = 'ikRPsolver', name = 'IK_BRAZO_%s' %lado )
-
-	cmds.orientConstraint( 'DRIVER_MANO_%s' %lado, 'MANO_%s_IK' %lado, mo=1 )
-
-	cmds.spaceLocator(n='LOC_BRAZO_%s' %lado)
-	cmds.pointConstraint( 'MANO_%s_IK' %lado, 'LOC_BRAZO_%s' %lado )
-
-	PX = cmds.getAttr('LOC_BRAZO_%s.tx' %lado)
-	PY = cmds.getAttr('LOC_BRAZO_%s.ty' %lado)
-	PZ = cmds.getAttr('LOC_BRAZO_%s.tz' %lado)
-
-	cmds.move(PX, PY, PZ, "effector8.scalePivot","effector8.rotatePivot", absolute=True)
-
-	cmds.move(PX, PY, PZ, 'IK_BRAZO_%s' %lado)
-
-	cmds.delete('LOC_BRAZO_%s' %lado)
-
-	cmds.poleVectorConstraint( 'DRIVER_CODO_%s' %lado, 'IK_BRAZO_%s' %lado, w=1, n='POLEA_BRAZO_%s' %lado)
-
-	#CREAR IK DE LOS BRAZOS (TERMINA)
-
-
-
-
-	#CREAR FK DE LOS BRAZOS (COMIENZA)
-
-	cmds.orientConstraint( 'DRIVER_HOMBRO_%s_FK' %lado, 'HOMBRO_%s_FK' %lado, mo=1 )
-	cmds.orientConstraint( 'DRIVER_CODO_%s_FK' %lado, 'CODO_%s_FK' %lado, mo=1 )
-	cmds.orientConstraint( 'DRIVER_MANO_%s_FK' %lado, 'MANO_%s_FK' %lado, mo=1 )
-
-
-	cmds.parent( 'DRIVER_MANO_%s_FK' %lado, 'DRIVER_CODO_%s_FK' %lado)
-	cmds.parent( 'DRIVER_CODO_%s_FK' %lado, 'DRIVER_HOMBRO_%s_FK' %lado)
-
-	#CREAR FK DE LOS BRAZOS (TERMINA)
-
-
-
-
-	#CONSTRAINS DEDOS(COMIENZA)
-
-	cmds.parent( 'GRP_DRIVER_INDEX_%s_1' %lado, 'MANO_%s' %lado)
-	cmds.parent( 'GRP_DRIVER_MIDDLE_%s_1' %lado, 'MANO_%s' %lado)
-	cmds.parent( 'GRP_DRIVER_CANCEL_%s_1' %lado, 'MANO_%s' %lado)
-	cmds.parent( 'GRP_DRIVER_PINKY_%s_1' %lado, 'MANO_%s' %lado)
-	cmds.parent( 'GRP_DRIVER_THUMB_%s_1' %lado, 'MANO_%s' %lado)
-
-	cmds.parent( 'GRP_DRIVER_INDEX_%s_2' %lado, 'DRIVER_INDEX_%s_1' %lado)
-	cmds.parent( 'GRP_DRIVER_MIDDLE_%s_2' %lado, 'DRIVER_MIDDLE_%s_1' %lado)
-	cmds.parent( 'GRP_DRIVER_CANCEL_%s_2' %lado, 'DRIVER_CANCEL_%s_1' %lado)
-	cmds.parent( 'GRP_DRIVER_PINKY_%s_2' %lado, 'DRIVER_PINKY_%s_1' %lado)
-	cmds.parent( 'GRP_DRIVER_THUMB_%s_2' %lado, 'DRIVER_THUMB_%s_1' %lado)
-
-	cmds.parent( 'GRP_DRIVER_INDEX_%s_3' %lado, 'DRIVER_INDEX_%s_2' %lado)
-	cmds.parent( 'GRP_DRIVER_MIDDLE_%s_3' %lado, 'DRIVER_MIDDLE_%s_2' %lado)
-	cmds.parent( 'GRP_DRIVER_CANCEL_%s_3' %lado, 'DRIVER_CANCEL_%s_2' %lado)
-	cmds.parent( 'GRP_DRIVER_PINKY_%s_3' %lado, 'DRIVER_PINKY_%s_2' %lado)
-	cmds.parent( 'GRP_DRIVER_THUMB_%s_3' %lado, 'DRIVER_THUMB_%s_2' %lado)
-
-
-
-
-
-	cmds.select('DRIVER_INDEX_%s_1' %lado, 'DRIVER_MIDDLE_%s_1' %lado, 'DRIVER_CANCEL_%s_1' %lado, 'DRIVER_PINKY_%s_1' %lado,
-		'DRIVER_THUMB_%s_1' %lado)
-
-	cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
-
-
-
-
-
-	cmds.orientConstraint( 'DRIVER_INDEX_%s_1' %lado, 'INDEX_%s_1' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_INDEX_%s_2' %lado, 'INDEX_%s_2' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_INDEX_%s_3' %lado, 'INDEX_%s_3' %lado, mo=1)
-
-	cmds.orientConstraint( 'DRIVER_MIDDLE_%s_1' %lado, 'MIDDLE_%s_1' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_MIDDLE_%s_2' %lado, 'MIDDLE_%s_2' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_MIDDLE_%s_3' %lado, 'MIDDLE_%s_3' %lado, mo=1)
-
-	cmds.orientConstraint( 'DRIVER_CANCEL_%s_1' %lado, 'CANCEL_%s_1' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_CANCEL_%s_2' %lado, 'CANCEL_%s_2' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_CANCEL_%s_3' %lado, 'CANCEL_%s_3' %lado, mo=1)
-
-	cmds.orientConstraint( 'DRIVER_PINKY_%s_1' %lado, 'PINKY_%s_1' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_PINKY_%s_2' %lado, 'PINKY_%s_2' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_PINKY_%s_3' %lado, 'PINKY_%s_3' %lado, mo=1)
-
-	cmds.orientConstraint( 'DRIVER_THUMB_%s_1' %lado, 'THUMB_%s_1' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_THUMB_%s_2' %lado, 'THUMB_%s_2' %lado, mo=1)
-	cmds.orientConstraint( 'DRIVER_THUMB_%s_3' %lado, 'THUMB_%s_3' %lado, mo=1)
-
-	#CONSTRAINS DEDOS(COMIENZA)
-
-
-
-
-	#CONECTAR LA ROTACION SECUNDARIA DEL CODO(COMIENZA)
-
-	cmds.connectAttr( 'DRIVER_MANO_%s.CORRECION_CODO' %lado, 'CODO_SEC_%s_IK.rotateX' %lado)
-
-	cmds.connectAttr( 'DRIVER_MANO_%s_FK.CORRECION_CODO' %lado, 'CODO_SEC_%s_FK.rotateX' %lado)
-
-	#CONECTAR LA ROTACION SECUNDARIA DEL CODO(COMIENZA)
-
-
-
-
-
-
-
-
-
-
-
-
-
-	#MULTIPLY DIVIDES (COMIENZA)
-
-	myShader = cmds.shadingNode('multiplyDivide', asShader= True, name ='MULTY_CUELLO', au =1 )
-	cmds.connectAttr( 'DRIVER_CABEZA.rotateX', 'MULTY_CUELLO.input1X' )
-	cmds.connectAttr( 'DRIVER_CABEZA.rotateY', 'MULTY_CUELLO.input1Y' )
-	cmds.connectAttr( 'DRIVER_CABEZA.rotateZ', 'MULTY_CUELLO.input1Z' )
-
-	cmds.connectAttr( 'MULTY_CUELLO.outputX', 'CUELLO_SEC.rotateZ' )
-	cmds.connectAttr( 'MULTY_CUELLO.outputY', 'CUELLO_SEC.rotateX' )
-	cmds.connectAttr( 'MULTY_CUELLO.outputZ', 'CUELLO_SEC.rotateY' )
-
-	cmds.setAttr( 'MULTY_CUELLO.input2X', -0.35 )
-	cmds.setAttr( 'MULTY_CUELLO.input2Y',  0.35 )
-	cmds.setAttr( 'MULTY_CUELLO.input2Z', -0.35 )
-
-	#MULTIPLY DIVIDES (TERMINA)
-
-
-
-	#CREAR LAYER Y OCULTAR BASURA(COMIENZA)
-
-	cmds.createDisplayLayer( noRecurse=True, name='no_tocar' )
-	cmds.editDisplayLayerMembers( 'no_tocar', 'IK_BRAZO_IZQ', 'IK_BRAZO_DER', 'IK_TALON_IZQ', 'IK_TALON_DER',
-	 	'IK_PIE_IZQ', 'IK_PIE_DER', 'IK_DEDOS_PIE_IZQ', 'IK_DEDOS_PIE_DER', 'CLR_CODO_IZQ_1', 'CLR_CODO_IZQ_2',
-	  	'CLR_CODO_DER_1', 'CLR_CODO_DER_2', 'REV_IZQ_1', 'REV_DER_1', 'CLR_RODILLA_IZQ_1', 'CLR_RODILLA_DER_1', 
-	  	'CLR_RODILLA_IZQ_2', 'CLR_RODILLA_DER_2')
-
-	#CREAR LAYER Y OCULTAR BASURA(TERMINA)
-
-
-
-
-	#CAMBIA COLORES OVERRIDES (COMIENZA)
-
-	cmds.setAttr( 'MASTER.overrideEnabled', 1 )
-	cmds.setAttr( 'MASTER.overrideColor', 17 )
-
-	cmds.setAttr( 'DRIVER_OJO_IZQ.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_OJO_IZQ.overrideColor', 6 )
-
-	cmds.setAttr( 'DRIVER_OJO_DER.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_OJO_DER.overrideColor', 13 )
-
-	cmds.setAttr( 'DRIVER_PINKY_SEC_IZQ.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_PINKY_SEC_IZQ.overrideColor', 6 )
-	cmds.setAttr( 'DRIVER_MANO_IZQ.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_MANO_IZQ.overrideColor', 6 )
-	cmds.setAttr( 'DRIVER_CODO_IZQ.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_CODO_IZQ.overrideColor', 6 )
-	cmds.setAttr( 'DRIVER_CLAVICULA_IZQ.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_CLAVICULA_IZQ.overrideColor', 6 )
-	cmds.setAttr( 'DRIVER_PIE_IZQ.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_PIE_IZQ.overrideColor', 6 )
-	cmds.setAttr( 'DRIVER_RODILLA_IZQ.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_RODILLA_IZQ.overrideColor', 6 )
-
-	cmds.setAttr( 'DRIVER_CANCEL_IZQ_1.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_CANCEL_IZQ_1.overrideColor', 6 )
-	cmds.setAttr( 'DRIVER_MIDDLE_IZQ_1.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_MIDDLE_IZQ_1.overrideColor', 6 )
-	cmds.setAttr( 'DRIVER_INDEX_IZQ_1.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_INDEX_IZQ_1.overrideColor', 6 )
-	cmds.setAttr( 'DRIVER_THUMB_IZQ_1.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_THUMB_IZQ_1.overrideColor', 6 )
-
-
-
-	cmds.setAttr( 'DRIVER_PINKY_SEC_DER.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_PINKY_SEC_DER.overrideColor', 13 )
-	cmds.setAttr( 'DRIVER_MANO_DER.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_MANO_DER.overrideColor', 13 )
-	cmds.setAttr( 'DRIVER_CODO_DER.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_CODO_DER.overrideColor', 13 )
-	cmds.setAttr( 'DRIVER_CLAVICULA_DER.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_CLAVICULA_DER.overrideColor', 13 )
-	cmds.setAttr( 'DRIVER_PIE_DER.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_PIE_DER.overrideColor', 13 )
-	cmds.setAttr( 'DRIVER_RODILLA_DER.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_RODILLA_DER.overrideColor', 13 )
-
-	cmds.setAttr( 'DRIVER_CANCEL_DER_1.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_CANCEL_DER_1.overrideColor', 13 )
-	cmds.setAttr( 'DRIVER_MIDDLE_DER_1.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_MIDDLE_DER_1.overrideColor', 13 )
-	cmds.setAttr( 'DRIVER_INDEX_DER_1.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_INDEX_DER_1.overrideColor', 13 )
-	cmds.setAttr( 'DRIVER_THUMB_DER_1.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_THUMB_DER_1.overrideColor', 13 )
-
-
-	cmds.setAttr( 'MOVE_ALL.overrideEnabled', 1 )
-	cmds.setAttr( 'MOVE_ALL.overrideColor', 18 )
-	cmds.setAttr( 'DRIVER_CINTURA.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_CINTURA.overrideColor', 18 )
-	cmds.setAttr( 'DRIVER_ROOT.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_ROOT.overrideColor', 17 )
-	cmds.setAttr( 'DRIVER_COLUMNA_BOTTOM.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_COLUMNA_BOTTOM.overrideColor', 18 )
-	cmds.setAttr( 'DRIVER_COLUMNA_TOP.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_COLUMNA_TOP.overrideColor', 17 )
-	cmds.setAttr( 'DRIVER_BOCA.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_BOCA.overrideColor', 18 )
-	cmds.setAttr( 'DRIVER_DIENTES_TOP.overrideEnabled', 1 )
-	cmds.setAttr( 'DRIVER_DIENTES_TOP.overrideColor', 18 )
-
-	cmds.setAttr( 'ROOT.overrideEnabled', 1 )
-	cmds.setAttr( 'ROOT.overrideColor', 1 )
-
-	#CAMBIA COLORES OVERRIDES (TERMINA)
-
-
-
-
-	#CREAR ATRIBUTOS PRENDIDO APAGADO CABEZA, PIERNAS ETC...(COMIENZA)
-
-	cmds.addAttr('MASTER', longName='CUERPO', at = 'bool')
-	cmds.setAttr('MASTER.CUERPO', channelBox = 1, keyable=1)
-	cmds.addAttr('MASTER', longName='PIERNAS', at = 'bool')
-	cmds.setAttr('MASTER.PIERNAS' , channelBox = 1, keyable=1)
-	cmds.addAttr('DRIVER_CABEZA', longName='VISIBILITY_BS', at = 'bool')
-	cmds.setAttr('DRIVER_CABEZA.VISIBILITY_BS' , channelBox = 1, keyable=1)
-
-	cmds.setAttr('MASTER.CUERPO', 1)
-
-	cmds.setAttr('MASTER.PIERNAS' , 1)
-
-
-	#CREAR ATRIBUTOS PRENDIDO APAGADO CABEZA, PIERNAS ETC...(TERMINA)
-
-
-
-
-	#CONECTAR ATRIBUTOS DE VISIBILIDAD CON DRIVERS(COMIENZA)
-
-	cmds.connectAttr( 'MASTER.CUERPO' , 'DRIVER_ROOT.visibility')
-	cmds.connectAttr( 'MASTER.CUERPO' , 'DRIVER_DIENTES_TOP.visibility')
-	cmds.connectAttr( 'MASTER.CUERPO' , 'DRIVER_BOCA.visibility')
-
-
-	cmds.connectAttr( 'MASTER.PIERNAS' , 'DRIVER_PIE_IZQ.visibility')
-	cmds.connectAttr( 'MASTER.PIERNAS' , 'DRIVER_RODILLA_IZQ.visibility')
-	cmds.connectAttr( 'MASTER.PIERNAS' , 'DRIVER_PIE_DER.visibility')
-	cmds.connectAttr( 'MASTER.PIERNAS' , 'DRIVER_RODILLA_DER.visibility')
-
-	cmds.connectAttr( 'DRIVER_CABEZA.VISIBILITY_BS' , 'DRIVER_CARA.visibility')
-
-	#CONECTAR ATRIBUTOS DE VISIBILIDAD CON DRIVERS(TERMINA)
-
-
-
-
-	#SWITCH OJOS FOLLOW(COMIENZA)
-
-	cmds.parent( 'DRIVER_OJO_IZQ', 'DRIVER_OJOS')
-	cmds.parent( 'DRIVER_OJO_DER', 'DRIVER_OJOS')
-	cmds.parent( 'DRIVER_OJOS', 'MOVE_ALL')
-
-	cmds.group( 'DRIVER_OJOS', n='GRP_OJOS' )
-
-	cmds.parentConstraint( 'CABEZA_ALTA', 'GRP_OJOS', mo=1 )
-
-
-	cmds.setDrivenKeyframe( 'GRP_OJOS_parentConstraint1.CABEZA_ALTAW0', cd='DRIVER_CABEZA.SWITCH_OJOS' )
-
-	cmds.setAttr( 'DRIVER_CABEZA.SWITCH_OJOS', 1 )
-	cmds.setAttr( 'GRP_OJOS_parentConstraint1.CABEZA_ALTAW0', 0 )
-
-	cmds.setDrivenKeyframe( 'GRP_OJOS_parentConstraint1.CABEZA_ALTAW0', cd='DRIVER_CABEZA.SWITCH_OJOS' )
-
-	#SWITCH OJOS FOLLOW(TERMINA)
-
-
-
-
-	#CONSTRAINS GENEALES(COMIENZA)
-
-	cmds.parent( 'DRIVER_HOMBRO_IZQ_FK', 'DRIVER_CLAVICULA_IZQ')
-	cmds.parent( 'DRIVER_HOMBRO_DER_FK', 'DRIVER_CLAVICULA_DER')
-
-	cmds.parent( 'DRIVER_PINKY_SEC_IZQ', 'MANO_IZQ')
-	cmds.parent( 'DRIVER_PINKY_SEC_DER', 'MANO_DER')
-
-	cmds.select('DRIVER_PINKY_SEC_IZQ', 'DRIVER_PINKY_SEC_DER')
-	cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
-
-	cmds.parent( 'GRP_DRIVER_PINKY_IZQ_1', 'DRIVER_PINKY_SEC_IZQ')
-	cmds.parent( 'GRP_DRIVER_PINKY_DER_1', 'DRIVER_PINKY_SEC_DER')
-
-	cmds.parent( 'DRIVER_DIENTES_BOTTOM', 'DRIVER_BOCA')
-	cmds.parent( 'DRIVER_BOCA', 'CABEZA')
-	cmds.parent( 'DRIVER_DIENTES_TOP', 'CABEZA')
-	cmds.parent( 'DRIVER_LENGUA', 'DRIVER_BOCA')
-	cmds.parent( 'DRIVER_CABEZA', 'DRIVER_COLUMNA_TOP')
-	cmds.parent( 'DRIVER_CLAVICULA_IZQ', 'DRIVER_COLUMNA_TOP')
-	cmds.parent( 'DRIVER_CLAVICULA_DER', 'DRIVER_COLUMNA_TOP')
-	cmds.parent( 'DRIVER_MANO_DER', 'MOVE_ALL')
-	cmds.parent( 'DRIVER_MANO_IZQ', 'MOVE_ALL')
-	cmds.parent( 'DRIVER_CODO_IZQ', 'MOVE_ALL')
-	cmds.parent( 'DRIVER_CODO_DER', 'MOVE_ALL')
-	cmds.parent( 'DRIVER_COLUMNA_TOP', 'DRIVER_COLUMNA_MIDDLE')
-	cmds.parent( 'DRIVER_COLUMNA_MIDDLE', 'DRIVER_COLUMNA_BOTTOM')
-	cmds.parent( 'DRIVER_COLUMNA_BOTTOM', 'DRIVER_ROOT')
-	cmds.parent( 'DRIVER_CINTURA', 'DRIVER_ROOT')
-	cmds.parent( 'DRIVER_RODILLA_DER', 'MOVE_ALL')
-	cmds.parent( 'DRIVER_RODILLA_IZQ', 'MOVE_ALL')
-	cmds.parent( 'DRIVER_PIE_DER', 'MOVE_ALL')
-	cmds.parent( 'DRIVER_PIE_IZQ', 'MOVE_ALL')
-	cmds.parent( 'DRIVER_ROOT', 'MOVE_ALL')
-	cmds.parent( 'MOVE_ALL', 'MASTER')
-
-
-
-	cmds.select('DRIVER_BOCA', 'DRIVER_DIENTES_TOP')
-	cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
-
-
-
-	cmds.parent( 'IK_BRAZO_IZQ', 'MOVE_ALL')
-	cmds.parent( 'IK_BRAZO_DER', 'MOVE_ALL')
-	cmds.parent( 'IK_TALON_IZQ', 'MOVE_ALL')
-	cmds.parent( 'IK_TALON_DER', 'MOVE_ALL')
-
-
-	cmds.parent( 'ROOT', 'MOVE_ALL')
-
-	cmds.orientConstraint( 'DRIVER_CINTURA', 'CINTURA', mo=1)
-	cmds.parentConstraint( 'DRIVER_ROOT', 'ROOT', mo=1)
-	cmds.orientConstraint( 'DRIVER_COLUMNA_BOTTOM', 'COLUMNA_BAJA', mo=1)
-	cmds.orientConstraint( 'DRIVER_COLUMNA_MIDDLE', 'COLUMNA_MEDIA', mo=1)
-	cmds.orientConstraint( 'DRIVER_COLUMNA_TOP', 'COLUMNA_ALTA', mo=1)
-	cmds.orientConstraint( 'DRIVER_CABEZA', 'CUELLO', mo=1)
-	cmds.orientConstraint( 'DRIVER_CLAVICULA_IZQ', 'CLAVICULA_IZQ', mo=1 )
-	cmds.orientConstraint( 'DRIVER_CLAVICULA_DER', 'CLAVICULA_DER', mo=1 )
-	cmds.parentConstraint( 'DRIVER_DIENTES_TOP', 'DIENTES_ARRIBA', mo=1)
-	cmds.parentConstraint( 'DRIVER_DIENTES_BOTTOM', 'DIENTES_BAJA', mo=1)
-	cmds.orientConstraint( 'DRIVER_BOCA', 'BOCA_1', mo=1 )
-	cmds.parentConstraint( 'DRIVER_LENGUA', 'LENGUA_2', mo=1 )
-	cmds.aimConstraint( 'DRIVER_OJO_IZQ', 'OJO_IZQ', mo=1 )
-	cmds.aimConstraint( 'DRIVER_OJO_DER', 'OJO_DER', mo=1 )
-
-
-
-	cmds.orientConstraint( 'DRIVER_PINKY_SEC_IZQ', 'PINKY_SEC_IZQ', mo=1)
-	cmds.orientConstraint( 'DRIVER_PINKY_SEC_DER', 'PINKY_SEC_DER', mo=1)
-	cmds.pointConstraint( 'DRIVER_MANO_IZQ', 'IK_BRAZO_IZQ', mo=1 )
-	cmds.pointConstraint( 'DRIVER_MANO_DER', 'IK_BRAZO_DER', mo=1 )
-
-	#CONSTRAINS GENEALES(TERMINA)
-
-
-
-
-
-	#BLOQUEAR Y OCULTAR ATRIBUTOS(COMIENZA)
-
-	cmds.setAttr('DRIVER_OJO_IZQ.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_OJO_IZQ.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_OJO_IZQ.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_OJO_IZQ.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_OJO_DER.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_OJO_DER.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_OJO_DER.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_OJO_DER.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CABEZA.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CABEZA.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CABEZA.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CABEZA.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CABEZA.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CABEZA.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CABEZA.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_LENGUA.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_LENGUA.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_LENGUA.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_LENGUA.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_BOCA.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BOCA.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BOCA.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BOCA.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BOCA.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BOCA.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BOCA.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_DIENTES_TOP.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_DIENTES_TOP.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_DIENTES_TOP.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_DIENTES_TOP.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_DIENTES_BOTTOM.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_DIENTES_BOTTOM.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_DIENTES_BOTTOM.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_DIENTES_BOTTOM.v', channelBox = 0, keyable=0, l=1)
-
-
-	cmds.setAttr('DRIVER_CLAVICULA_IZQ.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_IZQ.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_IZQ.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_IZQ.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_IZQ.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_IZQ.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_IZQ.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CLAVICULA_DER.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_DER.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_DER.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_DER.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_DER.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_DER.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CLAVICULA_DER.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CODO_IZQ.rx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ.ry', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ.rz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CODO_DER.rx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER.ry', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER.rz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_MANO_IZQ.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_IZQ.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_IZQ.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_IZQ.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_MANO_DER.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_DER.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_DER.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_DER.v', channelBox = 0, keyable=0, l=1)
-
-
-
-	cmds.setAttr('DRIVER_PINKY_SEC_IZQ.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_IZQ.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_IZQ.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_IZQ.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_IZQ.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_IZQ.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_IZQ.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_PINKY_SEC_DER.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_DER.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_DER.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_DER.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_DER.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_DER.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_SEC_DER.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_PINKY_IZQ_1.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_1.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_1.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_1.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_1.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_1.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_1.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_PINKY_DER_1.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_1.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_1.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_1.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_1.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_1.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_1.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_PINKY_IZQ_2.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_2.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_2.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_2.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_2.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_2.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_2.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_PINKY_DER_2.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_2.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_2.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_2.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_2.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_2.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_2.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_PINKY_IZQ_3.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_3.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_3.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_3.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_3.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_3.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_IZQ_3.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_PINKY_DER_3.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_3.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_3.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_3.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_3.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_3.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PINKY_DER_3.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CANCEL_IZQ_1.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_1.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_1.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_1.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_1.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_1.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_1.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CANCEL_DER_1.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_1.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_1.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_1.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_1.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_1.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_1.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CANCEL_IZQ_2.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_2.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_2.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_2.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_2.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_2.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_2.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CANCEL_DER_2.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_2.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_2.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_2.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_2.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_2.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_2.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CANCEL_IZQ_3.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_3.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_3.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_3.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_3.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_3.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_IZQ_3.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CANCEL_DER_3.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_3.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_3.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_3.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_3.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_3.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CANCEL_DER_3.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_1.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_1.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_1.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_1.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_1.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_1.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_1.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_MIDDLE_DER_1.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_1.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_1.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_1.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_1.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_1.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_1.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_2.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_2.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_2.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_2.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_2.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_2.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_2.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_MIDDLE_DER_2.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_2.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_2.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_2.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_2.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_2.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_2.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_3.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_3.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_3.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_3.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_3.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_3.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_IZQ_3.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_MIDDLE_DER_3.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_3.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_3.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_3.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_3.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_3.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MIDDLE_DER_3.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_INDEX_IZQ_1.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_1.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_1.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_1.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_1.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_1.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_1.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_INDEX_DER_1.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_1.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_1.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_1.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_1.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_1.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_1.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_INDEX_IZQ_2.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_2.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_2.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_2.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_2.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_2.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_2.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_INDEX_DER_2.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_2.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_2.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_2.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_2.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_2.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_2.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_INDEX_IZQ_3.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_3.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_3.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_3.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_3.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_3.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_IZQ_3.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_INDEX_DER_3.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_3.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_3.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_3.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_3.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_3.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_INDEX_DER_3.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_THUMB_IZQ_1.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_1.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_1.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_1.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_1.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_1.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_1.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_THUMB_DER_1.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_1.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_1.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_1.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_1.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_1.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_1.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_THUMB_IZQ_2.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_2.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_2.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_2.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_2.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_2.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_2.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_THUMB_DER_2.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_2.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_2.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_2.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_2.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_2.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_2.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_THUMB_IZQ_3.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_3.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_3.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_3.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_3.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_3.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_IZQ_3.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_THUMB_DER_3.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_3.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_3.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_3.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_3.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_3.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_THUMB_DER_3.v', channelBox = 0, keyable=0, l=1)
-
-
-
-
-	cmds.setAttr('DRIVER_COLUMNA_TOP.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_TOP.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_TOP.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_TOP.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_TOP.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_TOP.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_TOP.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_COLUMNA_MIDDLE.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_MIDDLE.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_MIDDLE.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_MIDDLE.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_MIDDLE.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_MIDDLE.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_MIDDLE.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_COLUMNA_BOTTOM.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_BOTTOM.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_BOTTOM.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_BOTTOM.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_BOTTOM.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_BOTTOM.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_COLUMNA_BOTTOM.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_ROOT.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_ROOT.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_ROOT.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_ROOT.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CINTURA.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CINTURA.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CINTURA.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CINTURA.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CINTURA.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CINTURA.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CINTURA.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_RODILLA_IZQ.rx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_IZQ.ry', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_IZQ.rz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_IZQ.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_IZQ.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_IZQ.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_IZQ.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_RODILLA_DER.rx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_DER.ry', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_DER.rz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_DER.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_DER.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_DER.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_RODILLA_DER.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_PIE_IZQ.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PIE_IZQ.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PIE_IZQ.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PIE_IZQ.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_PIE_DER.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PIE_DER.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PIE_DER.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_PIE_DER.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('MOVE_ALL.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('MOVE_ALL.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('MOVE_ALL.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('MOVE_ALL.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('MASTER.v', channelBox = 0, keyable=0, l=1)
-
-
-
-	cmds.setAttr('DRIVER_HOMBRO_IZQ_FK.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_IZQ_FK.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_IZQ_FK.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_IZQ_FK.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_IZQ_FK.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_IZQ_FK.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_IZQ_FK.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CODO_IZQ_FK.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ_FK.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ_FK.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ_FK.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ_FK.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ_FK.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_IZQ_FK.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_MANO_IZQ_FK.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_IZQ_FK.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_IZQ_FK.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_IZQ_FK.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_IZQ_FK.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_IZQ_FK.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_IZQ_FK.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_HOMBRO_DER_FK.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_DER_FK.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_DER_FK.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_DER_FK.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_DER_FK.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_DER_FK.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HOMBRO_DER_FK.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_CODO_DER_FK.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER_FK.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER_FK.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER_FK.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER_FK.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER_FK.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_CODO_DER_FK.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_MANO_DER_FK.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_DER_FK.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_DER_FK.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_DER_FK.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_DER_FK.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_DER_FK.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_MANO_DER_FK.v', channelBox = 0, keyable=0, l=1)
-
-
-	cmds.setAttr('DRIVER_HEEL_IZQ.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_IZQ.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_IZQ.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_IZQ.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_IZQ.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_IZQ.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_IZQ.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_BALL_IZQ.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_IZQ.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_IZQ.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_IZQ.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_IZQ.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_IZQ.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_IZQ.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_TOE_IZQ.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_IZQ.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_IZQ.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_IZQ.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_IZQ.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_IZQ.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_IZQ.v', channelBox = 0, keyable=0, l=1)
-
-
-	cmds.setAttr('DRIVER_HEEL_DER.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_DER.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_DER.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_DER.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_DER.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_DER.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_HEEL_DER.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_BALL_DER.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_DER.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_DER.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_DER.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_DER.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_DER.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_BALL_DER.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_TOE_DER.tx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_DER.ty', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_DER.tz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_DER.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_DER.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_DER.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_DER.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_TOE_FINGERS_IZQ.rx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_IZQ.ry', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_IZQ.rz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_IZQ.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_IZQ.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_IZQ.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_IZQ.v', channelBox = 0, keyable=0, l=1)
-
-	cmds.setAttr('DRIVER_TOE_FINGERS_DER.rx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_DER.ry', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_DER.rz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_DER.sx', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_DER.sy', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_DER.sz', channelBox = 0, keyable=0, l=1)
-	cmds.setAttr('DRIVER_TOE_FINGERS_DER.v', channelBox = 0, keyable=0, l=1)
-
-	#BLOQUEAR Y OCULTAR ATRIBUTOS(TERMINA)
-
-
-
-
-	#GRUPO GENERAL(COMIENZA)
-
-	cmds.group( 'MASTER', 'CRV_REFR_RODILLA_IZQ', 'CLR_RODILLA_IZQ_1', 'CLR_RODILLA_IZQ_2', 
-		'crv_refr_brazo_IZQ', 'CLR_CODO_IZQ_1', 'CLR_CODO_IZQ_2', 'CRV_REFR_RODILLA_DER', 
-		'CLR_RODILLA_DER_1', 'CLR_RODILLA_DER_2', 'crv_refr_brazo_DER', 'CLR_CODO_DER_1', 
-		'CLR_CODO_DER_2', 'GRP_GEO', n='GRP_RIGG' )
-
-	#GRUPO GENERAL(TERMINA)
-
-
-
-	#EMPARENTAMIENTO Y CREACION DE BLENDS CARA(COMIENZA)
-
-	cmds.parent( 'DRIVER_CARA', 'MASTER')
-
-	#EMPARENTAMIENTO Y CREACION DE BLENDS CARA(TERMINA)
-
-
-	cmds.setAttr("DRIVER_CODO_IZQ_FK.rotateX", l=True)
-	cmds.setAttr("DRIVER_CODO_IZQ_FK.rotateZ", l=True)
-	cmds.setAttr("DRIVER_CODO_IZQ_FK.rotateX", l=True)
-	cmds.setAttr("DRIVER_CODO_IZQ_FK.rotateZ", l=True)
+		cmds.setDrivenKeyframe(orientCons + '.MASTERW0', cd= clav_ctrl + '.SWT_CLAVICULA', dv=0, v=1)
+		cmds.setDrivenKeyframe(orientCons + '.MASTERW0', cd= clav_ctrl + '.SWT_CLAVICULA', dv=1, v=0)
+		cmds.setDrivenKeyframe(orientCons + '.' + clavicleLoc +'W1', cd= clav_ctrl + '.SWT_CLAVICULA', dv=0, v=0)
+		cmds.setDrivenKeyframe(orientCons + '.' + clavicleLoc +'W1', cd= clav_ctrl + '.SWT_CLAVICULA', dv=1, v=1)
+		cmds.editDisplayLayerMembers( 'no_tocar', 'clavicleLoc_' +side)

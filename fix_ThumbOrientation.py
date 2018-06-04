@@ -35,3 +35,5 @@ def mainThumbs():
 	for num in xrange(2, 4):
 		num = str(num)
 		cmds.orientConstraint(CTRL_DER + num, JNT_DER + num, mo=True)
+
+	cmds.delete('tempGrp')

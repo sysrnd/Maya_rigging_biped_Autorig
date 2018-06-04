@@ -17,12 +17,7 @@ class updateRig(object):
 		for codo in self.codoCtrls:
 			cmds.setAttr(codo + '.rotateX', lock=True, keyable=True)
 			cmds.setAttr(codo + '.rotateZ', lock=True, keyable=True)
-	def mainWires(self, ctrls):
-		for ctrl in ctrls:
-			#handle = self.getConn(ctrl, 'transform')
-			#self.replaceConn(handle, ctrl)
-			grp = self.group(ctrl)
-			self.setGroup(grp, 0)
+
 	def mainClavicle(self, ctrls):
 		for ctrl in range(0, len(ctrls)):
 			cons = self.getConn(self.clavicleList[ctrl], 'orientConstraint')
@@ -36,6 +31,8 @@ class updateRig(object):
 			shape.shapeToCtrl(self.clavicleList[ctrl], tempGrp)
 			pos = cmds.xform(self.clavicleJntList[ctrl], q=True, ws=True, piv=True)
 			cmds.xform(self.clavicleList[ctrl], ws=True, piv=(pos[0], pos[1], pos[2]))
+		cmds.pointConstraint( 'DRIVER_CLAVICULA_IZQ', 'CLAVICULA_IZQ')
+		cmds.pointConstraint( 'DRIVER_CLAVICULA_DER', 'CLAVICULA_DER' )
 	def mainFingers(self, ctrls):
 
 		sides = ['_DER_', '_IZQ_']

@@ -1,10 +1,10 @@
 //Maya ASCII 2015 scene
 //Name: RIGG_BASE.ma
-//Last modified: Thu, Apr 05, 2018 09:24:44 PM
+//Last modified: Fri, Jun 01, 2018 04:07:01 PM
 //Codeset: 1252
 requires maya "2015";
-requires -nodeType "ilrOptionsNode" -nodeType "ilrUIOptionsNode" -nodeType "ilrBakeLayerManager"
-		 -nodeType "ilrBakeLayer" "Turtle" "2015.0.0";
+requires -nodeType "mentalrayFramebuffer" -nodeType "mentalrayOptions" -nodeType "mentalrayGlobals"
+		 -nodeType "mentalrayItemsList" -dataType "byteArray" "Mayatomr" "2015.0 - 3.12.1.12 ";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
 fileInfo "product" "Maya 2015";
@@ -12,56 +12,57 @@ fileInfo "version" "2015";
 fileInfo "cutIdentifier" "201503261530-955654";
 fileInfo "osv" "Microsoft Windows 8 Business Edition, 64-bit  (Build 9200)\n";
 createNode transform -s -n "persp";
-	setAttr ".t" -type "double3" 30.209988623492265 -8.1602759750138887 27.187121965899312 ;
-	setAttr ".r" -type "double3" 2.661647270609063 25.399999999998364 0 ;
+	setAttr ".t" -type "double3" 11.044156558693317 15.74734233950479 25.436093862534143 ;
+	setAttr ".r" -type "double3" -14.738352729784136 27.000000000000391 -8.9240499230932892e-016 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v";
-	setAttr ".fl" 34.999999999999986;
-	setAttr ".coi" 26.10069793897415;
+	setAttr ".fl" 34.999999999999993;
+	setAttr ".coi" 20.204221670243513;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
-	setAttr ".tp" -type "double3" 19.026560169728874 -6.9482169347214917 3.6348763446438599 ;
+	setAttr ".tp" -type "double3" 18.037233608704998 -5.8558394810227021 3.2529842186076126 ;
 	setAttr ".hc" -type "string" "viewSet -p %camera";
 createNode transform -s -n "top";
-	setAttr ".t" -type "double3" -0.66328373914519867 105.96032803264163 -0.6501146312209829 ;
+	setAttr ".t" -type "double3" 17.774311423403294 104.74654518457899 1.5775331118102698 ;
 	setAttr ".r" -type "double3" -89.999999999999986 0 0 ;
 createNode camera -s -n "topShape" -p "top";
 	setAttr -k off ".v";
 	setAttr ".rnd" no;
 	setAttr ".coi" 100.1;
-	setAttr ".ow" 20.942452060976763;
+	setAttr ".ow" 18.046022718435378;
 	setAttr ".imn" -type "string" "top";
 	setAttr ".den" -type "string" "top_depth";
 	setAttr ".man" -type "string" "top_mask";
 	setAttr ".hc" -type "string" "viewSet -t %camera";
 	setAttr ".o" yes;
 createNode transform -s -n "front";
-	setAttr ".t" -type "double3" -0.0077514538099932029 0.36063518637080066 103.6794123239622 ;
+	setAttr ".t" -type "double3" 17.541793197386195 -5.6720949333241872 111.01989109190187 ;
 createNode camera -s -n "frontShape" -p "front";
 	setAttr -k off ".v";
 	setAttr ".rnd" no;
 	setAttr ".coi" 100.1;
-	setAttr ".ow" 24.069288981816662;
+	setAttr ".ow" 15.584833517728217;
 	setAttr ".imn" -type "string" "front";
 	setAttr ".den" -type "string" "front_depth";
 	setAttr ".man" -type "string" "front_mask";
 	setAttr ".hc" -type "string" "viewSet -f %camera";
 	setAttr ".o" yes;
 createNode transform -s -n "side";
-	setAttr ".t" -type "double3" 102.30388622047279 0.056207893040220086 1.8580702727558651 ;
+	setAttr ".t" -type "double3" 101.43796755493051 13.968499696952676 7.5463680257144947 ;
 	setAttr ".r" -type "double3" 0 89.999999999999986 0 ;
 createNode camera -s -n "sideShape" -p "side";
 	setAttr -k off ".v";
 	setAttr ".rnd" no;
 	setAttr ".coi" 100.1;
-	setAttr ".ow" 8.7326866983678197;
+	setAttr ".ow" 7.2320946220465965;
 	setAttr ".imn" -type "string" "side";
 	setAttr ".den" -type "string" "side_depth";
 	setAttr ".man" -type "string" "side_mask";
 	setAttr ".hc" -type "string" "viewSet -s %camera";
 	setAttr ".o" yes;
 createNode transform -n "DEFORM_CURV_NARIZ";
+	setAttr ".tmp" yes;
 	setAttr ".rp" -type "double3" 19.026560169728874 -6.9482169347214935 3.6348763446438599 ;
 	setAttr ".sp" -type "double3" 19.026560169728874 -6.9482169347214935 3.6348763446438599 ;
 createNode nurbsCurve -n "DEFORM_CURV_NARIZShape" -p "DEFORM_CURV_NARIZ";
@@ -75,6 +76,7 @@ createNode nurbsCurve -n "DEFORM_CURV_NARIZShape" -p "DEFORM_CURV_NARIZ";
 		19.619765413091105 -7.0236960537692852 3.2803908549662446
 		;
 createNode transform -n "DEFORM_CURV_BOCA_SUP";
+	setAttr ".tmp" yes;
 	setAttr ".rp" -type "double3" 19.007144562447763 -7.3467672206508112 2.9882825783993896 ;
 	setAttr ".sp" -type "double3" 19.007144562447763 -7.3467672206508112 2.9882825783993896 ;
 createNode nurbsCurve -n "DEFORM_CURV_BOCA_SUPShape" -p "DEFORM_CURV_BOCA_SUP";
@@ -90,7 +92,7 @@ createNode nurbsCurve -n "DEFORM_CURV_BOCA_SUPShape" -p "DEFORM_CURV_BOCA_SUP";
 		19.999581645758639 -7.2905305478588645 2.8018676366440274
 		;
 createNode transform -n "DEFORM_CURV_BOCA_INF";
-	setAttr -l on -k off ".v";
+	setAttr ".tmp" yes;
 	setAttr ".rp" -type "double3" 19.007144562447763 -7.4605792408699507 2.9527232754181725 ;
 	setAttr ".sp" -type "double3" 19.007144562447763 -7.4605792408699507 2.9527232754181725 ;
 createNode nurbsCurve -n "DEFORM_CURV_BOCA_INFShape" -p "DEFORM_CURV_BOCA_INF";
@@ -106,6 +108,7 @@ createNode nurbsCurve -n "DEFORM_CURV_BOCA_INFShape" -p "DEFORM_CURV_BOCA_INF";
 		19.953776274152741 -7.3920932683815153 2.7935937995350741
 		;
 createNode transform -n "DEFORM_CURV_DER";
+	setAttr ".tmp" yes;
 	setAttr ".rp" -type "double3" 18.038557429396882 -5.8570092103643034 3.1713017358758022 ;
 	setAttr ".sp" -type "double3" 18.038557429396882 -5.8570092103643034 3.1713017358758022 ;
 createNode nurbsCurve -n "DEFORM_CURV_DERShape" -p "DEFORM_CURV_DER";
@@ -131,8 +134,13 @@ createNode nurbsCurve -n "DEFORM_CURV_DERShape" -p "DEFORM_CURV_DER";
 		18.038557429396882 -4.8755473461538159 3.1713017358758022
 		;
 createNode transform -n "MASTER";
+	addAttr -ci true -sn "CUERPO" -ln "CUERPO" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "PIERNAS" -ln "PIERNAS" -min 0 -max 1 -at "bool";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 0 0 0.93937092674000233 ;
 	setAttr ".sp" -type "double3" 0 0 0.93937092674000233 ;
+	setAttr -cb on ".CUERPO" yes;
+	setAttr -cb on ".PIERNAS" yes;
 createNode nurbsCurve -n "MASTERShape" -p "MASTER";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
@@ -166,8 +174,12 @@ createNode nurbsCurve -n "MASTERShape" -p "MASTER";
 		-2.2215208837003106 -6.6329118552736169e-033 -2.0222764359694336
 		;
 createNode transform -n "DRIVER_RODILLA_DER";
+	addAttr -ci true -sn "SWITCH_RODILLA_DER" -ln "SWITCH_RODILLA_DER" -min 0 -max 
+		2 -en "NONE:FOOT:MIDDLE" -at "enum";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -1.1685200000000011 4.28726 4.0907987591282975 ;
 	setAttr ".sp" -type "double3" -1.1685200000000009 4.28726 4.0907987591282975 ;
+	setAttr -k on ".SWITCH_RODILLA_DER";
 createNode nurbsCurve -n "DRIVER_RODILLA_DERShape" -p "DRIVER_RODILLA_DER";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
@@ -230,72 +242,29 @@ createNode joint -n "R_CUELLO" -p "R_COLUMNA_ALTA";
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" 0 0 -6.2586055777971534 ;
 	setAttr ".radi" 0.5;
-createNode joint -n "R_CUELLO_SEC" -p "R_CUELLO";
+createNode joint -n "R_CABEZA" -p "R_CUELLO";
 	setAttr ".t" -type "double3" 0.81376688813207243 -4.163336342344337e-016 3.8193815413782679e-017 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" -3.7109739420078524e-017 -3.013218097554932e-015 1.411198187229372 ;
 	setAttr ".radi" 0.51308788540535555;
-createNode joint -n "R_CABEZA" -p "R_CUELLO_SEC";
+createNode joint -n "R_CABEZA_INUTIL" -p "R_CABEZA";
 	setAttr ".t" -type "double3" 1.2530324511702062 4.4408920985006262e-016 6.5897699460178739e-017 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" -1.5601944247390472e-016 -4.0209083498230684e-015 
 		4.4441566619681394 ;
 	setAttr ".radi" 0.5;
-createNode joint -n "R_CABEZA_ALTA" -p "R_CABEZA";
-	setAttr ".t" -type "double3" 3.8035175790681413 1.4432899320127035e-015 2.6692359755541876e-016 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 82.860738057281097 89.999999999999943 0 ;
-	setAttr ".radi" 0.64500952995180039;
-createNode joint -n "R_OJO_DER" -p "R_CABEZA_ALTA";
-	setAttr ".t" -type "double3" -0.78837371753915542 -2.5781719232551943 1.2322024176368775 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -4.9298597562684521e-014 1.3292816646217324e-014 -4.3310199980768558e-014 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_OJO_IZQ" -p "R_CABEZA_ALTA";
-	setAttr ".t" -type "double3" 0.78837371753915553 -2.5781719232552014 1.2322024176368764 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -4.9298597562684521e-014 1.3292816646217324e-014 -4.3310199980768558e-014 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_DIENTES_ARRIBA" -p "R_CABEZA";
+createNode joint -n "R_DIENTES_ARRIBA" -p "R_CABEZA_INUTIL";
 	setAttr ".t" -type "double3" -0.10051539876732107 -2.1351054109164433 -4.8585021093867975e-016 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".radi" 0.55883466074071964;
-createNode joint -n "R_MANDIBULA" -p "R_CABEZA";
-	setAttr ".t" -type "double3" -0.66860466948992503 -0.26497786275343049 -1.0634254066090235e-016 ;
+createNode joint -n "R_LENGUA_1" -p "R_CABEZA_INUTIL";
+	setAttr ".t" -type "double3" -0.63606229207114851 -0.52479200504850176 -1.5357738140663223e-016 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -3.3698699940756828e-014 1.0693660171329217e-014 -144.78825112142795 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_BOCA_1" -p "R_MANDIBULA";
-	setAttr ".t" -type "double3" 0.62571848571684341 5.6906906805896314e-016 -1.1678383479618832e-016 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 0 0 46.526138700420574 ;
-	setAttr ".radi" 0.53549279413611195;
-createNode joint -n "R_BOCA_2" -p "R_BOCA_1";
-	setAttr ".t" -type "double3" 1.6861940199648304 1.8873791418627661e-015 -3.9120831053427193e-016 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -7.3336042339983414e-015 -5.5865703068859238e-015 
-		105.40137436372635 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_DIENTES_BAJA" -p "R_BOCA_2";
-	setAttr ".t" -type "double3" 0.98765368823933408 3.3306690738754696e-016 9.6300230402562218e-017 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 0 0 -7.1392619427189628 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_LENGUA_1" -p "R_MANDIBULA";
-	setAttr ".t" -type "double3" 0.12322080879818209 0.23103901649658987 -4.1331192578072786e-017 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 8.1051248416849092e-015 1.0937036409119461e-014 73.082172803075139 ;
+	setAttr ".jo" -type "double3" 1.0259235005671536e-015 -1.3520646709423963e-014 -71.706078318352837 ;
 	setAttr ".radi" 0.5;
 createNode joint -n "R_LENGUA_2" -p "R_LENGUA_1";
 	setAttr ".t" -type "double3" 0.76577535626406346 -0.15099795757319567 -1.5058584311591282e-016 ;
@@ -303,11 +272,36 @@ createNode joint -n "R_LENGUA_2" -p "R_LENGUA_1";
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" -2.1036297916225148e-015 1.2867723890901738e-014 -18.56929002990292 ;
 	setAttr ".radi" 0.5;
-createNode joint -n "R_LENGUA_3" -p "R_LENGUA_2";
+createNode joint -n "R_LENGUA_3_INUTIL" -p "R_LENGUA_2";
 	setAttr ".t" -type "double3" 0.71715331881975897 0.093328171627229395 -1.6624680184612668e-016 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" 0 0 -54.512882773172215 ;
+	setAttr ".radi" 0.5;
+createNode joint -n "R_MANDIBULA_INUTIL" -p "R_CABEZA_INUTIL";
+	setAttr ".t" -type "double3" -1.1798333664253189 -0.62576705715581094 -1.3602271008768396e-016 ;
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".jo" -type "double3" -4.8662818781762951e-015 1.5409908406756396e-014 -98.262112421007387 ;
+	setAttr ".radi" 0.53549279413611195;
+createNode joint -n "R_BOCA" -p "R_MANDIBULA_INUTIL";
+	setAttr ".t" -type "double3" 1.6861940199648304 1.8873791418627661e-015 -3.9120831053427193e-016 ;
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".jo" -type "double3" -7.3336042339983414e-015 -5.5865703068859238e-015 
+		105.40137436372635 ;
+	setAttr ".radi" 0.5;
+createNode joint -n "R_DIENTES_BAJA" -p "R_BOCA";
+	setAttr ".t" -type "double3" 0.98765368823933408 3.3306690738754696e-016 9.6300230402562218e-017 ;
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".jo" -type "double3" 0 0 -7.1392619427189628 ;
+	setAttr ".radi" 0.5;
+createNode joint -n "R_OJO_IZQ" -p "R_CABEZA_INUTIL";
+	setAttr ".t" -type "double3" 1.3984740996490928 -1.5430680885805077 -0.78837371753915553 ;
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".jo" -type "double3" 82.86073805728104 89.999999999999986 0 ;
 	setAttr ".radi" 0.5;
 createNode joint -n "R_CLAVICULA_IZQ" -p "R_COLUMNA_ALTA";
 	setAttr ".t" -type "double3" 0.16086960653645832 0.019000347228715686 -1.076989314315111 ;
@@ -316,22 +310,26 @@ createNode joint -n "R_CLAVICULA_IZQ" -p "R_COLUMNA_ALTA";
 	setAttr ".jo" -type "double3" 90.000000000000242 80.625352979108854 6.7360112141195172 ;
 	setAttr ".radi" 0.50471268734568542;
 createNode joint -n "R_HOMBRO_IZQ" -p "R_CLAVICULA_IZQ";
-	setAttr ".t" -type "double3" 1.0911119553499182 9.1593399531575415e-016 5.2222796637331994e-016 ;
+	setAttr ".t" -type "double3" 0.93963368916199841 0.025008204323471863 0.00097243547278833518 ;
+	setAttr ".r" -type "double3" 0 2.439611146462326 0 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" -1.1023216300637443e-012 5.6358403616014243 -9.3746470208910537 ;
 	setAttr ".radi" 0.59704833651003142;
 createNode joint -n "R_CODO_IZQ" -p "R_HOMBRO_IZQ";
-	setAttr ".t" -type "double3" 2.8762678391939387 -2.9088006330002314e-015 -8.8817841970012523e-016 ;
+	setAttr ".t" -type "double3" 2.9854984920510654 -1.7763568394002505e-015 0.2946162825792713 ;
+	setAttr ".r" -type "double3" 0 -4.2992350921328795 0 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" 7.4625022989917234e-015 -14.430440342312302 -5.894585613885645e-014 ;
+	setAttr -av ".is" -type "double3" 1 1 1 ;
+	setAttr -av ".is";
 	setAttr ".radi" 0.57392190162732382;
 createNode joint -n "R_CODO_SEC_IZQ" -p "R_CODO_IZQ";
-	setAttr ".t" -type "double3" 0.98423999512474047 -0.0012045657891253114 -0.0077856508572380356 ;
+	setAttr ".t" -type "double3" 0.99117682436545884 7.638334409421077e-014 -0.13254622907047864 ;
 	setAttr ".radi" 0.57392190162732382;
 createNode joint -n "R_MANO_IZQ" -p "R_CODO_SEC_IZQ";
-	setAttr ".t" -type "double3" 1.4827921084934546 -0.0017235890215477312 -0.011730006326813643 ;
+	setAttr ".t" -type "double3" 1.4925574333121527 4.1868107356502184e-015 -0.19959391159421919 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" -1.0081127280851612 5.2078667684428526 -3.9964603400648171 ;
@@ -354,7 +352,7 @@ createNode joint -n "R_MIDDLE_IZQ_3" -p "R_MIDDLE_IZQ_2";
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" -1.1323115366376642e-015 -0.6620262699199313 1.959920725104381e-013 ;
 	setAttr ".radi" 0.5;
-createNode joint -n "R_MIDDLE_IZQ_4" -p "R_MIDDLE_IZQ_3";
+createNode joint -n "R_MIDDLE_IZQ_4_INUTIL" -p "R_MIDDLE_IZQ_3";
 	setAttr ".t" -type "double3" 0.31038076300484313 3.1225022567582528e-017 7.6588041464376033e-016 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
@@ -385,7 +383,7 @@ createNode joint -n "R_PINKY_IZQ_3" -p "R_PINKY_IZQ_2";
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" -1.791915219911692e-014 4.6278950862124129 -4.4345583705820839e-013 ;
 	setAttr ".radi" 0.5;
-createNode joint -n "R_PINKY_IZQ_4" -p "R_PINKY_IZQ_3";
+createNode joint -n "R_PINKY_IZQ_4_INUTIL" -p "R_PINKY_IZQ_3";
 	setAttr ".t" -type "double3" 0.23753345597066877 0.00087684232747319805 0.0018144402089301376 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
@@ -410,7 +408,7 @@ createNode joint -n "R_CANCEL_IZQ_3" -p "R_CANCEL_IZQ_2";
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" 3.427427038457143e-033 0.10374482489103187 3.7857705277440378e-030 ;
 	setAttr ".radi" 0.5;
-createNode joint -n "R_CANCEL_IZQ_4" -p "R_CANCEL_IZQ_3";
+createNode joint -n "R_CANCEL_IZQ_4_INUTIL" -p "R_CANCEL_IZQ_3";
 	setAttr ".t" -type "double3" 0.27928780060505914 -0.00011799621303352497 -3.4177766619309322e-005 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
@@ -434,7 +432,7 @@ createNode joint -n "R_INDEX_IZQ_3" -p "R_INDEX_IZQ_2";
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" 1.0745325081721283e-014 1.6870984604159376 7.2979414921776405e-013 ;
 	setAttr ".radi" 0.5;
-createNode joint -n "R_INDEX_IZQ_4" -p "R_INDEX_IZQ_3";
+createNode joint -n "R_INDEX_IZQ_4_INUTIL" -p "R_INDEX_IZQ_3";
 	setAttr ".t" -type "double3" 0.27904276347459606 1.7763568394002505e-015 -1.0200174038743626e-015 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
@@ -459,168 +457,18 @@ createNode joint -n "R_THUMB_IZQ_3" -p "R_THUMB_IZQ_2";
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" 1.2554036256381601e-014 -4.4339209495244623 -3.2428827576260377e-013 ;
 	setAttr ".radi" 0.5;
-createNode joint -n "R_THUMB_IZQ_4" -p "R_THUMB_IZQ_3";
+createNode joint -n "R_THUMB_IZQ_4_INUTIL" -p "R_THUMB_IZQ_3";
 	setAttr ".t" -type "double3" 0.32140149315883604 -0.00088139515058639328 -0.0047417376385099535 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" 0 27.825867501786615 0 ;
 	setAttr ".radi" 0.5;
-createNode joint -n "R_CLAVICULA_DER" -p "R_COLUMNA_ALTA";
-	setAttr ".t" -type "double3" 0.16088063883362125 0.019001929365822789 1.0769900000000001 ;
+createNode joint -n "R_BUSTO_IZQ" -p "R_COLUMNA_ALTA";
+	setAttr ".t" -type "double3" -0.13399863501548026 -1.9788142792918211 -0.86558863984364898 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 90.000000000000185 80.625352979108882 -173.26398878588066 ;
-	setAttr ".radi" 0.50471268734568542;
-createNode joint -n "R_HOMBRO_DER" -p "R_CLAVICULA_DER";
-	setAttr ".t" -type "double3" -1.0911075385519444 3.0250887645522084e-005 -7.7715611723760958e-016 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 4.7440679014250113e-013 5.6358403616014101 -9.3746470208910626 ;
-	setAttr ".radi" 0.59704833651003142;
-createNode joint -n "R_CODO_DER" -p "R_HOMBRO_DER";
-	setAttr ".t" -type "double3" -2.8762652734835217 2.7799624996660555e-005 1.9865951015329841e-006 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -1.9473126074158124e-015 -14.430440342312302 1.5381704985152627e-014 ;
-	setAttr ".radi" 0.57392190162732382;
-createNode joint -n "R_CODO_SEC_DER" -p "R_CODO_DER";
-	setAttr ".t" -type "double3" -0.98424310237100432 0.0011572998828555114 0.0077842415866822279 ;
-	setAttr ".radi" 0.57392190162732382;
-createNode joint -n "R_MANO_DER" -p "R_CODO_SEC_DER";
-	setAttr ".t" -type "double3" -1.4827966049742223 0.0016747104830088233 0.011730841304797401 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -1.008112728085599 5.2078667684428144 -3.9964603400647767 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_MIDDLE_DER_1" -p "R_MANO_DER";
-	setAttr ".t" -type "double3" -1.4625591089989456 5.3290705182007514e-015 4.6134563147504082e-007 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 1.0623260177876064e-016 4.9287427807029598 2.4683478624019161e-015 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_MIDDLE_DER_2" -p "R_MIDDLE_DER_1";
-	setAttr ".t" -type "double3" -0.41638024405096097 0 -2.4992780062182973e-007 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 2.8033968948383908e-017 0.54127410510290874 5.9349455027812166e-015 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_MIDDLE_DER_3" -p "R_MIDDLE_DER_2";
-	setAttr ".t" -type "double3" -0.30521105597433085 -1.7763568394002505e-015 1.8409142599207229e-007 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -9.7287762181122899e-018 -0.66202626991883018 1.683956183687121e-015 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_MIDDLE_DER_4" -p "R_MIDDLE_DER_3";
-	setAttr ".t" -type "double3" -0.31038460677842394 1.7763568394002505e-015 -4.384910923249663e-008 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -91.276695262256823 -7.0419799138107129 94.169749292941049 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_PINKY_SEC_DER" -p "R_MANO_DER";
-	setAttr ".t" -type "double3" -0.43319151466700223 -1.7763568394002505e-015 0.41454110471883165 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 3.776090194142536e-015 10.717480086177586 4.0256256981235178e-014 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_PINKY_DER_1" -p "R_PINKY_SEC_DER";
-	setAttr ".t" -type "double3" -0.93900487172164837 0.018299999999999983 0.0012880539597451696 ;
-	setAttr ".r" -type "double3" 0 0 -6.8690539463847893 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -1.8253402455298918e-016 -0.58382984406832639 3.5826667094990362e-014 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_PINKY_DER_2" -p "R_PINKY_DER_1";
-	setAttr ".t" -type "double3" -0.22386387786304152 -0.0012834718333039064 -0.0011813924729709158 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -1.5776148504194374e-016 -4.4208651669524919 4.0872462746534165e-015 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_PINKY_DER_3" -p "R_PINKY_DER_2";
-	setAttr ".t" -type "double3" -0.216550915908444 -2.2742689562704754e-005 1.4084813549919417e-006 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 1.5427488014607259e-015 4.6278950862123347 3.8179315266714501e-014 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_PINKY_DER_4" -p "R_PINKY_DER_3";
-	setAttr ".t" -type "double3" -0.2375374398285528 -0.00081608389801779424 -0.001818484745074872 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 3.6830919891334522e-015 -10.340680161369011 -4.0703804182636821e-014 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_CANCEL_DER_1" -p "R_MANO_DER";
-	setAttr ".t" -type "double3" -1.407714782672409 -0.087299999999997269 0.30991514889494365 ;
-	setAttr ".r" -type "double3" 0 0 -7.9533971014506841 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 1.1968426297920325e-015 7.4037120803680816 1.8498446644539546e-014 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_CANCEL_DER_2" -p "R_CANCEL_DER_1";
-	setAttr ".t" -type "double3" -0.37688572697765466 5.1725279325509632e-005 1.0101815620111587e-006 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -1.5682561420050562e-016 -1.67913633636118 1.0701695270120769e-014 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_CANCEL_DER_3" -p "R_CANCEL_DER_2";
-	setAttr ".t" -type "double3" -0.27617428431757407 -0.00090493813639191956 -0.00022924363714060814 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 1.216196267485551e-017 0.10374482489103187 1.3433517136142169e-014 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_CANCEL_DER_4" -p "R_CANCEL_DER_3";
-	setAttr ".t" -type "double3" -0.27929486814444271 0.00017075965380008995 3.4326640161452815e-005 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 1.1780255018156101e-015 -5.8283205688978761 -2.3141375498091097e-014 ;
-	setAttr ".radi" 0.56364323295275121;
-createNode joint -n "R_INDEX_DER_1" -p "R_MANO_DER";
-	setAttr ".t" -type "double3" -1.4663927500948279 8.8817841970012523e-015 -0.31665023847350371 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -2.4780754365965218e-016 3.1395128455277872 -9.0426600526576685e-015 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_INDEX_DER_2" -p "R_INDEX_DER_1";
-	setAttr ".t" -type "double3" -0.37432968710616166 1.7763568394002505e-015 -5.035840844325179e-008 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 7.0709908367739506e-018 1.4908561152356763 5.4346636005714814e-016 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_INDEX_DER_3" -p "R_INDEX_DER_2";
-	setAttr ".t" -type "double3" -0.32185703577986757 -3.5527136788005009e-015 4.1833592978601786e-009 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 1.6755386444493222e-016 1.6870984604159376 1.1379816712920705e-014 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_INDEX_DER_4" -p "R_INDEX_DER_3";
-	setAttr ".t" -type "double3" -0.27904505841338256 0 2.6539098330058408e-007 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 1.6190191653275831e-015 -6.3174674211793009 -2.9337378471731352e-014 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_THUMB_DER_1" -p "R_MANO_DER";
-	setAttr ".t" -type "double3" -0.60001686096056428 8.8817841970012523e-015 -0.54890738355821345 ;
-	setAttr ".r" -type "double3" 41.295087426667322 0.68208271769190998 -19.761220231791302 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 5.1037687223593854e-014 -26.788481971200412 -2.1432934531327236e-013 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_THUMB_DER_2" -p "R_THUMB_DER_1";
-	setAttr ".t" -type "double3" -0.47481790058111817 6.0231982406122597e-005 -5.2122310888691459e-005 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -5.6679810969500626e-015 3.3965354189381811 -1.9116908616137313e-013 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_THUMB_DER_3" -p "R_THUMB_DER_2";
-	setAttr ".t" -type "double3" -0.26393540841874019 -0.0099621548596910969 -0.001870597333789803 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 8.3978020655970822e-015 -4.4339209495242971 -2.1692694655584343e-013 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_THUMB_DER_4" -p "R_THUMB_DER_3";
-	setAttr ".t" -type "double3" -0.32141022692758625 0.00090660668941389133 0.0047160286968193077 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -1.603587775517759e-014 27.825867501786512 -6.4735306815253083e-014 ;
-	setAttr ".radi" 0.5;
+	setAttr ".jo" -type "double3" 83.263988785880684 89.999999999999986 0 ;
+	setAttr ".radi" 0.56020700745192098;
 createNode joint -n "R_CINTURA" -p "R_ROOT";
 	setAttr ".t" -type "double3" -0.63833454827948621 -0.30318330547630618 5.4039316970270638e-017 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
@@ -652,42 +500,11 @@ createNode joint -n "R_DEDOS_PIE_IZQ" -p "R_TALON_IZQ";
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" -4.0740242154587478e-015 7.8000518948984514e-014 -5.9797672800990531 ;
 	setAttr ".radi" 0.5;
-createNode joint -n "R_PUNTA_PIE_IZQ" -p "R_DEDOS_PIE_IZQ";
+createNode joint -n "R_PUNTA_PIE_IZQ_INUTIL" -p "R_DEDOS_PIE_IZQ";
 	setAttr ".t" -type "double3" 1.2158807939645544 0.046160354934911739 -1.5454654262127367e-014 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
 	setAttr ".jo" -type "double3" -91.2983150864506 63.377534309703734 -65.783022821189448 ;
-	setAttr ".radi" 0.59781307637981407;
-createNode joint -n "R_PIERNA_DER" -p "R_CINTURA";
-	setAttr ".t" -type "double3" -0.58159811089191571 -1.3488749607895789 -0.25807621481561621 ;
-	setAttr ".r" -type "double3" 0 1.751016603660563 0 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -90.000000000000099 19.407238163462207 124.88355821178392 ;
-	setAttr ".radi" 0.60997308065702804;
-createNode joint -n "R_RODILLA_DER" -p "R_PIERNA_DER";
-	setAttr ".t" -type "double3" -3.1232332050953016 1.7460193943996671e-006 -0.095478872380630797 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -180 2.211479426955099e-015 -38.343303475263497 ;
-	setAttr ".radi" 0.62926894798024147;
-createNode joint -n "R_TALON_DER" -p "R_RODILLA_DER";
-	setAttr ".t" -type "double3" -3.4971882105618395 -0.001590076924667061 0.083820867167230473 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 178.63513760828323 1.0970129647730664 -89.55960204557195 ;
-	setAttr ".radi" 0.52608389778031572;
-createNode joint -n "R_DEDOS_PIE_DER" -p "R_TALON_DER";
-	setAttr ".t" -type "double3" -1.5042929908338489 -1.4673953000476914e-006 -2.2204460492503131e-016 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 2.8800285304795015e-014 -5.5140496984009469e-013 -5.9797672800989927 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_PUNTA_PIE_DER" -p "R_DEDOS_PIE_DER";
-	setAttr ".t" -type "double3" -0.98627085442002771 -3.8518170153434284e-007 -7.3274719625260332e-015 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -91.298315086454409 63.377534309698675 -65.783022821192901 ;
 	setAttr ".radi" 0.59781307637981407;
 createNode joint -n "R_REV_IZQ_1";
 	setAttr ".t" -type "double3" 1.2485268812659505 0 -1.3618286702918883 ;
@@ -714,6 +531,7 @@ createNode joint -n "R_REV_IZQ_4" -p "R_REV_IZQ_3";
 	setAttr ".jo" -type "double3" -19.389530444065549 -89.999999999999972 0 ;
 	setAttr ".radi" 0.52608389778031561;
 createNode transform -n "DRIVER_LENGUA";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 0 15.364664664220429 0.95216732969087803 ;
 	setAttr ".sp" -type "double3" 0 15.364664664220429 0.95216732969087803 ;
 createNode nurbsCurve -n "DRIVER_LENGUAShape" -p "DRIVER_LENGUA";
@@ -737,6 +555,7 @@ createNode nurbsCurve -n "DRIVER_LENGUAShape" -p "DRIVER_LENGUA";
 		-0.095054576344098862 14.937998494232401 2.784070644407747
 		;
 createNode transform -n "DRIVER_COLUMNA_BOTTOM";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 0 9.9788611441405717 -0.31488087373940044 ;
 	setAttr ".sp" -type "double3" 0 9.9788611441405717 -0.31488087373940044 ;
 createNode nurbsCurve -n "DRIVER_COLUMNA_BOTTOMShape" -p "DRIVER_COLUMNA_BOTTOM";
@@ -766,6 +585,7 @@ createNode nurbsCurve -n "DRIVER_COLUMNA_BOTTOMShape" -p "DRIVER_COLUMNA_BOTTOM"
 		-1.2042228757472411 9.9788611441405699 -2.5950621236227223
 		;
 createNode transform -n "MOVE_ALL";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 0 0 0.93937092674000233 ;
 	setAttr ".sp" -type "double3" 0 0 0.93937092674000233 ;
 createNode nurbsCurve -n "MOVE_ALLShape" -p "MOVE_ALL";
@@ -787,6 +607,7 @@ createNode nurbsCurve -n "MOVE_ALLShape" -p "MOVE_ALL";
 		-1.7535085509530084 1.0737143171010587e-016 -1.5542641032221398
 		;
 createNode transform -n "DRIVER_CINTURA";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 0 8.0082916844570846 0.13113021481561482 ;
 	setAttr ".sp" -type "double3" 0 8.0082916844570846 0.13113021481561482 ;
 createNode nurbsCurve -n "DRIVER_CINTURAShape" -p "DRIVER_CINTURA";
@@ -802,8 +623,11 @@ createNode nurbsCurve -n "DRIVER_CINTURAShape" -p "DRIVER_CINTURA";
 		-2.5400809095018282 8.0082916844570846 -2.4089506946862116
 		;
 createNode transform -n "DRIVER_MANO_IZQ";
+	addAttr -ci true -sn "CORRECION_CODO" -ln "CORRECION_CODO" -at "double";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 7.4441288599560931 13.52245092162403 -0.66514120092053219 ;
 	setAttr ".sp" -type "double3" 7.4441288599560922 13.52245092162403 -0.66514120092053219 ;
+	setAttr -k on ".CORRECION_CODO";
 createNode nurbsCurve -n "DRIVER_MANO_IZQShape" -p "DRIVER_MANO_IZQ";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
@@ -827,6 +651,7 @@ createNode nurbsCurve -n "DRIVER_MANO_IZQShape" -p "DRIVER_MANO_IZQ";
 		8.0556720240699207 13.52245092162403 -1.7973385924712333
 		;
 createNode transform -n "DRIVER_ROOT";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 0 8.7132271986612011 0.18069868322541349 ;
 	setAttr ".sp" -type "double3" 0 8.7132271986612011 0.18069868322541349 ;
 createNode nurbsCurve -n "DRIVER_ROOTShape" -p "DRIVER_ROOT";
@@ -848,6 +673,7 @@ createNode nurbsCurve -n "DRIVER_ROOTShape" -p "DRIVER_ROOT";
 		-2.8826837901139695 8.7132271986612011 -2.7019851068885559
 		;
 createNode transform -n "DRIVER_BOCA";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -3.1554436208840472e-030 14.555369654099279 0.28139203617900543 ;
 	setAttr ".sp" -type "double3" -3.1554436208840472e-030 14.555369654099279 0.28139203617900543 ;
 createNode nurbsCurve -n "DRIVER_BOCAShape" -p "DRIVER_BOCA";
@@ -869,6 +695,7 @@ createNode nurbsCurve -n "DRIVER_BOCAShape" -p "DRIVER_BOCA";
 		-0.68825483906168805 14.177044418130953 2.6681766796278139
 		;
 createNode transform -n "DRIVER_DIENTES_BOTTOM";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -2.8842726847143244e-030 15.095205210404005 1.9070332000512029 ;
 	setAttr ".sp" -type "double3" -2.8842726847143244e-030 15.095205210404005 1.9070332000512029 ;
 createNode nurbsCurve -n "DRIVER_DIENTES_BOTTOMShape" -p "DRIVER_DIENTES_BOTTOM";
@@ -890,8 +717,12 @@ createNode nurbsCurve -n "DRIVER_DIENTES_BOTTOMShape" -p "DRIVER_DIENTES_BOTTOM"
 		-0.19032212897928935 13.728979772643694 2.4078279271894028
 		;
 createNode transform -n "DRIVER_RODILLA_IZQ";
+	addAttr -ci true -sn "SWITCH_RODILLA_IZQ" -ln "SWITCH_RODILLA_IZQ" -min 0 -max 
+		2 -en "NONE:FOOT:MIDDLE" -at "enum";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 1.1685239477799845 4.2872621762102092 4.0907984739644725 ;
 	setAttr ".sp" -type "double3" 1.1685239477799847 4.2872621762102092 4.0907984739644725 ;
+	setAttr -k on ".SWITCH_RODILLA_IZQ";
 createNode nurbsCurve -n "DRIVER_RODILLA_IZQShape" -p "DRIVER_RODILLA_IZQ";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
@@ -925,6 +756,7 @@ createNode nurbsCurve -n "DRIVER_RODILLA_IZQShape" -p "DRIVER_RODILLA_IZQ";
 		1.0117061005169596 4.2872621762102092 4.0907984739644725
 		;
 createNode transform -n "DRIVER_COLUMNA_MIDDLE";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 2.4651903288156619e-032 11.374108204518429 -0.6579744131765789 ;
 	setAttr ".sp" -type "double3" 2.4651903288156619e-032 11.374108204518429 -0.6579744131765789 ;
 createNode nurbsCurve -n "DRIVER_COLUMNA_MIDDLEShape" -p "DRIVER_COLUMNA_MIDDLE";
@@ -954,27 +786,39 @@ createNode nurbsCurve -n "DRIVER_COLUMNA_MIDDLEShape" -p "DRIVER_COLUMNA_MIDDLE"
 		-1.3652596481092925 11.374108204518427 -3.2430768170064481
 		;
 createNode transform -n "DRIVER_COLUMNA_TOP";
+	addAttr -ci true -sn "SWITCH_IK_FK_IZQ" -ln "SWITCH_IK_FK_IZQ" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "SWITCH_IK_FK_DER" -ln "SWITCH_IK_FK_DER" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "MATCH" -ln "MATCH" -min 0 -max 1 -en "OFF:ON" -at "enum";
+	addAttr -ci true -sn "BASURA" -ln "BASURA" -min 0 -max 1 -en "OFF:ON" -at "enum";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -3.2047474274603605e-031 12.815101070154579 -0.74184172281677785 ;
 	setAttr ".sp" -type "double3" -3.2047474274603605e-031 12.815101070154579 -0.74184172281677785 ;
+	setAttr -k on ".SWITCH_IK_FK_IZQ";
+	setAttr -k on ".SWITCH_IK_FK_DER";
+	setAttr -cb on ".MATCH";
+	setAttr -cb on ".BASURA";
 createNode nurbsCurve -n "DRIVER_COLUMNA_TOPShape" -p "DRIVER_COLUMNA_TOP";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		1.9015499470564923 12.662494491463292 -2.6433916698732629
-		-5.6051947860544743e-016 12.815101070154579 -5.6548848784387893
-		-1.9015499470564874 12.662494491463292 -2.6433916698732647
-		-4.9130431556220113 11.746855019315579 -0.74184172281677929
-		-1.9015499470564881 12.662494491463292 1.1597082242397088
-		-1.4803957863205777e-015 12.815101070154579 4.1712014328052351
-		1.9015499470564858 12.662494491463292 1.1597082242397101
-		4.9130431556220113 11.746855019315579 -0.74184172281677518
-		1.9015499470564923 12.662494491463292 -2.6433916698732629
-		-5.6051947860544743e-016 12.815101070154579 -5.6548848784387893
-		-1.9015499470564874 12.662494491463292 -2.6433916698732647
+		3 10 2 no 3
+		15 -2 -1 0 1 2 2.7266003470000002 3 4 5 5.2076277439999998 6 7 8 9 10
+		13
+		1.9015499470564923 12.662494491463292 -4.1491382741545202
+		-5.6051947860544743e-016 12.662497526301125 -4.1491339760647721
+		-1.9015499470564874 12.662494491463292 -4.1491382741545202
+		-2.8910251573274115 14.748484583766961 -2.9149136558153717
+		-2.363662918910773 14.749070938932761 1.3349506567379381
+		-1.1794834746915832 12.702796665580099 2.6654548285216957
+		-1.4803957863205777e-015 12.70280021659824 2.6654521529318664
+		1.1377939513326631 12.702801564475976 2.6654548285217614
+		2.3397944874557184 14.748972734170639 1.3349583216154293
+		2.9148935887824652 14.748512185128272 -2.914915280180133
+		1.9015499470564923 12.662494491463292 -4.1491382741545202
+		-5.6051947860544743e-016 12.662497526301125 -4.1491339760647721
+		-1.9015499470564874 12.662494491463292 -4.1491382741545202
 		;
 createNode transform -n "DRIVER_CODO_IZQ";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 5.0088095415392431 13.357047335818008 -4.1085417205481116 ;
 	setAttr ".sp" -type "double3" 5.0088095415392431 13.357047335818008 -4.1085417205481116 ;
 createNode nurbsCurve -n "DRIVER_CODO_IZQShape" -p "DRIVER_CODO_IZQ";
@@ -1010,6 +854,7 @@ createNode nurbsCurve -n "DRIVER_CODO_IZQShape" -p "DRIVER_CODO_IZQ";
 		4.8519916942763919 13.357047335818487 -4.1085417205481143
 		;
 createNode transform -n "DRIVER_CODO_DER";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -5.00881 13.357000000000001 -4.1085439153295784 ;
 	setAttr ".sp" -type "double3" -5.00881 13.357000000000001 -4.1085439153295784 ;
 createNode nurbsCurve -n "DRIVER_CODO_DERShape" -p "DRIVER_CODO_DER";
@@ -1045,6 +890,7 @@ createNode nurbsCurve -n "DRIVER_CODO_DERShape" -p "DRIVER_CODO_DER";
 		-5.1656278472630257 13.357000000000001 -4.1085439153295784
 		;
 createNode transform -n "DRIVER_CLAVICULA_IZQ";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 1.0769893143151119 12.977088858280743 -0.74184172281677774 ;
 	setAttr ".sp" -type "double3" 1.0769893143151119 12.977088858280743 -0.74184172281677774 ;
 createNode nurbsCurve -n "DRIVER_CLAVICULA_IZQShape" -p "DRIVER_CLAVICULA_IZQ";
@@ -1053,25 +899,26 @@ createNode nurbsCurve -n "DRIVER_CLAVICULA_IZQShape" -p "DRIVER_CLAVICULA_IZQ";
 		1 16 0 no 3
 		17 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
 		17
-		1.3179838919065419 14.616112858317367 -0.46173336245593855
-		1.2845604854455375 14.516709429347966 -0.93580664033890337
-		1.2008379562754699 14.26771307132552 -1.4098799182218669
-		0.85647140142856271 14.388932020086729 -1.4098799182218669
-		1.3317864269147521 13.71756514434677 -2.3580264739877919
-		1.9918314225676199 14.007178595083706 -1.4098799182218669
-		1.7685179668449913 14.076836358824007 -1.4098799182218669
-		1.852240496015066 14.325832716846453 -0.93580664033890337
-		1.8856639024760811 14.425236145815852 -0.46173336245593855
-		1.852240496015066 14.325832716846453 0.012339915427026282
-		1.7685179668449913 14.076836358824007 0.48641319330999044
-		1.9918314225676199 14.007178595083706 0.48641319330999044
-		1.3317864269147521 13.71756514434677 1.4345597490759179
-		0.85647140142856271 14.388932020086729 0.48641319330999044
-		1.2008379562754699 14.26771307132552 0.48641319330999044
-		1.2845604854455375 14.516709429347966 0.012339915427026282
-		1.3179838919065419 14.616112858317367 -0.46173336245593855
+		1.3179838919065419 14.28910833569768 -0.61934132028552868
+		1.2845604854455375 14.189704906728279 -1.0934145981684935
+		1.2008379562754699 13.940708548705834 -1.567487876051457
+		0.85647140142856271 14.061927497467043 -1.567487876051457
+		1.3317864269147521 13.390560621727083 -2.5156344318173818
+		1.9918314225676199 13.68017407246402 -1.567487876051457
+		1.7685179668449913 13.74983183620432 -1.567487876051457
+		1.852240496015066 13.998828194226766 -1.0934145981684935
+		1.8856639024760811 14.098231623196165 -0.61934132028552868
+		1.852240496015066 13.998828194226766 -0.14526804240256386
+		1.7685179668449913 13.74983183620432 0.3288052354804003
+		1.9918314225676199 13.68017407246402 0.3288052354804003
+		1.3317864269147521 13.390560621727083 1.2769517912463277
+		0.85647140142856271 14.061927497467043 0.3288052354804003
+		1.2008379562754699 13.940708548705834 0.3288052354804003
+		1.2845604854455375 14.189704906728279 -0.14526804240256386
+		1.3179838919065419 14.28910833569768 -0.61934132028552868
 		;
 createNode transform -n "DRIVER_CLAVICULA_DER";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -1.0769900000000003 12.977099999999998 -0.74184200000000056 ;
 	setAttr ".sp" -type "double3" -1.0769900000000003 12.977099999999998 -0.74184200000000056 ;
 createNode nurbsCurve -n "DRIVER_CLAVICULA_DERShape" -p "DRIVER_CLAVICULA_DER";
@@ -1080,27 +927,30 @@ createNode nurbsCurve -n "DRIVER_CLAVICULA_DERShape" -p "DRIVER_CLAVICULA_DER";
 		1 16 0 no 3
 		17 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
 		17
-		-1.3179845775914303 14.616124000036622 -0.46173363963916136
-		-1.2845611711304259 14.516720571067221 -0.93580691752212619
-		-1.2008386419603583 14.267724213044776 -1.4098801954050897
-		-0.85647208711345113 14.388943161805985 -1.4098801954050897
-		-1.3317871125996406 13.717576286066025 -2.3580267511710149
-		-1.9918321082525083 14.007189736802962 -1.4098801954050897
-		-1.7685186525298797 14.076847500543263 -1.4098801954050897
-		-1.8522411816999544 14.325843858565708 -0.93580691752212619
-		-1.8856645881609695 14.425247287535107 -0.46173363963916136
-		-1.8522411816999544 14.325843858565708 0.012339638243803464
-		-1.7685186525298797 14.076847500543263 0.48641291612676762
-		-1.9918321082525083 14.007189736802962 0.48641291612676762
-		-1.3317871125996406 13.717576286066025 1.4345594718926953
-		-0.85647208711345113 14.388943161805985 0.48641291612676762
-		-1.2008386419603583 14.267724213044776 0.48641291612676762
-		-1.2845611711304259 14.516720571067221 0.012339638243803464
-		-1.3179845775914303 14.616124000036622 -0.46173363963916136
+		-1.3179845775914303 14.289119477416936 -0.6193415974687515
+		-1.2845611711304259 14.189716048447535 -1.0934148753517163
+		-1.2008386419603583 13.940719690425089 -1.5674881532346798
+		-0.85647208711345113 14.061938639186298 -1.5674881532346798
+		-1.3317871125996406 13.390571763446339 -2.5156347090006048
+		-1.9918321082525083 13.680185214183275 -1.5674881532346798
+		-1.7685186525298797 13.749842977923576 -1.5674881532346798
+		-1.8522411816999544 13.998839335946021 -1.0934148753517163
+		-1.8856645881609695 14.098242764915421 -0.6193415974687515
+		-1.8522411816999544 13.998839335946021 -0.14526831958578668
+		-1.7685186525298797 13.749842977923576 0.32880495829717749
+		-1.9918321082525083 13.680185214183275 0.32880495829717749
+		-1.3317871125996406 13.390571763446339 1.2769515140631051
+		-0.85647208711345113 14.061938639186298 0.32880495829717749
+		-1.2008386419603583 13.940719690425089 0.32880495829717749
+		-1.2845611711304259 14.189716048447535 -0.14526831958578668
+		-1.3179845775914303 14.289119477416936 -0.6193415974687515
 		;
 createNode transform -n "DRIVER_MANO_DER";
+	addAttr -ci true -sn "CORRECION_CODO" -ln "CORRECION_CODO" -at "double";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -7.4441299999999995 13.522500000000003 -0.6651410000000002 ;
 	setAttr ".sp" -type "double3" -7.44413 13.522500000000003 -0.6651410000000002 ;
+	setAttr -k on ".CORRECION_CODO";
 createNode nurbsCurve -n "DRIVER_MANO_DERShape" -p "DRIVER_MANO_DER";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
@@ -1124,6 +974,7 @@ createNode nurbsCurve -n "DRIVER_MANO_DERShape" -p "DRIVER_MANO_DER";
 		-8.0556731641138324 13.522500000000003 -1.797338363777444
 		;
 createNode transform -n "DRIVER_DIENTES_TOP";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -3.1061398143077343e-030 15.438736928052469 1.9131676950092116 ;
 	setAttr ".sp" -type "double3" -3.1061398143077343e-030 15.438736928052469 1.9131676950092116 ;
 createNode nurbsCurve -n "DRIVER_DIENTES_TOPShape" -p "DRIVER_DIENTES_TOP";
@@ -1144,54 +995,8 @@ createNode nurbsCurve -n "DRIVER_DIENTES_TOPShape" -p "DRIVER_DIENTES_TOP";
 		-4.3611460165471726e-017 13.965274745477945 2.5467455504866505
 		-0.19032212897928646 13.927299650033437 2.5257338222828327
 		;
-createNode transform -n "DRIVER_CABEZA";
-	setAttr ".rp" -type "double3" -1.035379938102578e-030 13.783387281455061 -0.62747720967105192 ;
-	setAttr ".sp" -type "double3" -1.035379938102578e-030 13.783387281455061 -0.62747720967105192 ;
-createNode nurbsCurve -n "DRIVER_CABEZAShape" -p "DRIVER_CABEZA";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 12 2 no 3
-		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
-		15
-		1.7283324432398732 20.355083512494872 -0.62747720967105247
-		-1.1983127091512918e-015 20.532210891280272 -0.62747720967105258
-		-1.7283324432398679 20.355083512494872 -0.62747720967105247
-		-2.734865953608177 20.09077901438998 -0.62747720967105225
-		-2.9552280506854878 19.291874757958148 -0.62747720967105203
-		-2.2895532905713569 14.808448843168968 -0.62747720967105181
-		-1.8645969174860757 14.122637115614072 -0.62747720967105158
-		-2.4387257712677327e-015 13.827954557196019 -0.62747720967105147
-		1.8645969174860733 14.122637115614072 -0.62747720967105158
-		2.2895532905713543 14.808448843168964 -0.62747720967105181
-		2.9552280506854869 19.291874757958141 -0.62747720967105203
-		2.734865953608177 20.09077901438998 -0.62747720967105225
-		1.7283324432398732 20.355083512494872 -0.62747720967105247
-		-1.1983127091512918e-015 20.532210891280272 -0.62747720967105258
-		-1.7283324432398679 20.355083512494872 -0.62747720967105247
-		;
-createNode nurbsCurve -n "DRIVER_CABEZA1Shape" -p "DRIVER_CABEZA";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 12 2 no 3
-		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
-		15
-		-2.2204460492503131e-016 20.355083512494872 -2.3558096529109251
-		-6.6613381477509392e-016 20.532210891280272 -0.6274772096710507
-		-8.8817841970012523e-016 20.355083512494872 1.100855233568816
-		-8.8817841970012523e-016 20.09077901438998 2.1073887439371251
-		-7.7715611723760958e-016 19.291874757958148 2.3277508410144359
-		-4.4408920985006262e-016 14.808448843168968 1.662076080900305
-		-1.1102230246251565e-016 14.122637115614072 1.2371197078150238
-		4.4408920985006262e-016 13.827954557196019 -0.62747720967104947
-		7.7715611723760958e-016 14.122637115614072 -2.4920741271571254
-		6.6613381477509392e-016 14.808448843168964 -2.9170305002424062
-		5.5511151231257827e-016 19.291874757958141 -3.5827052603565388
-		2.2204460492503131e-016 20.09077901438998 -3.3623431632792289
-		-2.2204460492503131e-016 20.355083512494872 -2.3558096529109251
-		-6.6613381477509392e-016 20.532210891280272 -0.6274772096710507
-		-8.8817841970012523e-016 20.355083512494872 1.100855233568816
-		;
 createNode transform -n "DRIVER_OJOS";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 0 17.046100073815637 5.8284431416822873 ;
 	setAttr ".sp" -type "double3" 0 17.046100073815637 5.8284431416822873 ;
 createNode nurbsCurve -n "DRIVER_OJOSShape" -p "DRIVER_OJOS";
@@ -1213,6 +1018,7 @@ createNode nurbsCurve -n "DRIVER_OJOSShape" -p "DRIVER_OJOS";
 		-1.4696094967039146 18.247960631776081 5.8284431416822944
 		;
 createNode transform -n "DRIVER_OJO_IZQ";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 0.78837371753915575 16.999684024249976 5.8284431416822873 ;
 	setAttr ".sp" -type "double3" 0.78837371753915575 16.999684024249976 5.8284431416822873 ;
 createNode nurbsCurve -n "DRIVER_OJO_IZQShape" -p "DRIVER_OJO_IZQ";
@@ -1234,6 +1040,7 @@ createNode nurbsCurve -n "DRIVER_OJO_IZQShape" -p "DRIVER_OJO_IZQ";
 		0.24897331500714312 17.539084426782757 5.8284431416825271
 		;
 createNode transform -n "DRIVER_PIE_IZQ";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 1.2523840219923328 0.97864343443490087 -0.22463545383475858 ;
 	setAttr ".sp" -type "double3" 1.2523840219923328 0.97864343443490087 -0.22463545383475858 ;
 createNode nurbsCurve -n "DRIVER_PIE_IZQShape" -p "DRIVER_PIE_IZQ";
@@ -1259,6 +1066,7 @@ createNode nurbsCurve -n "DRIVER_PIE_IZQShape" -p "DRIVER_PIE_IZQ";
 		0.84779159043750729 0.11105763332017127 -1.1368534757527833
 		;
 createNode transform -n "DRIVER_PIE_DER";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -1.2523799999999965 0.97864299999999638 -0.22463500000000003 ;
 	setAttr ".sp" -type "double3" -1.2523799999999965 0.97864299999999638 -0.22463500000000003 ;
 createNode nurbsCurve -n "DRIVER_PIE_DERShape" -p "DRIVER_PIE_DER";
@@ -1284,6 +1092,7 @@ createNode nurbsCurve -n "DRIVER_PIE_DERShape" -p "DRIVER_PIE_DER";
 		-0.84778708929685886 0.1110580000000001 -1.1368537398612002
 		;
 createNode transform -n "DRIVER_OJO_DER";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -0.78837371753915497 16.999684024249984 5.8284431416822873 ;
 	setAttr ".sp" -type "double3" -0.78837371753915497 16.999684024249984 5.8284431416822873 ;
 createNode nurbsCurve -n "DRIVER_OJO_DERShape" -p "DRIVER_OJO_DER";
@@ -1305,6 +1114,7 @@ createNode nurbsCurve -n "DRIVER_OJO_DERShape" -p "DRIVER_OJO_DER";
 		-1.3277741200711821 17.539084426782008 5.8284431416822873
 		;
 createNode transform -n "DRIVER_PINKY_SEC_IZQ";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 7.9021667701099556 13.522450921624028 -1.0520531515461713 ;
 	setAttr ".sp" -type "double3" 7.9021667701099556 13.522450921624028 -1.0520531515461713 ;
 createNode nurbsCurve -n "DRIVER_PINKY_SEC_IZQShape" -p "DRIVER_PINKY_SEC_IZQ";
@@ -1335,6 +1145,7 @@ createNode nurbsCurve -n "DRIVER_PINKY_SEC_IZQShape" -p "DRIVER_PINKY_SEC_IZQ";
 		7.6315615475962257 13.79181554351932 -1.1731635428597604
 		;
 createNode transform -n "DRIVER_PINKY_SEC_DER";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -7.90217 13.522499999999997 -1.0520499999999997 ;
 	setAttr ".sp" -type "double3" -7.90217 13.522499999999997 -1.0520499999999997 ;
 createNode nurbsCurve -n "DRIVER_PINKY_SEC_DERShape" -p "DRIVER_PINKY_SEC_DER";
@@ -1365,6 +1176,8 @@ createNode nurbsCurve -n "DRIVER_PINKY_SEC_DERShape" -p "DRIVER_PINKY_SEC_DER";
 		-7.631564777486278 13.791864621895277 -1.1731603913135948
 		;
 createNode transform -n "DRIVER_TOE_IZQ";
+	setAttr ".v" no;
+	setAttr ".t" -type "double3" 0.00090897106291176755 0.054475514976925266 -0.017180743814107835 ;
 	setAttr ".rp" -type "double3" 1.2523840219923323 0.056667576726437241 2.0854951605329939 ;
 	setAttr ".sp" -type "double3" 1.2523840219923323 0.056667576726437241 2.0854951605329939 ;
 createNode nurbsCurve -n "DRIVER_TOE_IZQShape" -p "DRIVER_TOE_IZQ";
@@ -1388,6 +1201,7 @@ createNode nurbsCurve -n "DRIVER_TOE_IZQShape" -p "DRIVER_TOE_IZQ";
 		0.92304222728872731 0.38989571262963474 2.0854951605329939
 		;
 createNode transform -n "DRIVER_BALL_IZQ";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 1.2523840219923326 0.47923647795466817 1.1943350024972175 ;
 	setAttr ".sp" -type "double3" 1.2523840219923326 0.47923647795466817 1.1943350024972175 ;
 createNode nurbsCurve -n "DRIVER_BALL_IZQShape" -p "DRIVER_BALL_IZQ";
@@ -1411,6 +1225,7 @@ createNode nurbsCurve -n "DRIVER_BALL_IZQShape" -p "DRIVER_BALL_IZQ";
 		0.8427528470054606 0.98247409247610529 1.1943350024972172
 		;
 createNode transform -n "DRIVER_TOE_DER";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -1.2523799999999963 0.056667576726437241 2.0854951605329939 ;
 	setAttr ".sp" -type "double3" -1.2523799999999963 0.056667576726437241 2.0854951605329939 ;
 createNode nurbsCurve -n "DRIVER_TOE_DERShape" -p "DRIVER_TOE_DER";
@@ -1434,6 +1249,7 @@ createNode nurbsCurve -n "DRIVER_TOE_DERShape" -p "DRIVER_TOE_DER";
 		-1.5817217947036013 0.38989571262963474 2.0854951605329939
 		;
 createNode transform -n "DRIVER_BALL_DER";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -1.2523799999999965 0.47923647795466817 1.1943350024972175 ;
 	setAttr ".sp" -type "double3" -1.2523799999999965 0.47923647795466817 1.1943350024972175 ;
 createNode nurbsCurve -n "DRIVER_BALL_DERShape" -p "DRIVER_BALL_DER";
@@ -1457,6 +1273,7 @@ createNode nurbsCurve -n "DRIVER_BALL_DERShape" -p "DRIVER_BALL_DER";
 		-1.6620111749868685 0.98247409247610529 1.1943350024972172
 		;
 createNode transform -n "DRIVER_HEEL_DER";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -1.3141899999999997 0.11105800000000011 -0.772075 ;
 	setAttr ".sp" -type "double3" -1.3141899999999997 0.111058 -0.772075 ;
 createNode nurbsCurve -n "DRIVER_HEEL_DERShape" -p "DRIVER_HEEL_DER";
@@ -1465,21 +1282,22 @@ createNode nurbsCurve -n "DRIVER_HEEL_DERShape" -p "DRIVER_HEEL_DER";
 		3 10 2 no 3
 		15 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12
 		13
-		-0.38278924520764535 0.22683918115875101 -1.6425037464442473
-		-1.3131414076152306 0.22683918110577542 -2.0228797518086195
-		-2.2434935700223742 0.22683918115875101 -1.6425037464442473
-		-2.2434935700228147 0.22683918121438343 -1.4636293691513382
-		-2.2434935700228147 0.22683918121438343 -1.1089044112180868
-		-2.2434935700223742 0.22683918115875104 -0.93003003392495054
-		-1.3131414076152308 0.22683918110577542 -1.3918527408774444
-		-0.38278924520764535 0.22683918115875104 -0.93003003392495054
-		-0.38278924520808499 0.22683918121438343 -1.1089044112180857
-		-0.38278924520808499 0.22683918121438343 -1.4636293691513365
-		-0.38278924520764535 0.22683918115875101 -1.6425037464442473
-		-1.3131414076152306 0.22683918110577542 -2.0228797518086195
-		-2.2434935700223742 0.22683918115875101 -1.6425037464442473
+		-0.62482369899820911 0.22683918115909665 -1.5993055412891521
+		-1.3131414076152301 0.22683918111990278 -1.8807253638085715
+		-2.0014591162319251 0.22683918115909665 -1.5993055412891521
+		-2.001459116232251 0.22683918120025601 -1.4669659751726687
+		-2.001459116232251 0.22683918120025601 -1.2045239880416518
+		-2.0014591162319251 0.22683918115909668 -1.0721844219249999
+		-1.3131414076152301 0.22683918111990278 -1.4138622943278902
+		-0.62482369899820911 0.22683918115909668 -1.0721844219249999
+		-0.62482369899853418 0.22683918120025601 -1.204523988041651
+		-0.62482369899853418 0.22683918120025601 -1.4669659751726669
+		-0.62482369899820911 0.22683918115909665 -1.5993055412891521
+		-1.3131414076152301 0.22683918111990278 -1.8807253638085715
+		-2.0014591162319251 0.22683918115909665 -1.5993055412891521
 		;
 createNode transform -n "DRIVER_HOMBRO_IZQ_FK";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 2.1535287445750244 13.154819424597235 -0.74184172281677829 ;
 	setAttr ".sp" -type "double3" 2.1535287445750244 13.154819424597235 -0.74184172281677829 ;
 createNode nurbsCurve -n "DRIVER_HOMBRO_IZQ_FKShape" -p "DRIVER_HOMBRO_IZQ_FK";
@@ -1488,12 +1306,12 @@ createNode nurbsCurve -n "DRIVER_HOMBRO_IZQ_FKShape" -p "DRIVER_HOMBRO_IZQ_FK";
 		1 7 0 no 3
 		8 0 1 2 3 4 5 6 7
 		8
-		4.7469994629433288 13.995146265101674 -0.11339773608651182
-		4.7469994629433288 12.833038078299726 -0.11339773608651182
+		4.4404294975312997 13.995146265101674 -0.11339773608651182
+		4.4404294975312997 12.833038078299726 -0.11339773608651182
 		2.1535287445750244 12.440230036136089 0.26397271061809524
 		2.1535287445750244 14.094855989772501 0.26397271061809524
-		4.7469994629433288 13.995146265101674 -0.11339773608651182
-		4.7469994629433288 13.995146265101674 -1.4170491802081191
+		4.4404294975312997 13.995146265101674 -0.11339773608651182
+		4.4404294975312997 13.995146265101674 -1.4170491802081191
 		2.1535287445750244 14.094855989772501 -1.5594740950243522
 		2.1535287445750244 14.094855989772501 0.26397271061809524
 		;
@@ -1513,8 +1331,8 @@ createNode nurbsCurve -n "DRIVER_HOMBRO_IZQ_FKShape2" -p "DRIVER_HOMBRO_IZQ_FK";
 		1 1 0 no 3
 		2 0 1
 		2
-		4.7469994629433288 12.833038078299726 -1.4170491802081191
-		4.7469994629433288 13.995146265101674 -1.4170491802081191
+		4.4404294975312997 12.833038078299726 -1.4170491802081191
+		4.4404294975312997 13.995146265101674 -1.4170491802081191
 		;
 createNode nurbsCurve -n "DRIVER_HOMBRO_IZQ_FKShape3" -p "DRIVER_HOMBRO_IZQ_FK";
 	setAttr -k off ".v";
@@ -1523,10 +1341,11 @@ createNode nurbsCurve -n "DRIVER_HOMBRO_IZQ_FKShape3" -p "DRIVER_HOMBRO_IZQ_FK";
 		3 0 1 2
 		3
 		2.1535287445750244 12.440230036136089 -1.5594740950243522
-		4.7469994629433288 12.833038078299726 -1.4170491802081191
-		4.7469994629433288 12.833038078299726 -0.11339773608651182
+		4.4404294975312997 12.833038078299726 -1.4170491802081191
+		4.4404294975312997 12.833038078299726 -0.11339773608651182
 		;
 createNode transform -n "DRIVER_HOMBRO_DER_FK";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -2.15353 13.154799999999998 -0.74184200000000033 ;
 	setAttr ".sp" -type "double3" -2.15353 13.154799999999998 -0.74184200000000033 ;
 createNode nurbsCurve -n "DRIVER_HOMBRO_DER_FKShape" -p "DRIVER_HOMBRO_DER_FK";
@@ -1535,12 +1354,12 @@ createNode nurbsCurve -n "DRIVER_HOMBRO_DER_FKShape" -p "DRIVER_HOMBRO_DER_FK";
 		1 7 0 no 3
 		8 0 1 2 3 4 5 6 7
 		8
-		-4.7470007183683043 13.995126840504437 -0.11339773608651182
-		-4.7470007183683043 12.833018653702489 -0.11339773608651182
+		-4.4404307529562743 13.995126840504437 -0.11339773608651182
+		-4.4404307529562743 12.833018653702489 -0.11339773608651182
 		-2.1535299999999999 12.440210611538852 0.2639724334348732
 		-2.1535299999999999 14.094836565175264 0.2639724334348732
-		-4.7470007183683043 13.995126840504437 -0.11339773608651182
-		-4.7470007183683043 13.995126840504437 -1.4170491802081191
+		-4.4404307529562743 13.995126840504437 -0.11339773608651182
+		-4.4404307529562743 13.995126840504437 -1.4170491802081191
 		-2.1535299999999999 14.094836565175264 -1.5594743722075743
 		-2.1535299999999999 14.094836565175264 0.2639724334348732
 		;
@@ -1560,8 +1379,8 @@ createNode nurbsCurve -n "DRIVER_HOMBRO_DER_FKShape2" -p "DRIVER_HOMBRO_DER_FK";
 		1 1 0 no 3
 		2 0 1
 		2
-		-4.7470007183683043 12.833018653702489 -1.4170491802081191
-		-4.7470007183683043 13.995126840504437 -1.4170491802081191
+		-4.4404307529562743 12.833018653702489 -1.4170491802081191
+		-4.4404307529562743 13.995126840504437 -1.4170491802081191
 		;
 createNode nurbsCurve -n "DRIVER_HOMBRO_DER_FKShape3" -p "DRIVER_HOMBRO_DER_FK";
 	setAttr -k off ".v";
@@ -1570,10 +1389,11 @@ createNode nurbsCurve -n "DRIVER_HOMBRO_DER_FKShape3" -p "DRIVER_HOMBRO_DER_FK";
 		3 0 1 2
 		3
 		-2.1535299999999999 12.440210611538852 -1.5594743722075743
-		-4.7470007183683043 12.833018653702489 -1.4170491802081191
-		-4.7470007183683043 12.833018653702489 -0.11339773608651182
+		-4.4404307529562743 12.833018653702489 -1.4170491802081191
+		-4.4404307529562743 12.833018653702489 -0.11339773608651182
 		;
 createNode transform -n "DRIVER_CODO_IZQ_FK";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 5.0088095415392431 13.357047335818008 -1.0236078052185347 ;
 	setAttr ".sp" -type "double3" 5.0088095415392431 13.357047335818008 -1.0236078052185347 ;
 createNode nurbsCurve -n "DRIVER_CODO_IZQ_FKShape" -p "DRIVER_CODO_IZQ_FK";
@@ -1582,12 +1402,12 @@ createNode nurbsCurve -n "DRIVER_CODO_IZQ_FKShape" -p "DRIVER_CODO_IZQ_FK";
 		1 7 0 no 3
 		8 0 1 2 3 4 5 6 7
 		8
-		7.2496689265281908 13.942445170560195 -0.035351213217357347
-		7.2496689265281908 12.961677815659662 -0.035351213217357236
+		6.7907472752558888 13.942445170560195 -0.035351213217357347
+		6.7907472752558888 12.961677815659662 -0.035351213217357236
 		5.0088095415392431 12.82624350125014 -0.11339773608649324
 		5.0088095415392431 13.994554223345164 -0.11339773608649324
-		7.2496689265281908 13.942445170560195 -0.035351213217357347
-		7.2496689265281908 13.942445170560195 -1.2626795509840181
+		6.7907472752558888 13.942445170560195 -0.035351213217357347
+		6.7907472752558888 13.942445170560195 -1.2626795509840181
 		5.0088095415392431 13.994554223345164 -1.4170491802081353
 		5.0088095415392431 13.994554223345164 -0.11339773608649324
 		;
@@ -1607,8 +1427,8 @@ createNode nurbsCurve -n "DRIVER_CODO_IZQ_FKShape2" -p "DRIVER_CODO_IZQ_FK";
 		1 1 0 no 3
 		2 0 1
 		2
-		7.2496689265281908 12.961677815659662 -1.2626795509840176
-		7.2496689265281908 13.942445170560195 -1.2626795509840181
+		6.7907472752558888 12.961677815659662 -1.2626795509840176
+		6.7907472752558888 13.942445170560195 -1.2626795509840181
 		;
 createNode nurbsCurve -n "DRIVER_CODO_IZQ_FKShape3" -p "DRIVER_CODO_IZQ_FK";
 	setAttr -k off ".v";
@@ -1617,10 +1437,11 @@ createNode nurbsCurve -n "DRIVER_CODO_IZQ_FKShape3" -p "DRIVER_CODO_IZQ_FK";
 		3 0 1 2
 		3
 		5.0088095415392431 12.82624350125014 -1.4170491802081353
-		7.2496689265281908 12.961677815659662 -1.2626795509840176
-		7.2496689265281908 12.961677815659662 -0.035351213217357236
+		6.7907472752558888 12.961677815659662 -1.2626795509840176
+		6.7907472752558888 12.961677815659662 -0.035351213217357236
 		;
 createNode transform -n "DRIVER_CODO_DER_FK";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -5.00881 13.357000000000001 -1.0236100000000001 ;
 	setAttr ".sp" -type "double3" -5.00881 13.357000000000001 -1.0236100000000001 ;
 createNode nurbsCurve -n "DRIVER_CODO_DER_FKShape" -p "DRIVER_CODO_DER_FK";
@@ -1629,12 +1450,12 @@ createNode nurbsCurve -n "DRIVER_CODO_DER_FKShape" -p "DRIVER_CODO_DER_FK";
 		1 7 0 no 3
 		8 0 1 2 3 4 5 6 7
 		8
-		-7.2496693849889482 13.942397834742188 -0.035353407998822806
-		-7.2496693849889482 12.961630479841656 -0.035353407998822695
+		-6.7907477337166453 13.942397834742188 -0.035353407998822806
+		-6.7907477337166453 12.961630479841656 -0.035353407998822695
 		-5.0088100000000004 12.826196165432133 -0.11339773608649324
 		-5.0088100000000004 13.994506887527157 -0.11339773608649324
-		-7.2496693849889482 13.942397834742188 -0.035353407998822806
-		-7.2496693849889482 13.942397834742188 -1.2626817457654835
+		-6.7907477337166453 13.942397834742188 -0.035353407998822806
+		-6.7907477337166453 13.942397834742188 -1.2626817457654835
 		-5.0088100000000004 13.994506887527157 -1.4170491802081353
 		-5.0088100000000004 13.994506887527157 -0.11339773608649324
 		;
@@ -1654,8 +1475,8 @@ createNode nurbsCurve -n "DRIVER_CODO_DER_FKShape2" -p "DRIVER_CODO_DER_FK";
 		1 1 0 no 3
 		2 0 1
 		2
-		-7.2496693849889482 12.961630479841656 -1.2626817457654831
-		-7.2496693849889482 13.942397834742188 -1.2626817457654835
+		-6.7907477337166453 12.961630479841656 -1.2626817457654831
+		-6.7907477337166453 13.942397834742188 -1.2626817457654835
 		;
 createNode nurbsCurve -n "DRIVER_CODO_DER_FKShape3" -p "DRIVER_CODO_DER_FK";
 	setAttr -k off ".v";
@@ -1664,12 +1485,15 @@ createNode nurbsCurve -n "DRIVER_CODO_DER_FKShape3" -p "DRIVER_CODO_DER_FK";
 		3 0 1 2
 		3
 		-5.0088100000000004 12.826196165432133 -1.4170491802081353
-		-7.2496693849889482 12.961630479841656 -1.2626817457654831
-		-7.2496693849889482 12.961630479841656 -0.035353407998822695
+		-6.7907477337166453 12.961630479841656 -1.2626817457654831
+		-6.7907477337166453 12.961630479841656 -0.035353407998822695
 		;
 createNode transform -n "DRIVER_MANO_IZQ_FK";
+	addAttr -ci true -sn "CORRECION_CODO" -ln "CORRECION_CODO" -at "double";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 7.4441288599560931 13.52245092162403 -0.66514120092053353 ;
 	setAttr ".sp" -type "double3" 7.4441288599560931 13.52245092162403 -0.66514120092053353 ;
+	setAttr -k on ".CORRECION_CODO";
 createNode nurbsCurve -n "DRIVER_MANO_IZQ_FKShape" -p "DRIVER_MANO_IZQ_FK";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
@@ -1715,8 +1539,11 @@ createNode nurbsCurve -n "DRIVER_MANO_IZQ_FKShape3" -p "DRIVER_MANO_IZQ_FK";
 		8.6542457779491286 13.346348850490813 0.028249568728278163
 		;
 createNode transform -n "DRIVER_MANO_DER_FK";
+	addAttr -ci true -sn "CORRECION_CODO" -ln "CORRECION_CODO" -at "double";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" -7.4441299999999995 13.522499999999999 -0.665141 ;
 	setAttr ".sp" -type "double3" -7.4441299999999995 13.522499999999999 -0.665141 ;
+	setAttr -k on ".CORRECION_CODO";
 createNode nurbsCurve -n "DRIVER_MANO_DER_FKShape" -p "DRIVER_MANO_DER_FK";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
@@ -1765,6 +1592,7 @@ createNode transform -n "GRP_DRIVER_THUMB_IZQ_1";
 	setAttr ".rp" -type "double3" 8.0048955178762249 13.517386184829427 -0.086606438551114384 ;
 	setAttr ".sp" -type "double3" 8.0048955178762249 13.517386184829427 -0.086606438551114384 ;
 createNode transform -n "DRIVER_THUMB_IZQ_1" -p "GRP_DRIVER_THUMB_IZQ_1";
+	setAttr ".v" no;
 	setAttr ".rp" -type "double3" 8.0048955178762249 13.521781912486343 -0.086606438551114384 ;
 	setAttr ".sp" -type "double3" 8.0048955178762249 13.521781912486343 -0.086606438551114384 ;
 createNode nurbsCurve -n "DRIVER_THUMB_IZQ_1Shape" -p "DRIVER_THUMB_IZQ_1";
@@ -1781,12 +1609,919 @@ createNode nurbsCurve -n "DRIVER_THUMB_IZQ_1Shape" -p "DRIVER_THUMB_IZQ_1";
 		8.0048452199953086 13.937809458694158 -0.086656306548636874
 		8.0044931348288344 13.514596514810322 -0.087005382531239239
 		;
-createNode transform -n "DRIVER_CARA";
+createNode transform -n "DRIVER_TOE_FINGERS_DER";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -1.2523799999999963 0.056667599999996821 2.0855000000000019 ;
+	setAttr ".sp" -type "double3" -1.2523799999999963 0.056667599999996821 2.0855000000000019 ;
+createNode nurbsCurve -n "DRIVER_TOE_FINGERS_DERShape" -p "DRIVER_TOE_FINGERS_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 14 2 no 3
+		19 -1 -0.4554399870000001 0 0.43359919600000002 1 1.73555149 2 3 4 5 6 7 8
+		 8.4451647990000005 9 9.5445600129999999 10 10.433599195999999 11
+		17
+		-1.1375328502696782 0.75339471698938065 2.1450227390194367
+		-1.248814473776374 0.89358129257399388 2.1450227390194367
+		-1.36224550448986 0.75384205679495286 2.1450227390194367
+		-1.4943426016305505 0.63581942382294199 2.1450227390194367
+		-1.345419907420222 0.64285637731165979 2.1450227390194367
+		-1.3092933749570916 0.64384858469026152 2.1450227390194367
+		-1.3525539699861 0.43658174600410415 2.1450227390194367
+		-1.31545679701304 0.45026113814077739 2.1450227390194367
+		-1.2509638809831609 0.47933864649206759 2.1450227390194367
+		-1.1864709649532796 0.45026113814077739 2.1450227390194367
+		-1.1493737919802212 0.43658174600410404 2.1450227390194367
+		-1.1960868365390154 0.65157281439845693 2.1450227390194367
+		-1.1413903215202978 0.6382212524647457 2.1450227390194367
+		-1.0191786702268872 0.65361291920137421 2.1450227390194367
+		-1.1375328502696782 0.75339471698938065 2.1450227390194367
+		-1.248814473776374 0.89358129257399388 2.1450227390194367
+		-1.36224550448986 0.75384205679495286 2.1450227390194367
+		;
+createNode transform -n "DRIVER_TOE_FINGERS_IZQ";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 1.2523840219923323 0.056667576726437241 2.0854951605329939 ;
+	setAttr ".sp" -type "double3" 1.2523840219923323 0.056667576726437241 2.0854951605329939 ;
+createNode nurbsCurve -n "DRIVER_TOE_FINGERS_IZQShape" -p "DRIVER_TOE_FINGERS_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 14 2 no 3
+		19 -1 -0.4554399870000001 0 0.43359919600000002 1 1.73555149 2 3 4 5 6 7 8
+		 8.4451647990000005 9 9.5445600129999999 10 10.433599195999999 11
+		17
+		1.3672311717226504 0.75339469371582102 2.1450178995524287
+		1.2559495482159546 0.89358126930043436 2.1450178995524287
+		1.1425185175024686 0.75384203352139334 2.1450178995524287
+		1.0104214203617783 0.63581940054938235 2.1450178995524287
+		1.1593441145721066 0.64285635403810026 2.1450178995524287
+		1.1954706470352372 0.64384856141670188 2.1450178995524287
+		1.1522100520062288 0.43658172273054463 2.1450178995524287
+		1.1893072249792889 0.45026111486721776 2.1450178995524287
+		1.2538001410091677 0.47933862321850806 2.1450178995524287
+		1.318293057039049 0.45026111486721776 2.1450178995524287
+		1.3553902300121072 0.43658172273054452 2.1450178995524287
+		1.3086771854533132 0.6515727911248973 2.1450178995524287
+		1.363373700472031 0.63822122919118607 2.1450178995524287
+		1.4855853517654414 0.65361289592781469 2.1450178995524287
+		1.3672311717226504 0.75339469371582102 2.1450178995524287
+		1.2559495482159546 0.89358126930043436 2.1450178995524287
+		1.1425185175024686 0.75384203352139334 2.1450178995524287
+		;
+createNode transform -n "DRIVER_HEEL_IZQ";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 1.3141946792602541 0.11105763332017127 -0.77207473589158293 ;
+	setAttr ".sp" -type "double3" 1.3141946792602541 0.11105763332017116 -0.77207473589158293 ;
+createNode nurbsCurve -n "DRIVER_HEEL_IZQShape" -p "DRIVER_HEEL_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 10 2 no 3
+		15 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12
+		13
+		2.0044871142049665 0.2268388144792664 -1.5994705731683125
+		1.3152432716450235 0.22683881444002002 -1.8812690470671505
+		0.62599942908540751 0.2268388144792664 -1.5994705731683125
+		0.62599942908508155 0.22683881452048116 -1.4669529436914981
+		0.62599942908508155 0.22683881452048116 -1.2041578399265691
+		0.62599942908540751 0.22683881447926643 -1.0716402104495852
+		1.3152432716450233 0.22683881444002002 -1.4137778116538922
+		2.0044871142049665 0.22683881447926643 -1.0716402104495852
+		2.004487114204641 0.22683881452048116 -1.204157839926568
+		2.004487114204641 0.22683881452048116 -1.4669529436914963
+		2.0044871142049665 0.2268388144792664 -1.5994705731683125
+		1.3152432716450235 0.22683881444002002 -1.8812690470671505
+		0.62599942908540751 0.2268388144792664 -1.5994705731683125
+		;
+createNode transform -n "GRP_DRIVER_THUMB_IZQ_2";
+	setAttr ".rp" -type "double3" 8.3994182093148364 13.366911724051116 0.14419431585190967 ;
+	setAttr ".sp" -type "double3" 8.3994182093148364 13.366911724051116 0.14419431585190967 ;
+createNode transform -n "DRIVER_THUMB_IZQ_2" -p "GRP_DRIVER_THUMB_IZQ_2";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 8.3991854997622895 13.362498682402094 0.14396224002365443 ;
+	setAttr ".sp" -type "double3" 8.3991854997622895 13.362498682402094 0.14396224002365443 ;
+createNode nurbsCurve -n "DRIVER_THUMB_IZQ_Shape2" -p "DRIVER_THUMB_IZQ_2";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		8.3993891206207554 13.731077041739121 0.14416530637340763
+		8.39946090514532 13.731047992625806 0.19681931678757353
+		8.399519082533466 13.836356095293461 0.19687733574466759
+		8.3993755134843191 13.836414193520087 0.091569314916279537
+		8.3993173360962174 13.731106090852411 0.091511295959152139
+		8.3993891206207554 13.731077041739121 0.14416530637340763
+		8.3991854997622308 13.362498682402205 0.14396224002357649
+		;
+createNode transform -n "GRP_DRIVER_THUMB_IZQ_3";
+	setAttr ".rp" -type "double3" 8.6187671521482265 13.292572923438978 0.2568306087574137 ;
+	setAttr ".sp" -type "double3" 8.6187671521482265 13.292572923438978 0.2568306087574137 ;
+createNode transform -n "DRIVER_THUMB_IZQ_3" -p "GRP_DRIVER_THUMB_IZQ_3";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 8.618650407542269 13.28786996212003 0.25665505233223129 ;
+	setAttr ".sp" -type "double3" 8.618650407542269 13.28786996212003 0.25665505233223129 ;
+createNode nurbsCurve -n "DRIVER_THUMB_IZQ_Shape3" -p "DRIVER_THUMB_IZQ_3";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		8.6188037569712357 13.585236748547761 0.25680866420421911
+		8.6187674313108218 13.58521482273254 0.29928962382111246
+		8.6188112454333972 13.670176761711874 0.2993335129274568
+		8.6188838967541397 13.670220613342334 0.21437159369372472
+		8.6188400826316158 13.585258674363011 0.21432770458737194
+		8.6188037569712357 13.585236748547761 0.25680866420421911
+		8.6186504075422867 13.287869962120158 0.25665505233207142
+		;
+createNode transform -n "GRP_DRIVER_THUMB_DER_1";
+	setAttr ".rp" -type "double3" -8.009389564510851 13.527359485493854 -0.077957228337077411 ;
+	setAttr ".sp" -type "double3" -8.009389564510851 13.527359485493854 -0.077957228337077411 ;
+createNode transform -n "DRIVER_THUMB_DER_1" -p "GRP_DRIVER_THUMB_DER_1";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -8.0092927672640037 13.526529478278784 -0.078054807649484137 ;
+	setAttr ".sp" -type "double3" -8.0092927672640037 13.526529478278784 -0.078054807649484137 ;
+createNode nurbsCurve -n "DRIVER_THUMB_DER_1Shape" -p "DRIVER_THUMB_DER_1";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-8.0093774648550138 13.949742695493306 -0.07796942575112098
+		-8.009134211338786 13.949730546860035 -0.017510882860310772
+		-8.0091584106505067 14.070648608921335 -0.01748648803221009
+		-8.0096449176829161 14.070672906187898 -0.13840357381382162
+		-8.0096207183712274 13.949754844126602 -0.1384279686419454
+		-8.0093774648550138 13.949742695493306 -0.07796942575112098
+		-8.0092927672639966 13.526529478278768 -0.078054807649468927
+		;
+createNode transform -n "GRP_DRIVER_INDEX_IZQ_1";
+	setAttr ".rp" -type "double3" 8.888091309513495 13.522959243006767 -0.25825695089670808 ;
+	setAttr ".sp" -type "double3" 8.888091309513495 13.522959243006767 -0.25825695089670808 ;
+createNode transform -n "DRIVER_INDEX_IZQ_1" -p "GRP_DRIVER_INDEX_IZQ_1";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 8.8880913095134932 13.522450921624028 -0.25825695089667455 ;
+	setAttr ".sp" -type "double3" 8.8880913095134932 13.522450921624028 -0.25825695089667455 ;
+createNode nurbsCurve -n "DRIVER_INDEX_IZQ_1Shape" -p "DRIVER_INDEX_IZQ_1";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		8.888091309513495 13.945664155926728 -0.25825695089670653
+		8.8880913095135003 13.945664155926728 -0.19779791742491093
+		8.8880913095135003 14.066582222870316 -0.19779791742491093
+		8.8880913095134915 14.066582222870316 -0.31871598436850518
+		8.8880913095134915 13.945664155926728 -0.31871598436850518
+		8.888091309513495 13.945664155926728 -0.25825695089670653
+		8.888091309513495 13.522450921624172 -0.25825695089670653
+		;
+createNode transform -n "GRP_DRIVER_INDEX_IZQ_2";
+	setAttr ".rp" -type "double3" 9.2624078617368824 13.52750575778275 -0.25556402606055895 ;
+	setAttr ".sp" -type "double3" 9.2624078617368824 13.52750575778275 -0.25556402606055895 ;
+createNode transform -n "DRIVER_INDEX_IZQ_2" -p "GRP_DRIVER_INDEX_IZQ_2";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 9.262407861736774 13.522450921624026 -0.25556402606053563 ;
+	setAttr ".sp" -type "double3" 9.262407861736774 13.522450921624026 -0.25556402606053563 ;
+createNode nurbsCurve -n "DRIVER_INDEX_IZQ_Shape2" -p "DRIVER_INDEX_IZQ_2";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		9.2624078617368859 13.884253057566122 -0.25556402606056072
+		9.2624078617368628 13.884253057566122 -0.20387800664028041
+		9.2624078617368628 13.98762509640668 -0.20387800664028041
+		9.2624078617368824 13.98762509640668 -0.30725004548083923
+		9.2624078617368824 13.884253057566122 -0.30725004548083923
+		9.2624078617368859 13.884253057566122 -0.25556402606056072
+		9.2624078617368859 13.52245092162417 -0.25556402606056072
+		;
+createNode transform -n "GRP_DRIVER_INDEX_IZQ_3";
+	setAttr ".rp" -type "double3" 9.5842123796553977 13.526299616287371 -0.26162310694187907 ;
+	setAttr ".sp" -type "double3" 9.5842123796553977 13.526299616287371 -0.26162310694187907 ;
+createNode transform -n "DRIVER_INDEX_IZQ_3" -p "GRP_DRIVER_INDEX_IZQ_3";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 9.584212379655348 13.522450921624024 -0.26162310694184843 ;
+	setAttr ".sp" -type "double3" 9.584212379655348 13.522450921624024 -0.26162310694184843 ;
+createNode nurbsCurve -n "DRIVER_INDEX_IZQ_Shape3" -p "DRIVER_INDEX_IZQ_3";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		9.5842123796554048 13.830682547242343 -0.26162310694188107
+		9.5842123796553871 13.830682547242343 -0.21759001756787244
+		9.5842123796553871 13.918748725990355 -0.21759001756787244
+		9.5842123796554066 13.918748725990355 -0.30565619631588536
+		9.5842123796554066 13.830682547242343 -0.30565619631588536
+		9.5842123796554048 13.830682547242343 -0.26162310694188107
+		9.5842123796554048 13.522450921624168 -0.26162310694188107
+		;
+createNode transform -n "GRP_DRIVER_MIDDLE_IZQ_1";
+	setAttr ".rp" -type "double3" 8.903879820838899 13.526375923726041 -0.57453667904657324 ;
+	setAttr ".sp" -type "double3" 8.903879820838899 13.526375923726041 -0.57453667904657324 ;
+createNode transform -n "DRIVER_MIDDLE_IZQ_1" -p "GRP_DRIVER_MIDDLE_IZQ_1";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 8.9038798208388172 13.522450921624031 -0.57453667904656047 ;
+	setAttr ".sp" -type "double3" 8.9038798208388172 13.522450921624031 -0.57453667904656047 ;
+createNode nurbsCurve -n "DRIVER_MIDDLE_IZQ_1Shape" -p "DRIVER_MIDDLE_IZQ_1";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		8.9038798208388545 13.927969207060704 -0.57453667904657935
+		8.9038798208389434 13.927969207060704 -0.51660549541278056
+		8.9038798208389434 14.043831574328285 -0.51660549541278056
+		8.9038798208389398 14.043831574328285 -0.63246786268036592
+		8.9038798208389398 13.927969207060704 -0.63246786268036592
+		8.9038798208388545 13.927969207060704 -0.57453667904657935
+		8.9038798208388545 13.522450921624175 -0.57453667904657935
+		;
+createNode transform -n "GRP_DRIVER_MIDDLE_IZQ_2";
+	setAttr ".rp" -type "double3" 9.3201363221284055 13.525253011662498 -0.58454284494296804 ;
+	setAttr ".sp" -type "double3" 9.3201363221284055 13.525253011662498 -0.58454284494296804 ;
+createNode transform -n "DRIVER_MIDDLE_IZQ_2" -p "GRP_DRIVER_MIDDLE_IZQ_2";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 9.3201363221283469 13.522450921624031 -0.58454284494294306 ;
+	setAttr ".sp" -type "double3" 9.3201363221283469 13.522450921624031 -0.58454284494294306 ;
+createNode nurbsCurve -n "DRIVER_MIDDLE_IZQ_Shape2" -p "DRIVER_MIDDLE_IZQ_2";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		9.3201363221284268 13.869125765278914 -0.58454284494297359
+		9.3201363221283842 13.869125765278914 -0.5350178672780016
+		9.3201363221283842 13.968175720608839 -0.5350178672780016
+		9.3201363221284215 13.968175720608839 -0.63406782260793637
+		9.3201363221284215 13.869125765278914 -0.63406782260793637
+		9.3201363221284268 13.869125765278914 -0.58454284494297359
+		9.3201363221284268 13.522450921624175 -0.58454284494297359
+		;
+createNode transform -n "GRP_DRIVER_MIDDLE_IZQ_3";
+	setAttr ".rp" -type "double3" 9.6251825321067734 13.52758689744066 -0.59475986874137665 ;
+	setAttr ".sp" -type "double3" 9.6251825321067734 13.52758689744066 -0.59475986874137665 ;
+createNode transform -n "DRIVER_MIDDLE_IZQ_3" -p "GRP_DRIVER_MIDDLE_IZQ_3";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 9.6251825321066615 13.52245092162403 -0.59475986874135778 ;
+	setAttr ".sp" -type "double3" 9.6251825321066615 13.52245092162403 -0.59475986874135778 ;
+createNode nurbsCurve -n "DRIVER_MIDDLE_IZQ_Shape3" -p "DRIVER_MIDDLE_IZQ_3";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		9.6251825321068036 13.817795089071881 -0.59475986874138276
+		9.625182532106745 13.817795089071881 -0.55256784482026999
+		9.625182532106745 13.90217913691408 -0.55256784482026999
+		9.6251825321067468 13.90217913691408 -0.6369518926624832
+		9.6251825321067468 13.817795089071881 -0.6369518926624832
+		9.6251825321068036 13.817795089071881 -0.59475986874138276
+		9.6251825321068036 13.522450921624174 -0.59475986874138276
+		;
+createNode transform -n "GRP_DRIVER_CANCEL_IZQ_1";
+	setAttr ".rp" -type "double3" 8.8683378737268601 13.612864277357048 -0.88725410853500908 ;
+	setAttr ".sp" -type "double3" 8.8683378737268601 13.612864277357048 -0.88725410853500908 ;
+createNode transform -n "DRIVER_CANCEL_IZQ_1" -p "GRP_DRIVER_CANCEL_IZQ_1";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 8.868337873726805 13.609787182757968 -0.88725410853499298 ;
+	setAttr ".sp" -type "double3" 8.868337873726805 13.609787182757968 -0.88725410853499298 ;
+createNode nurbsCurve -n "DRIVER_CANCEL_IZQ_1Shape" -p "DRIVER_CANCEL_IZQ_1";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		8.8683378737268299 13.97402400187106 -0.88725410853501718
+		8.8683378737268903 13.97402400187106 -0.83522027723315706
+		8.8683378737268903 14.078091664474758 -0.83522027723315706
+		8.8683378737268388 14.078091664474758 -0.9392879398368611
+		8.8683378737268388 13.97402400187106 -0.9392879398368611
+		8.8683378737268299 13.97402400187106 -0.88725410853501718
+		8.8683378737268299 13.609787182758112 -0.88725410853501718
+		;
+createNode transform -n "GRP_DRIVER_CANCEL_IZQ_2";
+	setAttr ".rp" -type "double3" 9.2407542879003568 13.562397932085222 -0.91232952794318489 ;
+	setAttr ".sp" -type "double3" 9.2407542879003568 13.562397932085222 -0.91232952794318489 ;
+createNode transform -n "DRIVER_CANCEL_IZQ_2" -p "GRP_DRIVER_CANCEL_IZQ_2";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 9.2407542879003142 13.557638521758257 -0.91232952794318445 ;
+	setAttr ".sp" -type "double3" 9.2407542879003142 13.557638521758257 -0.91232952794318445 ;
+createNode nurbsCurve -n "DRIVER_CANCEL_IZQ_Shape2" -p "DRIVER_CANCEL_IZQ_2";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		9.2407542879004136 13.869022118637027 -0.91232952794319366
+		9.2407542879003319 13.869022118637043 -0.86784615696052436
+		9.2407542879003159 13.957988860602349 -0.86784615696052436
+		9.2407542879003159 13.957988860602349 -0.95681289892584365
+		9.2407542879003319 13.869022118637011 -0.95681289892584565
+		9.2407542879004136 13.869022118637027 -0.91232952794319366
+		9.2407542879004136 13.557638521758401 -0.91232952794319366
+		;
+createNode transform -n "GRP_DRIVER_CANCEL_IZQ_3";
+	setAttr ".rp" -type "double3" 9.5142116967567514 13.519634672333881 -0.92240182777641988 ;
+	setAttr ".sp" -type "double3" 9.5142116967567514 13.519634672333881 -0.92240182777641988 ;
+createNode transform -n "DRIVER_CANCEL_IZQ_3" -p "GRP_DRIVER_CANCEL_IZQ_3";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 9.5142116967567247 13.520259148550817 -0.922401827776413 ;
+	setAttr ".sp" -type "double3" 9.5142116967567247 13.520259148550817 -0.922401827776413 ;
+createNode nurbsCurve -n "DRIVER_CANCEL_IZQ_Shape3" -p "DRIVER_CANCEL_IZQ_3";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		9.5142116967567549 13.785537494702229 -0.92240182777641921
+		9.5142116967567532 13.785537494702261 -0.88450492118336843
+		9.5142116967567691 13.861331307888348 -0.88450492118336843
+		9.5142116967567798 13.861331307888348 -0.96029873436947177
+		9.5142116967567798 13.785537494702245 -0.96029873436947133
+		9.5142116967567549 13.785537494702229 -0.92240182777641921
+		9.5142116967567389 13.520259148550945 -0.92240182777641921
+		;
+createNode transform -n "GRP_DRIVER_PINKY_IZQ_1";
+	setAttr ".rp" -type "double3" 8.8336770876506385 13.511497790099181 -1.170459447986719 ;
+	setAttr ".sp" -type "double3" 8.8336770876506385 13.511497790099181 -1.170459447986719 ;
+createNode transform -n "DRIVER_PINKY_IZQ_1" -p "GRP_DRIVER_PINKY_IZQ_1";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 8.8336770876506101 13.504234750385011 -1.1704594479867017 ;
+	setAttr ".sp" -type "double3" 8.8336770876506101 13.504234750385011 -1.1704594479867017 ;
+createNode nurbsCurve -n "DRIVER_PINKY_IZQ_1Shape" -p "DRIVER_PINKY_IZQ_1";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		8.8336770876506243 13.840362767440379 -1.1704594479867025
+		8.8336770876506527 13.840362767440379 -1.1224411598359894
+		8.8336770876506527 13.93639934374187 -1.1224411598359894
+		8.8336770876506243 13.93639934374187 -1.2184777361374484
+		8.8336770876506243 13.840362767440379 -1.2184777361374484
+		8.8336770876506243 13.840362767440379 -1.1704594479867025
+		8.8336770876506243 13.504234750385155 -1.1704594479867025
+		;
+createNode transform -n "GRP_DRIVER_PINKY_IZQ_2";
+	setAttr ".rp" -type "double3" 9.0547639351312945 13.48285424574615 -1.194781458888567 ;
+	setAttr ".sp" -type "double3" 9.0547639351312945 13.48285424574615 -1.194781458888567 ;
+createNode transform -n "DRIVER_PINKY_IZQ_2" -p "GRP_DRIVER_PINKY_IZQ_2";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 9.0547639351312235 13.478673298299844 -1.1947814588885604 ;
+	setAttr ".sp" -type "double3" 9.0547639351312235 13.478673298299844 -1.1947814588885604 ;
+createNode nurbsCurve -n "DRIVER_PINKY_IZQ_Shape2" -p "DRIVER_PINKY_IZQ_2";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		9.0547639351313176 13.766026870125136 -1.1947814588885861
+		9.0547639351313371 13.766026870125136 -1.1537309486278366
+		9.0547639351313371 13.848127890646607 -1.1537309486278366
+		9.0547639351312057 13.848127890646607 -1.2358319691492938
+		9.0547639351312217 13.76602687012512 -1.2358319691492961
+		9.0547639351313176 13.766026870125136 -1.1947814588885861
+		9.0547639351313176 13.478673298299972 -1.1947814588885839
+		;
+createNode transform -n "GRP_DRIVER_PINKY_IZQ_3";
+	setAttr ".rp" -type "double3" 9.2696220985294655 13.459588793980547 -1.2027697698918915 ;
+	setAttr ".sp" -type "double3" 9.2696220985294655 13.459588793980547 -1.2027697698918915 ;
+createNode transform -n "DRIVER_PINKY_IZQ_3" -p "GRP_DRIVER_PINKY_IZQ_3";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 9.2696220985293802 13.452850634295556 -1.2027697698918804 ;
+	setAttr ".sp" -type "double3" 9.2696220985293802 13.452850634295554 -1.2027697698918796 ;
+createNode nurbsCurve -n "DRIVER_PINKY_IZQ_Shape3" -p "DRIVER_PINKY_IZQ_3";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		9.2696220985294193 13.662133925534887 -1.2027697698918933
+		9.2696220985295277 13.662133925534887 -1.1728721568577227
+		9.2696220985295117 13.721929151603252 -1.1728721568577227
+		9.2696220985295241 13.721929151603236 -1.2326673829260599
+		9.2696220985295241 13.662133925534903 -1.2326673829260604
+		9.2696220985294193 13.662133925534887 -1.2027697698918933
+		9.2696220985294353 13.45285063429573 -1.2027697698918898
+		;
+createNode transform -n "GRP_DRIVER_THUMB_DER_2";
+	setAttr ".rp" -type "double3" -8.3897142421565256 13.36408149475179 0.14586287624738326 ;
+	setAttr ".sp" -type "double3" -8.3897142421565256 13.36408149475179 0.14586287624738326 ;
+createNode transform -n "DRIVER_THUMB_DER_2" -p "GRP_DRIVER_THUMB_DER_2";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -8.3895850641330583 13.358429732640959 0.14565071812126318 ;
+	setAttr ".sp" -type "double3" -8.3895850641330583 13.358429732640959 0.14565071812126318 ;
+createNode nurbsCurve -n "DRIVER_THUMB_DER_Shape2" -p "DRIVER_THUMB_DER_2";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-8.3897708400995228 13.727008110594065 0.14583635648162535
+		-8.3897903413324162 13.72698158099748 0.19849041354707009
+		-8.3898434201800018 13.832289688984094 0.19854345307859325
+		-8.3898044177141973 13.83234274817729 0.093235338947697477
+		-8.3897513388666294 13.727034640190674 0.093182299416169234
+		-8.3897708400995228 13.727008110594065 0.14583635648162535
+		-8.38958506413306 13.35842973264096 0.14565071812126013
+		;
+createNode transform -n "GRP_DRIVER_THUMB_DER_3";
+	setAttr ".rp" -type "double3" -8.6174208769220346 13.294808684669247 0.26706205679572825 ;
+	setAttr ".sp" -type "double3" -8.6174208769220346 13.294808684669247 0.26706205679572825 ;
+createNode transform -n "DRIVER_THUMB_DER_3" -p "GRP_DRIVER_THUMB_DER_3";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -8.6176862039003215 13.290841072898651 0.26752751172778444 ;
+	setAttr ".sp" -type "double3" -8.6176862039003215 13.290841072898651 0.26752751172778444 ;
+createNode nurbsCurve -n "DRIVER_THUMB_DER_Shape3" -p "DRIVER_THUMB_DER_3";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-8.6172787987555388 13.588207380560839 0.2671202386622254
+		-8.6172856460973737 13.588265571862348 0.30960117906086487
+		-8.6171692446274264 13.673227374051525 0.30948481532784555
+		-8.6171555499437495 13.673110991448505 0.22452293453060759
+		-8.6172719514136791 13.58814918925934 0.22463929826362666
+		-8.6172787987555388 13.588207380560839 0.2671202386622254
+		-8.617686203900325 13.290841072898658 0.26752751172778222
+		;
+createNode transform -n "GRP_DRIVER_INDEX_DER_1";
+	setAttr ".rp" -type "double3" -8.8880900000000143 13.523417674845675 -0.2582569999999984 ;
+	setAttr ".sp" -type "double3" -8.8880900000000143 13.523417674845675 -0.2582569999999984 ;
+createNode transform -n "DRIVER_INDEX_DER_1" -p "GRP_DRIVER_INDEX_DER_1";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -8.8880900000000018 13.522499999999994 -0.25825699999999929 ;
+	setAttr ".sp" -type "double3" -8.8880900000000018 13.522499999999994 -0.25825699999999929 ;
+createNode nurbsCurve -n "DRIVER_INDEX_DER_1Shape" -p "DRIVER_INDEX_DER_1";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-8.8880900000000018 13.945713234302536 -0.25825699999999846
+		-8.8880900000000018 13.945713234302547 -0.19779796652820536
+		-8.8880900000000267 14.066631301246135 -0.19779796652820392
+		-8.8880900000000302 14.066631301246135 -0.31871603347179034
+		-8.8880900000000054 13.945713234302547 -0.31871603347179323
+		-8.8880900000000018 13.945713234302536 -0.25825699999999846
+		-8.8880900000000018 13.52249999999998 -0.25825699999999918
+		;
+createNode transform -n "GRP_DRIVER_INDEX_DER_2";
+	setAttr ".rp" -type "double3" -9.2624100000000134 13.528494357264378 -0.25556399999999913 ;
+	setAttr ".sp" -type "double3" -9.2624100000000134 13.528494357264378 -0.25556399999999913 ;
+createNode transform -n "DRIVER_INDEX_DER_2" -p "GRP_DRIVER_INDEX_DER_2";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -9.2624100000000009 13.522499999999992 -0.25556399999999935 ;
+	setAttr ".sp" -type "double3" -9.2624100000000009 13.522499999999992 -0.25556399999999935 ;
+createNode nurbsCurve -n "DRIVER_INDEX_DER_Shape2" -p "DRIVER_INDEX_DER_2";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-9.2624099999999903 13.884302135941933 -0.25556399999999868
+		-9.2624100000000258 13.884302135941947 -0.20387798057972034
+		-9.2624100000000009 13.987674174782505 -0.20387798057972079
+		-9.2624100000000045 13.987674174782491 -0.30725001942027819
+		-9.2624100000000062 13.884302135941933 -0.3072500194202773
+		-9.2624099999999903 13.884302135941933 -0.25556399999999868
+		-9.2624099999999885 13.522499999999981 -0.25556399999999874
+		;
+createNode transform -n "GRP_DRIVER_INDEX_DER_3";
+	setAttr ".rp" -type "double3" -9.5842099999999935 13.52902690022804 -0.26162300000000094 ;
+	setAttr ".sp" -type "double3" -9.5842099999999935 13.52902690022804 -0.26162300000000094 ;
+createNode transform -n "DRIVER_INDEX_DER_3" -p "GRP_DRIVER_INDEX_DER_3";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -9.5842100000000059 13.522499999999996 -0.26162299999999938 ;
+	setAttr ".sp" -type "double3" -9.5842100000000059 13.522499999999996 -0.26162299999999938 ;
+createNode nurbsCurve -n "DRIVER_INDEX_DER_Shape3" -p "DRIVER_INDEX_DER_3";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-9.5842100000000059 13.830731625618014 -0.26162299999999938
+		-9.5842100000000023 13.830731625618014 -0.21758991062599509
+		-9.5842100000000094 13.918797804366024 -0.21758991062599764
+		-9.5842100000000059 13.918797804366024 -0.30565608937400734
+		-9.5842100000000059 13.830731625618014 -0.30565608937400401
+		-9.5842100000000059 13.830731625618014 -0.26162299999999938
+		-9.5842099999999935 13.522499999999981 -0.26162300000000183
+		;
+createNode transform -n "GRP_DRIVER_MIDDLE_DER_1";
+	setAttr ".rp" -type "double3" -8.9038800000000027 13.529344397677148 -0.57453700000000474 ;
+	setAttr ".sp" -type "double3" -8.9038800000000027 13.529344397677148 -0.57453700000000474 ;
+createNode transform -n "DRIVER_MIDDLE_DER_1" -p "GRP_DRIVER_MIDDLE_DER_1";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -8.9038800000000027 13.522499999999994 -0.57453699999999952 ;
+	setAttr ".sp" -type "double3" -8.9038800000000027 13.522499999999994 -0.57453699999999952 ;
+createNode nurbsCurve -n "DRIVER_MIDDLE_DER_1Shape" -p "DRIVER_MIDDLE_DER_1";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-8.9038800000000187 13.928018285436501 -0.5745370000000054
+		-8.9038799999999974 13.92801828543649 -0.5166058163662135
+		-8.9038800000000116 14.043880652704077 -0.51660581636621261
+		-8.9038799999999991 14.04388065270407 -0.63246818363379409
+		-8.9038799999999902 13.92801828543649 -0.63246818363379698
+		-8.9038800000000187 13.928018285436501 -0.5745370000000054
+		-8.9038799999999991 13.522499999999972 -0.5745370000000013
+		;
+createNode transform -n "GRP_DRIVER_MIDDLE_DER_2";
+	setAttr ".rp" -type "double3" -9.3201400000000056 13.528247424474637 -0.5845430000000027 ;
+	setAttr ".sp" -type "double3" -9.3201400000000056 13.528247424474637 -0.5845430000000027 ;
+createNode transform -n "DRIVER_MIDDLE_DER_2" -p "GRP_DRIVER_MIDDLE_DER_2";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -9.3201400000000039 13.522499999999994 -0.58454299999999948 ;
+	setAttr ".sp" -type "double3" -9.3201400000000039 13.522499999999994 -0.58454299999999948 ;
+createNode nurbsCurve -n "DRIVER_MIDDLE_DER_Shape2" -p "DRIVER_MIDDLE_DER_2";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-9.3201400000000163 13.869174843654706 -0.58454300000000325
+		-9.3201400000000429 13.869174843654715 -0.53501802233503848
+		-9.320140000000011 13.96822479898464 -0.53501802233504003
+		-9.320139999999995 13.968224798984625 -0.63406797766496603
+		-9.3201400000000181 13.869174843654701 -0.63406797766496648
+		-9.3201400000000163 13.869174843654706 -0.58454300000000325
+		-9.3201400000000163 13.522499999999958 -0.58454300000000348
+		;
+createNode transform -n "GRP_DRIVER_MIDDLE_DER_3";
+	setAttr ".rp" -type "double3" -9.6251800000000234 13.528211424183292 -0.59476000000000573 ;
+	setAttr ".sp" -type "double3" -9.6251800000000234 13.528211424183292 -0.59476000000000573 ;
+createNode transform -n "DRIVER_MIDDLE_DER_3" -p "GRP_DRIVER_MIDDLE_DER_3";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -9.6251800000000038 13.522499999999996 -0.59475999999999951 ;
+	setAttr ".sp" -type "double3" -9.6251800000000038 13.522499999999996 -0.59475999999999951 ;
+createNode nurbsCurve -n "DRIVER_MIDDLE_DER_Shape3" -p "DRIVER_MIDDLE_DER_3";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-9.6251800000000483 13.817844167447678 -0.59476000000000762
+		-9.6251800000000749 13.817844167447678 -0.55256797607890329
+		-9.6251800000000483 13.902228215289878 -0.55256797607890418
+		-9.6251800000000163 13.902228215289867 -0.63695202392110961
+		-9.6251800000000287 13.817844167447667 -0.63695202392110972
+		-9.6251800000000483 13.817844167447678 -0.59476000000000762
+		-9.6251800000000411 13.522499999999971 -0.59476000000000795
+		;
+createNode transform -n "GRP_DRIVER_CANCEL_DER_1";
+	setAttr ".rp" -type "double3" -8.8683399999999839 13.614484692665702 -0.8872539999999991 ;
+	setAttr ".sp" -type "double3" -8.8683399999999839 13.614484692665702 -0.8872539999999991 ;
+createNode transform -n "DRIVER_CANCEL_DER_1" -p "GRP_DRIVER_CANCEL_DER_1";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -8.8683400000000034 13.609799999999993 -0.88725399999999965 ;
+	setAttr ".sp" -type "double3" -8.8683400000000034 13.609799999999993 -0.88725399999999965 ;
+createNode nurbsCurve -n "DRIVER_CANCEL_DER_1Shape" -p "DRIVER_CANCEL_DER_1";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-8.8683399999999679 13.974036819112898 -0.88725400000000021
+		-8.8683399999999839 13.974036819112898 -0.83522016869815063
+		-8.8683400000000034 14.078104481716601 -0.83522016869814752
+		-8.8683399999999786 14.078104481716586 -0.93928783130184679
+		-8.8683399999999679 13.974036819112884 -0.93928783130184956
+		-8.8683399999999679 13.974036819112898 -0.88725400000000021
+		-8.8683399999999679 13.609799999999943 -0.88725399999999977
+		;
+createNode transform -n "GRP_DRIVER_CANCEL_DER_2";
+	setAttr ".rp" -type "double3" -9.2407499999999985 13.567049264461856 -0.91232999999999786 ;
+	setAttr ".sp" -type "double3" -9.2407499999999985 13.567049264461856 -0.91232999999999786 ;
+createNode transform -n "DRIVER_CANCEL_DER_2" -p "GRP_DRIVER_CANCEL_DER_2";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -9.2407500000000038 13.557599999999995 -0.91232999999999975 ;
+	setAttr ".sp" -type "double3" -9.2407500000000038 13.557599999999995 -0.91232999999999975 ;
+createNode nurbsCurve -n "DRIVER_CANCEL_DER_Shape2" -p "DRIVER_CANCEL_DER_2";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-9.2407499999999914 13.868983596878586 -0.91233000000000408
+		-9.2407500000000162 13.868983596878577 -0.867846629017341
+		-9.2407500000000073 13.95795033884391 -0.86784662901734344
+		-9.2407500000000091 13.95795033884391 -0.9568133709826605
+		-9.2407500000000233 13.868983596878598 -0.95681337098266139
+		-9.2407499999999914 13.868983596878586 -0.91233000000000408
+		-9.2407499999999683 13.557599999999978 -0.91233000000000208
+		;
+createNode transform -n "GRP_DRIVER_CANCEL_DER_3";
+	setAttr ".rp" -type "double3" -9.5142099999999949 13.529312544139945 -0.92240199999999706 ;
+	setAttr ".sp" -type "double3" -9.5142099999999949 13.529312544139945 -0.92240199999999706 ;
+createNode transform -n "DRIVER_CANCEL_DER_3" -p "GRP_DRIVER_CANCEL_DER_3";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -9.5142100000000038 13.520299999999995 -0.92240199999999961 ;
+	setAttr ".sp" -type "double3" -9.5142100000000038 13.520299999999995 -0.92240199999999961 ;
+createNode nurbsCurve -n "DRIVER_CANCEL_DER_Shape3" -p "DRIVER_CANCEL_DER_3";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-9.5142099999999576 13.785578346151286 -0.92240199999999617
+		-9.5142099999999505 13.785578346151299 -0.8845050934069516
+		-9.5142099999999736 13.861372159337373 -0.88450509340695005
+		-9.5142099999999754 13.861372159337357 -0.96029890659303563
+		-9.5142099999999843 13.78557834615127 -0.9602989065930374
+		-9.5142099999999576 13.785578346151286 -0.92240199999999617
+		-9.5142099999999576 13.520299999999988 -0.92240199999999462
+		;
+createNode transform -n "GRP_DRIVER_PINKY_DER_1";
+	setAttr ".rp" -type "double3" -8.8336799999999833 13.506741445663581 -1.1704600000000136 ;
+	setAttr ".sp" -type "double3" -8.8336799999999833 13.506741445663581 -1.1704600000000136 ;
+createNode transform -n "DRIVER_PINKY_DER_1" -p "GRP_DRIVER_PINKY_DER_1";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -8.83368 13.504199999999994 -1.1704599999999996 ;
+	setAttr ".sp" -type "double3" -8.83368 13.504199999999994 -1.1704599999999996 ;
+createNode nurbsCurve -n "DRIVER_PINKY_DER_1Shape" -p "DRIVER_PINKY_DER_1";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-8.8336800000000064 13.840328017055164 -1.1704600000000112
+		-8.83368000000001 13.840328017055167 -1.122441711849266
+		-8.8336799999999887 13.936364593356659 -1.1224417118492653
+		-8.833679999999978 13.936364593356661 -1.2184782881507601
+		-8.8336799999999958 13.840328017055167 -1.2184782881507599
+		-8.8336800000000064 13.840328017055164 -1.1704600000000112
+		-8.8336799999999798 13.504199999999946 -1.1704600000000134
+		;
+createNode transform -n "GRP_DRIVER_PINKY_DER_2";
+	setAttr ".rp" -type "double3" -9.0547600000000017 13.48620628373842 -1.1947800000000139 ;
+	setAttr ".sp" -type "double3" -9.0547600000000017 13.48620628373842 -1.1947800000000139 ;
+createNode transform -n "DRIVER_PINKY_DER_2" -p "GRP_DRIVER_PINKY_DER_2";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -9.0547600000000017 13.478699999999993 -1.1947799999999995 ;
+	setAttr ".sp" -type "double3" -9.0547600000000017 13.478699999999993 -1.1947799999999995 ;
+createNode nurbsCurve -n "DRIVER_PINKY_DER_Shape2" -p "DRIVER_PINKY_DER_2";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-9.0547600000000017 13.766053571825035 -1.1947800000000139
+		-9.054760000000007 13.766053571825079 -1.1537294897392814
+		-9.0547600000000177 13.848154592346548 -1.1537294897392818
+		-9.0547600000000017 13.848154592346555 -1.2358305102607516
+		-9.0547599999999893 13.766053571825076 -1.2358305102607523
+		-9.0547600000000017 13.766053571825035 -1.1947800000000139
+		-9.0547600000000017 13.478699999999868 -1.1947800000000162
+		;
+createNode transform -n "GRP_DRIVER_PINKY_DER_3";
+	setAttr ".rp" -type "double3" -9.2696199999999891 13.462851670028734 -1.2027700000000161 ;
+	setAttr ".sp" -type "double3" -9.2696199999999891 13.462851670028734 -1.2027700000000161 ;
+createNode transform -n "DRIVER_PINKY_DER_3" -p "GRP_DRIVER_PINKY_DER_3";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -9.2696200000000015 13.452899999999994 -1.2027699999999997 ;
+	setAttr ".sp" -type "double3" -9.2696200000000015 13.452899999999993 -1.2027699999999988 ;
+createNode nurbsCurve -n "DRIVER_PINKY_DER_Shape3" -p "DRIVER_PINKY_DER_3";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 6 0 no 3
+		7 0 1 2 3 4 5 6
+		7
+		-9.2696199999999713 13.662183291239142 -1.2027700000000112
+		-9.2696199999999482 13.662183291239142 -1.1728723869658446
+		-9.26961999999995 13.721978517307464 -1.1728723869658424
+		-9.2696199999999696 13.721978517307468 -1.2326676130341783
+		-9.2696199999999624 13.662183291239142 -1.2326676130341823
+		-9.2696199999999713 13.662183291239142 -1.2027700000000112
+		-9.2696199999999802 13.452899999999971 -1.2027700000000054
+		;
+createNode transform -n "CRV_REFR_RODILLA_IZQ";
+	setAttr ".tmp" yes;
+createNode nurbsCurve -n "CRV_REFR_RODILLA_IZQShape" -p "CRV_REFR_RODILLA_IZQ";
+	setAttr -k off ".v";
+	setAttr -s 6 ".iog[0].og";
+	setAttr ".tw" yes;
+createNode nurbsCurve -n "CRV_REFR_RODILLA_IZQShapeOrig" -p "CRV_REFR_RODILLA_IZQ";
+	setAttr -k off ".v";
+	setAttr ".io" yes;
+	setAttr ".tw" yes;
+createNode transform -n "CLR_RODILLA_IZQ_1";
+	setAttr ".tmp" yes;
+	setAttr ".t" -type "double3" 21.501320766445787 -6.2451035437844915 0 ;
+	setAttr ".rp" -type "double3" 0.5 -0.49999999999999989 0 ;
+	setAttr ".sp" -type "double3" 0.5 -0.49999999999999989 0 ;
+createNode clusterHandle -n "CLR_RODILLA_IZQ_1Shape" -p "CLR_RODILLA_IZQ_1";
+	setAttr ".ihi" 0;
+	setAttr -k off ".v";
+	setAttr ".or" -type "double3" 0.5 -0.49999999999999989 0 ;
+createNode transform -n "CLR_RODILLA_IZQ_2";
+	setAttr ".tmp" yes;
+	setAttr ".t" -type "double3" 21.501320766445787 -6.2451035437844915 0 ;
+	setAttr ".rp" -type "double3" 0.5 0.50000000000000011 0 ;
+	setAttr ".sp" -type "double3" 0.5 0.50000000000000011 0 ;
+createNode clusterHandle -n "CLR_RODILLA_IZQ_2Shape" -p "CLR_RODILLA_IZQ_2";
+	setAttr ".ihi" 0;
+	setAttr -k off ".v";
+	setAttr ".or" -type "double3" 0.5 0.50000000000000011 0 ;
+createNode transform -n "crv_refr_brazo_IZQ";
+	setAttr ".tmp" yes;
+createNode nurbsCurve -n "crv_refr_brazo_IZQShape" -p "crv_refr_brazo_IZQ";
+	setAttr -k off ".v";
+	setAttr -s 6 ".iog[0].og";
+	setAttr ".tw" yes;
+createNode nurbsCurve -n "crv_refr_brazo_IZQShapeOrig" -p "crv_refr_brazo_IZQ";
+	setAttr -k off ".v";
+	setAttr ".io" yes;
+	setAttr ".tw" yes;
+createNode transform -n "CLR_CODO_IZQ_1";
+	setAttr ".tmp" yes;
+	setAttr ".t" -type "double3" 21.501320766445787 -4.7197364923792851 0 ;
+	setAttr ".rp" -type "double3" 0.5 -0.49999999999999989 0 ;
+	setAttr ".sp" -type "double3" 0.5 -0.49999999999999989 0 ;
+createNode clusterHandle -n "CLR_CODO_IZQ_1Shape" -p "CLR_CODO_IZQ_1";
+	setAttr ".ihi" 0;
+	setAttr -k off ".v";
+	setAttr ".or" -type "double3" 0.5 -0.49999999999999989 0 ;
+createNode transform -n "CLR_CODO_IZQ_2";
+	setAttr ".tmp" yes;
+	setAttr ".t" -type "double3" 21.501320766445787 -4.7197364923792851 0 ;
+	setAttr ".rp" -type "double3" 0.5 0.50000000000000011 0 ;
+	setAttr ".sp" -type "double3" 0.5 0.50000000000000011 0 ;
+createNode clusterHandle -n "CLR_CODO_IZQ_2Shape" -p "CLR_CODO_IZQ_2";
+	setAttr ".ihi" 0;
+	setAttr -k off ".v";
+	setAttr ".or" -type "double3" 0.5 0.50000000000000011 0 ;
+createNode transform -n "CRV_REFR_RODILLA_DER";
+	setAttr ".tmp" yes;
+createNode nurbsCurve -n "CRV_REFR_RODILLA_DERShape" -p "CRV_REFR_RODILLA_DER";
+	setAttr -k off ".v";
+	setAttr -s 6 ".iog[0].og";
+	setAttr ".tw" yes;
+createNode nurbsCurve -n "CRV_REFR_RODILLA_DERShapeOrig" -p "CRV_REFR_RODILLA_DER";
+	setAttr -k off ".v";
+	setAttr ".io" yes;
+	setAttr ".tw" yes;
+createNode transform -n "CLR_RODILLA_DER_1";
+	setAttr ".tmp" yes;
+	setAttr ".t" -type "double3" 20.963328237941873 -6.2451035437844915 0 ;
+	setAttr ".rp" -type "double3" 0.5 -0.49999999999999989 0 ;
+	setAttr ".sp" -type "double3" 0.5 -0.49999999999999989 0 ;
+createNode clusterHandle -n "CLR_RODILLA_DER_1Shape" -p "CLR_RODILLA_DER_1";
+	setAttr ".ihi" 0;
+	setAttr -k off ".v";
+	setAttr ".or" -type "double3" 0.5 -0.49999999999999989 0 ;
+createNode transform -n "CLR_RODILLA_DER_2";
+	setAttr ".tmp" yes;
+	setAttr ".t" -type "double3" 20.963328237941873 -6.2451035437844915 0 ;
+	setAttr ".rp" -type "double3" 0.5 0.50000000000000011 0 ;
+	setAttr ".sp" -type "double3" 0.5 0.50000000000000011 0 ;
+createNode clusterHandle -n "CLR_RODILLA_DER_2Shape" -p "CLR_RODILLA_DER_2";
+	setAttr ".ihi" 0;
+	setAttr -k off ".v";
+	setAttr ".or" -type "double3" 0.5 0.50000000000000011 0 ;
+createNode transform -n "crv_refr_brazo_DER";
+	setAttr ".tmp" yes;
+createNode nurbsCurve -n "crv_refr_brazo_DERShape" -p "crv_refr_brazo_DER";
+	setAttr -k off ".v";
+	setAttr -s 6 ".iog[0].og";
+	setAttr ".tw" yes;
+createNode nurbsCurve -n "crv_refr_brazo_DERShapeOrig" -p "crv_refr_brazo_DER";
+	setAttr -k off ".v";
+	setAttr ".io" yes;
+	setAttr ".tw" yes;
+createNode transform -n "CLR_CODO_DER_1";
+	setAttr ".tmp" yes;
+	setAttr ".t" -type "double3" 20.96332823794188 -4.726065816244037 0 ;
+	setAttr ".rp" -type "double3" 0.5 -0.49999999999999989 0 ;
+	setAttr ".sp" -type "double3" 0.5 -0.49999999999999989 0 ;
+createNode clusterHandle -n "CLR_CODO_DER_1Shape" -p "CLR_CODO_DER_1";
+	setAttr ".ihi" 0;
+	setAttr -k off ".v";
+	setAttr ".or" -type "double3" 0.5 -0.49999999999999989 0 ;
+createNode transform -n "CLR_CODO_DER_2";
+	setAttr ".tmp" yes;
+	setAttr ".t" -type "double3" 20.96332823794188 -4.726065816244037 0 ;
+	setAttr ".rp" -type "double3" 0.5 0.50000000000000011 0 ;
+	setAttr ".sp" -type "double3" 0.5 0.50000000000000011 0 ;
+createNode clusterHandle -n "CLR_CODO_DER_2Shape" -p "CLR_CODO_DER_2";
+	setAttr ".ihi" 0;
+	setAttr -k off ".v";
+	setAttr ".or" -type "double3" 0.5 0.50000000000000011 0 ;
+createNode transform -n "GRP_DRIVER_CABEZA";
+	setAttr ".rp" -type "double3" -7.1778359226654327e-016 14.576314572598761 -0.44449398863789097 ;
+	setAttr ".sp" -type "double3" -7.1778359226654327e-016 14.576314572598761 -0.44449398863789097 ;
+createNode transform -n "DRIVER_CABEZA" -p "GRP_DRIVER_CABEZA";
+	addAttr -ci true -sn "SWITCH_OJOS" -ln "SWITCH_OJOS" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "SWITCH_CABEZA_FOLLOW" -ln "SWITCH_CABEZA_FOLLOW" -min 0 -max 
+		1 -at "double";
+	addAttr -ci true -sn "SWITCH_LENTES" -ln "SWITCH_LENTES" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "SWITCH_SOMBRERO" -ln "SWITCH_SOMBRERO" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "VISIBILITY_BS" -ln "VISIBILITY_BS" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "LENTES_VISIBILIDAD" -ln "LENTES_VISIBILIDAD" -min 0 -max 1 
+		-at "bool";
+	addAttr -ci true -sn "SOMBRERO_VISIBILIDAD" -ln "SOMBRERO_VISIBILIDAD" -min 0 -max 
+		1 -at "bool";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -7.1778359226654327e-016 14.576314572598761 -0.44449398863789097 ;
+	setAttr ".sp" -type "double3" -7.1778359226654327e-016 14.576314572598761 -0.44449398863789097 ;
+	setAttr -k on ".SWITCH_OJOS";
+	setAttr -k on ".SWITCH_CABEZA_FOLLOW";
+	setAttr -k on ".SWITCH_LENTES";
+	setAttr -k on ".SWITCH_SOMBRERO";
+	setAttr -cb on ".VISIBILITY_BS" yes;
+	setAttr -cb on ".LENTES_VISIBILIDAD" yes;
+	setAttr -cb on ".SOMBRERO_VISIBILIDAD" yes;
+createNode nurbsCurve -n "DRIVER_CABEZAShape" -p "DRIVER_CABEZA";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		1.7283324432398726 21.14801080363857 -0.44449398863789152
+		-1.9160963014178343e-015 21.32513818242397 -0.44449398863789163
+		-1.7283324432398686 21.14801080363857 -0.44449398863789152
+		-2.7348659536081779 20.883706305533678 -0.4444939886378913
+		-2.9552280506854887 20.084802049101846 -0.44449398863789108
+		-2.2895532905713578 15.601376134312668 -0.44449398863789086
+		-1.8645969174860764 14.915564406757772 -0.44449398863789064
+		-3.1565093635342749e-015 14.620881848339719 -0.44449398863789052
+		1.8645969174860726 14.915564406757772 -0.44449398863789064
+		2.2895532905713534 15.601376134312664 -0.44449398863789086
+		2.955228050685486 20.084802049101839 -0.44449398863789108
+		2.7348659536081761 20.883706305533678 -0.4444939886378913
+		1.7283324432398726 21.14801080363857 -0.44449398863789152
+		-1.9160963014178343e-015 21.32513818242397 -0.44449398863789163
+		-1.7283324432398686 21.14801080363857 -0.44449398863789152
+		;
+createNode nurbsCurve -n "DRIVER_CABEZA1Shape" -p "DRIVER_CABEZA";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		-9.3982819719157359e-016 21.14801080363857 -2.1728264318777644
+		-1.3839174070416362e-015 21.32513818242397 -0.44449398863788975
+		-1.6059620119666675e-015 21.14801080363857 1.283838454601977
+		-1.6059620119666675e-015 20.883706305533678 2.2903719649702858
+		-1.4949397095041519e-015 20.084802049101846 2.5107340620475966
+		-1.1618728021166049e-015 15.601376134312668 1.845059301933466
+		-8.2880589472905793e-016 14.915564406757772 1.4201029288481848
+		-2.7369438241647966e-016 14.620881848339719 -0.44449398863788853
+		5.9372524971067299e-017 14.915564406757772 -2.3090909061239646
+		-5.1649777491448355e-017 15.601376134312664 -2.7340472792092454
+		-1.6267207995396401e-016 20.084802049101839 -3.399722039323378
+		-4.9573898734151097e-016 20.883706305533678 -3.1793599422460681
+		-9.3982819719157359e-016 21.14801080363857 -2.1728264318777644
+		-1.3839174070416362e-015 21.32513818242397 -0.44449398863788975
+		-1.6059620119666675e-015 21.14801080363857 1.283838454601977
+		;
+createNode transform -n "GRP_DRIVER_CUELLO";
+	setAttr ".rp" -type "double3" -6.1771111125596333e-016 13.783387281455061 -0.62747720967105247 ;
+	setAttr ".sp" -type "double3" -6.1771111125596333e-016 13.783387281455061 -0.62747720967105247 ;
+createNode transform -n "DRIVER_CUELLO" -p "GRP_DRIVER_CUELLO";
+	addAttr -ci true -sn "SWITCH_CUELLO_FOLLOW" -ln "SWITCH_CUELLO_FOLLOW" -min 0 -max 
+		1 -at "double";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -6.1771111125596333e-016 13.783387281455061 -0.62747720967105247 ;
+	setAttr ".sp" -type "double3" -6.1771111125596333e-016 13.783387281455061 -0.62747720967105247 ;
+	setAttr -k on ".SWITCH_CUELLO_FOLLOW";
+createNode nurbsCurve -n "DRIVER_CUELLOShape" -p "DRIVER_CUELLO";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		0.7476528690773151 13.985309739047805 -2.3125159734792575
+		-1.0572413604293403e-015 13.689459506153359 -2.7276601763205877
+		-0.74765286907731476 13.985309739047805 -2.3125159734792584
+		-1.2949727556665513 14.461594935958596 -1.4347316932845917
+		-1.4953057381546289 14.688630768162337 -0.62747720967105303
+		-1.2949727556665518 14.461594935958596 0.17977727394248605
+		-0.74765286907731576 13.985309739047805 1.0575615541371521
+		-1.5772110196256931e-015 13.689459506153359 1.4727057569784803
+		0.74765286907731221 13.985309739047805 1.057561554137153
+		1.2949727556665493 14.461594935958596 0.17977727394248713
+		1.4953057381546275 14.688630768162337 -0.62747720967105103
+		1.2949727556665505 14.461594935958596 -1.4347316932845904
+		0.7476528690773151 13.985309739047805 -2.3125159734792575
+		-1.0572413604293403e-015 13.689459506153359 -2.7276601763205877
+		-0.74765286907731476 13.985309739047805 -2.3125159734792584
+		;
+createNode transform -n "GRP_DRIVER_CARA";
+	setAttr ".rp" -type "double3" -7.2349398499056221 19.530115866706304 -1.3267757619389282 ;
+	setAttr ".sp" -type "double3" -7.2349398499056221 19.530115866706304 -1.3267757619389282 ;
+createNode transform -n "DRIVER_CARA" -p "GRP_DRIVER_CARA";
 	addAttr -ci true -sn "BS_TRISTE" -ln "BS_TRISTE" -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "BS_ENOJADO" -ln "BS_ENOJADO" -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "BS_SORPRENDIDO" -ln "BS_SORPRENDIDO" -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "BS_STRETCH" -ln "BS_STRETCH" -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "BS_SQUASH" -ln "BS_SQUASH" -min 0 -max 1 -at "double";
+	setAttr ".v" no;
 	setAttr ".ove" yes;
 	setAttr ".ovc" 18;
 	setAttr ".t" -type "double3" -1.2349398499056159 2.0885402152238797 -4.5201266721249116 ;
@@ -1814,99 +2549,6 @@ createNode nurbsCurve -n "DRIVER_CARAShape" -p "DRIVER_CARA";
 		-3.9592324328695927 19.713846326851598 3.1960397755793712
 		-6 20.194862403766734 3.1960397755793712
 		-8.0407675671304091 19.713846326851598 3.1960397755793712
-		;
-createNode transform -n "CEJA_DER_01" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -7.9540447302431261 18.474365433820719 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -7.9540447302431261 18.474365433820719 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_DER_01Shape" -p "CEJA_DER_01";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-7.8960652049081741 18.532344959155672 3.1960397755793712
-		-7.9540447302431261 18.556360864889363 3.1960397755793712
-		-8.0120242555780798 18.532344959155672 3.1960397755793712
-		-8.0360401613117709 18.474365433820719 3.1960397755793712
-		-8.0120242555780798 18.416385908485768 3.1960397755793712
-		-7.9540447302431261 18.392370002752074 3.1960397755793712
-		-7.8960652049081741 18.416385908485768 3.1960397755793712
-		-7.8720492991744813 18.474365433820719 3.1960397755793712
-		-7.8960652049081741 18.532344959155672 3.1960397755793712
-		-7.9540447302431261 18.556360864889363 3.1960397755793712
-		-8.0120242555780798 18.532344959155672 3.1960397755793712
-		;
-createNode transform -n "CEJA_DER_02" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -7.6067851451733626 18.821625018890483 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -7.6067851451733626 18.821625018890483 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_DER_02Shape" -p "CEJA_DER_02";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-7.5488056198384097 18.879604544225437 3.1960397755793712
-		-7.6067851451733626 18.903620449959128 3.1960397755793712
-		-7.6647646705083163 18.879604544225437 3.1960397755793712
-		-7.6887805762420074 18.821625018890479 3.1960397755793712
-		-7.6647646705083163 18.763645493555529 3.1960397755793712
-		-7.6067851451733626 18.739629587821835 3.1960397755793712
-		-7.5488056198384097 18.763645493555529 3.1960397755793712
-		-7.5247897141047178 18.821625018890479 3.1960397755793712
-		-7.5488056198384097 18.879604544225437 3.1960397755793712
-		-7.6067851451733626 18.903620449959128 3.1960397755793712
-		-7.6647646705083163 18.879604544225437 3.1960397755793712
-		;
-createNode transform -n "CEJA_DER_03" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -7.132419711352644 18.948730867641437 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -7.132419711352644 18.948730867641437 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_DER_03Shape" -p "CEJA_DER_03";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-7.0744401860176911 19.006710392976391 3.1960397755793712
-		-7.132419711352644 19.030726298710082 3.1960397755793712
-		-7.1903992366875968 19.006710392976391 3.1960397755793712
-		-7.2144151424212888 18.948730867641441 3.1960397755793712
-		-7.1903992366875968 18.890751342306487 3.1960397755793712
-		-7.1324197113526449 18.866735436572792 3.1960397755793712
-		-7.0744401860176911 18.890751342306487 3.1960397755793712
-		-7.0504242802839991 18.948730867641441 3.1960397755793712
-		-7.0744401860176911 19.006710392976391 3.1960397755793712
-		-7.132419711352644 19.030726298710082 3.1960397755793712
-		-7.1903992366875968 19.006710392976391 3.1960397755793712
 		;
 createNode transform -n "PARPADO_SUPERIOR_DER" -p "DRIVER_CARA";
 	setAttr -l on -k off ".v";
@@ -2046,583 +2688,6 @@ createNode nurbsCurve -n "BOCA_TEMPLEShape" -p "BOCA_TEMPLE";
 		-5.9962835751525283 15.714124067332577 3.1960397755793699
 		-6.7460301914127374 15.707935786631026 3.1960397755793699
 		;
-createNode transform -n "LABIO_SUPERIOR_CNT" -p "DRIVER_CARA";
-	setAttr -l on -k off ".v";
-	setAttr -l on -k off ".rx";
-	setAttr -l on -k off ".ry";
-	setAttr -l on -k off ".rz";
-	setAttr -l on -k off ".sx";
-	setAttr -l on -k off ".sy";
-	setAttr -l on -k off ".sz";
-	setAttr ".rp" -type "double3" -5.9962835751525283 15.649856401591324 3.1960397755793699 ;
-	setAttr ".sp" -type "double3" -5.9962835751525283 15.649856401591324 3.1960397755793699 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "LABIO_SUPERIOR_CNTShape" -p "LABIO_SUPERIOR_CNT";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-5.9561710496614797 15.689968927082372 3.1960397755793699
-		-5.9962835751525274 15.7065840791618 3.1960397755793699
-		-6.036396100643576 15.689968927082372 3.1960397755793699
-		-6.0530112527230049 15.649856401591324 3.1960397755793699
-		-6.036396100643576 15.609743876100277 3.1960397755793699
-		-5.9962835751525274 15.593128724020847 3.1960397755793699
-		-5.9561710496614797 15.609743876100273 3.1960397755793699
-		-5.9395558975820508 15.649856401591324 3.1960397755793699
-		-5.9561710496614797 15.689968927082372 3.1960397755793699
-		-5.9962835751525274 15.7065840791618 3.1960397755793699
-		-6.036396100643576 15.689968927082372 3.1960397755793699
-		;
-createNode transform -n "LABIO_INFERIOR_CNT" -p "DRIVER_CARA";
-	setAttr -l on -k off ".v";
-	setAttr -l on -k off ".rx";
-	setAttr -l on -k off ".ry";
-	setAttr -l on -k off ".rz";
-	setAttr -l on -k off ".sx";
-	setAttr -l on -k off ".sy";
-	setAttr -l on -k off ".sz";
-	setAttr ".rp" -type "double3" -5.9962835751525283 15.273942152516403 3.1960397755793699 ;
-	setAttr ".sp" -type "double3" -5.9962835751525283 15.273942152516403 3.1960397755793699 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "LABIO_INFERIOR_CNTShape" -p "LABIO_INFERIOR_CNT";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-5.9561710496614797 15.314054678007452 3.1960397755793699
-		-5.9962835751525274 15.33066983008688 3.1960397755793699
-		-6.036396100643576 15.314054678007452 3.1960397755793699
-		-6.0530112527230049 15.273942152516405 3.1960397755793699
-		-6.036396100643576 15.233829627025354 3.1960397755793699
-		-5.9962835751525274 15.217214474945926 3.1960397755793699
-		-5.9561710496614797 15.233829627025354 3.1960397755793699
-		-5.9395558975820508 15.273942152516405 3.1960397755793699
-		-5.9561710496614797 15.314054678007452 3.1960397755793699
-		-5.9962835751525274 15.33066983008688 3.1960397755793699
-		-6.036396100643576 15.314054678007452 3.1960397755793699
-		;
-createNode transform -n "LABIO_SUPERIOR_DER" -p "DRIVER_CARA";
-	setAttr -l on -k off ".v";
-	setAttr -l on -k off ".rx";
-	setAttr -l on -k off ".ry";
-	setAttr -l on -k off ".rz";
-	setAttr -l on -k off ".sx";
-	setAttr -l on -k off ".sy";
-	setAttr -l on -k off ".sz";
-	setAttr ".rp" -type "double3" -6.3977477766004949 15.633447526981282 3.1960397755793699 ;
-	setAttr ".sp" -type "double3" -6.3977477766004949 15.633447526981282 3.1960397755793699 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "LABIO_SUPERIOR_DERShape" -p "LABIO_SUPERIOR_DER";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-6.3576352511094472 15.673560052472329 3.1960397755793699
-		-6.3977477766004949 15.690175204551759 3.1960397755793699
-		-6.4378603020915435 15.673560052472329 3.1960397755793699
-		-6.4544754541709723 15.63344752698128 3.1960397755793699
-		-6.4378603020915435 15.593335001490233 3.1960397755793699
-		-6.3977477766004949 15.576719849410804 3.1960397755793699
-		-6.3576352511094472 15.593335001490232 3.1960397755793699
-		-6.3410200990300183 15.63344752698128 3.1960397755793699
-		-6.3576352511094472 15.673560052472329 3.1960397755793699
-		-6.3977477766004949 15.690175204551759 3.1960397755793699
-		-6.4378603020915435 15.673560052472329 3.1960397755793699
-		;
-createNode transform -n "LABIO_INFERIOR_DER" -p "DRIVER_CARA";
-	setAttr -l on -k off ".v";
-	setAttr -l on -k off ".rx";
-	setAttr -l on -k off ".ry";
-	setAttr -l on -k off ".rz";
-	setAttr -l on -k off ".sx";
-	setAttr -l on -k off ".sy";
-	setAttr -l on -k off ".sz";
-	setAttr ".rp" -type "double3" -6.3977477766004949 15.294522038763255 3.1960397755793699 ;
-	setAttr ".sp" -type "double3" -6.3977477766004949 15.294522038763255 3.1960397755793699 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "LABIO_INFERIOR_DERShape" -p "LABIO_INFERIOR_DER";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-6.3576352511094472 15.334634564254305 3.1960397755793699
-		-6.3977477766004949 15.351249716333733 3.1960397755793699
-		-6.4378603020915435 15.334634564254305 3.1960397755793699
-		-6.4544754541709723 15.294522038763255 3.1960397755793699
-		-6.4378603020915435 15.254409513272208 3.1960397755793699
-		-6.3977477766004949 15.237794361192776 3.1960397755793699
-		-6.3576352511094472 15.254409513272208 3.1960397755793699
-		-6.3410200990300183 15.294522038763255 3.1960397755793699
-		-6.3576352511094472 15.334634564254305 3.1960397755793699
-		-6.3977477766004949 15.351249716333733 3.1960397755793699
-		-6.4378603020915435 15.334634564254305 3.1960397755793699
-		;
-createNode transform -n "LABIO_SUPERIOR_ESQ_DER" -p "DRIVER_CARA";
-	setAttr -l on -k off ".v";
-	setAttr -l on -k off ".rx";
-	setAttr -l on -k off ".ry";
-	setAttr -l on -k off ".rz";
-	setAttr -l on -k off ".sx";
-	setAttr -l on -k off ".sy";
-	setAttr -l on -k off ".sz";
-	setAttr ".rp" -type "double3" -6.8089892326776909 15.550577638119494 3.1960397755793699 ;
-	setAttr ".sp" -type "double3" -6.8089892326776909 15.550577638119494 3.1960397755793699 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "LABIO_SUPERIOR_ESQ_DERShape" -p "LABIO_SUPERIOR_ESQ_DER";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-6.7688767071866422 15.590690163610542 3.1960397755793699
-		-6.80898923267769 15.60730531568997 3.1960397755793699
-		-6.8491017581687386 15.590690163610542 3.1960397755793699
-		-6.8657169102481674 15.550577638119496 3.1960397755793699
-		-6.8491017581687386 15.510465112628445 3.1960397755793699
-		-6.80898923267769 15.493849960549017 3.1960397755793699
-		-6.7688767071866422 15.510465112628445 3.1960397755793699
-		-6.7522615551072134 15.550577638119496 3.1960397755793699
-		-6.7688767071866422 15.590690163610542 3.1960397755793699
-		-6.80898923267769 15.60730531568997 3.1960397755793699
-		-6.8491017581687386 15.590690163610542 3.1960397755793699
-		;
-createNode transform -n "LABIO_INFERIOR_ESQ_DER" -p "DRIVER_CARA";
-	setAttr -l on -k off ".v";
-	setAttr -l on -k off ".rx";
-	setAttr -l on -k off ".ry";
-	setAttr -l on -k off ".rz";
-	setAttr -l on -k off ".sx";
-	setAttr -l on -k off ".sy";
-	setAttr -l on -k off ".sz";
-	setAttr ".rp" -type "double3" -6.8089892326776909 15.388614944804871 3.1960397755793699 ;
-	setAttr ".sp" -type "double3" -6.8089892326776909 15.388614944804871 3.1960397755793699 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "LABIO_INFERIOR_ESQ_DERShape" -p "LABIO_INFERIOR_ESQ_DER";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-6.7688767071866422 15.428727470295918 3.1960397755793699
-		-6.80898923267769 15.445342622375346 3.1960397755793699
-		-6.8491017581687386 15.428727470295922 3.1960397755793699
-		-6.8657169102481674 15.388614944804871 3.1960397755793699
-		-6.8491017581687386 15.348502419313824 3.1960397755793699
-		-6.80898923267769 15.331887267234396 3.1960397755793699
-		-6.7688767071866422 15.348502419313821 3.1960397755793699
-		-6.7522615551072134 15.388614944804871 3.1960397755793699
-		-6.7688767071866422 15.428727470295918 3.1960397755793699
-		-6.80898923267769 15.445342622375346 3.1960397755793699
-		-6.8491017581687386 15.428727470295922 3.1960397755793699
-		;
-createNode transform -n "LABIO_SUPERIOR_IZQ" -p "DRIVER_CARA";
-	setAttr -l on -k off ".v";
-	setAttr -l on -k off ".rx";
-	setAttr -l on -k off ".ry";
-	setAttr -l on -k off ".rz";
-	setAttr -l on -k off ".sx";
-	setAttr -l on -k off ".sy";
-	setAttr -l on -k off ".sz";
-	setAttr ".rp" -type "double3" -5.5944213968605681 15.633447526981282 3.1960397755793699 ;
-	setAttr ".sp" -type "double3" -5.5944213968605681 15.633447526981282 3.1960397755793699 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "LABIO_SUPERIOR_IZQShape" -p "LABIO_SUPERIOR_IZQ";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-5.5543088713695195 15.673560052472329 3.1960397755793699
-		-5.5944213968605681 15.690175204551759 3.1960397755793699
-		-5.6345339223516158 15.673560052472329 3.1960397755793699
-		-5.6511490744310446 15.63344752698128 3.1960397755793699
-		-5.6345339223516158 15.593335001490233 3.1960397755793699
-		-5.5944213968605681 15.576719849410804 3.1960397755793699
-		-5.5543088713695195 15.593335001490232 3.1960397755793699
-		-5.5376937192900906 15.63344752698128 3.1960397755793699
-		-5.5543088713695195 15.673560052472329 3.1960397755793699
-		-5.5944213968605681 15.690175204551759 3.1960397755793699
-		-5.6345339223516158 15.673560052472329 3.1960397755793699
-		;
-createNode transform -n "LABIO_INFERIOR_IZQ" -p "DRIVER_CARA";
-	setAttr -l on -k off ".v";
-	setAttr -l on -k off ".rx";
-	setAttr -l on -k off ".ry";
-	setAttr -l on -k off ".rz";
-	setAttr -l on -k off ".sx";
-	setAttr -l on -k off ".sy";
-	setAttr -l on -k off ".sz";
-	setAttr ".rp" -type "double3" -5.5944213968605681 15.294522038763255 3.1960397755793699 ;
-	setAttr ".sp" -type "double3" -5.5944213968605681 15.294522038763255 3.1960397755793699 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "LABIO_INFERIOR_IZQShape" -p "LABIO_INFERIOR_IZQ";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-5.5543088713695195 15.334634564254305 3.1960397755793699
-		-5.5944213968605681 15.351249716333733 3.1960397755793699
-		-5.6345339223516158 15.334634564254305 3.1960397755793699
-		-5.6511490744310446 15.294522038763255 3.1960397755793699
-		-5.6345339223516158 15.254409513272208 3.1960397755793699
-		-5.5944213968605681 15.237794361192776 3.1960397755793699
-		-5.5543088713695195 15.254409513272208 3.1960397755793699
-		-5.5376937192900906 15.294522038763255 3.1960397755793699
-		-5.5543088713695195 15.334634564254305 3.1960397755793699
-		-5.5944213968605681 15.351249716333733 3.1960397755793699
-		-5.6345339223516158 15.334634564254305 3.1960397755793699
-		;
-createNode transform -n "LABIO_SUPERIOR_ESQ_IZQ" -p "DRIVER_CARA";
-	setAttr -l on -k off ".v";
-	setAttr -l on -k off ".rx";
-	setAttr -l on -k off ".ry";
-	setAttr -l on -k off ".rz";
-	setAttr -l on -k off ".sx";
-	setAttr -l on -k off ".sy";
-	setAttr -l on -k off ".sz";
-	setAttr ".rp" -type "double3" -5.1835779176273657 15.550577638119494 3.1960397755793699 ;
-	setAttr ".sp" -type "double3" -5.1835779176273657 15.550577638119494 3.1960397755793699 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "LABIO_SUPERIOR_ESQ_IZQShape" -p "LABIO_SUPERIOR_ESQ_IZQ";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-5.143465392136318 15.590690163610542 3.1960397755793699
-		-5.1835779176273657 15.60730531568997 3.1960397755793699
-		-5.2236904431184144 15.590690163610542 3.1960397755793699
-		-5.2403055951978432 15.550577638119496 3.1960397755793699
-		-5.2236904431184144 15.510465112628445 3.1960397755793699
-		-5.1835779176273657 15.493849960549017 3.1960397755793699
-		-5.143465392136318 15.510465112628445 3.1960397755793699
-		-5.1268502400568883 15.550577638119496 3.1960397755793699
-		-5.143465392136318 15.590690163610542 3.1960397755793699
-		-5.1835779176273657 15.60730531568997 3.1960397755793699
-		-5.2236904431184144 15.590690163610542 3.1960397755793699
-		;
-createNode transform -n "LABIO_INFERIOR_ESQ_IZQ" -p "DRIVER_CARA";
-	setAttr -l on -k off ".v";
-	setAttr -l on -k off ".rx";
-	setAttr -l on -k off ".ry";
-	setAttr -l on -k off ".rz";
-	setAttr -l on -k off ".sx";
-	setAttr -l on -k off ".sy";
-	setAttr -l on -k off ".sz";
-	setAttr ".rp" -type "double3" -5.1835779176273657 15.388614944804871 3.1960397755793699 ;
-	setAttr ".sp" -type "double3" -5.1835779176273657 15.388614944804871 3.1960397755793699 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "LABIO_INFERIOR_ESQ_IZQShape" -p "LABIO_INFERIOR_ESQ_IZQ";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-5.143465392136318 15.428727470295918 3.1960397755793699
-		-5.1835779176273657 15.445342622375346 3.1960397755793699
-		-5.2236904431184144 15.428727470295922 3.1960397755793699
-		-5.2403055951978432 15.388614944804871 3.1960397755793699
-		-5.2236904431184144 15.348502419313824 3.1960397755793699
-		-5.1835779176273657 15.331887267234396 3.1960397755793699
-		-5.143465392136318 15.348502419313821 3.1960397755793699
-		-5.1268502400568883 15.388614944804871 3.1960397755793699
-		-5.143465392136318 15.428727470295918 3.1960397755793699
-		-5.1835779176273657 15.445342622375346 3.1960397755793699
-		-5.2236904431184144 15.428727470295922 3.1960397755793699
-		;
-createNode transform -n "CEJA_DER_04" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -6.6580542775319254 18.821625018890483 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -6.6580542775319254 18.821625018890483 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_DER_04Shape" -p "CEJA_DER_04";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-6.6000747521969725 18.879604544225437 3.1960397755793712
-		-6.6580542775319254 18.903620449959128 3.1960397755793712
-		-6.7160338028668782 18.879604544225437 3.1960397755793712
-		-6.7400497086005702 18.821625018890487 3.1960397755793712
-		-6.7160338028668782 18.763645493555533 3.1960397755793712
-		-6.6580542775319254 18.739629587821838 3.1960397755793712
-		-6.6000747521969725 18.763645493555533 3.1960397755793712
-		-6.5760588464632805 18.821625018890487 3.1960397755793712
-		-6.6000747521969725 18.879604544225437 3.1960397755793712
-		-6.6580542775319254 18.903620449959128 3.1960397755793712
-		-6.7160338028668782 18.879604544225437 3.1960397755793712
-		;
-createNode transform -n "CEJA_DER_05" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -6.3107946924621618 18.474365433820719 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -6.3107946924621618 18.474365433820719 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_DER_05Shape" -p "CEJA_DER_05";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-6.252815167127209 18.532344959155672 3.1960397755793712
-		-6.3107946924621618 18.556360864889363 3.1960397755793712
-		-6.3687742177971147 18.532344959155672 3.1960397755793712
-		-6.3927901235308067 18.474365433820719 3.1960397755793712
-		-6.3687742177971147 18.416385908485765 3.1960397755793712
-		-6.3107946924621627 18.392370002752074 3.1960397755793712
-		-6.252815167127209 18.416385908485765 3.1960397755793712
-		-6.228799261393517 18.474365433820719 3.1960397755793712
-		-6.252815167127209 18.532344959155672 3.1960397755793712
-		-6.3107946924621618 18.556360864889363 3.1960397755793712
-		-6.3687742177971147 18.532344959155672 3.1960397755793712
-		;
-createNode transform -n "CEJA_DER_06" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -6.1836888437112076 18 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -6.1836888437112076 18 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_DER_06Shape" -p "CEJA_DER_06";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-6.1257093183762548 18.05797952533495 3.1960397755793712
-		-6.1836888437112076 18.081995431068645 3.1960397755793712
-		-6.2416683690461605 18.05797952533495 3.1960397755793712
-		-6.2656842747798525 18 3.1960397755793712
-		-6.2416683690461605 17.94202047466505 3.1960397755793712
-		-6.1836888437112076 17.918004568931352 3.1960397755793712
-		-6.1257093183762548 17.94202047466505 3.1960397755793712
-		-6.1016934126425628 18 3.1960397755793712
-		-6.1257093183762548 18.05797952533495 3.1960397755793712
-		-6.1836888437112076 18.081995431068645 3.1960397755793712
-		-6.2416683690461605 18.05797952533495 3.1960397755793712
-		;
-createNode transform -n "POMULO_DER_03" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -7.132419711352644 17.051269132358563 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -7.132419711352644 17.051269132358563 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "POMULO_DER_03Shape" -p "POMULO_DER_03";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-7.0744401860176902 17.109248657693517 3.1960397755793712
-		-7.1324197113526431 17.133264563427208 3.1960397755793712
-		-7.1903992366875968 17.109248657693517 3.1960397755793712
-		-7.2144151424212888 17.051269132358563 3.1960397755793712
-		-7.1903992366875968 16.993289607023609 3.1960397755793712
-		-7.132419711352644 16.969273701289918 3.1960397755793712
-		-7.0744401860176902 16.993289607023609 3.1960397755793712
-		-7.0504242802839983 17.051269132358563 3.1960397755793712
-		-7.0744401860176902 17.109248657693517 3.1960397755793712
-		-7.1324197113526431 17.133264563427208 3.1960397755793712
-		-7.1903992366875968 17.109248657693517 3.1960397755793712
-		;
-createNode transform -n "POMULO_DER_02" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -7.6067851451733626 17.178374981109517 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -7.6067851451733626 17.178374981109517 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "POMULO_DER_02Shape" -p "POMULO_DER_02";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-7.5488056198384088 17.236354506444471 3.1960397755793712
-		-7.6067851451733617 17.260370412178165 3.1960397755793712
-		-7.6647646705083146 17.236354506444471 3.1960397755793712
-		-7.6887805762420074 17.178374981109517 3.1960397755793712
-		-7.6647646705083146 17.120395455774567 3.1960397755793712
-		-7.6067851451733626 17.096379550040872 3.1960397755793712
-		-7.5488056198384088 17.120395455774567 3.1960397755793712
-		-7.5247897141047169 17.178374981109517 3.1960397755793712
-		-7.5488056198384088 17.236354506444471 3.1960397755793712
-		-7.6067851451733617 17.260370412178165 3.1960397755793712
-		-7.6647646705083146 17.236354506444471 3.1960397755793712
-		;
-createNode transform -n "POMULO_DER_01" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -7.9540447302431261 17.525634566179281 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -7.9540447302431261 17.525634566179281 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "POMULO_DER_01Shape" -p "POMULO_DER_01";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-7.8960652049081732 17.583614091514235 3.1960397755793712
-		-7.9540447302431252 17.607629997247926 3.1960397755793712
-		-8.0120242555780763 17.583614091514235 3.1960397755793712
-		-8.0360401613117709 17.525634566179285 3.1960397755793712
-		-8.0120242555780763 17.467655040844331 3.1960397755793712
-		-7.9540447302431252 17.443639135110637 3.1960397755793712
-		-7.8960652049081732 17.467655040844331 3.1960397755793712
-		-7.8720492991744804 17.525634566179285 3.1960397755793712
-		-7.8960652049081732 17.583614091514235 3.1960397755793712
-		-7.9540447302431252 17.607629997247926 3.1960397755793712
-		-8.0120242555780763 17.583614091514235 3.1960397755793712
-		;
-createNode transform -n "CEJA_IZQ_00" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -3.9188492490529874 18 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -3.9188492490529874 18 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_IZQ_00Shape" -p "CEJA_IZQ_00";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-3.9768287743879385 18.057979525334954 3.1960397755793712
-		-3.9188492490529865 18.081995431068645 3.1960397755793712
-		-3.8608697237180341 18.057979525334954 3.1960397755793712
-		-3.8368538179843426 18 3.1960397755793712
-		-3.8608697237180341 17.94202047466505 3.1960397755793712
-		-3.9188492490529865 17.918004568931355 3.1960397755793712
-		-3.9768287743879385 17.94202047466505 3.1960397755793712
-		-4.0008446801216326 18 3.1960397755793712
-		-3.9768287743879385 18.057979525334954 3.1960397755793712
-		-3.9188492490529865 18.081995431068645 3.1960397755793712
-		-3.8608697237180341 18.057979525334954 3.1960397755793712
-		;
 createNode transform -n "PARPADO_SUPERIOR_IZQ" -p "DRIVER_CARA";
 	setAttr -l on -k off ".v";
 	setAttr ".ove" yes;
@@ -2695,37 +2760,6 @@ createNode nurbsCurve -n "PARPADO_INFERIOR_IZQShape" -p "PARPADO_INFERIOR_IZQ";
 		-5.3893958966702886 17.484606892217499 3.1960397755793712
 		-4.867580168655711 17.268463740614273 3.1960397755793712
 		-4.3457644406411342 17.484606892217499 3.1960397755793712
-		;
-createNode transform -n "POMULO_IZQ_01" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -4.045955097803942 17.525634566179281 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -4.045955097803942 17.525634566179281 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "POMULO_IZQ_01Shape" -p "POMULO_IZQ_01";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-4.1039346231388958 17.583614091514235 3.1960397755793712
-		-4.045955097803942 17.607629997247926 3.1960397755793712
-		-3.98797557246899 17.583614091514235 3.1960397755793712
-		-3.9639596667352972 17.525634566179285 3.1960397755793712
-		-3.98797557246899 17.467655040844331 3.1960397755793712
-		-4.045955097803942 17.443639135110637 3.1960397755793712
-		-4.1039346231388958 17.467655040844331 3.1960397755793712
-		-4.1279505288725868 17.525634566179285 3.1960397755793712
-		-4.1039346231388958 17.583614091514235 3.1960397755793712
-		-4.045955097803942 17.607629997247926 3.1960397755793712
-		-3.98797557246899 17.583614091514235 3.1960397755793712
 		;
 createNode transform -n "NARIZ_SEC_IZQ" -p "DRIVER_CARA";
 	setAttr -l on -k off ".v";
@@ -2800,409 +2834,6 @@ createNode nurbsCurve -n "NARIZ_SEC_DERShape" -p "NARIZ_SEC_DER";
 		-6.3154426712122333 16.538484422444302 3.1960248064588059
 		-6.4947567354207436 16.504676322403334 3.1960248064588059
 		-6.5108059340083715 16.282290770456932 3.1960248064588059
-		;
-createNode transform -n "CEJA_DER_00" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -8.0811505789940803 18 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -8.0811505789940803 18 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_DER_00Shape" -p "CEJA_DER_00";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-8.0231710536591283 18.057979525334954 3.1960397755793712
-		-8.0811505789940803 18.081995431068645 3.1960397755793712
-		-8.1391301043290341 18.057979525334954 3.1960397755793712
-		-8.1631460100627251 18 3.1960397755793712
-		-8.1391301043290341 17.94202047466505 3.1960397755793712
-		-8.0811505789940803 17.918004568931355 3.1960397755793712
-		-8.0231710536591283 17.94202047466505 3.1960397755793712
-		-7.9991551479254355 18 3.1960397755793712
-		-8.0231710536591283 18.057979525334954 3.1960397755793712
-		-8.0811505789940803 18.081995431068645 3.1960397755793712
-		-8.1391301043290341 18.057979525334954 3.1960397755793712
-		;
-createNode transform -n "POMULO_DER_04" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -6.6580542775319254 17.178374981109517 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -6.6580542775319254 17.178374981109517 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "POMULO_DER_04Shape" -p "POMULO_DER_04";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-6.6000747521969716 17.236354506444471 3.1960397755793712
-		-6.6580542775319245 17.260370412178162 3.1960397755793712
-		-6.7160338028668782 17.236354506444471 3.1960397755793712
-		-6.7400497086005702 17.178374981109517 3.1960397755793712
-		-6.7160338028668782 17.120395455774563 3.1960397755793712
-		-6.6580542775319254 17.096379550040872 3.1960397755793712
-		-6.6000747521969716 17.120395455774563 3.1960397755793712
-		-6.5760588464632797 17.178374981109517 3.1960397755793712
-		-6.6000747521969716 17.236354506444471 3.1960397755793712
-		-6.6580542775319245 17.260370412178162 3.1960397755793712
-		-6.7160338028668782 17.236354506444471 3.1960397755793712
-		;
-createNode transform -n "POMULO_DER_05" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 13;
-	setAttr ".rp" -type "double3" -6.3107946924621618 17.525634566179281 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -6.3107946924621618 17.525634566179281 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "POMULO_DER_05Shape" -p "POMULO_DER_05";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-6.2528151671272081 17.583614091514235 3.1960397755793712
-		-6.310794692462161 17.607629997247926 3.1960397755793712
-		-6.3687742177971147 17.583614091514235 3.1960397755793712
-		-6.3927901235308067 17.525634566179281 3.1960397755793712
-		-6.3687742177971147 17.467655040844328 3.1960397755793712
-		-6.3107946924621618 17.443639135110637 3.1960397755793712
-		-6.2528151671272081 17.467655040844328 3.1960397755793712
-		-6.2287992613935161 17.525634566179281 3.1960397755793712
-		-6.2528151671272081 17.583614091514235 3.1960397755793712
-		-6.310794692462161 17.607629997247926 3.1960397755793712
-		-6.3687742177971147 17.583614091514235 3.1960397755793712
-		;
-createNode transform -n "CEJA_IZQ_01" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -4.045955097803942 18.474365433820719 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -4.045955097803942 18.474365433820719 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_IZQ_01Shape" -p "CEJA_IZQ_01";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-4.1039346231388931 18.532344959155672 3.1960397755793712
-		-4.0459550978039411 18.556360864889363 3.1960397755793712
-		-3.9879755724689887 18.532344959155672 3.1960397755793712
-		-3.9639596667352972 18.474365433820719 3.1960397755793712
-		-3.9879755724689887 18.416385908485768 3.1960397755793712
-		-4.0459550978039411 18.392370002752074 3.1960397755793712
-		-4.1039346231388931 18.416385908485768 3.1960397755793712
-		-4.1279505288725868 18.474365433820719 3.1960397755793712
-		-4.1039346231388931 18.532344959155672 3.1960397755793712
-		-4.0459550978039411 18.556360864889363 3.1960397755793712
-		-3.9879755724689887 18.532344959155672 3.1960397755793712
-		;
-createNode transform -n "CEJA_IZQ_02" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -4.3932146828737055 18.821625018890483 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -4.3932146828737055 18.821625018890483 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_IZQ_02Shape" -p "CEJA_IZQ_02";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-4.4511942082086566 18.879604544225437 3.1960397755793712
-		-4.3932146828737046 18.903620449959128 3.1960397755793712
-		-4.3352351575387527 18.879604544225437 3.1960397755793712
-		-4.3112192518050607 18.821625018890483 3.1960397755793712
-		-4.3352351575387527 18.763645493555533 3.1960397755793712
-		-4.3932146828737046 18.739629587821838 3.1960397755793712
-		-4.4511942082086566 18.763645493555533 3.1960397755793712
-		-4.4752101139423512 18.821625018890483 3.1960397755793712
-		-4.4511942082086566 18.879604544225437 3.1960397755793712
-		-4.3932146828737046 18.903620449959128 3.1960397755793712
-		-4.3352351575387527 18.879604544225437 3.1960397755793712
-		;
-createNode transform -n "CEJA_IZQ_03" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -4.8675801166944241 18.948730867641437 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -4.8675801166944241 18.948730867641437 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_IZQ_03Shape" -p "CEJA_IZQ_03";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-4.9255596420293752 19.006710392976391 3.1960397755793712
-		-4.8675801166944233 19.030726298710082 3.1960397755793712
-		-4.8096005913594713 19.006710392976391 3.1960397755793712
-		-4.7855846856257793 18.948730867641437 3.1960397755793712
-		-4.8096005913594713 18.890751342306487 3.1960397755793712
-		-4.8675801166944233 18.866735436572792 3.1960397755793712
-		-4.9255596420293752 18.890751342306487 3.1960397755793712
-		-4.9495755477630698 18.948730867641437 3.1960397755793712
-		-4.9255596420293752 19.006710392976391 3.1960397755793712
-		-4.8675801166944233 19.030726298710082 3.1960397755793712
-		-4.8096005913594713 19.006710392976391 3.1960397755793712
-		;
-createNode transform -n "CEJA_IZQ_04" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -5.3419455505151427 18.821625018890483 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -5.3419455505151427 18.821625018890483 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_IZQ_04Shape" -p "CEJA_IZQ_04";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-5.3999250758500938 18.879604544225437 3.1960397755793712
-		-5.3419455505151419 18.903620449959128 3.1960397755793712
-		-5.2839660251801899 18.879604544225437 3.1960397755793712
-		-5.2599501194464979 18.821625018890483 3.1960397755793712
-		-5.2839660251801899 18.763645493555533 3.1960397755793712
-		-5.3419455505151419 18.739629587821838 3.1960397755793712
-		-5.3999250758500938 18.763645493555533 3.1960397755793712
-		-5.4239409815837885 18.821625018890483 3.1960397755793712
-		-5.3999250758500938 18.879604544225437 3.1960397755793712
-		-5.3419455505151419 18.903620449959128 3.1960397755793712
-		-5.2839660251801899 18.879604544225437 3.1960397755793712
-		;
-createNode transform -n "CEJA_IZQ_05" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -5.6892051355849063 18.474365433820719 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -5.6892051355849063 18.474365433820719 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_IZQ_05Shape" -p "CEJA_IZQ_05";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-5.7471846609198574 18.532344959155672 3.1960397755793712
-		-5.6892051355849054 18.556360864889363 3.1960397755793712
-		-5.6312256102499534 18.532344959155672 3.1960397755793712
-		-5.6072097045162614 18.474365433820719 3.1960397755793712
-		-5.6312256102499534 18.416385908485768 3.1960397755793712
-		-5.6892051355849054 18.392370002752074 3.1960397755793712
-		-5.7471846609198574 18.416385908485768 3.1960397755793712
-		-5.771200566653552 18.474365433820719 3.1960397755793712
-		-5.7471846609198574 18.532344959155672 3.1960397755793712
-		-5.6892051355849054 18.556360864889363 3.1960397755793712
-		-5.6312256102499534 18.532344959155672 3.1960397755793712
-		;
-createNode transform -n "CEJA_IZQ_06" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -5.8163109843358605 18 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -5.8163109843358605 18 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "CEJA_IZQ_06Shape" -p "CEJA_IZQ_06";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-5.8742905096708116 18.057979525334954 3.1960397755793712
-		-5.8163109843358596 18.081995431068645 3.1960397755793712
-		-5.7583314590009076 18.057979525334954 3.1960397755793712
-		-5.7343155532672156 18 3.1960397755793712
-		-5.7583314590009076 17.94202047466505 3.1960397755793712
-		-5.8163109843358596 17.918004568931355 3.1960397755793712
-		-5.8742905096708116 17.94202047466505 3.1960397755793712
-		-5.8983064154045062 18 3.1960397755793712
-		-5.8742905096708116 18.057979525334954 3.1960397755793712
-		-5.8163109843358596 18.081995431068645 3.1960397755793712
-		-5.7583314590009076 18.057979525334954 3.1960397755793712
-		;
-createNode transform -n "POMULO_IZQ_02" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -4.3932146828737055 17.178374981109517 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -4.3932146828737055 17.178374981109517 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "POMULO_IZQ_02Shape" -p "POMULO_IZQ_02";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-4.4511942082086593 17.236354506444471 3.1960397755793712
-		-4.3932146828737055 17.260370412178162 3.1960397755793712
-		-4.3352351575387535 17.236354506444471 3.1960397755793712
-		-4.3112192518050607 17.178374981109521 3.1960397755793712
-		-4.3352351575387535 17.120395455774567 3.1960397755793712
-		-4.3932146828737055 17.096379550040872 3.1960397755793712
-		-4.4511942082086593 17.120395455774567 3.1960397755793712
-		-4.4752101139423504 17.178374981109521 3.1960397755793712
-		-4.4511942082086593 17.236354506444471 3.1960397755793712
-		-4.3932146828737055 17.260370412178162 3.1960397755793712
-		-4.3352351575387535 17.236354506444471 3.1960397755793712
-		;
-createNode transform -n "POMULO_IZQ_03" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -4.8675801166944241 17.051269132358563 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -4.8675801166944241 17.051269132358563 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "POMULO_IZQ_03Shape" -p "POMULO_IZQ_03";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-4.9255596420293779 17.109248657693517 3.1960397755793712
-		-4.8675801166944241 17.133264563427208 3.1960397755793712
-		-4.8096005913594722 17.109248657693517 3.1960397755793712
-		-4.7855846856257793 17.051269132358566 3.1960397755793712
-		-4.8096005913594722 16.993289607023613 3.1960397755793712
-		-4.8675801166944241 16.969273701289918 3.1960397755793712
-		-4.9255596420293779 16.993289607023613 3.1960397755793712
-		-4.949575547763069 17.051269132358566 3.1960397755793712
-		-4.9255596420293779 17.109248657693517 3.1960397755793712
-		-4.8675801166944241 17.133264563427208 3.1960397755793712
-		-4.8096005913594722 17.109248657693517 3.1960397755793712
-		;
-createNode transform -n "POMULO_IZQ_04" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -5.3419455505151427 17.178374981109517 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -5.3419455505151427 17.178374981109517 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "POMULO_IZQ_04Shape" -p "POMULO_IZQ_04";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-5.3999250758500965 17.236354506444471 3.1960397755793712
-		-5.3419455505151427 17.260370412178162 3.1960397755793712
-		-5.2839660251801908 17.236354506444471 3.1960397755793712
-		-5.2599501194464979 17.178374981109521 3.1960397755793712
-		-5.2839660251801908 17.120395455774567 3.1960397755793712
-		-5.3419455505151427 17.096379550040872 3.1960397755793712
-		-5.3999250758500965 17.120395455774567 3.1960397755793712
-		-5.4239409815837876 17.178374981109521 3.1960397755793712
-		-5.3999250758500965 17.236354506444471 3.1960397755793712
-		-5.3419455505151427 17.260370412178162 3.1960397755793712
-		-5.2839660251801908 17.236354506444471 3.1960397755793712
-		;
-createNode transform -n "POMULO_IZQ_05" -p "DRIVER_CARA";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
-	setAttr ".rp" -type "double3" -5.6892051355849063 17.525634566179281 3.1960397755793712 ;
-	setAttr ".sp" -type "double3" -5.6892051355849063 17.525634566179281 3.1960397755793712 ;
-	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
-	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
-	setAttr ".mtxe" yes;
-	setAttr ".mtye" yes;
-	setAttr ".mtze" yes;
-	setAttr ".xtxe" yes;
-	setAttr ".xtye" yes;
-	setAttr ".xtze" yes;
-createNode nurbsCurve -n "POMULO_IZQ_05Shape" -p "POMULO_IZQ_05";
-	setAttr -k off ".v";
-	setAttr ".cc" -type "nurbsCurve" 
-		3 8 2 no 3
-		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
-		11
-		-5.74718466091986 17.583614091514235 3.1960397755793712
-		-5.6892051355849063 17.607629997247926 3.1960397755793712
-		-5.6312256102499543 17.583614091514235 3.1960397755793712
-		-5.6072097045162614 17.525634566179285 3.1960397755793712
-		-5.6312256102499543 17.467655040844331 3.1960397755793712
-		-5.6892051355849063 17.443639135110637 3.1960397755793712
-		-5.74718466091986 17.467655040844331 3.1960397755793712
-		-5.7712005666535511 17.525634566179285 3.1960397755793712
-		-5.74718466091986 17.583614091514235 3.1960397755793712
-		-5.6892051355849063 17.607629997247926 3.1960397755793712
-		-5.6312256102499543 17.583614091514235 3.1960397755793712
 		;
 createNode transform -n "BOCA" -p "DRIVER_CARA";
 	addAttr -ci true -sn "BS_BOCA_A" -ln "BS_BOCA_A" -min 0 -max 1 -at "double";
@@ -3488,6 +3119,8 @@ createNode transform -n "CEJAS" -p "DRIVER_CARA";
 	addAttr -ci true -sn "BS_CEJAS_ENOJADAS" -ln "BS_CEJAS_ENOJADAS" -min 0 -max 1 
 		-at "double";
 	addAttr -ci true -sn "BS_CEJAS_TRISTES" -ln "BS_CEJAS_TRISTES" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "VISIBILITY_PARPADOS" -ln "VISIBILITY_PARPADOS" -min 0 -max 
+		1 -at "bool";
 	setAttr -l on -k off ".v";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
@@ -3504,6 +3137,7 @@ createNode transform -n "CEJAS" -p "DRIVER_CARA";
 	setAttr ".sp" -type "double3" -6.0032081562833319 19.387357874155427 3.1962888346144744 ;
 	setAttr -k on ".BS_CEJAS_ENOJADAS";
 	setAttr -k on ".BS_CEJAS_TRISTES";
+	setAttr -k on ".VISIBILITY_PARPADOS";
 createNode nurbsCurve -n "CejaIzq" -p "CEJAS";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
@@ -3574,6 +3208,7 @@ createNode transform -n "EXTRAS" -p "DRIVER_CARA";
 	addAttr -ci true -sn "BS_VACIO2" -ln "BS_VACIO2" -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "BS_VACIO3" -ln "BS_VACIO3" -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "BS_VACIO4" -ln "BS_VACIO4" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "BS_VACIO5" -ln "BS_VACIO5" -min 0 -max 1 -at "double";
 	setAttr -l on -k off ".v";
 	setAttr -l on -k off ".tx";
 	setAttr -l on -k off ".ty";
@@ -3595,6 +3230,7 @@ createNode transform -n "EXTRAS" -p "DRIVER_CARA";
 	setAttr -k on ".BS_VACIO2";
 	setAttr -k on ".BS_VACIO3";
 	setAttr -k on ".BS_VACIO4";
+	setAttr -k on ".BS_VACIO5";
 createNode nurbsCurve -n "AntenaIzq" -p "EXTRAS";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
@@ -3667,700 +3303,2969 @@ createNode nurbsCurve -n "AntenaDer" -p "EXTRAS";
 		-4.6461846715616106 19.956572406340033 3.1894929581659612
 		-4.604481024406927 20.033384663289933 3.1894929581659612
 		;
-createNode transform -n "DRIVER_TOE_FINGERS_DER";
-	setAttr ".rp" -type "double3" -1.2523799999999963 0.056667599999996821 2.0855000000000019 ;
-	setAttr ".sp" -type "double3" -1.2523799999999963 0.056667599999996821 2.0855000000000019 ;
-createNode nurbsCurve -n "DRIVER_TOE_FINGERS_DERShape" -p "DRIVER_TOE_FINGERS_DER";
+createNode transform -n "CAM_CARITA" -p "DRIVER_CARA";
+	setAttr -l on -k off ".v" no;
+	setAttr ".t" -type "double3" -5.5756777665107569 17.587877455898646 19.55324855713507 ;
+	setAttr -l on -k off ".tx";
+	setAttr -l on -k off ".ty";
+	setAttr -l on -k off ".tz";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+createNode camera -n "CAM_CARITAShape" -p "CAM_CARITA";
+	setAttr -k off ".v";
+	setAttr ".rnd" no;
+	setAttr ".cap" -type "double2" 1.41732 0.94488 ;
+	setAttr ".ff" 0;
+	setAttr ".ovr" 1.3;
+	setAttr ".coi" 11.484133149886494;
+	setAttr ".ow" 30;
+	setAttr ".imn" -type "string" "camera1";
+	setAttr ".den" -type "string" "camera1_depth";
+	setAttr ".man" -type "string" "camera1_mask";
+	setAttr ".dr" yes;
+	setAttr ".dsa" yes;
+createNode transform -n "GRP_CTRLS_PARPADOS" -p "DRIVER_CARA";
+	setAttr ".rp" -type "double3" -6.0011071871841848 18.001999530767417 3.1960397755793721 ;
+	setAttr ".sp" -type "double3" -6.0011071871841848 18.001999530767417 3.1960397755793721 ;
+createNode transform -n "CTRL_PARPADO_DER_UP_01" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -7.6948983766878412 18.55525929055462 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -7.6948983766878412 18.55525929055462 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_0Shape1" -p "CTRL_PARPADO_DER_UP_01";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		3 14 2 no 3
-		19 -1 -0.4554399870000001 0 0.43359919600000002 1 1.73555149 2 3 4 5 6 7 8
-		 8.4451647990000005 9 9.5445600129999999 10 10.433599195999999 11
-		17
-		-1.1375328502696782 0.75339471698938065 2.0855000000000019
-		-1.248814473776374 0.89358129257399388 2.0855000000000019
-		-1.36224550448986 0.75384205679495286 2.0855000000000019
-		-1.4943426016305505 0.63581942382294199 2.0855000000000019
-		-1.345419907420222 0.64285637731165979 2.0855000000000019
-		-1.3092933749570916 0.64384858469026152 2.0855000000000019
-		-1.3525539699861 0.43658174600410415 2.0855000000000019
-		-1.31545679701304 0.45026113814077739 2.0855000000000019
-		-1.2509638809831609 0.47933864649206759 2.0855000000000019
-		-1.1864709649532796 0.45026113814077739 2.0855000000000019
-		-1.1493737919802212 0.43658174600410404 2.0855000000000019
-		-1.1960868365390154 0.65157281439845693 2.0855000000000019
-		-1.1413903215202978 0.6382212524647457 2.0855000000000019
-		-1.0191786702268872 0.65361291920137421 2.0855000000000019
-		-1.1375328502696782 0.75339471698938065 2.0855000000000019
-		-1.248814473776374 0.89358129257399388 2.0855000000000019
-		-1.36224550448986 0.75384205679495286 2.0855000000000019
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.6310618543966759 18.619095812845785 3.1960397755793712
+		-7.6948983766878412 18.645537766153517 3.1960397755793712
+		-7.7587348989790064 18.619095812845785 3.1960397755793712
+		-7.7851768522867397 18.55525929055462 3.1960397755793712
+		-7.7587348989790064 18.491422768263455 3.1960397755793712
+		-7.6948983766878412 18.464980814955723 3.1960397755793712
+		-7.6310618543966759 18.491422768263455 3.1960397755793712
+		-7.6046199010889426 18.55525929055462 3.1960397755793712
+		-7.6310618543966759 18.619095812845785 3.1960397755793712
+		-7.6948983766878412 18.645537766153517 3.1960397755793712
+		-7.7587348989790064 18.619095812845785 3.1960397755793712
 		;
-createNode transform -n "DRIVER_TOE_FINGERS_IZQ";
-	setAttr ".rp" -type "double3" 1.2523840219923323 0.056667576726437241 2.0854951605329939 ;
-	setAttr ".sp" -type "double3" 1.2523840219923323 0.056667576726437241 2.0854951605329939 ;
-createNode nurbsCurve -n "DRIVER_TOE_FINGERS_IZQShape" -p "DRIVER_TOE_FINGERS_IZQ";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_0Shape2" -p "CTRL_PARPADO_DER_UP_01";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		3 14 2 no 3
-		19 -1 -0.4554399870000001 0 0.43359919600000002 1 1.73555149 2 3 4 5 6 7 8
-		 8.4451647990000005 9 9.5445600129999999 10 10.433599195999999 11
-		17
-		1.3672311717226504 0.75339469371582102 2.0854951605329939
-		1.2559495482159546 0.89358126930043436 2.0854951605329939
-		1.1425185175024686 0.75384203352139334 2.0854951605329939
-		1.0104214203617783 0.63581940054938235 2.0854951605329939
-		1.1593441145721066 0.64285635403810026 2.0854951605329939
-		1.1954706470352372 0.64384856141670188 2.0854951605329939
-		1.1522100520062288 0.43658172273054463 2.0854951605329939
-		1.1893072249792889 0.45026111486721776 2.0854951605329939
-		1.2538001410091677 0.47933862321850806 2.0854951605329939
-		1.318293057039049 0.45026111486721776 2.0854951605329939
-		1.3553902300121072 0.43658172273054452 2.0854951605329939
-		1.3086771854533132 0.6515727911248973 2.0854951605329939
-		1.363373700472031 0.63822122919118607 2.0854951605329939
-		1.4855853517654414 0.65361289592781469 2.0854951605329939
-		1.3672311717226504 0.75339469371582102 2.0854951605329939
-		1.2559495482159546 0.89358126930043436 2.0854951605329939
-		1.1425185175024686 0.75384203352139334 2.0854951605329939
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.6948983766878412 18.619095812845785 3.1322032532882069
+		-7.6948983766878412 18.645537766153517 3.1960397755793721
+		-7.6948983766878412 18.619095812845785 3.2598762978705373
+		-7.6948983766878412 18.55525929055462 3.2863182511782707
+		-7.6948983766878412 18.491422768263455 3.2598762978705373
+		-7.6948983766878412 18.464980814955723 3.1960397755793721
+		-7.6948983766878412 18.491422768263455 3.1322032532882069
+		-7.6948983766878412 18.55525929055462 3.1057612999804736
+		-7.6948983766878412 18.619095812845785 3.1322032532882069
+		-7.6948983766878412 18.645537766153517 3.1960397755793721
+		-7.6948983766878412 18.619095812845785 3.2598762978705373
 		;
-createNode transform -n "DRIVER_HEEL_IZQ";
-	setAttr ".rp" -type "double3" 1.3141946792602541 0.11105763332017127 -0.77207473589158293 ;
-	setAttr ".sp" -type "double3" 1.3141946792602541 0.11105763332017116 -0.77207473589158293 ;
-createNode nurbsCurve -n "DRIVER_HEEL_IZQShape" -p "DRIVER_HEEL_IZQ";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_0Shape3" -p "CTRL_PARPADO_DER_UP_01";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		3 10 2 no 3
-		15 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12
-		13
-		2.2455954340526088 0.22683881447892215 -1.6425034823358304
-		1.3152432716450233 0.22683881442594658 -2.0228794877002025
-		0.38489110923787972 0.22683881447892215 -1.6425034823358304
-		0.38489110923743919 0.22683881453455459 -1.4636291050429211
-		0.38489110923743919 0.22683881453455459 -1.1089041471096697
-		0.38489110923787972 0.22683881447892218 -0.93002976981653351
-		1.3152432716450231 0.22683881442594658 -1.3918524767690275
-		2.2455954340526088 0.22683881447892218 -0.93002976981653351
-		2.2455954340521691 0.22683881453455459 -1.1089041471096688
-		2.2455954340521691 0.22683881453455459 -1.4636291050429193
-		2.2455954340526088 0.22683881447892215 -1.6425034823358304
-		1.3152432716450233 0.22683881442594658 -2.0228794877002025
-		0.38489110923787972 0.22683881447892215 -1.6425034823358304
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.7587348989790064 18.555259290554623 3.1322032532882069
+		-7.7851768522867379 18.555259290554623 3.1960397755793721
+		-7.7587348989790064 18.555259290554623 3.2598762978705373
+		-7.6948983766878412 18.555259290554623 3.2863182511782707
+		-7.6310618543966759 18.555259290554623 3.2598762978705373
+		-7.6046199010889444 18.555259290554623 3.1960397755793721
+		-7.6310618543966759 18.555259290554623 3.1322032532882069
+		-7.6948983766878412 18.555259290554623 3.1057612999804736
+		-7.7587348989790064 18.555259290554623 3.1322032532882069
+		-7.7851768522867379 18.555259290554623 3.1960397755793721
+		-7.7587348989790064 18.555259290554623 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_THUMB_IZQ_2";
-	setAttr ".rp" -type "double3" 8.3994182093148364 13.366911724051116 0.14419431585190967 ;
-	setAttr ".sp" -type "double3" 8.3994182093148364 13.366911724051116 0.14419431585190967 ;
-createNode transform -n "DRIVER_THUMB_IZQ_2" -p "GRP_DRIVER_THUMB_IZQ_2";
-	setAttr ".rp" -type "double3" 8.3991854997622895 13.362498682402094 0.14396224002365443 ;
-	setAttr ".sp" -type "double3" 8.3991854997622895 13.362498682402094 0.14396224002365443 ;
-createNode nurbsCurve -n "DRIVER_THUMB_IZQ_Shape2" -p "DRIVER_THUMB_IZQ_2";
+createNode transform -n "CTRL_PARPADO_DER_UP_02" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -7.1324197079562817 18.774006610266095 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -7.1324197079562817 18.774006610266095 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_0Shape2" -p "CTRL_PARPADO_DER_UP_02";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		8.3993891206207554 13.731077041739121 0.14416530637340763
-		8.39946090514532 13.731047992625806 0.19681931678757353
-		8.399519082533466 13.836356095293461 0.19687733574466759
-		8.3993755134843191 13.836414193520087 0.091569314916279537
-		8.3993173360962174 13.731106090852411 0.091511295959152139
-		8.3993891206207554 13.731077041739121 0.14416530637340763
-		8.3991854997622308 13.362498682402205 0.14396224002357649
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.0685831856651165 18.837843132557261 3.1960397755793712
+		-7.1324197079562817 18.864285085864992 3.1960397755793712
+		-7.1962562302474469 18.837843132557261 3.1960397755793712
+		-7.2226981835551802 18.774006610266095 3.1960397755793712
+		-7.1962562302474469 18.71017008797493 3.1960397755793712
+		-7.1324197079562817 18.683728134667199 3.1960397755793712
+		-7.0685831856651165 18.71017008797493 3.1960397755793712
+		-7.0421412323573831 18.774006610266095 3.1960397755793712
+		-7.0685831856651165 18.837843132557261 3.1960397755793712
+		-7.1324197079562817 18.864285085864992 3.1960397755793712
+		-7.1962562302474469 18.837843132557261 3.1960397755793712
 		;
-createNode transform -n "GRP_DRIVER_THUMB_IZQ_3";
-	setAttr ".rp" -type "double3" 8.6187671521482265 13.292572923438978 0.2568306087574137 ;
-	setAttr ".sp" -type "double3" 8.6187671521482265 13.292572923438978 0.2568306087574137 ;
-createNode transform -n "DRIVER_THUMB_IZQ_3" -p "GRP_DRIVER_THUMB_IZQ_3";
-	setAttr ".rp" -type "double3" 8.618650407542269 13.28786996212003 0.25665505233223129 ;
-	setAttr ".sp" -type "double3" 8.618650407542269 13.28786996212003 0.25665505233223129 ;
-createNode nurbsCurve -n "DRIVER_THUMB_IZQ_Shape3" -p "DRIVER_THUMB_IZQ_3";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_0Shape10" -p "CTRL_PARPADO_DER_UP_02";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		8.6188037569712357 13.585236748547761 0.25680866420421911
-		8.6187674313108218 13.58521482273254 0.29928962382111246
-		8.6188112454333972 13.670176761711874 0.2993335129274568
-		8.6188838967541397 13.670220613342334 0.21437159369372472
-		8.6188400826316158 13.585258674363011 0.21432770458737194
-		8.6188037569712357 13.585236748547761 0.25680866420421911
-		8.6186504075422867 13.287869962120158 0.25665505233207142
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.1324197079562817 18.837843132557261 3.1322032532882069
+		-7.1324197079562817 18.864285085864992 3.1960397755793721
+		-7.1324197079562817 18.837843132557261 3.2598762978705373
+		-7.1324197079562817 18.774006610266095 3.2863182511782707
+		-7.1324197079562817 18.71017008797493 3.2598762978705373
+		-7.1324197079562817 18.683728134667199 3.1960397755793721
+		-7.1324197079562817 18.71017008797493 3.1322032532882069
+		-7.1324197079562817 18.774006610266095 3.1057612999804736
+		-7.1324197079562817 18.837843132557261 3.1322032532882069
+		-7.1324197079562817 18.864285085864992 3.1960397755793721
+		-7.1324197079562817 18.837843132557261 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_THUMB_DER_1";
-	setAttr ".rp" -type "double3" -8.009389564510851 13.527359485493854 -0.077957228337077411 ;
-	setAttr ".sp" -type "double3" -8.009389564510851 13.527359485493854 -0.077957228337077411 ;
-createNode transform -n "DRIVER_THUMB_DER_1" -p "GRP_DRIVER_THUMB_DER_1";
-	setAttr ".rp" -type "double3" -8.0092927672640037 13.526529478278784 -0.078054807649484137 ;
-	setAttr ".sp" -type "double3" -8.0092927672640037 13.526529478278784 -0.078054807649484137 ;
-createNode nurbsCurve -n "DRIVER_THUMB_DER_1Shape" -p "DRIVER_THUMB_DER_1";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_0Shape11" -p "CTRL_PARPADO_DER_UP_02";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-8.0093774648550138 13.949742695493306 -0.07796942575112098
-		-8.009134211338786 13.949730546860035 -0.017510882860310772
-		-8.0091584106505067 14.070648608921335 -0.01748648803221009
-		-8.0096449176829161 14.070672906187898 -0.13840357381382162
-		-8.0096207183712274 13.949754844126602 -0.1384279686419454
-		-8.0093774648550138 13.949742695493306 -0.07796942575112098
-		-8.0092927672639966 13.526529478278768 -0.078054807649468927
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.1962562302474469 18.774006610266099 3.1322032532882069
+		-7.2226981835551785 18.774006610266099 3.1960397755793721
+		-7.1962562302474469 18.774006610266099 3.2598762978705373
+		-7.1324197079562817 18.774006610266099 3.2863182511782707
+		-7.0685831856651165 18.774006610266099 3.2598762978705373
+		-7.0421412323573849 18.774006610266099 3.1960397755793721
+		-7.0685831856651165 18.774006610266099 3.1322032532882069
+		-7.1324197079562817 18.774006610266099 3.1057612999804736
+		-7.1962562302474469 18.774006610266099 3.1322032532882069
+		-7.2226981835551785 18.774006610266099 3.1960397755793721
+		-7.1962562302474469 18.774006610266099 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_INDEX_IZQ_1";
-	setAttr ".rp" -type "double3" 8.888091309513495 13.522959243006767 -0.25825695089670808 ;
-	setAttr ".sp" -type "double3" 8.888091309513495 13.522959243006767 -0.25825695089670808 ;
-createNode transform -n "DRIVER_INDEX_IZQ_1" -p "GRP_DRIVER_INDEX_IZQ_1";
-	setAttr ".rp" -type "double3" 8.8880913095134932 13.522450921624028 -0.25825695089667455 ;
-	setAttr ".sp" -type "double3" 8.8880913095134932 13.522450921624028 -0.25825695089667455 ;
-createNode nurbsCurve -n "DRIVER_INDEX_IZQ_1Shape" -p "DRIVER_INDEX_IZQ_1";
+createNode transform -n "CTRL_PARPADO_DER_UP_03" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.5602275063548996 18.55525929055462 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -6.5602275063548996 18.55525929055462 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_0Shape3" -p "CTRL_PARPADO_DER_UP_03";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		8.888091309513495 13.945664155926728 -0.25825695089670653
-		8.8880913095135003 13.945664155926728 -0.19779791742491093
-		8.8880913095135003 14.066582222870316 -0.19779791742491093
-		8.8880913095134915 14.066582222870316 -0.31871598436850518
-		8.8880913095134915 13.945664155926728 -0.31871598436850518
-		8.888091309513495 13.945664155926728 -0.25825695089670653
-		8.888091309513495 13.522450921624172 -0.25825695089670653
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.4963909840637344 18.619095812845785 3.1960397755793712
+		-6.5602275063548996 18.645537766153517 3.1960397755793712
+		-6.6240640286460648 18.619095812845785 3.1960397755793712
+		-6.6505059819537982 18.55525929055462 3.1960397755793712
+		-6.6240640286460648 18.491422768263455 3.1960397755793712
+		-6.5602275063548996 18.464980814955723 3.1960397755793712
+		-6.4963909840637344 18.491422768263455 3.1960397755793712
+		-6.469949030756001 18.55525929055462 3.1960397755793712
+		-6.4963909840637344 18.619095812845785 3.1960397755793712
+		-6.5602275063548996 18.645537766153517 3.1960397755793712
+		-6.6240640286460648 18.619095812845785 3.1960397755793712
 		;
-createNode transform -n "GRP_DRIVER_INDEX_IZQ_2";
-	setAttr ".rp" -type "double3" 9.2624078617368824 13.52750575778275 -0.25556402606055895 ;
-	setAttr ".sp" -type "double3" 9.2624078617368824 13.52750575778275 -0.25556402606055895 ;
-createNode transform -n "DRIVER_INDEX_IZQ_2" -p "GRP_DRIVER_INDEX_IZQ_2";
-	setAttr ".rp" -type "double3" 9.262407861736774 13.522450921624026 -0.25556402606053563 ;
-	setAttr ".sp" -type "double3" 9.262407861736774 13.522450921624026 -0.25556402606053563 ;
-createNode nurbsCurve -n "DRIVER_INDEX_IZQ_Shape2" -p "DRIVER_INDEX_IZQ_2";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_0Shape6" -p "CTRL_PARPADO_DER_UP_03";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		9.2624078617368859 13.884253057566122 -0.25556402606056072
-		9.2624078617368628 13.884253057566122 -0.20387800664028041
-		9.2624078617368628 13.98762509640668 -0.20387800664028041
-		9.2624078617368824 13.98762509640668 -0.30725004548083923
-		9.2624078617368824 13.884253057566122 -0.30725004548083923
-		9.2624078617368859 13.884253057566122 -0.25556402606056072
-		9.2624078617368859 13.52245092162417 -0.25556402606056072
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.5602275063548996 18.619095812845785 3.1322032532882069
+		-6.5602275063548996 18.645537766153517 3.1960397755793721
+		-6.5602275063548996 18.619095812845785 3.2598762978705373
+		-6.5602275063548996 18.55525929055462 3.2863182511782707
+		-6.5602275063548996 18.491422768263455 3.2598762978705373
+		-6.5602275063548996 18.464980814955723 3.1960397755793721
+		-6.5602275063548996 18.491422768263455 3.1322032532882069
+		-6.5602275063548996 18.55525929055462 3.1057612999804736
+		-6.5602275063548996 18.619095812845785 3.1322032532882069
+		-6.5602275063548996 18.645537766153517 3.1960397755793721
+		-6.5602275063548996 18.619095812845785 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_INDEX_IZQ_3";
-	setAttr ".rp" -type "double3" 9.5842123796553977 13.526299616287371 -0.26162310694187907 ;
-	setAttr ".sp" -type "double3" 9.5842123796553977 13.526299616287371 -0.26162310694187907 ;
-createNode transform -n "DRIVER_INDEX_IZQ_3" -p "GRP_DRIVER_INDEX_IZQ_3";
-	setAttr ".rp" -type "double3" 9.584212379655348 13.522450921624024 -0.26162310694184843 ;
-	setAttr ".sp" -type "double3" 9.584212379655348 13.522450921624024 -0.26162310694184843 ;
-createNode nurbsCurve -n "DRIVER_INDEX_IZQ_Shape3" -p "DRIVER_INDEX_IZQ_3";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_0Shape7" -p "CTRL_PARPADO_DER_UP_03";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		9.5842123796554048 13.830682547242343 -0.26162310694188107
-		9.5842123796553871 13.830682547242343 -0.21759001756787244
-		9.5842123796553871 13.918748725990355 -0.21759001756787244
-		9.5842123796554066 13.918748725990355 -0.30565619631588536
-		9.5842123796554066 13.830682547242343 -0.30565619631588536
-		9.5842123796554048 13.830682547242343 -0.26162310694188107
-		9.5842123796554048 13.522450921624168 -0.26162310694188107
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.6240640286460648 18.555259290554623 3.1322032532882069
+		-6.6505059819537964 18.555259290554623 3.1960397755793721
+		-6.6240640286460648 18.555259290554623 3.2598762978705373
+		-6.5602275063548996 18.555259290554623 3.2863182511782707
+		-6.4963909840637344 18.555259290554623 3.2598762978705373
+		-6.4699490307560028 18.555259290554623 3.1960397755793721
+		-6.4963909840637344 18.555259290554623 3.1322032532882069
+		-6.5602275063548996 18.555259290554623 3.1057612999804736
+		-6.6240640286460648 18.555259290554623 3.1322032532882069
+		-6.6505059819537964 18.555259290554623 3.1960397755793721
+		-6.6240640286460648 18.555259290554623 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_MIDDLE_IZQ_1";
-	setAttr ".rp" -type "double3" 8.903879820838899 13.526375923726041 -0.57453667904657324 ;
-	setAttr ".sp" -type "double3" 8.903879820838899 13.526375923726041 -0.57453667904657324 ;
-createNode transform -n "DRIVER_MIDDLE_IZQ_1" -p "GRP_DRIVER_MIDDLE_IZQ_1";
-	setAttr ".rp" -type "double3" 8.9038798208388172 13.522450921624031 -0.57453667904656047 ;
-	setAttr ".sp" -type "double3" 8.9038798208388172 13.522450921624031 -0.57453667904656047 ;
-createNode nurbsCurve -n "DRIVER_MIDDLE_IZQ_1Shape" -p "DRIVER_MIDDLE_IZQ_1";
+createNode transform -n "CTRL_PARPADO_DER_UP_04" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.3735095150342893 17.999999994183511 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -6.3735095150342893 17.999999994183511 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_04Shape" -p "CTRL_PARPADO_DER_UP_04";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		8.9038798208388545 13.927969207060704 -0.57453667904657935
-		8.9038798208389434 13.927969207060704 -0.51660549541278056
-		8.9038798208389434 14.043831574328285 -0.51660549541278056
-		8.9038798208389398 14.043831574328285 -0.63246786268036592
-		8.9038798208389398 13.927969207060704 -0.63246786268036592
-		8.9038798208388545 13.927969207060704 -0.57453667904657935
-		8.9038798208388545 13.522450921624175 -0.57453667904657935
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.3096729927431241 18.063836516474677 3.1960397755793712
+		-6.3735095150342893 18.090278469782408 3.1960397755793712
+		-6.4373460373254545 18.063836516474677 3.1960397755793712
+		-6.4637879906331879 17.999999994183511 3.1960397755793712
+		-6.4373460373254545 17.936163471892346 3.1960397755793712
+		-6.3735095150342893 17.909721518584615 3.1960397755793712
+		-6.3096729927431241 17.936163471892346 3.1960397755793712
+		-6.2832310394353907 17.999999994183511 3.1960397755793712
+		-6.3096729927431241 18.063836516474677 3.1960397755793712
+		-6.3735095150342893 18.090278469782408 3.1960397755793712
+		-6.4373460373254545 18.063836516474677 3.1960397755793712
 		;
-createNode transform -n "GRP_DRIVER_MIDDLE_IZQ_2";
-	setAttr ".rp" -type "double3" 9.3201363221284055 13.525253011662498 -0.58454284494296804 ;
-	setAttr ".sp" -type "double3" 9.3201363221284055 13.525253011662498 -0.58454284494296804 ;
-createNode transform -n "DRIVER_MIDDLE_IZQ_2" -p "GRP_DRIVER_MIDDLE_IZQ_2";
-	setAttr ".rp" -type "double3" 9.3201363221283469 13.522450921624031 -0.58454284494294306 ;
-	setAttr ".sp" -type "double3" 9.3201363221283469 13.522450921624031 -0.58454284494294306 ;
-createNode nurbsCurve -n "DRIVER_MIDDLE_IZQ_Shape2" -p "DRIVER_MIDDLE_IZQ_2";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_04Shape1" -p "CTRL_PARPADO_DER_UP_04";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		9.3201363221284268 13.869125765278914 -0.58454284494297359
-		9.3201363221283842 13.869125765278914 -0.5350178672780016
-		9.3201363221283842 13.968175720608839 -0.5350178672780016
-		9.3201363221284215 13.968175720608839 -0.63406782260793637
-		9.3201363221284215 13.869125765278914 -0.63406782260793637
-		9.3201363221284268 13.869125765278914 -0.58454284494297359
-		9.3201363221284268 13.522450921624175 -0.58454284494297359
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.3735095150342893 18.063836516474677 3.1322032532882069
+		-6.3735095150342893 18.090278469782408 3.1960397755793721
+		-6.3735095150342893 18.063836516474677 3.2598762978705373
+		-6.3735095150342893 17.999999994183511 3.2863182511782707
+		-6.3735095150342893 17.936163471892346 3.2598762978705373
+		-6.3735095150342893 17.909721518584615 3.1960397755793721
+		-6.3735095150342893 17.936163471892346 3.1322032532882069
+		-6.3735095150342893 17.999999994183511 3.1057612999804736
+		-6.3735095150342893 18.063836516474677 3.1322032532882069
+		-6.3735095150342893 18.090278469782408 3.1960397755793721
+		-6.3735095150342893 18.063836516474677 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_MIDDLE_IZQ_3";
-	setAttr ".rp" -type "double3" 9.6251825321067734 13.52758689744066 -0.59475986874137665 ;
-	setAttr ".sp" -type "double3" 9.6251825321067734 13.52758689744066 -0.59475986874137665 ;
-createNode transform -n "DRIVER_MIDDLE_IZQ_3" -p "GRP_DRIVER_MIDDLE_IZQ_3";
-	setAttr ".rp" -type "double3" 9.6251825321066615 13.52245092162403 -0.59475986874135778 ;
-	setAttr ".sp" -type "double3" 9.6251825321066615 13.52245092162403 -0.59475986874135778 ;
-createNode nurbsCurve -n "DRIVER_MIDDLE_IZQ_Shape3" -p "DRIVER_MIDDLE_IZQ_3";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_04Shape2" -p "CTRL_PARPADO_DER_UP_04";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		9.6251825321068036 13.817795089071881 -0.59475986874138276
-		9.625182532106745 13.817795089071881 -0.55256784482026999
-		9.625182532106745 13.90217913691408 -0.55256784482026999
-		9.6251825321067468 13.90217913691408 -0.6369518926624832
-		9.6251825321067468 13.817795089071881 -0.6369518926624832
-		9.6251825321068036 13.817795089071881 -0.59475986874138276
-		9.6251825321068036 13.522450921624174 -0.59475986874138276
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.4373460373254545 17.999999994183515 3.1322032532882069
+		-6.4637879906331861 17.999999994183515 3.1960397755793721
+		-6.4373460373254545 17.999999994183515 3.2598762978705373
+		-6.3735095150342893 17.999999994183515 3.2863182511782707
+		-6.3096729927431241 17.999999994183515 3.2598762978705373
+		-6.2832310394353925 17.999999994183515 3.1960397755793721
+		-6.3096729927431241 17.999999994183515 3.1322032532882069
+		-6.3735095150342893 17.999999994183515 3.1057612999804736
+		-6.4373460373254545 17.999999994183515 3.1322032532882069
+		-6.4637879906331861 17.999999994183515 3.1960397755793721
+		-6.4373460373254545 17.999999994183515 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_CANCEL_IZQ_1";
-	setAttr ".rp" -type "double3" 8.8683378737268601 13.612864277357048 -0.88725410853500908 ;
-	setAttr ".sp" -type "double3" 8.8683378737268601 13.612864277357048 -0.88725410853500908 ;
-createNode transform -n "DRIVER_CANCEL_IZQ_1" -p "GRP_DRIVER_CANCEL_IZQ_1";
-	setAttr ".rp" -type "double3" 8.868337873726805 13.609787182757968 -0.88725410853499298 ;
-	setAttr ".sp" -type "double3" 8.868337873726805 13.609787182757968 -0.88725410853499298 ;
-createNode nurbsCurve -n "DRIVER_CANCEL_IZQ_1Shape" -p "DRIVER_CANCEL_IZQ_1";
+createNode transform -n "CTRL_PARPADO_DER_UP_00" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -7.8935854700161832 17.999999994183511 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -7.8935854700161832 17.999999994183511 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_00Shape" -p "CTRL_PARPADO_DER_UP_00";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		8.8683378737268299 13.97402400187106 -0.88725410853501718
-		8.8683378737268903 13.97402400187106 -0.83522027723315706
-		8.8683378737268903 14.078091664474758 -0.83522027723315706
-		8.8683378737268388 14.078091664474758 -0.9392879398368611
-		8.8683378737268388 13.97402400187106 -0.9392879398368611
-		8.8683378737268299 13.97402400187106 -0.88725410853501718
-		8.8683378737268299 13.609787182758112 -0.88725410853501718
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.8297489477250179 18.063836516474677 3.1960397755793712
+		-7.8935854700161832 18.090278469782408 3.1960397755793712
+		-7.9574219923073484 18.063836516474677 3.1960397755793712
+		-7.9838639456150817 17.999999994183511 3.1960397755793712
+		-7.9574219923073484 17.936163471892346 3.1960397755793712
+		-7.8935854700161832 17.909721518584615 3.1960397755793712
+		-7.8297489477250179 17.936163471892346 3.1960397755793712
+		-7.8033069944172846 17.999999994183511 3.1960397755793712
+		-7.8297489477250179 18.063836516474677 3.1960397755793712
+		-7.8935854700161832 18.090278469782408 3.1960397755793712
+		-7.9574219923073484 18.063836516474677 3.1960397755793712
 		;
-createNode transform -n "GRP_DRIVER_CANCEL_IZQ_2";
-	setAttr ".rp" -type "double3" 9.2407542879003568 13.562397932085222 -0.91232952794318489 ;
-	setAttr ".sp" -type "double3" 9.2407542879003568 13.562397932085222 -0.91232952794318489 ;
-createNode transform -n "DRIVER_CANCEL_IZQ_2" -p "GRP_DRIVER_CANCEL_IZQ_2";
-	setAttr ".rp" -type "double3" 9.2407542879003142 13.557638521758257 -0.91232952794318445 ;
-	setAttr ".sp" -type "double3" 9.2407542879003142 13.557638521758257 -0.91232952794318445 ;
-createNode nurbsCurve -n "DRIVER_CANCEL_IZQ_Shape2" -p "DRIVER_CANCEL_IZQ_2";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_00Shape1" -p "CTRL_PARPADO_DER_UP_00";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		9.2407542879004136 13.869022118637027 -0.91232952794319366
-		9.2407542879003319 13.869022118637043 -0.86784615696052436
-		9.2407542879003159 13.957988860602349 -0.86784615696052436
-		9.2407542879003159 13.957988860602349 -0.95681289892584365
-		9.2407542879003319 13.869022118637011 -0.95681289892584565
-		9.2407542879004136 13.869022118637027 -0.91232952794319366
-		9.2407542879004136 13.557638521758401 -0.91232952794319366
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.8935854700161832 18.063836516474677 3.1322032532882069
+		-7.8935854700161832 18.090278469782408 3.1960397755793721
+		-7.8935854700161832 18.063836516474677 3.2598762978705373
+		-7.8935854700161832 17.999999994183511 3.2863182511782707
+		-7.8935854700161832 17.936163471892346 3.2598762978705373
+		-7.8935854700161832 17.909721518584615 3.1960397755793721
+		-7.8935854700161832 17.936163471892346 3.1322032532882069
+		-7.8935854700161832 17.999999994183511 3.1057612999804736
+		-7.8935854700161832 18.063836516474677 3.1322032532882069
+		-7.8935854700161832 18.090278469782408 3.1960397755793721
+		-7.8935854700161832 18.063836516474677 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_CANCEL_IZQ_3";
-	setAttr ".rp" -type "double3" 9.5142116967567514 13.519634672333881 -0.92240182777641988 ;
-	setAttr ".sp" -type "double3" 9.5142116967567514 13.519634672333881 -0.92240182777641988 ;
-createNode transform -n "DRIVER_CANCEL_IZQ_3" -p "GRP_DRIVER_CANCEL_IZQ_3";
-	setAttr ".rp" -type "double3" 9.5142116967567247 13.520259148550817 -0.922401827776413 ;
-	setAttr ".sp" -type "double3" 9.5142116967567247 13.520259148550817 -0.922401827776413 ;
-createNode nurbsCurve -n "DRIVER_CANCEL_IZQ_Shape3" -p "DRIVER_CANCEL_IZQ_3";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_UP_00Shape2" -p "CTRL_PARPADO_DER_UP_00";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		9.5142116967567549 13.785537494702229 -0.92240182777641921
-		9.5142116967567532 13.785537494702261 -0.88450492118336843
-		9.5142116967567691 13.861331307888348 -0.88450492118336843
-		9.5142116967567798 13.861331307888348 -0.96029873436947177
-		9.5142116967567798 13.785537494702245 -0.96029873436947133
-		9.5142116967567549 13.785537494702229 -0.92240182777641921
-		9.5142116967567389 13.520259148550945 -0.92240182777641921
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.9574219923073484 17.999999994183515 3.1322032532882069
+		-7.9838639456150799 17.999999994183515 3.1960397755793721
+		-7.9574219923073484 17.999999994183515 3.2598762978705373
+		-7.8935854700161832 17.999999994183515 3.2863182511782707
+		-7.8297489477250179 17.999999994183515 3.2598762978705373
+		-7.8033069944172864 17.999999994183515 3.1960397755793721
+		-7.8297489477250179 17.999999994183515 3.1322032532882069
+		-7.8935854700161832 17.999999994183515 3.1057612999804736
+		-7.9574219923073484 17.999999994183515 3.1322032532882069
+		-7.9838639456150799 17.999999994183515 3.1960397755793721
+		-7.9574219923073484 17.999999994183515 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_PINKY_IZQ_1";
-	setAttr ".rp" -type "double3" 8.8336770876506385 13.511497790099181 -1.170459447986719 ;
-	setAttr ".sp" -type "double3" 8.8336770876506385 13.511497790099181 -1.170459447986719 ;
-createNode transform -n "DRIVER_PINKY_IZQ_1" -p "GRP_DRIVER_PINKY_IZQ_1";
-	setAttr ".rp" -type "double3" 8.8336770876506101 13.504234750385011 -1.1704594479867017 ;
-	setAttr ".sp" -type "double3" 8.8336770876506101 13.504234750385011 -1.1704594479867017 ;
-createNode nurbsCurve -n "DRIVER_PINKY_IZQ_1Shape" -p "DRIVER_PINKY_IZQ_1";
+createNode transform -n "CTRL_PARPADO_DER_DWN_01" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -7.6948983766878412 17.434951342630956 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -7.6948983766878412 17.434951342630956 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_DER_DWN_0Shape1" -p "CTRL_PARPADO_DER_DWN_01";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		8.8336770876506243 13.840362767440379 -1.1704594479867025
-		8.8336770876506527 13.840362767440379 -1.1224411598359894
-		8.8336770876506527 13.93639934374187 -1.1224411598359894
-		8.8336770876506243 13.93639934374187 -1.2184777361374484
-		8.8336770876506243 13.840362767440379 -1.2184777361374484
-		8.8336770876506243 13.840362767440379 -1.1704594479867025
-		8.8336770876506243 13.504234750385155 -1.1704594479867025
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.6310618543966759 17.498787864922122 3.1960397755793712
+		-7.6948983766878412 17.525229818229853 3.1960397755793712
+		-7.7587348989790064 17.498787864922122 3.1960397755793712
+		-7.7851768522867397 17.434951342630956 3.1960397755793712
+		-7.7587348989790064 17.371114820339791 3.1960397755793712
+		-7.6948983766878412 17.34467286703206 3.1960397755793712
+		-7.6310618543966759 17.371114820339791 3.1960397755793712
+		-7.6046199010889426 17.434951342630956 3.1960397755793712
+		-7.6310618543966759 17.498787864922122 3.1960397755793712
+		-7.6948983766878412 17.525229818229853 3.1960397755793712
+		-7.7587348989790064 17.498787864922122 3.1960397755793712
 		;
-createNode transform -n "GRP_DRIVER_PINKY_IZQ_2";
-	setAttr ".rp" -type "double3" 9.0547639351312945 13.48285424574615 -1.194781458888567 ;
-	setAttr ".sp" -type "double3" 9.0547639351312945 13.48285424574615 -1.194781458888567 ;
-createNode transform -n "DRIVER_PINKY_IZQ_2" -p "GRP_DRIVER_PINKY_IZQ_2";
-	setAttr ".rp" -type "double3" 9.0547639351312235 13.478673298299844 -1.1947814588885604 ;
-	setAttr ".sp" -type "double3" 9.0547639351312235 13.478673298299844 -1.1947814588885604 ;
-createNode nurbsCurve -n "DRIVER_PINKY_IZQ_Shape2" -p "DRIVER_PINKY_IZQ_2";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_DWN_0Shape2" -p "CTRL_PARPADO_DER_DWN_01";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		9.0547639351313176 13.766026870125136 -1.1947814588885861
-		9.0547639351313371 13.766026870125136 -1.1537309486278366
-		9.0547639351313371 13.848127890646607 -1.1537309486278366
-		9.0547639351312057 13.848127890646607 -1.2358319691492938
-		9.0547639351312217 13.76602687012512 -1.2358319691492961
-		9.0547639351313176 13.766026870125136 -1.1947814588885861
-		9.0547639351313176 13.478673298299972 -1.1947814588885839
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.6948983766878412 17.498787864922122 3.1322032532882069
+		-7.6948983766878412 17.525229818229853 3.1960397755793721
+		-7.6948983766878412 17.498787864922122 3.2598762978705373
+		-7.6948983766878412 17.434951342630956 3.2863182511782707
+		-7.6948983766878412 17.371114820339791 3.2598762978705373
+		-7.6948983766878412 17.34467286703206 3.1960397755793721
+		-7.6948983766878412 17.371114820339791 3.1322032532882069
+		-7.6948983766878412 17.434951342630956 3.1057612999804736
+		-7.6948983766878412 17.498787864922122 3.1322032532882069
+		-7.6948983766878412 17.525229818229853 3.1960397755793721
+		-7.6948983766878412 17.498787864922122 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_PINKY_IZQ_3";
-	setAttr ".rp" -type "double3" 9.2696220985294655 13.459588793980547 -1.2027697698918915 ;
-	setAttr ".sp" -type "double3" 9.2696220985294655 13.459588793980547 -1.2027697698918915 ;
-createNode transform -n "DRIVER_PINKY_IZQ_3" -p "GRP_DRIVER_PINKY_IZQ_3";
-	setAttr ".rp" -type "double3" 9.2696220985293802 13.452850634295556 -1.2027697698918804 ;
-	setAttr ".sp" -type "double3" 9.2696220985293802 13.452850634295554 -1.2027697698918796 ;
-createNode nurbsCurve -n "DRIVER_PINKY_IZQ_Shape3" -p "DRIVER_PINKY_IZQ_3";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_DWN_0Shape3" -p "CTRL_PARPADO_DER_DWN_01";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		9.2696220985294193 13.662133925534887 -1.2027697698918933
-		9.2696220985295277 13.662133925534887 -1.1728721568577227
-		9.2696220985295117 13.721929151603252 -1.1728721568577227
-		9.2696220985295241 13.721929151603236 -1.2326673829260599
-		9.2696220985295241 13.662133925534903 -1.2326673829260604
-		9.2696220985294193 13.662133925534887 -1.2027697698918933
-		9.2696220985294353 13.45285063429573 -1.2027697698918898
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.7587348989790064 17.43495134263096 3.1322032532882069
+		-7.7851768522867379 17.43495134263096 3.1960397755793721
+		-7.7587348989790064 17.43495134263096 3.2598762978705373
+		-7.6948983766878412 17.43495134263096 3.2863182511782707
+		-7.6310618543966759 17.43495134263096 3.2598762978705373
+		-7.6046199010889444 17.43495134263096 3.1960397755793721
+		-7.6310618543966759 17.43495134263096 3.1322032532882069
+		-7.6948983766878412 17.43495134263096 3.1057612999804736
+		-7.7587348989790064 17.43495134263096 3.1322032532882069
+		-7.7851768522867379 17.43495134263096 3.1960397755793721
+		-7.7587348989790064 17.43495134263096 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_THUMB_DER_2";
-	setAttr ".rp" -type "double3" -8.3897142421565256 13.36408149475179 0.14586287624738326 ;
-	setAttr ".sp" -type "double3" -8.3897142421565256 13.36408149475179 0.14586287624738326 ;
-createNode transform -n "DRIVER_THUMB_DER_2" -p "GRP_DRIVER_THUMB_DER_2";
-	setAttr ".rp" -type "double3" -8.3895850641330583 13.358429732640959 0.14565071812126318 ;
-	setAttr ".sp" -type "double3" -8.3895850641330583 13.358429732640959 0.14565071812126318 ;
-createNode nurbsCurve -n "DRIVER_THUMB_DER_Shape2" -p "DRIVER_THUMB_DER_2";
+createNode transform -n "CTRL_PARPADO_DER_DWN_02" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -7.1324197079562817 17.229992451268739 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -7.1324197079562817 17.229992451268739 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_DER_DWN_0Shape2" -p "CTRL_PARPADO_DER_DWN_02";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-8.3897708400995228 13.727008110594065 0.14583635648162535
-		-8.3897903413324162 13.72698158099748 0.19849041354707009
-		-8.3898434201800018 13.832289688984094 0.19854345307859325
-		-8.3898044177141973 13.83234274817729 0.093235338947697477
-		-8.3897513388666294 13.727034640190674 0.093182299416169234
-		-8.3897708400995228 13.727008110594065 0.14583635648162535
-		-8.38958506413306 13.35842973264096 0.14565071812126013
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.0685831856651165 17.293828973559904 3.1960397755793712
+		-7.1324197079562817 17.320270926867636 3.1960397755793712
+		-7.1962562302474469 17.293828973559904 3.1960397755793712
+		-7.2226981835551802 17.229992451268739 3.1960397755793712
+		-7.1962562302474469 17.166155928977574 3.1960397755793712
+		-7.1324197079562817 17.139713975669842 3.1960397755793712
+		-7.0685831856651165 17.166155928977574 3.1960397755793712
+		-7.0421412323573831 17.229992451268739 3.1960397755793712
+		-7.0685831856651165 17.293828973559904 3.1960397755793712
+		-7.1324197079562817 17.320270926867636 3.1960397755793712
+		-7.1962562302474469 17.293828973559904 3.1960397755793712
 		;
-createNode transform -n "GRP_DRIVER_THUMB_DER_3";
-	setAttr ".rp" -type "double3" -8.6174208769220346 13.294808684669247 0.26706205679572825 ;
-	setAttr ".sp" -type "double3" -8.6174208769220346 13.294808684669247 0.26706205679572825 ;
-createNode transform -n "DRIVER_THUMB_DER_3" -p "GRP_DRIVER_THUMB_DER_3";
-	setAttr ".rp" -type "double3" -8.6176862039003215 13.290841072898651 0.26752751172778444 ;
-	setAttr ".sp" -type "double3" -8.6176862039003215 13.290841072898651 0.26752751172778444 ;
-createNode nurbsCurve -n "DRIVER_THUMB_DER_Shape3" -p "DRIVER_THUMB_DER_3";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_DWN_0Shape10" -p "CTRL_PARPADO_DER_DWN_02";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-8.6172787987555388 13.588207380560839 0.2671202386622254
-		-8.6172856460973737 13.588265571862348 0.30960117906086487
-		-8.6171692446274264 13.673227374051525 0.30948481532784555
-		-8.6171555499437495 13.673110991448505 0.22452293453060759
-		-8.6172719514136791 13.58814918925934 0.22463929826362666
-		-8.6172787987555388 13.588207380560839 0.2671202386622254
-		-8.617686203900325 13.290841072898658 0.26752751172778222
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.1324197079562817 17.293828973559904 3.1322032532882069
+		-7.1324197079562817 17.320270926867636 3.1960397755793721
+		-7.1324197079562817 17.293828973559904 3.2598762978705373
+		-7.1324197079562817 17.229992451268739 3.2863182511782707
+		-7.1324197079562817 17.166155928977574 3.2598762978705373
+		-7.1324197079562817 17.139713975669842 3.1960397755793721
+		-7.1324197079562817 17.166155928977574 3.1322032532882069
+		-7.1324197079562817 17.229992451268739 3.1057612999804736
+		-7.1324197079562817 17.293828973559904 3.1322032532882069
+		-7.1324197079562817 17.320270926867636 3.1960397755793721
+		-7.1324197079562817 17.293828973559904 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_INDEX_DER_1";
-	setAttr ".rp" -type "double3" -8.8880900000000143 13.523417674845675 -0.2582569999999984 ;
-	setAttr ".sp" -type "double3" -8.8880900000000143 13.523417674845675 -0.2582569999999984 ;
-createNode transform -n "DRIVER_INDEX_DER_1" -p "GRP_DRIVER_INDEX_DER_1";
-	setAttr ".rp" -type "double3" -8.8880900000000018 13.522499999999994 -0.25825699999999929 ;
-	setAttr ".sp" -type "double3" -8.8880900000000018 13.522499999999994 -0.25825699999999929 ;
-createNode nurbsCurve -n "DRIVER_INDEX_DER_1Shape" -p "DRIVER_INDEX_DER_1";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_DWN_0Shape11" -p "CTRL_PARPADO_DER_DWN_02";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-8.8880900000000018 13.945713234302536 -0.25825699999999846
-		-8.8880900000000018 13.945713234302547 -0.19779796652820536
-		-8.8880900000000267 14.066631301246135 -0.19779796652820392
-		-8.8880900000000302 14.066631301246135 -0.31871603347179034
-		-8.8880900000000054 13.945713234302547 -0.31871603347179323
-		-8.8880900000000018 13.945713234302536 -0.25825699999999846
-		-8.8880900000000018 13.52249999999998 -0.25825699999999918
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.1962562302474469 17.229992451268743 3.1322032532882069
+		-7.2226981835551785 17.229992451268743 3.1960397755793721
+		-7.1962562302474469 17.229992451268743 3.2598762978705373
+		-7.1324197079562817 17.229992451268743 3.2863182511782707
+		-7.0685831856651165 17.229992451268743 3.2598762978705373
+		-7.0421412323573849 17.229992451268743 3.1960397755793721
+		-7.0685831856651165 17.229992451268743 3.1322032532882069
+		-7.1324197079562817 17.229992451268743 3.1057612999804736
+		-7.1962562302474469 17.229992451268743 3.1322032532882069
+		-7.2226981835551785 17.229992451268743 3.1960397755793721
+		-7.1962562302474469 17.229992451268743 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_INDEX_DER_2";
-	setAttr ".rp" -type "double3" -9.2624100000000134 13.528494357264378 -0.25556399999999913 ;
-	setAttr ".sp" -type "double3" -9.2624100000000134 13.528494357264378 -0.25556399999999913 ;
-createNode transform -n "DRIVER_INDEX_DER_2" -p "GRP_DRIVER_INDEX_DER_2";
-	setAttr ".rp" -type "double3" -9.2624100000000009 13.522499999999992 -0.25556399999999935 ;
-	setAttr ".sp" -type "double3" -9.2624100000000009 13.522499999999992 -0.25556399999999935 ;
-createNode nurbsCurve -n "DRIVER_INDEX_DER_Shape2" -p "DRIVER_INDEX_DER_2";
+createNode transform -n "CTRL_PARPADO_DER_DWN_03" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.5602275063548996 17.434951342630956 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -6.5602275063548996 17.434951342630956 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_DER_DWN_0Shape3" -p "CTRL_PARPADO_DER_DWN_03";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-9.2624099999999903 13.884302135941933 -0.25556399999999868
-		-9.2624100000000258 13.884302135941947 -0.20387798057972034
-		-9.2624100000000009 13.987674174782505 -0.20387798057972079
-		-9.2624100000000045 13.987674174782491 -0.30725001942027819
-		-9.2624100000000062 13.884302135941933 -0.3072500194202773
-		-9.2624099999999903 13.884302135941933 -0.25556399999999868
-		-9.2624099999999885 13.522499999999981 -0.25556399999999874
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.4963909840637344 17.498787864922122 3.1960397755793712
+		-6.5602275063548996 17.525229818229853 3.1960397755793712
+		-6.6240640286460648 17.498787864922122 3.1960397755793712
+		-6.6505059819537982 17.434951342630956 3.1960397755793712
+		-6.6240640286460648 17.371114820339791 3.1960397755793712
+		-6.5602275063548996 17.34467286703206 3.1960397755793712
+		-6.4963909840637344 17.371114820339791 3.1960397755793712
+		-6.469949030756001 17.434951342630956 3.1960397755793712
+		-6.4963909840637344 17.498787864922122 3.1960397755793712
+		-6.5602275063548996 17.525229818229853 3.1960397755793712
+		-6.6240640286460648 17.498787864922122 3.1960397755793712
 		;
-createNode transform -n "GRP_DRIVER_INDEX_DER_3";
-	setAttr ".rp" -type "double3" -9.5842099999999935 13.52902690022804 -0.26162300000000094 ;
-	setAttr ".sp" -type "double3" -9.5842099999999935 13.52902690022804 -0.26162300000000094 ;
-createNode transform -n "DRIVER_INDEX_DER_3" -p "GRP_DRIVER_INDEX_DER_3";
-	setAttr ".rp" -type "double3" -9.5842100000000059 13.522499999999996 -0.26162299999999938 ;
-	setAttr ".sp" -type "double3" -9.5842100000000059 13.522499999999996 -0.26162299999999938 ;
-createNode nurbsCurve -n "DRIVER_INDEX_DER_Shape3" -p "DRIVER_INDEX_DER_3";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_DWN_0Shape6" -p "CTRL_PARPADO_DER_DWN_03";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-9.5842100000000059 13.830731625618014 -0.26162299999999938
-		-9.5842100000000023 13.830731625618014 -0.21758991062599509
-		-9.5842100000000094 13.918797804366024 -0.21758991062599764
-		-9.5842100000000059 13.918797804366024 -0.30565608937400734
-		-9.5842100000000059 13.830731625618014 -0.30565608937400401
-		-9.5842100000000059 13.830731625618014 -0.26162299999999938
-		-9.5842099999999935 13.522499999999981 -0.26162300000000183
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.5602275063548996 17.498787864922122 3.1322032532882069
+		-6.5602275063548996 17.525229818229853 3.1960397755793721
+		-6.5602275063548996 17.498787864922122 3.2598762978705373
+		-6.5602275063548996 17.434951342630956 3.2863182511782707
+		-6.5602275063548996 17.371114820339791 3.2598762978705373
+		-6.5602275063548996 17.34467286703206 3.1960397755793721
+		-6.5602275063548996 17.371114820339791 3.1322032532882069
+		-6.5602275063548996 17.434951342630956 3.1057612999804736
+		-6.5602275063548996 17.498787864922122 3.1322032532882069
+		-6.5602275063548996 17.525229818229853 3.1960397755793721
+		-6.5602275063548996 17.498787864922122 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_MIDDLE_DER_1";
-	setAttr ".rp" -type "double3" -8.9038800000000027 13.529344397677148 -0.57453700000000474 ;
-	setAttr ".sp" -type "double3" -8.9038800000000027 13.529344397677148 -0.57453700000000474 ;
-createNode transform -n "DRIVER_MIDDLE_DER_1" -p "GRP_DRIVER_MIDDLE_DER_1";
-	setAttr ".rp" -type "double3" -8.9038800000000027 13.522499999999994 -0.57453699999999952 ;
-	setAttr ".sp" -type "double3" -8.9038800000000027 13.522499999999994 -0.57453699999999952 ;
-createNode nurbsCurve -n "DRIVER_MIDDLE_DER_1Shape" -p "DRIVER_MIDDLE_DER_1";
+createNode nurbsCurve -n "CTRL_PARPADO_DER_DWN_0Shape7" -p "CTRL_PARPADO_DER_DWN_03";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-8.9038800000000187 13.928018285436501 -0.5745370000000054
-		-8.9038799999999974 13.92801828543649 -0.5166058163662135
-		-8.9038800000000116 14.043880652704077 -0.51660581636621261
-		-8.9038799999999991 14.04388065270407 -0.63246818363379409
-		-8.9038799999999902 13.92801828543649 -0.63246818363379698
-		-8.9038800000000187 13.928018285436501 -0.5745370000000054
-		-8.9038799999999991 13.522499999999972 -0.5745370000000013
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.6240640286460648 17.43495134263096 3.1322032532882069
+		-6.6505059819537964 17.43495134263096 3.1960397755793721
+		-6.6240640286460648 17.43495134263096 3.2598762978705373
+		-6.5602275063548996 17.43495134263096 3.2863182511782707
+		-6.4963909840637344 17.43495134263096 3.2598762978705373
+		-6.4699490307560028 17.43495134263096 3.1960397755793721
+		-6.4963909840637344 17.43495134263096 3.1322032532882069
+		-6.5602275063548996 17.43495134263096 3.1057612999804736
+		-6.6240640286460648 17.43495134263096 3.1322032532882069
+		-6.6505059819537964 17.43495134263096 3.1960397755793721
+		-6.6240640286460648 17.43495134263096 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_MIDDLE_DER_2";
-	setAttr ".rp" -type "double3" -9.3201400000000056 13.528247424474637 -0.5845430000000027 ;
-	setAttr ".sp" -type "double3" -9.3201400000000056 13.528247424474637 -0.5845430000000027 ;
-createNode transform -n "DRIVER_MIDDLE_DER_2" -p "GRP_DRIVER_MIDDLE_DER_2";
-	setAttr ".rp" -type "double3" -9.3201400000000039 13.522499999999994 -0.58454299999999948 ;
-	setAttr ".sp" -type "double3" -9.3201400000000039 13.522499999999994 -0.58454299999999948 ;
-createNode nurbsCurve -n "DRIVER_MIDDLE_DER_Shape2" -p "DRIVER_MIDDLE_DER_2";
+createNode transform -n "CTRL_PARPADO_IZQ_DWN_01" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -4.2953468956727976 17.434951342630956 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -4.2953468956727976 17.434951342630956 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_DWN_0Shape1" -p "CTRL_PARPADO_IZQ_DWN_01";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-9.3201400000000163 13.869174843654706 -0.58454300000000325
-		-9.3201400000000429 13.869174843654715 -0.53501802233503848
-		-9.320140000000011 13.96822479898464 -0.53501802233504003
-		-9.320139999999995 13.968224798984625 -0.63406797766496603
-		-9.3201400000000181 13.869174843654701 -0.63406797766496648
-		-9.3201400000000163 13.869174843654706 -0.58454300000000325
-		-9.3201400000000163 13.522499999999958 -0.58454300000000348
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.2315103733816324 17.498787864922122 3.1960397755793712
+		-4.2953468956727976 17.525229818229853 3.1960397755793712
+		-4.3591834179639628 17.498787864922122 3.1960397755793712
+		-4.3856253712716962 17.434951342630956 3.1960397755793712
+		-4.3591834179639628 17.371114820339791 3.1960397755793712
+		-4.2953468956727976 17.34467286703206 3.1960397755793712
+		-4.2315103733816324 17.371114820339791 3.1960397755793712
+		-4.205068420073899 17.434951342630956 3.1960397755793712
+		-4.2315103733816324 17.498787864922122 3.1960397755793712
+		-4.2953468956727976 17.525229818229853 3.1960397755793712
+		-4.3591834179639628 17.498787864922122 3.1960397755793712
 		;
-createNode transform -n "GRP_DRIVER_MIDDLE_DER_3";
-	setAttr ".rp" -type "double3" -9.6251800000000234 13.528211424183292 -0.59476000000000573 ;
-	setAttr ".sp" -type "double3" -9.6251800000000234 13.528211424183292 -0.59476000000000573 ;
-createNode transform -n "DRIVER_MIDDLE_DER_3" -p "GRP_DRIVER_MIDDLE_DER_3";
-	setAttr ".rp" -type "double3" -9.6251800000000038 13.522499999999996 -0.59475999999999951 ;
-	setAttr ".sp" -type "double3" -9.6251800000000038 13.522499999999996 -0.59475999999999951 ;
-createNode nurbsCurve -n "DRIVER_MIDDLE_DER_Shape3" -p "DRIVER_MIDDLE_DER_3";
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_DWN_0Shape11" -p "CTRL_PARPADO_IZQ_DWN_01";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-9.6251800000000483 13.817844167447678 -0.59476000000000762
-		-9.6251800000000749 13.817844167447678 -0.55256797607890329
-		-9.6251800000000483 13.902228215289878 -0.55256797607890418
-		-9.6251800000000163 13.902228215289867 -0.63695202392110961
-		-9.6251800000000287 13.817844167447667 -0.63695202392110972
-		-9.6251800000000483 13.817844167447678 -0.59476000000000762
-		-9.6251800000000411 13.522499999999971 -0.59476000000000795
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.2953468956727976 17.498787864922122 3.1322032532882069
+		-4.2953468956727976 17.525229818229853 3.1960397755793721
+		-4.2953468956727976 17.498787864922122 3.2598762978705373
+		-4.2953468956727976 17.434951342630956 3.2863182511782707
+		-4.2953468956727976 17.371114820339791 3.2598762978705373
+		-4.2953468956727976 17.34467286703206 3.1960397755793721
+		-4.2953468956727976 17.371114820339791 3.1322032532882069
+		-4.2953468956727976 17.434951342630956 3.1057612999804736
+		-4.2953468956727976 17.498787864922122 3.1322032532882069
+		-4.2953468956727976 17.525229818229853 3.1960397755793721
+		-4.2953468956727976 17.498787864922122 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_CANCEL_DER_1";
-	setAttr ".rp" -type "double3" -8.8683399999999839 13.614484692665702 -0.8872539999999991 ;
-	setAttr ".sp" -type "double3" -8.8683399999999839 13.614484692665702 -0.8872539999999991 ;
-createNode transform -n "DRIVER_CANCEL_DER_1" -p "GRP_DRIVER_CANCEL_DER_1";
-	setAttr ".rp" -type "double3" -8.8683400000000034 13.609799999999993 -0.88725399999999965 ;
-	setAttr ".sp" -type "double3" -8.8683400000000034 13.609799999999993 -0.88725399999999965 ;
-createNode nurbsCurve -n "DRIVER_CANCEL_DER_1Shape" -p "DRIVER_CANCEL_DER_1";
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_DWN_0Shape12" -p "CTRL_PARPADO_IZQ_DWN_01";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-8.8683399999999679 13.974036819112898 -0.88725400000000021
-		-8.8683399999999839 13.974036819112898 -0.83522016869815063
-		-8.8683400000000034 14.078104481716601 -0.83522016869814752
-		-8.8683399999999786 14.078104481716586 -0.93928783130184679
-		-8.8683399999999679 13.974036819112884 -0.93928783130184956
-		-8.8683399999999679 13.974036819112898 -0.88725400000000021
-		-8.8683399999999679 13.609799999999943 -0.88725399999999977
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.3591834179639628 17.43495134263096 3.1322032532882069
+		-4.3856253712716944 17.43495134263096 3.1960397755793721
+		-4.3591834179639628 17.43495134263096 3.2598762978705373
+		-4.2953468956727976 17.43495134263096 3.2863182511782707
+		-4.2315103733816324 17.43495134263096 3.2598762978705373
+		-4.2050684200739008 17.43495134263096 3.1960397755793721
+		-4.2315103733816324 17.43495134263096 3.1322032532882069
+		-4.2953468956727976 17.43495134263096 3.1057612999804736
+		-4.3591834179639628 17.43495134263096 3.1322032532882069
+		-4.3856253712716944 17.43495134263096 3.1960397755793721
+		-4.3591834179639628 17.43495134263096 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_CANCEL_DER_2";
-	setAttr ".rp" -type "double3" -9.2407499999999985 13.567049264461856 -0.91232999999999786 ;
-	setAttr ".sp" -type "double3" -9.2407499999999985 13.567049264461856 -0.91232999999999786 ;
-createNode transform -n "DRIVER_CANCEL_DER_2" -p "GRP_DRIVER_CANCEL_DER_2";
-	setAttr ".rp" -type "double3" -9.2407500000000038 13.557599999999995 -0.91232999999999975 ;
-	setAttr ".sp" -type "double3" -9.2407500000000038 13.557599999999995 -0.91232999999999975 ;
-createNode nurbsCurve -n "DRIVER_CANCEL_DER_Shape2" -p "DRIVER_CANCEL_DER_2";
+createNode transform -n "CTRL_PARPADO_IZQ_DWN_02" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -4.8675390972741797 17.229992451268739 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -4.8675390972741797 17.229992451268739 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_DWN_0Shape2" -p "CTRL_PARPADO_IZQ_DWN_02";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-9.2407499999999914 13.868983596878586 -0.91233000000000408
-		-9.2407500000000162 13.868983596878577 -0.867846629017341
-		-9.2407500000000073 13.95795033884391 -0.86784662901734344
-		-9.2407500000000091 13.95795033884391 -0.9568133709826605
-		-9.2407500000000233 13.868983596878598 -0.95681337098266139
-		-9.2407499999999914 13.868983596878586 -0.91233000000000408
-		-9.2407499999999683 13.557599999999978 -0.91233000000000208
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.8037025749830145 17.293828973559904 3.1960397755793712
+		-4.8675390972741797 17.320270926867636 3.1960397755793712
+		-4.9313756195653449 17.293828973559904 3.1960397755793712
+		-4.9578175728730782 17.229992451268739 3.1960397755793712
+		-4.9313756195653449 17.166155928977574 3.1960397755793712
+		-4.8675390972741797 17.139713975669842 3.1960397755793712
+		-4.8037025749830145 17.166155928977574 3.1960397755793712
+		-4.7772606216752811 17.229992451268739 3.1960397755793712
+		-4.8037025749830145 17.293828973559904 3.1960397755793712
+		-4.8675390972741797 17.320270926867636 3.1960397755793712
+		-4.9313756195653449 17.293828973559904 3.1960397755793712
 		;
-createNode transform -n "GRP_DRIVER_CANCEL_DER_3";
-	setAttr ".rp" -type "double3" -9.5142099999999949 13.529312544139945 -0.92240199999999706 ;
-	setAttr ".sp" -type "double3" -9.5142099999999949 13.529312544139945 -0.92240199999999706 ;
-createNode transform -n "DRIVER_CANCEL_DER_3" -p "GRP_DRIVER_CANCEL_DER_3";
-	setAttr ".rp" -type "double3" -9.5142100000000038 13.520299999999995 -0.92240199999999961 ;
-	setAttr ".sp" -type "double3" -9.5142100000000038 13.520299999999995 -0.92240199999999961 ;
-createNode nurbsCurve -n "DRIVER_CANCEL_DER_Shape3" -p "DRIVER_CANCEL_DER_3";
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_DWN_0Shape13" -p "CTRL_PARPADO_IZQ_DWN_02";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-9.5142099999999576 13.785578346151286 -0.92240199999999617
-		-9.5142099999999505 13.785578346151299 -0.8845050934069516
-		-9.5142099999999736 13.861372159337373 -0.88450509340695005
-		-9.5142099999999754 13.861372159337357 -0.96029890659303563
-		-9.5142099999999843 13.78557834615127 -0.9602989065930374
-		-9.5142099999999576 13.785578346151286 -0.92240199999999617
-		-9.5142099999999576 13.520299999999988 -0.92240199999999462
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.8675390972741797 17.293828973559904 3.1322032532882069
+		-4.8675390972741797 17.320270926867636 3.1960397755793721
+		-4.8675390972741797 17.293828973559904 3.2598762978705373
+		-4.8675390972741797 17.229992451268739 3.2863182511782707
+		-4.8675390972741797 17.166155928977574 3.2598762978705373
+		-4.8675390972741797 17.139713975669842 3.1960397755793721
+		-4.8675390972741797 17.166155928977574 3.1322032532882069
+		-4.8675390972741797 17.229992451268739 3.1057612999804736
+		-4.8675390972741797 17.293828973559904 3.1322032532882069
+		-4.8675390972741797 17.320270926867636 3.1960397755793721
+		-4.8675390972741797 17.293828973559904 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_PINKY_DER_1";
-	setAttr ".rp" -type "double3" -8.8336799999999833 13.506741445663581 -1.1704600000000136 ;
-	setAttr ".sp" -type "double3" -8.8336799999999833 13.506741445663581 -1.1704600000000136 ;
-createNode transform -n "DRIVER_PINKY_DER_1" -p "GRP_DRIVER_PINKY_DER_1";
-	setAttr ".rp" -type "double3" -8.83368 13.504199999999994 -1.1704599999999996 ;
-	setAttr ".sp" -type "double3" -8.83368 13.504199999999994 -1.1704599999999996 ;
-createNode nurbsCurve -n "DRIVER_PINKY_DER_1Shape" -p "DRIVER_PINKY_DER_1";
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_DWN_0Shape14" -p "CTRL_PARPADO_IZQ_DWN_02";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-8.8336800000000064 13.840328017055164 -1.1704600000000112
-		-8.83368000000001 13.840328017055167 -1.122441711849266
-		-8.8336799999999887 13.936364593356659 -1.1224417118492653
-		-8.833679999999978 13.936364593356661 -1.2184782881507601
-		-8.8336799999999958 13.840328017055167 -1.2184782881507599
-		-8.8336800000000064 13.840328017055164 -1.1704600000000112
-		-8.8336799999999798 13.504199999999946 -1.1704600000000134
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.9313756195653449 17.229992451268743 3.1322032532882069
+		-4.9578175728730765 17.229992451268743 3.1960397755793721
+		-4.9313756195653449 17.229992451268743 3.2598762978705373
+		-4.8675390972741797 17.229992451268743 3.2863182511782707
+		-4.8037025749830145 17.229992451268743 3.2598762978705373
+		-4.7772606216752829 17.229992451268743 3.1960397755793721
+		-4.8037025749830145 17.229992451268743 3.1322032532882069
+		-4.8675390972741797 17.229992451268743 3.1057612999804736
+		-4.9313756195653449 17.229992451268743 3.1322032532882069
+		-4.9578175728730765 17.229992451268743 3.1960397755793721
+		-4.9313756195653449 17.229992451268743 3.2598762978705373
 		;
-createNode transform -n "GRP_DRIVER_PINKY_DER_2";
-	setAttr ".rp" -type "double3" -9.0547600000000017 13.48620628373842 -1.1947800000000139 ;
-	setAttr ".sp" -type "double3" -9.0547600000000017 13.48620628373842 -1.1947800000000139 ;
-createNode transform -n "DRIVER_PINKY_DER_2" -p "GRP_DRIVER_PINKY_DER_2";
-	setAttr ".rp" -type "double3" -9.0547600000000017 13.478699999999993 -1.1947799999999995 ;
-	setAttr ".sp" -type "double3" -9.0547600000000017 13.478699999999993 -1.1947799999999995 ;
-createNode nurbsCurve -n "DRIVER_PINKY_DER_Shape2" -p "DRIVER_PINKY_DER_2";
+createNode transform -n "CTRL_PARPADO_IZQ_DWN_03" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.4300177660057392 17.434951342630956 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -5.4300177660057392 17.434951342630956 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_DWN_0Shape3" -p "CTRL_PARPADO_IZQ_DWN_03";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-9.0547600000000017 13.766053571825035 -1.1947800000000139
-		-9.054760000000007 13.766053571825079 -1.1537294897392814
-		-9.0547600000000177 13.848154592346548 -1.1537294897392818
-		-9.0547600000000017 13.848154592346555 -1.2358305102607516
-		-9.0547599999999893 13.766053571825076 -1.2358305102607523
-		-9.0547600000000017 13.766053571825035 -1.1947800000000139
-		-9.0547600000000017 13.478699999999868 -1.1947800000000162
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.3661812437145739 17.498787864922122 3.1960397755793712
+		-5.4300177660057392 17.525229818229853 3.1960397755793712
+		-5.4938542882969044 17.498787864922122 3.1960397755793712
+		-5.5202962416046377 17.434951342630956 3.1960397755793712
+		-5.4938542882969044 17.371114820339791 3.1960397755793712
+		-5.4300177660057392 17.34467286703206 3.1960397755793712
+		-5.3661812437145739 17.371114820339791 3.1960397755793712
+		-5.3397392904068406 17.434951342630956 3.1960397755793712
+		-5.3661812437145739 17.498787864922122 3.1960397755793712
+		-5.4300177660057392 17.525229818229853 3.1960397755793712
+		-5.4938542882969044 17.498787864922122 3.1960397755793712
 		;
-createNode transform -n "GRP_DRIVER_PINKY_DER_3";
-	setAttr ".rp" -type "double3" -9.2696199999999891 13.462851670028734 -1.2027700000000161 ;
-	setAttr ".sp" -type "double3" -9.2696199999999891 13.462851670028734 -1.2027700000000161 ;
-createNode transform -n "DRIVER_PINKY_DER_3" -p "GRP_DRIVER_PINKY_DER_3";
-	setAttr ".rp" -type "double3" -9.2696200000000015 13.452899999999994 -1.2027699999999997 ;
-	setAttr ".sp" -type "double3" -9.2696200000000015 13.452899999999993 -1.2027699999999988 ;
-createNode nurbsCurve -n "DRIVER_PINKY_DER_Shape3" -p "DRIVER_PINKY_DER_3";
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_DWN_0Shape15" -p "CTRL_PARPADO_IZQ_DWN_03";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
-		1 6 0 no 3
-		7 0 1 2 3 4 5 6
-		7
-		-9.2696199999999713 13.662183291239142 -1.2027700000000112
-		-9.2696199999999482 13.662183291239142 -1.1728723869658446
-		-9.26961999999995 13.721978517307464 -1.1728723869658424
-		-9.2696199999999696 13.721978517307468 -1.2326676130341783
-		-9.2696199999999624 13.662183291239142 -1.2326676130341823
-		-9.2696199999999713 13.662183291239142 -1.2027700000000112
-		-9.2696199999999802 13.452899999999971 -1.2027700000000054
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.4300177660057392 17.498787864922122 3.1322032532882069
+		-5.4300177660057392 17.525229818229853 3.1960397755793721
+		-5.4300177660057392 17.498787864922122 3.2598762978705373
+		-5.4300177660057392 17.434951342630956 3.2863182511782707
+		-5.4300177660057392 17.371114820339791 3.2598762978705373
+		-5.4300177660057392 17.34467286703206 3.1960397755793721
+		-5.4300177660057392 17.371114820339791 3.1322032532882069
+		-5.4300177660057392 17.434951342630956 3.1057612999804736
+		-5.4300177660057392 17.498787864922122 3.1322032532882069
+		-5.4300177660057392 17.525229818229853 3.1960397755793721
+		-5.4300177660057392 17.498787864922122 3.2598762978705373
 		;
-createNode joint -n "R_REV_DER_1";
-	setAttr ".t" -type "double3" -1.31419 0.111058 -0.772075 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -41.334252489082139 88.349622908284374 138.65395815421752 ;
-	setAttr ".radi" 0.59614253979186849;
-createNode joint -n "R_REV_DER_2" -p "R_REV_DER_1";
-	setAttr ".t" -type "double3" -2.858844105958716 -1.3375094301132373e-006 -0.0038483321687325933 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -179.46902035323063 -1.1196301958058767 155.71567671224267 ;
-	setAttr ".radi" 0.5;
-createNode joint -n "R_REV_DER_3" -p "R_REV_DER_2";
-	setAttr ".t" -type "double3" -0.98627085442002738 3.8518170319967737e-007 0 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -6.112773187408598e-016 1.1703403210666104e-014 -5.9797672800989918 ;
-	setAttr ".radi" 0.52608389778031561;
-createNode joint -n "R_REV_DER_4" -p "R_REV_DER_3";
-	setAttr ".t" -type "double3" -1.5042929908338496 1.4673953029342712e-006 0 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -19.389530444065588 -89.999999999999901 0 ;
-	setAttr ".radi" 0.52608389778031561;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_DWN_0Shape16" -p "CTRL_PARPADO_IZQ_DWN_03";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.4938542882969044 17.43495134263096 3.1322032532882069
+		-5.5202962416046359 17.43495134263096 3.1960397755793721
+		-5.4938542882969044 17.43495134263096 3.2598762978705373
+		-5.4300177660057392 17.43495134263096 3.2863182511782707
+		-5.3661812437145739 17.43495134263096 3.2598762978705373
+		-5.3397392904068424 17.43495134263096 3.1960397755793721
+		-5.3661812437145739 17.43495134263096 3.1322032532882069
+		-5.4300177660057392 17.43495134263096 3.1057612999804736
+		-5.4938542882969044 17.43495134263096 3.1322032532882069
+		-5.5202962416046359 17.43495134263096 3.1960397755793721
+		-5.4938542882969044 17.43495134263096 3.2598762978705373
+		;
+createNode transform -n "CTRL_PARPADO_IZQ_UP_04" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.6287048593340812 17.999999994183511 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -5.6287048593340812 17.999999994183511 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_04Shape" -p "CTRL_PARPADO_IZQ_UP_04";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.5648683370429159 18.063836516474677 3.1960397755793712
+		-5.6287048593340812 18.090278469782408 3.1960397755793712
+		-5.6925413816252464 18.063836516474677 3.1960397755793712
+		-5.7189833349329797 17.999999994183511 3.1960397755793712
+		-5.6925413816252464 17.936163471892346 3.1960397755793712
+		-5.6287048593340812 17.909721518584615 3.1960397755793712
+		-5.5648683370429159 17.936163471892346 3.1960397755793712
+		-5.5384263837351826 17.999999994183511 3.1960397755793712
+		-5.5648683370429159 18.063836516474677 3.1960397755793712
+		-5.6287048593340812 18.090278469782408 3.1960397755793712
+		-5.6925413816252464 18.063836516474677 3.1960397755793712
+		;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_04Shape1" -p "CTRL_PARPADO_IZQ_UP_04";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.6287048593340812 18.063836516474677 3.1322032532882069
+		-5.6287048593340812 18.090278469782408 3.1960397755793721
+		-5.6287048593340812 18.063836516474677 3.2598762978705373
+		-5.6287048593340812 17.999999994183511 3.2863182511782707
+		-5.6287048593340812 17.936163471892346 3.2598762978705373
+		-5.6287048593340812 17.909721518584615 3.1960397755793721
+		-5.6287048593340812 17.936163471892346 3.1322032532882069
+		-5.6287048593340812 17.999999994183511 3.1057612999804736
+		-5.6287048593340812 18.063836516474677 3.1322032532882069
+		-5.6287048593340812 18.090278469782408 3.1960397755793721
+		-5.6287048593340812 18.063836516474677 3.2598762978705373
+		;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_04Shape2" -p "CTRL_PARPADO_IZQ_UP_04";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.6925413816252464 17.999999994183515 3.1322032532882069
+		-5.7189833349329779 17.999999994183515 3.1960397755793721
+		-5.6925413816252464 17.999999994183515 3.2598762978705373
+		-5.6287048593340812 17.999999994183515 3.2863182511782707
+		-5.5648683370429159 17.999999994183515 3.2598762978705373
+		-5.5384263837351844 17.999999994183515 3.1960397755793721
+		-5.5648683370429159 17.999999994183515 3.1322032532882069
+		-5.6287048593340812 17.999999994183515 3.1057612999804736
+		-5.6925413816252464 17.999999994183515 3.1322032532882069
+		-5.7189833349329779 17.999999994183515 3.1960397755793721
+		-5.6925413816252464 17.999999994183515 3.2598762978705373
+		;
+createNode transform -n "CTRL_PARPADO_IZQ_UP_03" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.4300177660057392 18.55525929055462 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -5.4300177660057392 18.55525929055462 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_0Shape3" -p "CTRL_PARPADO_IZQ_UP_03";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.3661812437145739 18.619095812845785 3.1960397755793712
+		-5.4300177660057392 18.645537766153517 3.1960397755793712
+		-5.4938542882969044 18.619095812845785 3.1960397755793712
+		-5.5202962416046377 18.55525929055462 3.1960397755793712
+		-5.4938542882969044 18.491422768263455 3.1960397755793712
+		-5.4300177660057392 18.464980814955723 3.1960397755793712
+		-5.3661812437145739 18.491422768263455 3.1960397755793712
+		-5.3397392904068406 18.55525929055462 3.1960397755793712
+		-5.3661812437145739 18.619095812845785 3.1960397755793712
+		-5.4300177660057392 18.645537766153517 3.1960397755793712
+		-5.4938542882969044 18.619095812845785 3.1960397755793712
+		;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_0Shape17" -p "CTRL_PARPADO_IZQ_UP_03";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.4300177660057392 18.619095812845785 3.1322032532882069
+		-5.4300177660057392 18.645537766153517 3.1960397755793721
+		-5.4300177660057392 18.619095812845785 3.2598762978705373
+		-5.4300177660057392 18.55525929055462 3.2863182511782707
+		-5.4300177660057392 18.491422768263455 3.2598762978705373
+		-5.4300177660057392 18.464980814955723 3.1960397755793721
+		-5.4300177660057392 18.491422768263455 3.1322032532882069
+		-5.4300177660057392 18.55525929055462 3.1057612999804736
+		-5.4300177660057392 18.619095812845785 3.1322032532882069
+		-5.4300177660057392 18.645537766153517 3.1960397755793721
+		-5.4300177660057392 18.619095812845785 3.2598762978705373
+		;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_0Shape18" -p "CTRL_PARPADO_IZQ_UP_03";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.4938542882969044 18.555259290554623 3.1322032532882069
+		-5.5202962416046359 18.555259290554623 3.1960397755793721
+		-5.4938542882969044 18.555259290554623 3.2598762978705373
+		-5.4300177660057392 18.555259290554623 3.2863182511782707
+		-5.3661812437145739 18.555259290554623 3.2598762978705373
+		-5.3397392904068424 18.555259290554623 3.1960397755793721
+		-5.3661812437145739 18.555259290554623 3.1322032532882069
+		-5.4300177660057392 18.555259290554623 3.1057612999804736
+		-5.4938542882969044 18.555259290554623 3.1322032532882069
+		-5.5202962416046359 18.555259290554623 3.1960397755793721
+		-5.4938542882969044 18.555259290554623 3.2598762978705373
+		;
+createNode transform -n "CTRL_PARPADO_IZQ_UP_02" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -4.8675390972741797 18.774006610266095 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -4.8675390972741797 18.774006610266095 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_0Shape2" -p "CTRL_PARPADO_IZQ_UP_02";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.8037025749830145 18.837843132557261 3.1960397755793712
+		-4.8675390972741797 18.864285085864992 3.1960397755793712
+		-4.9313756195653449 18.837843132557261 3.1960397755793712
+		-4.9578175728730782 18.774006610266095 3.1960397755793712
+		-4.9313756195653449 18.71017008797493 3.1960397755793712
+		-4.8675390972741797 18.683728134667199 3.1960397755793712
+		-4.8037025749830145 18.71017008797493 3.1960397755793712
+		-4.7772606216752811 18.774006610266095 3.1960397755793712
+		-4.8037025749830145 18.837843132557261 3.1960397755793712
+		-4.8675390972741797 18.864285085864992 3.1960397755793712
+		-4.9313756195653449 18.837843132557261 3.1960397755793712
+		;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_0Shape15" -p "CTRL_PARPADO_IZQ_UP_02";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.8675390972741797 18.837843132557261 3.1322032532882069
+		-4.8675390972741797 18.864285085864992 3.1960397755793721
+		-4.8675390972741797 18.837843132557261 3.2598762978705373
+		-4.8675390972741797 18.774006610266095 3.2863182511782707
+		-4.8675390972741797 18.71017008797493 3.2598762978705373
+		-4.8675390972741797 18.683728134667199 3.1960397755793721
+		-4.8675390972741797 18.71017008797493 3.1322032532882069
+		-4.8675390972741797 18.774006610266095 3.1057612999804736
+		-4.8675390972741797 18.837843132557261 3.1322032532882069
+		-4.8675390972741797 18.864285085864992 3.1960397755793721
+		-4.8675390972741797 18.837843132557261 3.2598762978705373
+		;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_0Shape16" -p "CTRL_PARPADO_IZQ_UP_02";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.9313756195653449 18.774006610266099 3.1322032532882069
+		-4.9578175728730765 18.774006610266099 3.1960397755793721
+		-4.9313756195653449 18.774006610266099 3.2598762978705373
+		-4.8675390972741797 18.774006610266099 3.2863182511782707
+		-4.8037025749830145 18.774006610266099 3.2598762978705373
+		-4.7772606216752829 18.774006610266099 3.1960397755793721
+		-4.8037025749830145 18.774006610266099 3.1322032532882069
+		-4.8675390972741797 18.774006610266099 3.1057612999804736
+		-4.9313756195653449 18.774006610266099 3.1322032532882069
+		-4.9578175728730765 18.774006610266099 3.1960397755793721
+		-4.9313756195653449 18.774006610266099 3.2598762978705373
+		;
+createNode transform -n "CTRL_PARPADO_IZQ_UP_01" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -4.2953468956727976 18.55525929055462 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -4.2953468956727976 18.55525929055462 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_0Shape1" -p "CTRL_PARPADO_IZQ_UP_01";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.2315103733816324 18.619095812845785 3.1960397755793712
+		-4.2953468956727976 18.645537766153517 3.1960397755793712
+		-4.3591834179639628 18.619095812845785 3.1960397755793712
+		-4.3856253712716962 18.55525929055462 3.1960397755793712
+		-4.3591834179639628 18.491422768263455 3.1960397755793712
+		-4.2953468956727976 18.464980814955723 3.1960397755793712
+		-4.2315103733816324 18.491422768263455 3.1960397755793712
+		-4.205068420073899 18.55525929055462 3.1960397755793712
+		-4.2315103733816324 18.619095812845785 3.1960397755793712
+		-4.2953468956727976 18.645537766153517 3.1960397755793712
+		-4.3591834179639628 18.619095812845785 3.1960397755793712
+		;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_0Shape11" -p "CTRL_PARPADO_IZQ_UP_01";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.2953468956727976 18.619095812845785 3.1322032532882069
+		-4.2953468956727976 18.645537766153517 3.1960397755793721
+		-4.2953468956727976 18.619095812845785 3.2598762978705373
+		-4.2953468956727976 18.55525929055462 3.2863182511782707
+		-4.2953468956727976 18.491422768263455 3.2598762978705373
+		-4.2953468956727976 18.464980814955723 3.1960397755793721
+		-4.2953468956727976 18.491422768263455 3.1322032532882069
+		-4.2953468956727976 18.55525929055462 3.1057612999804736
+		-4.2953468956727976 18.619095812845785 3.1322032532882069
+		-4.2953468956727976 18.645537766153517 3.1960397755793721
+		-4.2953468956727976 18.619095812845785 3.2598762978705373
+		;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_0Shape12" -p "CTRL_PARPADO_IZQ_UP_01";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.3591834179639628 18.555259290554623 3.1322032532882069
+		-4.3856253712716944 18.555259290554623 3.1960397755793721
+		-4.3591834179639628 18.555259290554623 3.2598762978705373
+		-4.2953468956727976 18.555259290554623 3.2863182511782707
+		-4.2315103733816324 18.555259290554623 3.2598762978705373
+		-4.2050684200739008 18.555259290554623 3.1960397755793721
+		-4.2315103733816324 18.555259290554623 3.1322032532882069
+		-4.2953468956727976 18.555259290554623 3.1057612999804736
+		-4.3591834179639628 18.555259290554623 3.1322032532882069
+		-4.3856253712716944 18.555259290554623 3.1960397755793721
+		-4.3591834179639628 18.555259290554623 3.2598762978705373
+		;
+createNode transform -n "CTRL_PARPADO_IZQ_UP_00" -p "GRP_CTRLS_PARPADOS";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -4.1086289043521873 17.999999994183511 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -4.1086289043521873 17.999999994183511 3.1960397755793712 ;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_00Shape" -p "CTRL_PARPADO_IZQ_UP_00";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.0447923820610221 18.063836516474677 3.1960397755793712
+		-4.1086289043521873 18.090278469782408 3.1960397755793712
+		-4.1724654266433525 18.063836516474677 3.1960397755793712
+		-4.1989073799510859 17.999999994183511 3.1960397755793712
+		-4.1724654266433525 17.936163471892346 3.1960397755793712
+		-4.1086289043521873 17.909721518584615 3.1960397755793712
+		-4.0447923820610221 17.936163471892346 3.1960397755793712
+		-4.0183504287532887 17.999999994183511 3.1960397755793712
+		-4.0447923820610221 18.063836516474677 3.1960397755793712
+		-4.1086289043521873 18.090278469782408 3.1960397755793712
+		-4.1724654266433525 18.063836516474677 3.1960397755793712
+		;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_00Shape1" -p "CTRL_PARPADO_IZQ_UP_00";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.1086289043521873 18.063836516474677 3.1322032532882069
+		-4.1086289043521873 18.090278469782408 3.1960397755793721
+		-4.1086289043521873 18.063836516474677 3.2598762978705373
+		-4.1086289043521873 17.999999994183511 3.2863182511782707
+		-4.1086289043521873 17.936163471892346 3.2598762978705373
+		-4.1086289043521873 17.909721518584615 3.1960397755793721
+		-4.1086289043521873 17.936163471892346 3.1322032532882069
+		-4.1086289043521873 17.999999994183511 3.1057612999804736
+		-4.1086289043521873 18.063836516474677 3.1322032532882069
+		-4.1086289043521873 18.090278469782408 3.1960397755793721
+		-4.1086289043521873 18.063836516474677 3.2598762978705373
+		;
+createNode nurbsCurve -n "CTRL_PARPADO_IZQ_UP_00Shape2" -p "CTRL_PARPADO_IZQ_UP_00";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.1724654266433525 17.999999994183515 3.1322032532882069
+		-4.1989073799510841 17.999999994183515 3.1960397755793721
+		-4.1724654266433525 17.999999994183515 3.2598762978705373
+		-4.1086289043521873 17.999999994183515 3.2863182511782707
+		-4.0447923820610221 17.999999994183515 3.2598762978705373
+		-4.0183504287532905 17.999999994183515 3.1960397755793721
+		-4.0447923820610221 17.999999994183515 3.1322032532882069
+		-4.1086289043521873 17.999999994183515 3.1057612999804736
+		-4.1724654266433525 17.999999994183515 3.1322032532882069
+		-4.1989073799510841 17.999999994183515 3.1960397755793721
+		-4.1724654266433525 17.999999994183515 3.2598762978705373
+		;
+createNode transform -n "GRP_CTRLS_CEJAS" -p "DRIVER_CARA";
+	setAttr ".rp" -type "double3" -5.9999999140235341 18 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -5.9999999140235341 18 3.1960397755793712 ;
+createNode transform -n "CEJA_DER_02" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -7.6067851451733626 18.821625018890483 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -7.6067851451733626 18.821625018890483 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_DER_02Shape" -p "CEJA_DER_02";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.5488056198384097 18.879604544225437 3.1960397755793712
+		-7.6067851451733626 18.903620449959128 3.1960397755793712
+		-7.6647646705083163 18.879604544225437 3.1960397755793712
+		-7.6887805762420074 18.821625018890479 3.1960397755793712
+		-7.6647646705083163 18.763645493555529 3.1960397755793712
+		-7.6067851451733626 18.739629587821835 3.1960397755793712
+		-7.5488056198384097 18.763645493555529 3.1960397755793712
+		-7.5247897141047178 18.821625018890479 3.1960397755793712
+		-7.5488056198384097 18.879604544225437 3.1960397755793712
+		-7.6067851451733626 18.903620449959128 3.1960397755793712
+		-7.6647646705083163 18.879604544225437 3.1960397755793712
+		;
+createNode transform -n "CEJA_DER_03" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -7.132419711352644 18.948730867641437 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -7.132419711352644 18.948730867641437 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_DER_03Shape" -p "CEJA_DER_03";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.0744401860176911 19.006710392976391 3.1960397755793712
+		-7.132419711352644 19.030726298710082 3.1960397755793712
+		-7.1903992366875968 19.006710392976391 3.1960397755793712
+		-7.2144151424212888 18.948730867641441 3.1960397755793712
+		-7.1903992366875968 18.890751342306487 3.1960397755793712
+		-7.1324197113526449 18.866735436572792 3.1960397755793712
+		-7.0744401860176911 18.890751342306487 3.1960397755793712
+		-7.0504242802839991 18.948730867641441 3.1960397755793712
+		-7.0744401860176911 19.006710392976391 3.1960397755793712
+		-7.132419711352644 19.030726298710082 3.1960397755793712
+		-7.1903992366875968 19.006710392976391 3.1960397755793712
+		;
+createNode transform -n "CEJA_DER_04" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.6580542775319254 18.821625018890483 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -6.6580542775319254 18.821625018890483 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_DER_04Shape" -p "CEJA_DER_04";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.6000747521969725 18.879604544225437 3.1960397755793712
+		-6.6580542775319254 18.903620449959128 3.1960397755793712
+		-6.7160338028668782 18.879604544225437 3.1960397755793712
+		-6.7400497086005702 18.821625018890487 3.1960397755793712
+		-6.7160338028668782 18.763645493555533 3.1960397755793712
+		-6.6580542775319254 18.739629587821838 3.1960397755793712
+		-6.6000747521969725 18.763645493555533 3.1960397755793712
+		-6.5760588464632805 18.821625018890487 3.1960397755793712
+		-6.6000747521969725 18.879604544225437 3.1960397755793712
+		-6.6580542775319254 18.903620449959128 3.1960397755793712
+		-6.7160338028668782 18.879604544225437 3.1960397755793712
+		;
+createNode transform -n "CEJA_IZQ_02" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -4.3932146828737055 18.821625018890483 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -4.3932146828737055 18.821625018890483 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_IZQ_02Shape" -p "CEJA_IZQ_02";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.4511942082086566 18.879604544225437 3.1960397755793712
+		-4.3932146828737046 18.903620449959128 3.1960397755793712
+		-4.3352351575387527 18.879604544225437 3.1960397755793712
+		-4.3112192518050607 18.821625018890483 3.1960397755793712
+		-4.3352351575387527 18.763645493555533 3.1960397755793712
+		-4.3932146828737046 18.739629587821838 3.1960397755793712
+		-4.4511942082086566 18.763645493555533 3.1960397755793712
+		-4.4752101139423512 18.821625018890483 3.1960397755793712
+		-4.4511942082086566 18.879604544225437 3.1960397755793712
+		-4.3932146828737046 18.903620449959128 3.1960397755793712
+		-4.3352351575387527 18.879604544225437 3.1960397755793712
+		;
+createNode transform -n "CEJA_IZQ_03" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -4.8675801166944241 18.948730867641437 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -4.8675801166944241 18.948730867641437 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_IZQ_03Shape" -p "CEJA_IZQ_03";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.9255596420293752 19.006710392976391 3.1960397755793712
+		-4.8675801166944233 19.030726298710082 3.1960397755793712
+		-4.8096005913594713 19.006710392976391 3.1960397755793712
+		-4.7855846856257793 18.948730867641437 3.1960397755793712
+		-4.8096005913594713 18.890751342306487 3.1960397755793712
+		-4.8675801166944233 18.866735436572792 3.1960397755793712
+		-4.9255596420293752 18.890751342306487 3.1960397755793712
+		-4.9495755477630698 18.948730867641437 3.1960397755793712
+		-4.9255596420293752 19.006710392976391 3.1960397755793712
+		-4.8675801166944233 19.030726298710082 3.1960397755793712
+		-4.8096005913594713 19.006710392976391 3.1960397755793712
+		;
+createNode transform -n "CEJA_IZQ_04" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.3419455505151427 18.821625018890483 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -5.3419455505151427 18.821625018890483 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_IZQ_04Shape" -p "CEJA_IZQ_04";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.3999250758500938 18.879604544225437 3.1960397755793712
+		-5.3419455505151419 18.903620449959128 3.1960397755793712
+		-5.2839660251801899 18.879604544225437 3.1960397755793712
+		-5.2599501194464979 18.821625018890483 3.1960397755793712
+		-5.2839660251801899 18.763645493555533 3.1960397755793712
+		-5.3419455505151419 18.739629587821838 3.1960397755793712
+		-5.3999250758500938 18.763645493555533 3.1960397755793712
+		-5.4239409815837885 18.821625018890483 3.1960397755793712
+		-5.3999250758500938 18.879604544225437 3.1960397755793712
+		-5.3419455505151419 18.903620449959128 3.1960397755793712
+		-5.2839660251801899 18.879604544225437 3.1960397755793712
+		;
+createNode transform -n "CEJA_IZQ_00" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -3.9188492490529874 18 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -3.9188492490529874 18 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_IZQ_00Shape" -p "CEJA_IZQ_00";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-3.9768287743879385 18.057979525334954 3.1960397755793712
+		-3.9188492490529865 18.081995431068645 3.1960397755793712
+		-3.8608697237180341 18.057979525334954 3.1960397755793712
+		-3.8368538179843426 18 3.1960397755793712
+		-3.8608697237180341 17.94202047466505 3.1960397755793712
+		-3.9188492490529865 17.918004568931355 3.1960397755793712
+		-3.9768287743879385 17.94202047466505 3.1960397755793712
+		-4.0008446801216326 18 3.1960397755793712
+		-3.9768287743879385 18.057979525334954 3.1960397755793712
+		-3.9188492490529865 18.081995431068645 3.1960397755793712
+		-3.8608697237180341 18.057979525334954 3.1960397755793712
+		;
+createNode transform -n "POMULO_IZQ_01" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -4.045955097803942 17.525634566179281 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -4.045955097803942 17.525634566179281 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "POMULO_IZQ_01Shape" -p "POMULO_IZQ_01";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.1039346231388958 17.583614091514235 3.1960397755793712
+		-4.045955097803942 17.607629997247926 3.1960397755793712
+		-3.98797557246899 17.583614091514235 3.1960397755793712
+		-3.9639596667352972 17.525634566179285 3.1960397755793712
+		-3.98797557246899 17.467655040844331 3.1960397755793712
+		-4.045955097803942 17.443639135110637 3.1960397755793712
+		-4.1039346231388958 17.467655040844331 3.1960397755793712
+		-4.1279505288725868 17.525634566179285 3.1960397755793712
+		-4.1039346231388958 17.583614091514235 3.1960397755793712
+		-4.045955097803942 17.607629997247926 3.1960397755793712
+		-3.98797557246899 17.583614091514235 3.1960397755793712
+		;
+createNode transform -n "CEJA_IZQ_01" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -4.045955097803942 18.474365433820719 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -4.045955097803942 18.474365433820719 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_IZQ_01Shape" -p "CEJA_IZQ_01";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.1039346231388931 18.532344959155672 3.1960397755793712
+		-4.0459550978039411 18.556360864889363 3.1960397755793712
+		-3.9879755724689887 18.532344959155672 3.1960397755793712
+		-3.9639596667352972 18.474365433820719 3.1960397755793712
+		-3.9879755724689887 18.416385908485768 3.1960397755793712
+		-4.0459550978039411 18.392370002752074 3.1960397755793712
+		-4.1039346231388931 18.416385908485768 3.1960397755793712
+		-4.1279505288725868 18.474365433820719 3.1960397755793712
+		-4.1039346231388931 18.532344959155672 3.1960397755793712
+		-4.0459550978039411 18.556360864889363 3.1960397755793712
+		-3.9879755724689887 18.532344959155672 3.1960397755793712
+		;
+createNode transform -n "CEJA_IZQ_05" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.6892051355849063 18.474365433820719 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -5.6892051355849063 18.474365433820719 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_IZQ_05Shape" -p "CEJA_IZQ_05";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.7471846609198574 18.532344959155672 3.1960397755793712
+		-5.6892051355849054 18.556360864889363 3.1960397755793712
+		-5.6312256102499534 18.532344959155672 3.1960397755793712
+		-5.6072097045162614 18.474365433820719 3.1960397755793712
+		-5.6312256102499534 18.416385908485768 3.1960397755793712
+		-5.6892051355849054 18.392370002752074 3.1960397755793712
+		-5.7471846609198574 18.416385908485768 3.1960397755793712
+		-5.771200566653552 18.474365433820719 3.1960397755793712
+		-5.7471846609198574 18.532344959155672 3.1960397755793712
+		-5.6892051355849054 18.556360864889363 3.1960397755793712
+		-5.6312256102499534 18.532344959155672 3.1960397755793712
+		;
+createNode transform -n "CEJA_IZQ_06" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.8163109843358605 18 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -5.8163109843358605 18 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_IZQ_06Shape" -p "CEJA_IZQ_06";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.8742905096708116 18.057979525334954 3.1960397755793712
+		-5.8163109843358596 18.081995431068645 3.1960397755793712
+		-5.7583314590009076 18.057979525334954 3.1960397755793712
+		-5.7343155532672156 18 3.1960397755793712
+		-5.7583314590009076 17.94202047466505 3.1960397755793712
+		-5.8163109843358596 17.918004568931355 3.1960397755793712
+		-5.8742905096708116 17.94202047466505 3.1960397755793712
+		-5.8983064154045062 18 3.1960397755793712
+		-5.8742905096708116 18.057979525334954 3.1960397755793712
+		-5.8163109843358596 18.081995431068645 3.1960397755793712
+		-5.7583314590009076 18.057979525334954 3.1960397755793712
+		;
+createNode transform -n "POMULO_IZQ_05" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.6892051355849063 17.525634566179281 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -5.6892051355849063 17.525634566179281 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "POMULO_IZQ_05Shape" -p "POMULO_IZQ_05";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.74718466091986 17.583614091514235 3.1960397755793712
+		-5.6892051355849063 17.607629997247926 3.1960397755793712
+		-5.6312256102499543 17.583614091514235 3.1960397755793712
+		-5.6072097045162614 17.525634566179285 3.1960397755793712
+		-5.6312256102499543 17.467655040844331 3.1960397755793712
+		-5.6892051355849063 17.443639135110637 3.1960397755793712
+		-5.74718466091986 17.467655040844331 3.1960397755793712
+		-5.7712005666535511 17.525634566179285 3.1960397755793712
+		-5.74718466091986 17.583614091514235 3.1960397755793712
+		-5.6892051355849063 17.607629997247926 3.1960397755793712
+		-5.6312256102499543 17.583614091514235 3.1960397755793712
+		;
+createNode transform -n "CEJA_DER_05" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.3107946924621618 18.474365433820719 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -6.3107946924621618 18.474365433820719 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_DER_05Shape" -p "CEJA_DER_05";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.252815167127209 18.532344959155672 3.1960397755793712
+		-6.3107946924621618 18.556360864889363 3.1960397755793712
+		-6.3687742177971147 18.532344959155672 3.1960397755793712
+		-6.3927901235308067 18.474365433820719 3.1960397755793712
+		-6.3687742177971147 18.416385908485765 3.1960397755793712
+		-6.3107946924621627 18.392370002752074 3.1960397755793712
+		-6.252815167127209 18.416385908485765 3.1960397755793712
+		-6.228799261393517 18.474365433820719 3.1960397755793712
+		-6.252815167127209 18.532344959155672 3.1960397755793712
+		-6.3107946924621618 18.556360864889363 3.1960397755793712
+		-6.3687742177971147 18.532344959155672 3.1960397755793712
+		;
+createNode transform -n "CEJA_DER_06" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.1836888437112076 18 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -6.1836888437112076 18 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_DER_06Shape" -p "CEJA_DER_06";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.1257093183762548 18.05797952533495 3.1960397755793712
+		-6.1836888437112076 18.081995431068645 3.1960397755793712
+		-6.2416683690461605 18.05797952533495 3.1960397755793712
+		-6.2656842747798525 18 3.1960397755793712
+		-6.2416683690461605 17.94202047466505 3.1960397755793712
+		-6.1836888437112076 17.918004568931352 3.1960397755793712
+		-6.1257093183762548 17.94202047466505 3.1960397755793712
+		-6.1016934126425628 18 3.1960397755793712
+		-6.1257093183762548 18.05797952533495 3.1960397755793712
+		-6.1836888437112076 18.081995431068645 3.1960397755793712
+		-6.2416683690461605 18.05797952533495 3.1960397755793712
+		;
+createNode transform -n "POMULO_DER_05" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.3107946924621618 17.525634566179281 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -6.3107946924621618 17.525634566179281 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "POMULO_DER_05Shape" -p "POMULO_DER_05";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.2528151671272081 17.583614091514235 3.1960397755793712
+		-6.310794692462161 17.607629997247926 3.1960397755793712
+		-6.3687742177971147 17.583614091514235 3.1960397755793712
+		-6.3927901235308067 17.525634566179281 3.1960397755793712
+		-6.3687742177971147 17.467655040844328 3.1960397755793712
+		-6.3107946924621618 17.443639135110637 3.1960397755793712
+		-6.2528151671272081 17.467655040844328 3.1960397755793712
+		-6.2287992613935161 17.525634566179281 3.1960397755793712
+		-6.2528151671272081 17.583614091514235 3.1960397755793712
+		-6.310794692462161 17.607629997247926 3.1960397755793712
+		-6.3687742177971147 17.583614091514235 3.1960397755793712
+		;
+createNode transform -n "POMULO_IZQ_02" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -4.3932146828737055 17.178374981109517 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -4.3932146828737055 17.178374981109517 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "POMULO_IZQ_02Shape" -p "POMULO_IZQ_02";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.4511942082086593 17.236354506444471 3.1960397755793712
+		-4.3932146828737055 17.260370412178162 3.1960397755793712
+		-4.3352351575387535 17.236354506444471 3.1960397755793712
+		-4.3112192518050607 17.178374981109521 3.1960397755793712
+		-4.3352351575387535 17.120395455774567 3.1960397755793712
+		-4.3932146828737055 17.096379550040872 3.1960397755793712
+		-4.4511942082086593 17.120395455774567 3.1960397755793712
+		-4.4752101139423504 17.178374981109521 3.1960397755793712
+		-4.4511942082086593 17.236354506444471 3.1960397755793712
+		-4.3932146828737055 17.260370412178162 3.1960397755793712
+		-4.3352351575387535 17.236354506444471 3.1960397755793712
+		;
+createNode transform -n "POMULO_IZQ_03" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -4.8675801166944241 17.051269132358563 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -4.8675801166944241 17.051269132358563 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "POMULO_IZQ_03Shape" -p "POMULO_IZQ_03";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-4.9255596420293779 17.109248657693517 3.1960397755793712
+		-4.8675801166944241 17.133264563427208 3.1960397755793712
+		-4.8096005913594722 17.109248657693517 3.1960397755793712
+		-4.7855846856257793 17.051269132358566 3.1960397755793712
+		-4.8096005913594722 16.993289607023613 3.1960397755793712
+		-4.8675801166944241 16.969273701289918 3.1960397755793712
+		-4.9255596420293779 16.993289607023613 3.1960397755793712
+		-4.949575547763069 17.051269132358566 3.1960397755793712
+		-4.9255596420293779 17.109248657693517 3.1960397755793712
+		-4.8675801166944241 17.133264563427208 3.1960397755793712
+		-4.8096005913594722 17.109248657693517 3.1960397755793712
+		;
+createNode transform -n "POMULO_IZQ_04" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.3419455505151427 17.178374981109517 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -5.3419455505151427 17.178374981109517 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "POMULO_IZQ_04Shape" -p "POMULO_IZQ_04";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.3999250758500965 17.236354506444471 3.1960397755793712
+		-5.3419455505151427 17.260370412178162 3.1960397755793712
+		-5.2839660251801908 17.236354506444471 3.1960397755793712
+		-5.2599501194464979 17.178374981109521 3.1960397755793712
+		-5.2839660251801908 17.120395455774567 3.1960397755793712
+		-5.3419455505151427 17.096379550040872 3.1960397755793712
+		-5.3999250758500965 17.120395455774567 3.1960397755793712
+		-5.4239409815837876 17.178374981109521 3.1960397755793712
+		-5.3999250758500965 17.236354506444471 3.1960397755793712
+		-5.3419455505151427 17.260370412178162 3.1960397755793712
+		-5.2839660251801908 17.236354506444471 3.1960397755793712
+		;
+createNode transform -n "POMULO_DER_03" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -7.132419711352644 17.051269132358563 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -7.132419711352644 17.051269132358563 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "POMULO_DER_03Shape" -p "POMULO_DER_03";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.0744401860176902 17.109248657693517 3.1960397755793712
+		-7.1324197113526431 17.133264563427208 3.1960397755793712
+		-7.1903992366875968 17.109248657693517 3.1960397755793712
+		-7.2144151424212888 17.051269132358563 3.1960397755793712
+		-7.1903992366875968 16.993289607023609 3.1960397755793712
+		-7.132419711352644 16.969273701289918 3.1960397755793712
+		-7.0744401860176902 16.993289607023609 3.1960397755793712
+		-7.0504242802839983 17.051269132358563 3.1960397755793712
+		-7.0744401860176902 17.109248657693517 3.1960397755793712
+		-7.1324197113526431 17.133264563427208 3.1960397755793712
+		-7.1903992366875968 17.109248657693517 3.1960397755793712
+		;
+createNode transform -n "POMULO_DER_04" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.6580542775319254 17.178374981109517 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -6.6580542775319254 17.178374981109517 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "POMULO_DER_04Shape" -p "POMULO_DER_04";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.6000747521969716 17.236354506444471 3.1960397755793712
+		-6.6580542775319245 17.260370412178162 3.1960397755793712
+		-6.7160338028668782 17.236354506444471 3.1960397755793712
+		-6.7400497086005702 17.178374981109517 3.1960397755793712
+		-6.7160338028668782 17.120395455774563 3.1960397755793712
+		-6.6580542775319254 17.096379550040872 3.1960397755793712
+		-6.6000747521969716 17.120395455774563 3.1960397755793712
+		-6.5760588464632797 17.178374981109517 3.1960397755793712
+		-6.6000747521969716 17.236354506444471 3.1960397755793712
+		-6.6580542775319245 17.260370412178162 3.1960397755793712
+		-6.7160338028668782 17.236354506444471 3.1960397755793712
+		;
+createNode transform -n "POMULO_DER_02" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -7.6067851451733626 17.178374981109517 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -7.6067851451733626 17.178374981109517 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "POMULO_DER_02Shape" -p "POMULO_DER_02";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.5488056198384088 17.236354506444471 3.1960397755793712
+		-7.6067851451733617 17.260370412178165 3.1960397755793712
+		-7.6647646705083146 17.236354506444471 3.1960397755793712
+		-7.6887805762420074 17.178374981109517 3.1960397755793712
+		-7.6647646705083146 17.120395455774567 3.1960397755793712
+		-7.6067851451733626 17.096379550040872 3.1960397755793712
+		-7.5488056198384088 17.120395455774567 3.1960397755793712
+		-7.5247897141047169 17.178374981109517 3.1960397755793712
+		-7.5488056198384088 17.236354506444471 3.1960397755793712
+		-7.6067851451733617 17.260370412178165 3.1960397755793712
+		-7.6647646705083146 17.236354506444471 3.1960397755793712
+		;
+createNode transform -n "POMULO_DER_01" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -7.9540447302431261 17.525634566179281 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -7.9540447302431261 17.525634566179281 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "POMULO_DER_01Shape" -p "POMULO_DER_01";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.8960652049081732 17.583614091514235 3.1960397755793712
+		-7.9540447302431252 17.607629997247926 3.1960397755793712
+		-8.0120242555780763 17.583614091514235 3.1960397755793712
+		-8.0360401613117709 17.525634566179285 3.1960397755793712
+		-8.0120242555780763 17.467655040844331 3.1960397755793712
+		-7.9540447302431252 17.443639135110637 3.1960397755793712
+		-7.8960652049081732 17.467655040844331 3.1960397755793712
+		-7.8720492991744804 17.525634566179285 3.1960397755793712
+		-7.8960652049081732 17.583614091514235 3.1960397755793712
+		-7.9540447302431252 17.607629997247926 3.1960397755793712
+		-8.0120242555780763 17.583614091514235 3.1960397755793712
+		;
+createNode transform -n "CEJA_DER_00" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -8.0811505789940803 18 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -8.0811505789940803 18 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_DER_00Shape" -p "CEJA_DER_00";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-8.0231710536591283 18.057979525334954 3.1960397755793712
+		-8.0811505789940803 18.081995431068645 3.1960397755793712
+		-8.1391301043290341 18.057979525334954 3.1960397755793712
+		-8.1631460100627251 18 3.1960397755793712
+		-8.1391301043290341 17.94202047466505 3.1960397755793712
+		-8.0811505789940803 17.918004568931355 3.1960397755793712
+		-8.0231710536591283 17.94202047466505 3.1960397755793712
+		-7.9991551479254355 18 3.1960397755793712
+		-8.0231710536591283 18.057979525334954 3.1960397755793712
+		-8.0811505789940803 18.081995431068645 3.1960397755793712
+		-8.1391301043290341 18.057979525334954 3.1960397755793712
+		;
+createNode transform -n "CEJA_DER_01" -p "GRP_CTRLS_CEJAS";
+	setAttr -l on -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -7.9540447302431261 18.474365433820719 3.1960397755793712 ;
+	setAttr ".sp" -type "double3" -7.9540447302431261 18.474365433820719 3.1960397755793712 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "CEJA_DER_01Shape" -p "CEJA_DER_01";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-7.8960652049081741 18.532344959155672 3.1960397755793712
+		-7.9540447302431261 18.556360864889363 3.1960397755793712
+		-8.0120242555780798 18.532344959155672 3.1960397755793712
+		-8.0360401613117709 18.474365433820719 3.1960397755793712
+		-8.0120242555780798 18.416385908485768 3.1960397755793712
+		-7.9540447302431261 18.392370002752074 3.1960397755793712
+		-7.8960652049081741 18.416385908485768 3.1960397755793712
+		-7.8720492991744813 18.474365433820719 3.1960397755793712
+		-7.8960652049081741 18.532344959155672 3.1960397755793712
+		-7.9540447302431261 18.556360864889363 3.1960397755793712
+		-8.0120242555780798 18.532344959155672 3.1960397755793712
+		;
+createNode transform -n "GRP_CTRLS_BOCA" -p "DRIVER_CARA";
+	setAttr ".rp" -type "double3" -5.9962835751525283 15.461899277053863 3.1960397755793699 ;
+	setAttr ".sp" -type "double3" -5.9962835751525283 15.461899277053863 3.1960397755793699 ;
+createNode transform -n "LABIO_SUPERIOR_CNT" -p "GRP_CTRLS_BOCA";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.9962835751525283 15.649856401591324 3.1960397755793699 ;
+	setAttr ".sp" -type "double3" -5.9962835751525283 15.649856401591324 3.1960397755793699 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "LABIO_SUPERIOR_CNTShape" -p "LABIO_SUPERIOR_CNT";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.9561710496614797 15.689968927082372 3.1960397755793699
+		-5.9962835751525274 15.7065840791618 3.1960397755793699
+		-6.036396100643576 15.689968927082372 3.1960397755793699
+		-6.0530112527230049 15.649856401591324 3.1960397755793699
+		-6.036396100643576 15.609743876100277 3.1960397755793699
+		-5.9962835751525274 15.593128724020847 3.1960397755793699
+		-5.9561710496614797 15.609743876100273 3.1960397755793699
+		-5.9395558975820508 15.649856401591324 3.1960397755793699
+		-5.9561710496614797 15.689968927082372 3.1960397755793699
+		-5.9962835751525274 15.7065840791618 3.1960397755793699
+		-6.036396100643576 15.689968927082372 3.1960397755793699
+		;
+createNode transform -n "LABIO_INFERIOR_CNT" -p "GRP_CTRLS_BOCA";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.9962835751525283 15.273942152516403 3.1960397755793699 ;
+	setAttr ".sp" -type "double3" -5.9962835751525283 15.273942152516403 3.1960397755793699 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "LABIO_INFERIOR_CNTShape" -p "LABIO_INFERIOR_CNT";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.9561710496614797 15.314054678007452 3.1960397755793699
+		-5.9962835751525274 15.33066983008688 3.1960397755793699
+		-6.036396100643576 15.314054678007452 3.1960397755793699
+		-6.0530112527230049 15.273942152516405 3.1960397755793699
+		-6.036396100643576 15.233829627025354 3.1960397755793699
+		-5.9962835751525274 15.217214474945926 3.1960397755793699
+		-5.9561710496614797 15.233829627025354 3.1960397755793699
+		-5.9395558975820508 15.273942152516405 3.1960397755793699
+		-5.9561710496614797 15.314054678007452 3.1960397755793699
+		-5.9962835751525274 15.33066983008688 3.1960397755793699
+		-6.036396100643576 15.314054678007452 3.1960397755793699
+		;
+createNode transform -n "LABIO_SUPERIOR_DER" -p "GRP_CTRLS_BOCA";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.3977477766004949 15.633447526981282 3.1960397755793699 ;
+	setAttr ".sp" -type "double3" -6.3977477766004949 15.633447526981282 3.1960397755793699 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "LABIO_SUPERIOR_DERShape" -p "LABIO_SUPERIOR_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.3576352511094472 15.673560052472329 3.1960397755793699
+		-6.3977477766004949 15.690175204551759 3.1960397755793699
+		-6.4378603020915435 15.673560052472329 3.1960397755793699
+		-6.4544754541709723 15.63344752698128 3.1960397755793699
+		-6.4378603020915435 15.593335001490233 3.1960397755793699
+		-6.3977477766004949 15.576719849410804 3.1960397755793699
+		-6.3576352511094472 15.593335001490232 3.1960397755793699
+		-6.3410200990300183 15.63344752698128 3.1960397755793699
+		-6.3576352511094472 15.673560052472329 3.1960397755793699
+		-6.3977477766004949 15.690175204551759 3.1960397755793699
+		-6.4378603020915435 15.673560052472329 3.1960397755793699
+		;
+createNode transform -n "LABIO_INFERIOR_DER" -p "GRP_CTRLS_BOCA";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.3977477766004949 15.294522038763255 3.1960397755793699 ;
+	setAttr ".sp" -type "double3" -6.3977477766004949 15.294522038763255 3.1960397755793699 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "LABIO_INFERIOR_DERShape" -p "LABIO_INFERIOR_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.3576352511094472 15.334634564254305 3.1960397755793699
+		-6.3977477766004949 15.351249716333733 3.1960397755793699
+		-6.4378603020915435 15.334634564254305 3.1960397755793699
+		-6.4544754541709723 15.294522038763255 3.1960397755793699
+		-6.4378603020915435 15.254409513272208 3.1960397755793699
+		-6.3977477766004949 15.237794361192776 3.1960397755793699
+		-6.3576352511094472 15.254409513272208 3.1960397755793699
+		-6.3410200990300183 15.294522038763255 3.1960397755793699
+		-6.3576352511094472 15.334634564254305 3.1960397755793699
+		-6.3977477766004949 15.351249716333733 3.1960397755793699
+		-6.4378603020915435 15.334634564254305 3.1960397755793699
+		;
+createNode transform -n "LABIO_SUPERIOR_ESQ_DER" -p "GRP_CTRLS_BOCA";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.8089892326776909 15.550577638119494 3.1960397755793699 ;
+	setAttr ".sp" -type "double3" -6.8089892326776909 15.550577638119494 3.1960397755793699 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 -0.7 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "LABIO_SUPERIOR_ESQ_DERShape" -p "LABIO_SUPERIOR_ESQ_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.7688767071866422 15.590690163610542 3.1960397755793699
+		-6.80898923267769 15.60730531568997 3.1960397755793699
+		-6.8491017581687386 15.590690163610542 3.1960397755793699
+		-6.8657169102481674 15.550577638119496 3.1960397755793699
+		-6.8491017581687386 15.510465112628445 3.1960397755793699
+		-6.80898923267769 15.493849960549017 3.1960397755793699
+		-6.7688767071866422 15.510465112628445 3.1960397755793699
+		-6.7522615551072134 15.550577638119496 3.1960397755793699
+		-6.7688767071866422 15.590690163610542 3.1960397755793699
+		-6.80898923267769 15.60730531568997 3.1960397755793699
+		-6.8491017581687386 15.590690163610542 3.1960397755793699
+		;
+createNode transform -n "LABIO_INFERIOR_ESQ_DER" -p "GRP_CTRLS_BOCA";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -6.8089892326776909 15.388614944804871 3.1960397755793699 ;
+	setAttr ".sp" -type "double3" -6.8089892326776909 15.388614944804871 3.1960397755793699 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "LABIO_INFERIOR_ESQ_DERShape" -p "LABIO_INFERIOR_ESQ_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-6.7688767071866422 15.428727470295918 3.1960397755793699
+		-6.80898923267769 15.445342622375346 3.1960397755793699
+		-6.8491017581687386 15.428727470295922 3.1960397755793699
+		-6.8657169102481674 15.388614944804871 3.1960397755793699
+		-6.8491017581687386 15.348502419313824 3.1960397755793699
+		-6.80898923267769 15.331887267234396 3.1960397755793699
+		-6.7688767071866422 15.348502419313821 3.1960397755793699
+		-6.7522615551072134 15.388614944804871 3.1960397755793699
+		-6.7688767071866422 15.428727470295918 3.1960397755793699
+		-6.80898923267769 15.445342622375346 3.1960397755793699
+		-6.8491017581687386 15.428727470295922 3.1960397755793699
+		;
+createNode transform -n "LABIO_SUPERIOR_IZQ" -p "GRP_CTRLS_BOCA";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.5944213968605681 15.633447526981282 3.1960397755793699 ;
+	setAttr ".sp" -type "double3" -5.5944213968605681 15.633447526981282 3.1960397755793699 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "LABIO_SUPERIOR_IZQShape" -p "LABIO_SUPERIOR_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.5543088713695195 15.673560052472329 3.1960397755793699
+		-5.5944213968605681 15.690175204551759 3.1960397755793699
+		-5.6345339223516158 15.673560052472329 3.1960397755793699
+		-5.6511490744310446 15.63344752698128 3.1960397755793699
+		-5.6345339223516158 15.593335001490233 3.1960397755793699
+		-5.5944213968605681 15.576719849410804 3.1960397755793699
+		-5.5543088713695195 15.593335001490232 3.1960397755793699
+		-5.5376937192900906 15.63344752698128 3.1960397755793699
+		-5.5543088713695195 15.673560052472329 3.1960397755793699
+		-5.5944213968605681 15.690175204551759 3.1960397755793699
+		-5.6345339223516158 15.673560052472329 3.1960397755793699
+		;
+createNode transform -n "LABIO_INFERIOR_IZQ" -p "GRP_CTRLS_BOCA";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.5944213968605681 15.294522038763255 3.1960397755793699 ;
+	setAttr ".sp" -type "double3" -5.5944213968605681 15.294522038763255 3.1960397755793699 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "LABIO_INFERIOR_IZQShape" -p "LABIO_INFERIOR_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.5543088713695195 15.334634564254305 3.1960397755793699
+		-5.5944213968605681 15.351249716333733 3.1960397755793699
+		-5.6345339223516158 15.334634564254305 3.1960397755793699
+		-5.6511490744310446 15.294522038763255 3.1960397755793699
+		-5.6345339223516158 15.254409513272208 3.1960397755793699
+		-5.5944213968605681 15.237794361192776 3.1960397755793699
+		-5.5543088713695195 15.254409513272208 3.1960397755793699
+		-5.5376937192900906 15.294522038763255 3.1960397755793699
+		-5.5543088713695195 15.334634564254305 3.1960397755793699
+		-5.5944213968605681 15.351249716333733 3.1960397755793699
+		-5.6345339223516158 15.334634564254305 3.1960397755793699
+		;
+createNode transform -n "LABIO_SUPERIOR_ESQ_IZQ" -p "GRP_CTRLS_BOCA";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.1835779176273657 15.550577638119494 3.1960397755793699 ;
+	setAttr ".sp" -type "double3" -5.1835779176273657 15.550577638119494 3.1960397755793699 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "LABIO_SUPERIOR_ESQ_IZQShape" -p "LABIO_SUPERIOR_ESQ_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.143465392136318 15.590690163610542 3.1960397755793699
+		-5.1835779176273657 15.60730531568997 3.1960397755793699
+		-5.2236904431184144 15.590690163610542 3.1960397755793699
+		-5.2403055951978432 15.550577638119496 3.1960397755793699
+		-5.2236904431184144 15.510465112628445 3.1960397755793699
+		-5.1835779176273657 15.493849960549017 3.1960397755793699
+		-5.143465392136318 15.510465112628445 3.1960397755793699
+		-5.1268502400568883 15.550577638119496 3.1960397755793699
+		-5.143465392136318 15.590690163610542 3.1960397755793699
+		-5.1835779176273657 15.60730531568997 3.1960397755793699
+		-5.2236904431184144 15.590690163610542 3.1960397755793699
+		;
+createNode transform -n "LABIO_INFERIOR_ESQ_IZQ" -p "GRP_CTRLS_BOCA";
+	setAttr -l on -k off ".v";
+	setAttr -l on -k off ".rx";
+	setAttr -l on -k off ".ry";
+	setAttr -l on -k off ".rz";
+	setAttr -l on -k off ".sx";
+	setAttr -l on -k off ".sy";
+	setAttr -l on -k off ".sz";
+	setAttr ".rp" -type "double3" -5.1835779176273657 15.388614944804871 3.1960397755793699 ;
+	setAttr ".sp" -type "double3" -5.1835779176273657 15.388614944804871 3.1960397755793699 ;
+	setAttr ".mntl" -type "double3" -0.7 -0.7 0 ;
+	setAttr ".mxtl" -type "double3" 0.7 0.7 0.7 ;
+	setAttr ".mtxe" yes;
+	setAttr ".mtye" yes;
+	setAttr ".mtze" yes;
+	setAttr ".xtxe" yes;
+	setAttr ".xtye" yes;
+	setAttr ".xtze" yes;
+createNode nurbsCurve -n "LABIO_INFERIOR_ESQ_IZQShape" -p "LABIO_INFERIOR_ESQ_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		-5.143465392136318 15.428727470295918 3.1960397755793699
+		-5.1835779176273657 15.445342622375346 3.1960397755793699
+		-5.2236904431184144 15.428727470295922 3.1960397755793699
+		-5.2403055951978432 15.388614944804871 3.1960397755793699
+		-5.2236904431184144 15.348502419313824 3.1960397755793699
+		-5.1835779176273657 15.331887267234396 3.1960397755793699
+		-5.143465392136318 15.348502419313821 3.1960397755793699
+		-5.1268502400568883 15.388614944804871 3.1960397755793699
+		-5.143465392136318 15.428727470295918 3.1960397755793699
+		-5.1835779176273657 15.445342622375346 3.1960397755793699
+		-5.2236904431184144 15.428727470295922 3.1960397755793699
+		;
+createNode transform -n "GRP_OREJA_IZQ" -p "DRIVER_CARA";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 6;
+	setAttr ".rp" -type "double3" -6.0124825677687737 18.056325188845236 3.2003115824225015 ;
+	setAttr ".sp" -type "double3" -6.0124825677687737 18.056325188845236 3.2003115824225015 ;
+createNode transform -n "OREJA_TOP_IZQ" -p "GRP_OREJA_IZQ";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -3.3002731711739832 18.937230189416422 3.2003115824225015 ;
+	setAttr ".sp" -type "double3" -3.3002731711739832 18.937230189416422 3.2003115824225015 ;
+createNode nurbsCurve -n "OREJA_TOP_IZQShape" -p "OREJA_TOP_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		-3.3998113871806028 19.109635436834651 3.2003115824225015
+		-3.3002731711739832 19.136306621429661 3.2003115824225015
+		-3.2007349551673636 19.109635436834651 3.2003115824225015
+		-3.1278679237557538 19.036768405423039 3.2003115824225015
+		-3.1011967391607458 18.937230189416422 3.2003115824225015
+		-3.1278679237557538 18.837691973409804 3.2003115824225015
+		-3.2007349551673636 18.764824941998192 3.2003115824225015
+		-3.3002731711739832 18.738153757403182 3.2003115824225015
+		-3.3998113871806028 18.764824941998192 3.2003115824225015
+		-3.4726784185922126 18.837691973409804 3.2003115824225015
+		-3.4993496031872207 18.937230189416422 3.2003115824225015
+		-3.4726784185922126 19.036768405423039 3.2003115824225015
+		-3.3998113871806028 19.109635436834651 3.2003115824225015
+		-3.3002731711739832 19.136306621429661 3.2003115824225015
+		-3.2007349551673636 19.109635436834651 3.2003115824225015
+		;
+createNode transform -n "OREJA_MID_IZQ" -p "GRP_OREJA_IZQ";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -2.6977806748981221 18.355377776928322 3.2003115824225015 ;
+	setAttr ".sp" -type "double3" -2.6977806748981221 18.355377776928322 3.2003115824225015 ;
+createNode nurbsCurve -n "OREJA_MID_IZQShape" -p "OREJA_MID_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		-2.7973188909047417 18.527783024346551 3.2003115824225015
+		-2.6977806748981221 18.554454208941561 3.2003115824225015
+		-2.5982424588915025 18.527783024346551 3.2003115824225015
+		-2.5253754274798927 18.454915992934939 3.2003115824225015
+		-2.4987042428848847 18.355377776928322 3.2003115824225015
+		-2.5253754274798927 18.255839560921704 3.2003115824225015
+		-2.5982424588915025 18.182972529510092 3.2003115824225015
+		-2.6977806748981221 18.156301344915082 3.2003115824225015
+		-2.7973188909047417 18.182972529510092 3.2003115824225015
+		-2.8701859223163515 18.255839560921704 3.2003115824225015
+		-2.8968571069113596 18.355377776928322 3.2003115824225015
+		-2.8701859223163515 18.454915992934939 3.2003115824225015
+		-2.7973188909047417 18.527783024346551 3.2003115824225015
+		-2.6977806748981221 18.554454208941561 3.2003115824225015
+		-2.5982424588915025 18.527783024346551 3.2003115824225015
+		;
+createNode transform -n "OREJA_BOTTOM_IZQ" -p "GRP_OREJA_IZQ";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -3.0953077625670593 17.17542018827405 3.2003115824225015 ;
+	setAttr ".sp" -type "double3" -3.0953077625670593 17.17542018827405 3.2003115824225015 ;
+createNode nurbsCurve -n "OREJA_BOTTOM_IZQShape" -p "OREJA_BOTTOM_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		-3.1948459785736789 17.347825435692279 3.2003115824225015
+		-3.0953077625670593 17.374496620287289 3.2003115824225015
+		-2.9957695465604397 17.347825435692279 3.2003115824225015
+		-2.9229025151488299 17.274958404280667 3.2003115824225015
+		-2.8962313305538219 17.17542018827405 3.2003115824225015
+		-2.9229025151488299 17.075881972267432 3.2003115824225015
+		-2.9957695465604397 17.00301494085582 3.2003115824225015
+		-3.0953077625670593 16.97634375626081 3.2003115824225015
+		-3.1948459785736789 17.00301494085582 3.2003115824225015
+		-3.2677130099852887 17.075881972267432 3.2003115824225015
+		-3.2943841945802967 17.17542018827405 3.2003115824225015
+		-3.2677130099852887 17.274958404280667 3.2003115824225015
+		-3.1948459785736789 17.347825435692279 3.2003115824225015
+		-3.0953077625670593 17.374496620287289 3.2003115824225015
+		-2.9957695465604397 17.347825435692279 3.2003115824225015
+		;
+createNode transform -n "GRP_OREJA_DER" -p "DRIVER_CARA";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 13;
+	setAttr ".rp" -type "double3" -9.0259382125014938 18.056325188845236 3.2003115824225015 ;
+	setAttr ".sp" -type "double3" -9.0259382125014938 18.056325188845236 3.2003115824225015 ;
+createNode transform -n "OREJA_TOP_DER" -p "GRP_OREJA_DER";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -8.724691964363565 18.937230189416422 3.2003115824225015 ;
+	setAttr ".sp" -type "double3" -8.724691964363565 18.937230189416422 3.2003115824225015 ;
+createNode nurbsCurve -n "OREJA_TOP_DERShape" -p "OREJA_TOP_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		-8.6251537483569436 19.109635436834651 3.2003115824225015
+		-8.7246919643635632 19.136306621429661 3.2003115824225015
+		-8.8242301803701828 19.109635436834651 3.2003115824225015
+		-8.8970972117817926 19.036768405423039 3.2003115824225015
+		-8.9237683963768006 18.937230189416422 3.2003115824225015
+		-8.8970972117817926 18.837691973409804 3.2003115824225015
+		-8.8242301803701828 18.764824941998192 3.2003115824225015
+		-8.7246919643635632 18.738153757403182 3.2003115824225015
+		-8.6251537483569436 18.764824941998192 3.2003115824225015
+		-8.5522867169453338 18.837691973409804 3.2003115824225015
+		-8.5256155323503258 18.937230189416422 3.2003115824225015
+		-8.5522867169453338 19.036768405423039 3.2003115824225015
+		-8.6251537483569436 19.109635436834651 3.2003115824225015
+		-8.7246919643635632 19.136306621429661 3.2003115824225015
+		-8.8242301803701828 19.109635436834651 3.2003115824225015
+		;
+createNode transform -n "OREJA_MID_DER" -p "GRP_OREJA_DER";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -9.3271844606394261 18.355377776928322 3.2003115824225015 ;
+	setAttr ".sp" -type "double3" -9.3271844606394261 18.355377776928322 3.2003115824225015 ;
+createNode nurbsCurve -n "OREJA_MID_DERShape" -p "OREJA_MID_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		-9.2276462446328047 18.527783024346551 3.2003115824225015
+		-9.3271844606394243 18.554454208941561 3.2003115824225015
+		-9.4267226766460439 18.527783024346551 3.2003115824225015
+		-9.4995897080576537 18.454915992934939 3.2003115824225015
+		-9.5262608926526617 18.355377776928322 3.2003115824225015
+		-9.4995897080576537 18.255839560921704 3.2003115824225015
+		-9.4267226766460439 18.182972529510092 3.2003115824225015
+		-9.3271844606394243 18.156301344915082 3.2003115824225015
+		-9.2276462446328047 18.182972529510092 3.2003115824225015
+		-9.1547792132211949 18.255839560921704 3.2003115824225015
+		-9.1281080286261869 18.355377776928322 3.2003115824225015
+		-9.1547792132211949 18.454915992934939 3.2003115824225015
+		-9.2276462446328047 18.527783024346551 3.2003115824225015
+		-9.3271844606394243 18.554454208941561 3.2003115824225015
+		-9.4267226766460439 18.527783024346551 3.2003115824225015
+		;
+createNode transform -n "OREJA_BOTTOM_DER" -p "GRP_OREJA_DER";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -8.9296573729704889 17.17542018827405 3.2003115824225015 ;
+	setAttr ".sp" -type "double3" -8.9296573729704889 17.17542018827405 3.2003115824225015 ;
+createNode nurbsCurve -n "OREJA_BOTTOM_DERShape" -p "OREJA_BOTTOM_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		-8.8301191569638675 17.347825435692279 3.2003115824225015
+		-8.9296573729704871 17.374496620287289 3.2003115824225015
+		-9.0291955889771067 17.347825435692279 3.2003115824225015
+		-9.1020626203887165 17.274958404280667 3.2003115824225015
+		-9.1287338049837246 17.17542018827405 3.2003115824225015
+		-9.1020626203887165 17.075881972267432 3.2003115824225015
+		-9.0291955889771067 17.00301494085582 3.2003115824225015
+		-8.9296573729704871 16.97634375626081 3.2003115824225015
+		-8.8301191569638675 17.00301494085582 3.2003115824225015
+		-8.7572521255522577 17.075881972267432 3.2003115824225015
+		-8.7305809409572497 17.17542018827405 3.2003115824225015
+		-8.7572521255522577 17.274958404280667 3.2003115824225015
+		-8.8301191569638675 17.347825435692279 3.2003115824225015
+		-8.9296573729704871 17.374496620287289 3.2003115824225015
+		-9.0291955889771067 17.347825435692279 3.2003115824225015
+		;
+createNode transform -n "OJO_DER_REFERENCIA";
+	setAttr ".rp" -type "double3" 23 -4 7.1054273576010019e-015 ;
+	setAttr ".sp" -type "double3" 23 -4 7.1054273576010019e-015 ;
+createNode nurbsCurve -n "OJO_DER_REFERENCIAShape" -p "OJO_DER_REFERENCIA";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		23.161758879186245 -3.7198254026740276 0.38252643363266176
+		23 -3.6764822416275091 0.38252643363266176
+		22.838241120813755 -3.7198254026740272 0.38252643363266176
+		22.719825402674026 -3.8382411208137546 0.38252643363266181
+		22.676482241627511 -4 0.38252643363266181
+		22.719825402674026 -4.1617588791862454 0.38252643363266181
+		22.838241120813755 -4.2801745973259724 0.38252643363266187
+		23 -4.3235177583724909 0.38252643363266187
+		23.161758879186245 -4.2801745973259733 0.38252643363266187
+		23.280174597325974 -4.1617588791862454 0.38252643363266181
+		23.323517758372489 -4 0.38252643363266181
+		23.280174597325974 -3.8382411208137546 0.38252643363266181
+		23.161758879186245 -3.7198254026740276 0.38252643363266176
+		23 -3.6764822416275091 0.38252643363266176
+		22.838241120813755 -3.7198254026740272 0.38252643363266176
+		;
+createNode transform -n "OJO_IZQ_REFERENCIA";
+	setAttr ".rp" -type "double3" 24 -4 7.1054273576010019e-015 ;
+	setAttr ".sp" -type "double3" 24 -4 7.1054273576010019e-015 ;
+createNode nurbsCurve -n "OJO_IZQ_REFERENCIAShape" -p "OJO_IZQ_REFERENCIA";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		24.161758879186245 -3.7198254026740276 0.38252643363266176
+		24 -3.6764822416275091 0.38252643363266176
+		23.838241120813755 -3.7198254026740272 0.38252643363266176
+		23.719825402674026 -3.8382411208137546 0.38252643363266181
+		23.676482241627511 -4 0.38252643363266181
+		23.719825402674026 -4.1617588791862454 0.38252643363266181
+		23.838241120813755 -4.2801745973259724 0.38252643363266187
+		24 -4.3235177583724909 0.38252643363266187
+		24.161758879186245 -4.2801745973259733 0.38252643363266187
+		24.280174597325974 -4.1617588791862454 0.38252643363266181
+		24.323517758372489 -4 0.38252643363266181
+		24.280174597325974 -3.8382411208137546 0.38252643363266181
+		24.161758879186245 -3.7198254026740276 0.38252643363266176
+		24 -3.6764822416275091 0.38252643363266176
+		23.838241120813755 -3.7198254026740272 0.38252643363266176
+		;
+createNode transform -n "GRP_DRIVER_SOMBRERO";
+	setAttr ".rp" -type "double3" -8.7234847355791014e-016 15.803827013696223 -0.19289205971729306 ;
+	setAttr ".sp" -type "double3" -8.7234847355791014e-016 15.803827013696223 -0.19289205971729306 ;
+createNode transform -n "DRIVER_SOMBRERO" -p "GRP_DRIVER_SOMBRERO";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -8.7234847355791024e-016 15.803827013696225 -0.19289205971729306 ;
+	setAttr ".sp" -type "double3" -8.7234847355791034e-016 15.803827013696225 -0.19289205971729306 ;
+createNode nurbsCurve -n "DRIVER_SOMBREROShape" -p "DRIVER_SOMBRERO";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 12 2 no 3
+		17 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+		15
+		1.8300549189842197 18.764875439851235 -3.9092623566117402
+		-5.7129911686693034e-016 18.764875439851235 -2.5573451750520841
+		-1.8300549189842139 18.764875439851235 -3.9092623566117415
+		-1.5742877554329961 18.764875439851235 -0.82612191756996578
+		-3.6601098379684283 18.764875439851235 0.082793541811207128
+		-1.5742877554329968 18.764875439851235 0.99170900119238259
+		-1.8300549189842157 18.764875439851235 3.2525416421332145
+		-1.2034219658516156e-015 18.764875439851235 1.9006244605735561
+		1.8300549189842117 18.764875439851235 3.2525416421332176
+		1.5742877554329959 18.764875439851235 0.99170900119238348
+		3.6601098379684291 18.764875439851235 0.08279354181121179
+		1.5742877554329968 18.764875439851235 -0.82612191756996434
+		1.8300549189842197 18.764875439851235 -3.9092623566117402
+		-5.7129911686693034e-016 18.764875439851235 -2.5573451750520841
+		-1.8300549189842139 18.764875439851235 -3.9092623566117415
+		;
+createNode transform -n "GRP_DRIVER_LENTES";
+	setAttr ".rp" -type "double3" -8.7234847355791014e-016 15.803827013696223 -0.19289205971729306 ;
+	setAttr ".sp" -type "double3" -8.7234847355791014e-016 15.803827013696223 -0.19289205971729306 ;
+createNode transform -n "DRIVER_LENTES" -p "GRP_DRIVER_LENTES";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -8.7234847355791014e-016 15.803827013696223 -0.19289205971729295 ;
+	setAttr ".sp" -type "double3" -8.7234847355791014e-016 15.803827013696223 -0.19289205971729295 ;
+createNode nurbsCurve -n "DRIVER_LENTESShape" -p "DRIVER_LENTES";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 4 0 no 3
+		5 0 1.4142135623730949 2.8284271247461898 4.2426406871192848 5.6568542494923797
+		
+		5
+		-1.7903472405896055 17.686641185147657 3.2764915578812435
+		-1.7903472405896061 16.490912602302348 3.2764915578812435
+		1.7903472405896055 16.490912602302348 3.2764915578812435
+		1.7903472405896064 17.686641185147657 3.2764915578812435
+		-1.7903472405896053 17.686641185147657 3.2764915578812435
+		;
+createNode nurbsCurve -n "DRIVER_LENTESShape1" -p "DRIVER_LENTES";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 4 0 no 3
+		5 0 1.4142135623730949 2.8284271247461898 4.2426406871192848 5.6568542494923797
+		
+		5
+		1.7896857123246923 17.686641185147657 3.276778383831072
+		1.7896857123246923 16.490912602302348 3.276778383831072
+		2.6308947842761623 16.818239256343993 -0.67256749136820115
+		2.6308947842761623 17.359314531106016 -0.67256749136820204
+		1.7896857123246923 17.686641185147657 3.276778383831072
+		;
+createNode nurbsCurve -n "DRIVER_LENTESShape2" -p "DRIVER_LENTES";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 4 0 no 3
+		5 0 1.4142135623730949 2.8284271247461898 4.2426406871192848 5.6568542494923797
+		
+		5
+		-1.790334436041465 17.686641185147657 3.276778383831072
+		-1.790334436041465 16.490912602302348 3.2767783838310738
+		-2.6316102975232289 16.818239256343993 -0.67256749136820027
+		-2.6316102975232289 17.359314531106016 -0.67256749136820115
+		-1.790334436041465 17.686641185147657 3.276778383831072
+		;
+createNode transform -n "DRIVER_BUSTO";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 3.3306690738754696e-016 12.501255949547669 1.7216014992433222 ;
+	setAttr ".sp" -type "double3" 3.3306690738754696e-016 12.501255949547669 1.7216014992433222 ;
+createNode nurbsCurve -n "DRIVER_BUSTOShape" -p "DRIVER_BUSTO";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.449757340344878 12.737764999399293 2.1554287449830416
+		1.449757340344878 12.028282893880483 2.1554287449830416
+		-1.449757340344878 12.028282893880393 2.155428744982987
+		-1.449757340344878 12.737764999399332 2.155428744982987
+		1.449757340344878 12.737764999399293 2.1554287449830416
+		1.8980932585560639 12.974229005214902 1.2877742535037353
+		-1.8980932585560633 12.974229005214944 1.2877742535036028
+		-1.449757340344878 12.737764999399332 2.155428744982987
+		;
+createNode nurbsCurve -n "DRIVER_BUSTOShape1" -p "DRIVER_BUSTO";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 2 0 no 3
+		3 0 1 2
+		3
+		-1.449757340344878 12.028282893880393 2.155428744982987
+		-1.8980932585560633 12.045340311862098 1.2877742535036028
+		-1.8980932585560633 12.974229005214944 1.2877742535036028
+		;
+createNode nurbsCurve -n "DRIVER_BUSTOShape2" -p "DRIVER_BUSTO";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 1 0 no 3
+		2 0 1
+		2
+		1.8980932585560639 12.045340311862217 1.2877742535037353
+		1.8980932585560639 12.974229005214902 1.2877742535037353
+		;
+createNode nurbsCurve -n "DRIVER_BUSTOShape3" -p "DRIVER_BUSTO";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 2 0 no 3
+		3 0 1 2
+		3
+		-1.8980932585560633 12.045340311862098 1.2877742535036028
+		1.8980932585560639 12.045340311862217 1.2877742535037353
+		1.449757340344878 12.028282893880483 2.1554287449830416
+		;
+createNode transform -n "DRIVER_BUSTO_IZQ";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" 0.86558863984364809 12.44992251698503 1.2075956858784114 ;
+	setAttr ".sp" -type "double3" 0.86558863984364809 12.44992251698503 1.2075956858784114 ;
+createNode nurbsCurve -n "DRIVER_BUSTO_IZQShape" -p "DRIVER_BUSTO_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.3157999855172635 12.703655003630262 1.9520029388693063
+		1.3157999855172635 12.101337661402807 1.9520029388693063
+		0.4153772941700325 12.101337661402731 1.9520029388692806
+		0.4153772941700325 12.703655003630287 1.9520029388692806
+		1.3157999855172635 12.703655003630262 1.9520029388693063
+		1.4550273661516373 12.904401957510311 1.4357302815459463
+		0.27614991353565843 12.904401957510357 1.4357302815458828
+		0.4153772941700325 12.703655003630287 1.9520029388692806
+		;
+createNode nurbsCurve -n "DRIVER_BUSTO_IZQShape1" -p "DRIVER_BUSTO_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 2 0 no 3
+		3 0 1 2
+		3
+		0.4153772941700325 12.101337661402731 1.9520029388692806
+		0.27614991353565843 12.115818616713774 1.4357302815458828
+		0.27614991353565843 12.904401957510357 1.4357302815458828
+		;
+createNode nurbsCurve -n "DRIVER_BUSTO_IZQShape2" -p "DRIVER_BUSTO_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 1 0 no 3
+		2 0 1
+		2
+		1.4550273661516373 12.115818616713877 1.4357302815459463
+		1.4550273661516373 12.904401957510311 1.4357302815459463
+		;
+createNode nurbsCurve -n "DRIVER_BUSTO_IZQShape3" -p "DRIVER_BUSTO_IZQ";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 2 0 no 3
+		3 0 1 2
+		3
+		0.27614991353565843 12.115818616713774 1.4357302815458828
+		1.4550273661516373 12.115818616713877 1.4357302815459463
+		1.3157999855172635 12.101337661402807 1.9520029388693063
+		;
+createNode transform -n "DRIVER_BUSTO_DER";
+	setAttr ".v" no;
+	setAttr ".rp" -type "double3" -0.865589 12.449900000000001 1.2076000000000007 ;
+	setAttr ".sp" -type "double3" -0.865589 12.449900000000001 1.2076000000000007 ;
+createNode nurbsCurve -n "DRIVER_BUSTO_DERShape" -p "DRIVER_BUSTO_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		-0.41537765432638474 12.703632486645233 1.9520072529908956
+		-0.41537765432638474 12.101315144417779 1.9520072529908956
+		-1.3158003456736156 12.101315144417702 1.9520072529908699
+		-1.3158003456736156 12.703632486645258 1.9520072529908699
+		-0.41537765432638474 12.703632486645233 1.9520072529908956
+		-0.27615027369201073 12.904379440525283 1.4357345956675356
+		-1.4550277263079896 12.904379440525329 1.4357345956674721
+		-1.3158003456736156 12.703632486645258 1.9520072529908699
+		;
+createNode nurbsCurve -n "DRIVER_BUSTO_DERShape1" -p "DRIVER_BUSTO_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 2 0 no 3
+		3 0 1 2
+		3
+		-1.3158003456736156 12.101315144417702 1.9520072529908699
+		-1.4550277263079896 12.115796099728746 1.4357345956674721
+		-1.4550277263079896 12.904379440525329 1.4357345956674721
+		;
+createNode nurbsCurve -n "DRIVER_BUSTO_DERShape2" -p "DRIVER_BUSTO_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 1 0 no 3
+		2 0 1
+		2
+		-0.27615027369201073 12.115796099728849 1.4357345956675356
+		-0.27615027369201073 12.904379440525283 1.4357345956675356
+		;
+createNode nurbsCurve -n "DRIVER_BUSTO_DERShape3" -p "DRIVER_BUSTO_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 2 0 no 3
+		3 0 1 2
+		3
+		-1.4550277263079896 12.115796099728746 1.4357345956674721
+		-0.27615027369201073 12.115796099728849 1.4357345956675356
+		-0.41537765432638474 12.101315144417779 1.9520072529908956
+		;
+createNode transform -n "DEFORM_CURV_OREJA_DER";
+	setAttr ".tmp" yes;
+	setAttr ".rp" -type "double3" 16.038795983597311 -5.6588188318954487 2.684366024869882 ;
+	setAttr ".sp" -type "double3" 16.038795983597311 -5.6588188318954487 2.684366024869882 ;
+createNode nurbsCurve -n "DEFORM_CURV_OREJA_DERShape" -p "DEFORM_CURV_OREJA_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 2 0 no 3
+		7 0 0 0 2 3 3 3
+		5
+		16.697736667199688 -4.6463127965355362 2.684366024869882
+		16.196496505541248 -4.6321769926058032 2.684366024869882
+		15.379855299994929 -5.1798905963810711 2.684366024869882
+		15.938505023031331 -6.4332839111073596 2.684366024869882
+		16.443833199832902 -6.6854606711850941 2.684366024869882
+		;
+createNode transform -n "DEFORM_CURV_PARPADO_DER";
+	setAttr ".tmp" yes;
+	setAttr ".rp" -type "double3" 18.037233608704998 -5.8558394810227021 3.2529842186076126 ;
+	setAttr ".sp" -type "double3" 18.037233608704998 -5.8558394810227021 3.2529842186076126 ;
+createNode nurbsCurve -n "DEFORM_CURV_PARPADO_DERShape" -p "DEFORM_CURV_PARPADO_DER";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		3 8 2 no 3
+		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
+		11
+		18.531992846662384 -5.3610802430653166 3.2529842186076126
+		18.037233608704998 -5.1561442565939899 3.2529842186076126
+		17.542474370747613 -5.3610802430653166 3.2529842186076126
+		17.337538384276286 -5.8558394810227021 3.2529842186076126
+		17.542474370747613 -6.3505987189800877 3.2529842186076126
+		18.037233608704998 -6.5555347054514144 3.2529842186076126
+		18.531992846662384 -6.3505987189800877 3.2529842186076126
+		18.73692883313371 -5.8558394810227021 3.2529842186076126
+		18.531992846662384 -5.3610802430653166 3.2529842186076126
+		18.037233608704998 -5.1561442565939899 3.2529842186076126
+		17.542474370747613 -5.3610802430653166 3.2529842186076126
+		;
+createNode mentalrayItemsList -s -n "mentalrayItemsList";
+createNode mentalrayGlobals -s -n "mentalrayGlobals";
+createNode mentalrayOptions -s -n "miDefaultOptions";
+	addAttr -ci true -m -sn "stringOptions" -ln "stringOptions" -at "compound" -nc 
+		3;
+	addAttr -ci true -sn "name" -ln "name" -dt "string" -p "stringOptions";
+	addAttr -ci true -sn "value" -ln "value" -dt "string" -p "stringOptions";
+	addAttr -ci true -sn "type" -ln "type" -dt "string" -p "stringOptions";
+	setAttr -s 48 ".stringOptions";
+	setAttr ".stringOptions[0].name" -type "string" "rast motion factor";
+	setAttr ".stringOptions[0].value" -type "string" "1.0";
+	setAttr ".stringOptions[0].type" -type "string" "scalar";
+	setAttr ".stringOptions[1].name" -type "string" "rast transparency depth";
+	setAttr ".stringOptions[1].value" -type "string" "8";
+	setAttr ".stringOptions[1].type" -type "string" "integer";
+	setAttr ".stringOptions[2].name" -type "string" "rast useopacity";
+	setAttr ".stringOptions[2].value" -type "string" "true";
+	setAttr ".stringOptions[2].type" -type "string" "boolean";
+	setAttr ".stringOptions[3].name" -type "string" "importon";
+	setAttr ".stringOptions[3].value" -type "string" "false";
+	setAttr ".stringOptions[3].type" -type "string" "boolean";
+	setAttr ".stringOptions[4].name" -type "string" "importon density";
+	setAttr ".stringOptions[4].value" -type "string" "1.0";
+	setAttr ".stringOptions[4].type" -type "string" "scalar";
+	setAttr ".stringOptions[5].name" -type "string" "importon merge";
+	setAttr ".stringOptions[5].value" -type "string" "0.0";
+	setAttr ".stringOptions[5].type" -type "string" "scalar";
+	setAttr ".stringOptions[6].name" -type "string" "importon trace depth";
+	setAttr ".stringOptions[6].value" -type "string" "0";
+	setAttr ".stringOptions[6].type" -type "string" "integer";
+	setAttr ".stringOptions[7].name" -type "string" "importon traverse";
+	setAttr ".stringOptions[7].value" -type "string" "true";
+	setAttr ".stringOptions[7].type" -type "string" "boolean";
+	setAttr ".stringOptions[8].name" -type "string" "shadowmap pixel samples";
+	setAttr ".stringOptions[8].value" -type "string" "3";
+	setAttr ".stringOptions[8].type" -type "string" "integer";
+	setAttr ".stringOptions[9].name" -type "string" "ambient occlusion";
+	setAttr ".stringOptions[9].value" -type "string" "false";
+	setAttr ".stringOptions[9].type" -type "string" "boolean";
+	setAttr ".stringOptions[10].name" -type "string" "ambient occlusion rays";
+	setAttr ".stringOptions[10].value" -type "string" "64";
+	setAttr ".stringOptions[10].type" -type "string" "integer";
+	setAttr ".stringOptions[11].name" -type "string" "ambient occlusion cache";
+	setAttr ".stringOptions[11].value" -type "string" "false";
+	setAttr ".stringOptions[11].type" -type "string" "boolean";
+	setAttr ".stringOptions[12].name" -type "string" "ambient occlusion cache density";
+	setAttr ".stringOptions[12].value" -type "string" "1.0";
+	setAttr ".stringOptions[12].type" -type "string" "scalar";
+	setAttr ".stringOptions[13].name" -type "string" "ambient occlusion cache points";
+	setAttr ".stringOptions[13].value" -type "string" "64";
+	setAttr ".stringOptions[13].type" -type "string" "integer";
+	setAttr ".stringOptions[14].name" -type "string" "irradiance particles";
+	setAttr ".stringOptions[14].value" -type "string" "false";
+	setAttr ".stringOptions[14].type" -type "string" "boolean";
+	setAttr ".stringOptions[15].name" -type "string" "irradiance particles rays";
+	setAttr ".stringOptions[15].value" -type "string" "256";
+	setAttr ".stringOptions[15].type" -type "string" "integer";
+	setAttr ".stringOptions[16].name" -type "string" "irradiance particles interpolate";
+	setAttr ".stringOptions[16].value" -type "string" "1";
+	setAttr ".stringOptions[16].type" -type "string" "integer";
+	setAttr ".stringOptions[17].name" -type "string" "irradiance particles interppoints";
+	setAttr ".stringOptions[17].value" -type "string" "64";
+	setAttr ".stringOptions[17].type" -type "string" "integer";
+	setAttr ".stringOptions[18].name" -type "string" "irradiance particles indirect passes";
+	setAttr ".stringOptions[18].value" -type "string" "0";
+	setAttr ".stringOptions[18].type" -type "string" "integer";
+	setAttr ".stringOptions[19].name" -type "string" "irradiance particles scale";
+	setAttr ".stringOptions[19].value" -type "string" "1.0";
+	setAttr ".stringOptions[19].type" -type "string" "scalar";
+	setAttr ".stringOptions[20].name" -type "string" "irradiance particles env";
+	setAttr ".stringOptions[20].value" -type "string" "true";
+	setAttr ".stringOptions[20].type" -type "string" "boolean";
+	setAttr ".stringOptions[21].name" -type "string" "irradiance particles env rays";
+	setAttr ".stringOptions[21].value" -type "string" "256";
+	setAttr ".stringOptions[21].type" -type "string" "integer";
+	setAttr ".stringOptions[22].name" -type "string" "irradiance particles env scale";
+	setAttr ".stringOptions[22].value" -type "string" "1";
+	setAttr ".stringOptions[22].type" -type "string" "integer";
+	setAttr ".stringOptions[23].name" -type "string" "irradiance particles rebuild";
+	setAttr ".stringOptions[23].value" -type "string" "true";
+	setAttr ".stringOptions[23].type" -type "string" "boolean";
+	setAttr ".stringOptions[24].name" -type "string" "irradiance particles file";
+	setAttr ".stringOptions[24].value" -type "string" "";
+	setAttr ".stringOptions[24].type" -type "string" "string";
+	setAttr ".stringOptions[25].name" -type "string" "geom displace motion factor";
+	setAttr ".stringOptions[25].value" -type "string" "1.0";
+	setAttr ".stringOptions[25].type" -type "string" "scalar";
+	setAttr ".stringOptions[26].name" -type "string" "contrast all buffers";
+	setAttr ".stringOptions[26].value" -type "string" "true";
+	setAttr ".stringOptions[26].type" -type "string" "boolean";
+	setAttr ".stringOptions[27].name" -type "string" "finalgather normal tolerance";
+	setAttr ".stringOptions[27].value" -type "string" "25.842";
+	setAttr ".stringOptions[27].type" -type "string" "scalar";
+	setAttr ".stringOptions[28].name" -type "string" "trace camera clip";
+	setAttr ".stringOptions[28].value" -type "string" "false";
+	setAttr ".stringOptions[28].type" -type "string" "boolean";
+	setAttr ".stringOptions[29].name" -type "string" "unified sampling";
+	setAttr ".stringOptions[29].value" -type "string" "true";
+	setAttr ".stringOptions[29].type" -type "string" "boolean";
+	setAttr ".stringOptions[30].name" -type "string" "samples quality";
+	setAttr ".stringOptions[30].value" -type "string" "0.25 0.25 0.25 0.25";
+	setAttr ".stringOptions[30].type" -type "string" "color";
+	setAttr ".stringOptions[31].name" -type "string" "samples min";
+	setAttr ".stringOptions[31].value" -type "string" "1.0";
+	setAttr ".stringOptions[31].type" -type "string" "scalar";
+	setAttr ".stringOptions[32].name" -type "string" "samples max";
+	setAttr ".stringOptions[32].value" -type "string" "100.0";
+	setAttr ".stringOptions[32].type" -type "string" "scalar";
+	setAttr ".stringOptions[33].name" -type "string" "samples error cutoff";
+	setAttr ".stringOptions[33].value" -type "string" "0.0 0.0 0.0 0.0";
+	setAttr ".stringOptions[33].type" -type "string" "color";
+	setAttr ".stringOptions[34].name" -type "string" "samples per object";
+	setAttr ".stringOptions[34].value" -type "string" "false";
+	setAttr ".stringOptions[34].type" -type "string" "boolean";
+	setAttr ".stringOptions[35].name" -type "string" "progressive";
+	setAttr ".stringOptions[35].value" -type "string" "false";
+	setAttr ".stringOptions[35].type" -type "string" "boolean";
+	setAttr ".stringOptions[36].name" -type "string" "progressive max time";
+	setAttr ".stringOptions[36].value" -type "string" "0";
+	setAttr ".stringOptions[36].type" -type "string" "integer";
+	setAttr ".stringOptions[37].name" -type "string" "progressive subsampling size";
+	setAttr ".stringOptions[37].value" -type "string" "4";
+	setAttr ".stringOptions[37].type" -type "string" "integer";
+	setAttr ".stringOptions[38].name" -type "string" "iray";
+	setAttr ".stringOptions[38].value" -type "string" "false";
+	setAttr ".stringOptions[38].type" -type "string" "boolean";
+	setAttr ".stringOptions[39].name" -type "string" "light relative scale";
+	setAttr ".stringOptions[39].value" -type "string" "0.31831";
+	setAttr ".stringOptions[39].type" -type "string" "scalar";
+	setAttr ".stringOptions[40].name" -type "string" "trace camera motion vectors";
+	setAttr ".stringOptions[40].value" -type "string" "false";
+	setAttr ".stringOptions[40].type" -type "string" "boolean";
+	setAttr ".stringOptions[41].name" -type "string" "ray differentials";
+	setAttr ".stringOptions[41].value" -type "string" "true";
+	setAttr ".stringOptions[41].type" -type "string" "boolean";
+	setAttr ".stringOptions[42].name" -type "string" "environment lighting mode";
+	setAttr ".stringOptions[42].value" -type "string" "off";
+	setAttr ".stringOptions[42].type" -type "string" "string";
+	setAttr ".stringOptions[43].name" -type "string" "environment lighting quality";
+	setAttr ".stringOptions[43].value" -type "string" "0.2";
+	setAttr ".stringOptions[43].type" -type "string" "scalar";
+	setAttr ".stringOptions[44].name" -type "string" "environment lighting shadow";
+	setAttr ".stringOptions[44].value" -type "string" "transparent";
+	setAttr ".stringOptions[44].type" -type "string" "string";
+	setAttr ".stringOptions[45].name" -type "string" "environment lighting resolution";
+	setAttr ".stringOptions[45].value" -type "string" "512";
+	setAttr ".stringOptions[45].type" -type "string" "integer";
+	setAttr ".stringOptions[46].name" -type "string" "environment lighting shader samples";
+	setAttr ".stringOptions[46].value" -type "string" "2";
+	setAttr ".stringOptions[46].type" -type "string" "integer";
+	setAttr ".stringOptions[47].name" -type "string" "environment lighting scale";
+	setAttr ".stringOptions[47].value" -type "string" "1.0 1.0 1.0";
+	setAttr ".stringOptions[47].type" -type "string" "color";
+createNode mentalrayFramebuffer -s -n "miDefaultFramebuffer";
 createNode lightLinker -s -n "lightLinker1";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
 createNode displayLayerManager -n "layerManager";
 	setAttr ".cdl" 2;
-	setAttr -s 66 ".dli[1:65]"  1 2 0 0 0 0 0 0 
-		0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-		0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-		0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-		0 0 0 0 0 0;
-	setAttr -s 2 ".dli";
+	setAttr -s 2 ".dli[1]"  2;
 createNode displayLayer -n "defaultLayer";
 createNode renderLayerManager -n "renderLayerManager";
 createNode renderLayer -n "defaultRenderLayer";
@@ -4373,7 +6278,11 @@ createNode hyperView -n "hyperView1";
 createNode hyperLayout -n "hyperLayout1";
 	setAttr ".ihi" 0;
 	setAttr -s 175 ".hyp";
+	setAttr ".hyp[0].x" 515.71429443359375;
+	setAttr ".hyp[0].y" -72.857139587402344;
 	setAttr ".hyp[0].nvs" 1920;
+	setAttr ".hyp[1].x" 241.42857360839844;
+	setAttr ".hyp[1].y" -72.857139587402344;
 	setAttr ".hyp[1].nvs" 1920;
 	setAttr ".hyp[2].nvs" 1920;
 	setAttr ".hyp[3].nvs" 1920;
@@ -4551,11 +6460,11 @@ createNode hyperLayout -n "hyperLayout1";
 	setAttr ".anf" yes;
 createNode script -n "uiConfigurationScriptNode";
 	setAttr ".b" -type "string" (
-		"// Maya Mel UI Configuration File.\n//\n//  This script is machine generated.  Edit at your own risk.\n//\n//\n\nglobal string $gMainPane;\nif (`paneLayout -exists $gMainPane`) {\n\n\tglobal int $gUseScenePanelConfig;\n\tint    $useSceneConfig = $gUseScenePanelConfig;\n\tint    $menusOkayInPanels = `optionVar -q allowMenusInPanels`;\tint    $nVisPanes = `paneLayout -q -nvp $gMainPane`;\n\tint    $nPanes = 0;\n\tstring $editorName;\n\tstring $panelName;\n\tstring $itemFilterName;\n\tstring $panelConfig;\n\n\t//\n\t//  get current state of the UI\n\t//\n\tsceneUIReplacement -update $gMainPane;\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Top View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Top View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"top\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n"
+		"// Maya Mel UI Configuration File.\n//\n//  This script is machine generated.  Edit at your own risk.\n//\n//\n\nglobal string $gMainPane;\nif (`paneLayout -exists $gMainPane`) {\n\n\tglobal int $gUseScenePanelConfig;\n\tint    $useSceneConfig = $gUseScenePanelConfig;\n\tint    $menusOkayInPanels = `optionVar -q allowMenusInPanels`;\tint    $nVisPanes = `paneLayout -q -nvp $gMainPane`;\n\tint    $nPanes = 0;\n\tstring $editorName;\n\tstring $panelName;\n\tstring $itemFilterName;\n\tstring $panelConfig;\n\n\t//\n\t//  get current state of the UI\n\t//\n\tsceneUIReplacement -update $gMainPane;\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Top View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Top View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"top\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n"
 		+ "                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n                -rendererName \"vp2Renderer\" \n                -objectFilterShowInHUD 1\n"
 		+ "                -isFiltered 0\n                -colorResolution 256 256 \n                -bumpResolution 512 512 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 1\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n"
 		+ "                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Top View\")) -mbv $menusOkayInPanels  $panelName;\n"
-		+ "\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"top\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"wireframe\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -maxConstantTransparency 1\n"
+		+ "\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"top\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -maxConstantTransparency 1\n"
 		+ "            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n"
 		+ "            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Side View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels `;\n"
 		+ "\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"side\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n"
@@ -4564,23 +6473,23 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"side\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n"
 		+ "            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n"
 		+ "            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n"
-		+ "\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Front View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"front\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n"
+		+ "\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Front View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"front\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n"
 		+ "                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n                -rendererName \"vp2Renderer\" \n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 256 256 \n                -bumpResolution 512 512 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 1\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n"
 		+ "                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n"
-		+ "                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"front\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"wireframe\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n"
+		+ "                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"front\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n"
 		+ "            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n"
 		+ "            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n"
 		+ "            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Persp View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n"
 		+ "                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n                -rendererName \"vp2Renderer\" \n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 256 256 \n                -bumpResolution 512 512 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n"
-		+ "                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 1\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 0\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n"
+		+ "                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 1\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n"
 		+ "                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n"
 		+ "            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n"
-		+ "            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 0\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n"
+		+ "            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n"
 		+ "            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"Outliner\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `outlinerPanel -unParent -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            outlinerEditor -e \n                -docTag \"isolOutln_fromSeln\" \n                -showShapes 0\n"
 		+ "                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 0\n                -showConnected 0\n                -showAnimCurvesOnly 0\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 0\n                -showDagOnly 1\n                -showAssets 1\n                -showContainedOnly 1\n                -showPublishedAsConnected 0\n                -showContainerContents 1\n                -ignoreDagHierarchy 0\n                -expandConnections 0\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 1\n                -showLeafs 1\n                -showNumericAttrsOnly 0\n                -highlightActive 1\n                -autoSelectNewObjects 0\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 0\n                -setFilter \"defaultSetFilter\" \n                -showSetMembers 1\n"
-		+ "                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 0\n                -showPinIcons 0\n                -mapMotionTrails 0\n                -ignoreHiddenAttribute 0\n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n"
+		+ "                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 0\n                -mapMotionTrails 0\n                -ignoreHiddenAttribute 0\n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n"
 		+ "            -showShapes 0\n            -showReferenceNodes 0\n            -showReferenceMembers 0\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n"
-		+ "            -directSelect 0\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -showNamespace 0\n            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"graphEditor\" (localizedPanelLabel(\"Graph Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"graphEditor\" -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n"
+		+ "            -directSelect 0\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -showNamespace 1\n            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"graphEditor\" (localizedPanelLabel(\"Graph Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"graphEditor\" -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n"
 		+ "            outlinerEditor -e \n                -showShapes 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n"
 		+ "                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 1\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"GraphEd\");\n            animCurveEditor -e \n                -displayKeys 1\n                -displayTangents 0\n                -displayActiveKeys 0\n"
 		+ "                -displayActiveKeyTangents 1\n                -displayInfinities 0\n                -autoFit 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -showResults \"off\" \n                -showBufferCurves \"off\" \n                -smoothness \"fine\" \n                -resultSamples 1\n                -resultScreenSamples 0\n                -resultUpdate \"delayed\" \n                -showUpstreamCurves 1\n                -stackedCurves 0\n                -stackedCurvesMin -1\n                -stackedCurvesMax 1\n                -stackedCurvesSpace 0.2\n                -displayNormalized 0\n                -preSelectionHighlight 0\n                -constrainDrag 0\n                -classicMode 1\n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showReferenceNodes 0\n"
@@ -4606,38 +6515,13 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynRelEdPanel\" (localizedPanelLabel(\"Dynamic Relationships\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"dynRelEdPanel\" -l (localizedPanelLabel(\"Dynamic Relationships\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dynamic Relationships\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"relationshipPanel\" (localizedPanelLabel(\"Relationship Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"relationshipPanel\" -l (localizedPanelLabel(\"Relationship Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Relationship Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"referenceEditorPanel\" (localizedPanelLabel(\"Reference Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"referenceEditorPanel\" -l (localizedPanelLabel(\"Reference Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Reference Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"componentEditorPanel\" (localizedPanelLabel(\"Component Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"componentEditorPanel\" -l (localizedPanelLabel(\"Component Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Component Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynPaintScriptedPanelType\" (localizedPanelLabel(\"Paint Effects\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"dynPaintScriptedPanelType\" -l (localizedPanelLabel(\"Paint Effects\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Paint Effects\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"scriptEditorPanel\" (localizedPanelLabel(\"Script Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"scriptEditorPanel\" -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
-		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Model Panel5\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Model Panel5\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 1\n                -activeComponentsXray 0\n                -displayTextures 1\n                -smoothWireframe 0\n"
-		+ "                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n"
-		+ "                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n"
-		+ "                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Model Panel5\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n"
-		+ "            -xray 0\n            -jointXray 1\n            -activeComponentsXray 0\n            -displayTextures 1\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -maxConstantTransparency 1\n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 4 4 \n            -bumpResolution 4 4 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 0\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n"
-		+ "            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n"
-		+ "            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Model Panel6\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Model Panel6\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"front\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n"
-		+ "                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 1\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n"
-		+ "                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n"
-		+ "                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Model Panel6\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"front\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n"
-		+ "            -headsUpDisplay 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 1\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -maxConstantTransparency 1\n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 4 4 \n            -bumpResolution 4 4 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n"
-		+ "            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 0\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n"
-		+ "            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Model Panel7\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Model Panel7\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"front\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n"
-		+ "                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 1\n                -activeComponentsXray 0\n                -displayTextures 1\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n"
-		+ "                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n"
-		+ "                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Model Panel7\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n"
-		+ "            -camera \"front\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 1\n            -activeComponentsXray 0\n            -displayTextures 1\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -maxConstantTransparency 1\n            -objectFilterShowInHUD 1\n"
-		+ "            -isFiltered 0\n            -colorResolution 4 4 \n            -bumpResolution 4 4 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 0\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n"
-		+ "            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Model Panel8\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Model Panel8\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n"
-		+ "                -camera \"front\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 1\n                -activeComponentsXray 0\n                -displayTextures 1\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n"
-		+ "                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n"
-		+ "                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n"
-		+ "\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Model Panel8\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"front\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 1\n            -activeComponentsXray 0\n            -displayTextures 1\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n"
-		+ "            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -maxConstantTransparency 1\n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 4 4 \n            -bumpResolution 4 4 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 0\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n"
-		+ "            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n"
-		+ "        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-defaultImage \"vacantCell.xP:/\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"single\\\" -ps 1 100 100 $gMainPane;\"\n\t\t\t\t-removeAllPanels\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Persp View\")) \n\t\t\t\t\t\"modelPanel\"\n"
-		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 0\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    $editorName\"\n"
-		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 0\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    $editorName\"\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-defaultImage \"vacantCell.xP:/\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"single\\\" -ps 1 100 100 $gMainPane;\"\n\t\t\t\t-removeAllPanels\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Persp View\")) \n\t\t\t\t\t\"modelPanel\"\n"
+		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    $editorName\"\n"
+		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    $editorName\"\n"
 		+ "\t\t\t\t$configName;\n\n            setNamedPanelLayout (localizedPanelLabel(\"Current Layout\"));\n        }\n\n        panelHistory -e -clear mainPanelHistory;\n        setFocus `paneLayout -q -p1 $gMainPane`;\n        sceneUIReplacement -deleteRemaining;\n        sceneUIReplacement -clear;\n\t}\n\n\ngrid -spacing 5 -size 12 -divisions 5 -displayAxes yes -displayGridLines yes -displayDivisionLines yes -displayPerspectiveLabels no -displayOrthographicLabels no -displayAxesBold yes -perspectiveLabelPosition axis -orthographicLabelPosition edge;\nviewManip -drawCompass 0 -compassAngle 0 -frontParameters \"\" -homeParameters \"\" -selectionLockParameters \"\";\n}\n");
 	setAttr ".st" 3;
 createNode script -n "sceneConfigurationScriptNode";
-	setAttr ".b" -type "string" "playbackOptions -min 1 -max 24 -ast 1 -aet 48 ";
+	setAttr ".b" -type "string" "playbackOptions -min 1 -max 120 -ast 1 -aet 200 ";
 	setAttr ".st" 6;
 createNode hyperGraphInfo -n "nodeEditorPanel2Info";
 createNode hyperView -n "hyperView2";
@@ -4736,22 +6620,156 @@ createNode hyperLayout -n "hyperLayout5";
 	setAttr ".hyp[10].nvs" 1920;
 	setAttr ".hyp[11].nvs" 1920;
 	setAttr ".anf" yes;
-createNode displayLayer -n "BONES_REFERENCIA";
-	setAttr ".do" 1;
-createNode ilrOptionsNode -s -n "TurtleRenderOptions";
-lockNode -l 1 ;
-createNode ilrUIOptionsNode -s -n "TurtleUIOptions";
-lockNode -l 1 ;
-createNode ilrBakeLayerManager -s -n "TurtleBakeLayerManager";
-lockNode -l 1 ;
-createNode ilrBakeLayer -s -n "TurtleDefaultBakeLayer";
-lockNode -l 1 ;
+createNode makeNurbsSquare -n "makeNurbsSquare1";
+	setAttr ".d" 1;
+createNode cluster -n "CLR_RODILLA_IZQ_1Cluster";
+	setAttr ".rel" yes;
+	setAttr ".gm[0]" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1;
+createNode tweak -n "tweak1";
+createNode objectSet -n "CLR_RODILLA_1Set";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "CLR_RODILLA_1GroupId";
+	setAttr ".ihi" 0;
+createNode groupParts -n "CLR_RODILLA_1GroupParts";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[1]";
+createNode objectSet -n "tweakSet1";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId2";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts2";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode cluster -n "CLR_RODILLA_IZQ_2Cluster";
+	setAttr ".rel" yes;
+	setAttr ".gm[0]" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1;
+createNode objectSet -n "CLR_RODILLA_2Set";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "CLR_RODILLA_2GroupId";
+	setAttr ".ihi" 0;
+createNode groupParts -n "CLR_RODILLA_2GroupParts";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[0]";
+createNode makeNurbsSquare -n "makeNurbsSquare2";
+	setAttr ".d" 1;
+createNode cluster -n "CLR_CODO_IZQ_1Cluster";
+	setAttr ".rel" yes;
+	setAttr ".gm[0]" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1;
+createNode tweak -n "tweak2";
+createNode objectSet -n "CLR_CODO_1Set";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "CLR_CODO_1GroupId";
+	setAttr ".ihi" 0;
+createNode groupParts -n "CLR_CODO_1GroupParts";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[1]";
+createNode objectSet -n "tweakSet2";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId4";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts4";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode cluster -n "CLR_CODO_IZQ_2Cluster";
+	setAttr ".rel" yes;
+	setAttr ".gm[0]" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1;
+createNode objectSet -n "CLR_CODO_2Set";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "CLR_CODO_2GroupId";
+	setAttr ".ihi" 0;
+createNode groupParts -n "CLR_CODO_2GroupParts";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[0]";
+createNode makeNurbsSquare -n "makeNurbsSquare3";
+	setAttr ".d" 1;
+createNode cluster -n "CLR_RODILLA_DER_1Cluster";
+	setAttr ".rel" yes;
+	setAttr ".gm[0]" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1;
+createNode tweak -n "tweak3";
+createNode objectSet -n "CLR_RODILLA_1Set1";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "CLR_RODILLA_1GroupId1";
+	setAttr ".ihi" 0;
+createNode groupParts -n "CLR_RODILLA_1GroupParts1";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[1]";
+createNode objectSet -n "tweakSet3";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId6";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts6";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode cluster -n "CLR_RODILLA_DER_2Cluster";
+	setAttr ".rel" yes;
+	setAttr ".gm[0]" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1;
+createNode objectSet -n "CLR_RODILLA_2Set1";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "CLR_RODILLA_2GroupId1";
+	setAttr ".ihi" 0;
+createNode groupParts -n "CLR_RODILLA_2GroupParts1";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[0]";
+createNode makeNurbsSquare -n "makeNurbsSquare4";
+	setAttr ".d" 1;
+createNode cluster -n "CLR_CODO_DER_1Cluster";
+	setAttr ".rel" yes;
+	setAttr ".gm[0]" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1;
+createNode tweak -n "tweak4";
+createNode objectSet -n "CLR_CODO_1Set1";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "CLR_CODO_1GroupId1";
+	setAttr ".ihi" 0;
+createNode groupParts -n "CLR_CODO_1GroupParts1";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[1]";
+createNode objectSet -n "tweakSet4";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId8";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts8";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode cluster -n "CLR_CODO_DER_2Cluster";
+	setAttr ".rel" yes;
+	setAttr ".gm[0]" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1;
+createNode objectSet -n "CLR_CODO_2Set1";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "CLR_CODO_2GroupId1";
+	setAttr ".ihi" 0;
+createNode groupParts -n "CLR_CODO_2GroupParts1";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[0]";
+createNode expression -n "expression1";
+	setAttr -k on ".nds";
+	setAttr ".ixp" -type "string" ".O[0] = .I[0];\nif ( .I[0] == 1) {\n\tpython(\"import Rigging.Maya_rigging_biped_Autorig.autorig_Core.match; reload(Rigging.Maya_rigging_biped_Autorig.autorig_Core.match)\");\n}";
+	setAttr ".ani" 0;
+createNode animCurveUU -n "GRP_CTRLS_CEJAS_visibility";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 2 ".ktv[0:1]"  0 1 1 0;
+createNode animCurveUU -n "GRP_CTRLS_PARPADOS_visibility";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 2 ".ktv[0:1]"  0 0 1 1;
 select -ne :time1;
 	setAttr -av -k on ".cch";
 	setAttr -k on ".ihi";
 	setAttr -k on ".nds";
 	setAttr -cb on ".bnm";
-	setAttr ".o" 1;
+	setAttr -k on ".o" 1;
 	setAttr ".unw" 1;
 select -ne :renderPartition;
 	setAttr -k on ".cch";
@@ -4791,7 +6809,16 @@ select -ne :initialShadingGroup;
 	setAttr -k on ".eo";
 	setAttr -k on ".fo";
 	setAttr -k on ".epo";
-	setAttr ".ro" yes;
+	setAttr -k on ".ro" yes;
+	setAttr -cb on ".mimt";
+	setAttr -cb on ".miop";
+	setAttr -cb on ".mise";
+	setAttr -cb on ".mism";
+	setAttr -cb on ".mice";
+	setAttr -av -cb on ".micc";
+	setAttr -cb on ".mica";
+	setAttr -cb on ".micw";
+	setAttr -cb on ".mirw";
 select -ne :initialParticleSE;
 	setAttr -k on ".cch";
 	setAttr -k on ".ihi";
@@ -4804,12 +6831,23 @@ select -ne :initialParticleSE;
 	setAttr -k on ".eo";
 	setAttr -k on ".fo";
 	setAttr -k on ".epo";
-	setAttr ".ro" yes;
+	setAttr -k on ".ro" yes;
+	setAttr -cb on ".mimt";
+	setAttr -cb on ".miop";
+	setAttr -cb on ".mise";
+	setAttr -cb on ".mism";
+	setAttr -cb on ".mice";
+	setAttr -cb on ".micc";
+	setAttr -cb on ".mica";
+	setAttr -cb on ".micw";
+	setAttr -cb on ".mirw";
 select -ne :defaultResolution;
 	setAttr -av -k on ".cch";
 	setAttr -k on ".ihi";
 	setAttr -av -k on ".nds";
 	setAttr -k on ".bnm";
+	setAttr -av ".w";
+	setAttr -av ".h";
 	setAttr -av ".pa" 1;
 	setAttr -av -k on ".al";
 	setAttr -av ".dar";
@@ -4830,16 +6868,16 @@ select -ne :hardwareRenderGlobals;
 	setAttr -k off ".fbfm";
 	setAttr -k off -cb on ".ehql";
 	setAttr -k off -cb on ".eams";
-	setAttr -k off ".eeaa";
-	setAttr -k off ".engm";
-	setAttr -k off ".mes";
-	setAttr -k off ".emb";
-	setAttr -av -k off ".mbbf";
-	setAttr -k off ".mbs";
-	setAttr -k off ".trm";
+	setAttr -k off -cb on ".eeaa";
+	setAttr -k off -cb on ".engm";
+	setAttr -k off -cb on ".mes";
+	setAttr -k off -cb on ".emb";
+	setAttr -av -k off -cb on ".mbbf";
+	setAttr -k off -cb on ".mbs";
+	setAttr -k off -cb on ".trm";
 	setAttr -k off -cb on ".tshc";
 	setAttr -k off ".enpt";
-	setAttr -k off ".clmt";
+	setAttr -k off -cb on ".clmt";
 	setAttr -k off -cb on ".tcov";
 	setAttr -k off -cb on ".lith";
 	setAttr -k off -cb on ".sobc";
@@ -4847,11 +6885,12 @@ select -ne :hardwareRenderGlobals;
 	setAttr -k off -cb on ".hgcd";
 	setAttr -k off -cb on ".hgci";
 	setAttr -k off -cb on ".mgcs";
-	setAttr -k off ".twa";
-	setAttr -k off ".twz";
+	setAttr -k off -cb on ".twa";
+	setAttr -k off -cb on ".twz";
 	setAttr -k on ".hwcc";
 	setAttr -k on ".hwdp";
 	setAttr -k on ".hwql";
+	setAttr -k on ".hwfr";
 select -ne :hardwareRenderingGlobals;
 	setAttr ".otfna" -type "stringArray" 22 "NURBS Curves" "NURBS Surfaces" "Polygons" "Subdiv Surface" "Particles" "Particle Instance" "Fluids" "Strokes" "Image Planes" "UI" "Lights" "Cameras" "Locators" "Joints" "IK Handles" "Deformers" "Motion Trails" "Components" "Hair Systems" "Follicles" "Misc. UI" "Ornaments"  ;
 	setAttr ".otfva" -type "Int32Array" 22 0 1 1 1 1 1
@@ -4893,24 +6932,20 @@ select -ne :defaultHardwareRenderGlobals;
 	setAttr -k on ".aap";
 	setAttr -k on ".gh";
 	setAttr -cb on ".sd";
-connectAttr "BONES_REFERENCIA.di" "R_ROOT.do";
 connectAttr "R_ROOT.s" "R_COLUMNA_BAJA.is";
 connectAttr "R_COLUMNA_BAJA.s" "R_COLUMNA_MEDIA.is";
 connectAttr "R_COLUMNA_MEDIA.s" "R_COLUMNA_ALTA.is";
 connectAttr "R_COLUMNA_ALTA.s" "R_CUELLO.is";
-connectAttr "R_CUELLO.s" "R_CUELLO_SEC.is";
-connectAttr "R_CUELLO_SEC.s" "R_CABEZA.is";
-connectAttr "R_CABEZA.s" "R_CABEZA_ALTA.is";
-connectAttr "R_CABEZA_ALTA.s" "R_OJO_DER.is";
-connectAttr "R_CABEZA_ALTA.s" "R_OJO_IZQ.is";
-connectAttr "R_CABEZA.s" "R_DIENTES_ARRIBA.is";
-connectAttr "R_CABEZA.s" "R_MANDIBULA.is";
-connectAttr "R_MANDIBULA.s" "R_BOCA_1.is";
-connectAttr "R_BOCA_1.s" "R_BOCA_2.is";
-connectAttr "R_BOCA_2.s" "R_DIENTES_BAJA.is";
-connectAttr "R_MANDIBULA.s" "R_LENGUA_1.is";
+connectAttr "R_CUELLO.s" "R_CABEZA.is";
+connectAttr "R_CABEZA.s" "R_CABEZA_INUTIL.is";
+connectAttr "R_CABEZA_INUTIL.s" "R_DIENTES_ARRIBA.is";
+connectAttr "R_CABEZA_INUTIL.s" "R_LENGUA_1.is";
 connectAttr "R_LENGUA_1.s" "R_LENGUA_2.is";
-connectAttr "R_LENGUA_2.s" "R_LENGUA_3.is";
+connectAttr "R_LENGUA_2.s" "R_LENGUA_3_INUTIL.is";
+connectAttr "R_CABEZA_INUTIL.s" "R_MANDIBULA_INUTIL.is";
+connectAttr "R_MANDIBULA_INUTIL.s" "R_BOCA.is";
+connectAttr "R_BOCA.s" "R_DIENTES_BAJA.is";
+connectAttr "R_CABEZA_INUTIL.s" "R_OJO_IZQ.is";
 connectAttr "R_COLUMNA_ALTA.s" "R_CLAVICULA_IZQ.is";
 connectAttr "R_CLAVICULA_IZQ.s" "R_HOMBRO_IZQ.is";
 connectAttr "R_HOMBRO_IZQ.s" "R_CODO_IZQ.is";
@@ -4919,69 +6954,80 @@ connectAttr "R_CODO_SEC_IZQ.s" "R_MANO_IZQ.is";
 connectAttr "R_MANO_IZQ.s" "R_MIDDLE_IZQ_1.is";
 connectAttr "R_MIDDLE_IZQ_1.s" "R_MIDDLE_IZQ_2.is";
 connectAttr "R_MIDDLE_IZQ_2.s" "R_MIDDLE_IZQ_3.is";
-connectAttr "R_MIDDLE_IZQ_3.s" "R_MIDDLE_IZQ_4.is";
+connectAttr "R_MIDDLE_IZQ_3.s" "R_MIDDLE_IZQ_4_INUTIL.is";
 connectAttr "R_MANO_IZQ.s" "R_PINKY_SEC_IZQ.is";
 connectAttr "R_PINKY_SEC_IZQ.s" "R_PINKY_IZQ_1.is";
 connectAttr "R_PINKY_IZQ_1.s" "R_PINKY_IZQ_2.is";
 connectAttr "R_PINKY_IZQ_2.s" "R_PINKY_IZQ_3.is";
-connectAttr "R_PINKY_IZQ_3.s" "R_PINKY_IZQ_4.is";
+connectAttr "R_PINKY_IZQ_3.s" "R_PINKY_IZQ_4_INUTIL.is";
 connectAttr "R_MANO_IZQ.s" "R_CANCEL_IZQ_1.is";
 connectAttr "R_CANCEL_IZQ_1.s" "R_CANCEL_IZQ_2.is";
 connectAttr "R_CANCEL_IZQ_2.s" "R_CANCEL_IZQ_3.is";
-connectAttr "R_CANCEL_IZQ_3.s" "R_CANCEL_IZQ_4.is";
+connectAttr "R_CANCEL_IZQ_3.s" "R_CANCEL_IZQ_4_INUTIL.is";
 connectAttr "R_MANO_IZQ.s" "R_INDEX_IZQ_1.is";
 connectAttr "R_INDEX_IZQ_1.s" "R_INDEX_IZQ_2.is";
 connectAttr "R_INDEX_IZQ_2.s" "R_INDEX_IZQ_3.is";
-connectAttr "R_INDEX_IZQ_3.s" "R_INDEX_IZQ_4.is";
+connectAttr "R_INDEX_IZQ_3.s" "R_INDEX_IZQ_4_INUTIL.is";
 connectAttr "R_MANO_IZQ.s" "R_THUMB_IZQ_1.is";
 connectAttr "R_THUMB_IZQ_1.s" "R_THUMB_IZQ_2.is";
 connectAttr "R_THUMB_IZQ_2.s" "R_THUMB_IZQ_3.is";
-connectAttr "R_THUMB_IZQ_3.s" "R_THUMB_IZQ_4.is";
-connectAttr "R_COLUMNA_ALTA.s" "R_CLAVICULA_DER.is";
-connectAttr "R_CLAVICULA_DER.s" "R_HOMBRO_DER.is";
-connectAttr "R_HOMBRO_DER.s" "R_CODO_DER.is";
-connectAttr "R_CODO_DER.s" "R_CODO_SEC_DER.is";
-connectAttr "R_CODO_SEC_DER.s" "R_MANO_DER.is";
-connectAttr "R_MANO_DER.s" "R_MIDDLE_DER_1.is";
-connectAttr "R_MIDDLE_DER_1.s" "R_MIDDLE_DER_2.is";
-connectAttr "R_MIDDLE_DER_2.s" "R_MIDDLE_DER_3.is";
-connectAttr "R_MIDDLE_DER_3.s" "R_MIDDLE_DER_4.is";
-connectAttr "R_MANO_DER.s" "R_PINKY_SEC_DER.is";
-connectAttr "R_PINKY_SEC_DER.s" "R_PINKY_DER_1.is";
-connectAttr "R_PINKY_DER_1.s" "R_PINKY_DER_2.is";
-connectAttr "R_PINKY_DER_2.s" "R_PINKY_DER_3.is";
-connectAttr "R_PINKY_DER_3.s" "R_PINKY_DER_4.is";
-connectAttr "R_MANO_DER.s" "R_CANCEL_DER_1.is";
-connectAttr "R_CANCEL_DER_1.s" "R_CANCEL_DER_2.is";
-connectAttr "R_CANCEL_DER_2.s" "R_CANCEL_DER_3.is";
-connectAttr "R_CANCEL_DER_3.s" "R_CANCEL_DER_4.is";
-connectAttr "R_MANO_DER.s" "R_INDEX_DER_1.is";
-connectAttr "R_INDEX_DER_1.s" "R_INDEX_DER_2.is";
-connectAttr "R_INDEX_DER_2.s" "R_INDEX_DER_3.is";
-connectAttr "R_INDEX_DER_3.s" "R_INDEX_DER_4.is";
-connectAttr "R_MANO_DER.s" "R_THUMB_DER_1.is";
-connectAttr "R_THUMB_DER_1.s" "R_THUMB_DER_2.is";
-connectAttr "R_THUMB_DER_2.s" "R_THUMB_DER_3.is";
-connectAttr "R_THUMB_DER_3.s" "R_THUMB_DER_4.is";
+connectAttr "R_THUMB_IZQ_3.s" "R_THUMB_IZQ_4_INUTIL.is";
+connectAttr "R_COLUMNA_ALTA.s" "R_BUSTO_IZQ.is";
 connectAttr "R_ROOT.s" "R_CINTURA.is";
 connectAttr "R_CINTURA.s" "R_PIERNA_IZQ.is";
 connectAttr "R_PIERNA_IZQ.s" "R_RODILLA_IZQ.is";
 connectAttr "R_RODILLA_IZQ.s" "R_TALON_IZQ.is";
 connectAttr "R_TALON_IZQ.s" "R_DEDOS_PIE_IZQ.is";
-connectAttr "R_DEDOS_PIE_IZQ.s" "R_PUNTA_PIE_IZQ.is";
-connectAttr "R_CINTURA.s" "R_PIERNA_DER.is";
-connectAttr "R_PIERNA_DER.s" "R_RODILLA_DER.is";
-connectAttr "R_RODILLA_DER.s" "R_TALON_DER.is";
-connectAttr "R_TALON_DER.s" "R_DEDOS_PIE_DER.is";
-connectAttr "R_DEDOS_PIE_DER.s" "R_PUNTA_PIE_DER.is";
-connectAttr "BONES_REFERENCIA.di" "R_REV_IZQ_1.do";
+connectAttr "R_DEDOS_PIE_IZQ.s" "R_PUNTA_PIE_IZQ_INUTIL.is";
 connectAttr "R_REV_IZQ_1.s" "R_REV_IZQ_2.is";
 connectAttr "R_REV_IZQ_2.s" "R_REV_IZQ_3.is";
 connectAttr "R_REV_IZQ_3.s" "R_REV_IZQ_4.is";
-connectAttr "BONES_REFERENCIA.di" "R_REV_DER_1.do";
-connectAttr "R_REV_DER_1.s" "R_REV_DER_2.is";
-connectAttr "R_REV_DER_2.s" "R_REV_DER_3.is";
-connectAttr "R_REV_DER_3.s" "R_REV_DER_4.is";
+connectAttr "expression1.out[0]" "DRIVER_COLUMNA_TOP.BASURA";
+connectAttr "CLR_RODILLA_IZQ_2Cluster.og[0]" "CRV_REFR_RODILLA_IZQShape.cr";
+connectAttr "tweak1.pl[0].cp[0]" "CRV_REFR_RODILLA_IZQShape.twl";
+connectAttr "CLR_RODILLA_1GroupId.id" "CRV_REFR_RODILLA_IZQShape.iog.og[0].gid";
+connectAttr "CLR_RODILLA_1Set.mwc" "CRV_REFR_RODILLA_IZQShape.iog.og[0].gco";
+connectAttr "groupId2.id" "CRV_REFR_RODILLA_IZQShape.iog.og[1].gid";
+connectAttr "tweakSet1.mwc" "CRV_REFR_RODILLA_IZQShape.iog.og[1].gco";
+connectAttr "CLR_RODILLA_2GroupId.id" "CRV_REFR_RODILLA_IZQShape.iog.og[2].gid";
+connectAttr "CLR_RODILLA_2Set.mwc" "CRV_REFR_RODILLA_IZQShape.iog.og[2].gco";
+connectAttr "makeNurbsSquare1.oc1" "CRV_REFR_RODILLA_IZQShapeOrig.cr";
+connectAttr "CLR_CODO_IZQ_2Cluster.og[0]" "crv_refr_brazo_IZQShape.cr";
+connectAttr "tweak2.pl[0].cp[0]" "crv_refr_brazo_IZQShape.twl";
+connectAttr "CLR_CODO_1GroupId.id" "crv_refr_brazo_IZQShape.iog.og[0].gid";
+connectAttr "CLR_CODO_1Set.mwc" "crv_refr_brazo_IZQShape.iog.og[0].gco";
+connectAttr "groupId4.id" "crv_refr_brazo_IZQShape.iog.og[1].gid";
+connectAttr "tweakSet2.mwc" "crv_refr_brazo_IZQShape.iog.og[1].gco";
+connectAttr "CLR_CODO_2GroupId.id" "crv_refr_brazo_IZQShape.iog.og[2].gid";
+connectAttr "CLR_CODO_2Set.mwc" "crv_refr_brazo_IZQShape.iog.og[2].gco";
+connectAttr "makeNurbsSquare2.oc1" "crv_refr_brazo_IZQShapeOrig.cr";
+connectAttr "CLR_RODILLA_DER_2Cluster.og[0]" "CRV_REFR_RODILLA_DERShape.cr";
+connectAttr "tweak3.pl[0].cp[0]" "CRV_REFR_RODILLA_DERShape.twl";
+connectAttr "CLR_RODILLA_1GroupId1.id" "CRV_REFR_RODILLA_DERShape.iog.og[0].gid"
+		;
+connectAttr "CLR_RODILLA_1Set1.mwc" "CRV_REFR_RODILLA_DERShape.iog.og[0].gco";
+connectAttr "groupId6.id" "CRV_REFR_RODILLA_DERShape.iog.og[1].gid";
+connectAttr "tweakSet3.mwc" "CRV_REFR_RODILLA_DERShape.iog.og[1].gco";
+connectAttr "CLR_RODILLA_2GroupId1.id" "CRV_REFR_RODILLA_DERShape.iog.og[2].gid"
+		;
+connectAttr "CLR_RODILLA_2Set1.mwc" "CRV_REFR_RODILLA_DERShape.iog.og[2].gco";
+connectAttr "makeNurbsSquare3.oc1" "CRV_REFR_RODILLA_DERShapeOrig.cr";
+connectAttr "CLR_CODO_DER_2Cluster.og[0]" "crv_refr_brazo_DERShape.cr";
+connectAttr "tweak4.pl[0].cp[0]" "crv_refr_brazo_DERShape.twl";
+connectAttr "CLR_CODO_1GroupId1.id" "crv_refr_brazo_DERShape.iog.og[0].gid";
+connectAttr "CLR_CODO_1Set1.mwc" "crv_refr_brazo_DERShape.iog.og[0].gco";
+connectAttr "groupId8.id" "crv_refr_brazo_DERShape.iog.og[1].gid";
+connectAttr "tweakSet4.mwc" "crv_refr_brazo_DERShape.iog.og[1].gco";
+connectAttr "CLR_CODO_2GroupId1.id" "crv_refr_brazo_DERShape.iog.og[2].gid";
+connectAttr "CLR_CODO_2Set1.mwc" "crv_refr_brazo_DERShape.iog.og[2].gco";
+connectAttr "makeNurbsSquare4.oc1" "crv_refr_brazo_DERShapeOrig.cr";
+connectAttr "GRP_CTRLS_PARPADOS_visibility.o" "GRP_CTRLS_PARPADOS.v";
+connectAttr "GRP_CTRLS_CEJAS_visibility.o" "GRP_CTRLS_CEJAS.v";
+connectAttr ":mentalrayGlobals.msg" ":mentalrayItemsList.glb";
+connectAttr ":miDefaultOptions.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":miDefaultFramebuffer.msg" ":mentalrayItemsList.fb" -na;
+connectAttr ":miDefaultOptions.msg" ":mentalrayGlobals.opt";
+connectAttr ":miDefaultFramebuffer.msg" ":mentalrayGlobals.fb";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
@@ -4990,6 +7036,8 @@ connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr "hyperView1.msg" "nodeEditorPanel1Info.b[0]";
 connectAttr "hyperLayout1.msg" "hyperView1.hl";
+connectAttr "DRIVER_CUELLO.msg" "hyperLayout1.hyp[0].dn";
+connectAttr "DRIVER_CUELLOShape.msg" "hyperLayout1.hyp[1].dn";
 connectAttr "uiConfigurationScriptNode.msg" "hyperLayout1.hyp[158].dn";
 connectAttr "sceneConfigurationScriptNode.msg" "hyperLayout1.hyp[159].dn";
 connectAttr "hyperView2.msg" "nodeEditorPanel2Info.b[0]";
@@ -5012,9 +7060,109 @@ connectAttr ":frontShape.msg" "hyperLayout5.hyp[5].dn";
 connectAttr ":side.msg" "hyperLayout5.hyp[6].dn";
 connectAttr ":sideShape.msg" "hyperLayout5.hyp[7].dn";
 connectAttr ":lightLinker1.msg" "hyperLayout5.hyp[8].dn";
-connectAttr "layerManager.dli[2]" "BONES_REFERENCIA.id";
-connectAttr ":TurtleDefaultBakeLayer.idx" ":TurtleBakeLayerManager.bli[0]";
-connectAttr ":TurtleRenderOptions.msg" ":TurtleDefaultBakeLayer.rset";
+connectAttr "CLR_RODILLA_1GroupParts.og" "CLR_RODILLA_IZQ_1Cluster.ip[0].ig";
+connectAttr "CLR_RODILLA_1GroupId.id" "CLR_RODILLA_IZQ_1Cluster.ip[0].gi";
+connectAttr "CLR_RODILLA_IZQ_1.wm" "CLR_RODILLA_IZQ_1Cluster.ma";
+connectAttr "CLR_RODILLA_IZQ_1Shape.x" "CLR_RODILLA_IZQ_1Cluster.x";
+connectAttr "groupParts2.og" "tweak1.ip[0].ig";
+connectAttr "groupId2.id" "tweak1.ip[0].gi";
+connectAttr "CLR_RODILLA_1GroupId.msg" "CLR_RODILLA_1Set.gn" -na;
+connectAttr "CRV_REFR_RODILLA_IZQShape.iog.og[0]" "CLR_RODILLA_1Set.dsm" -na;
+connectAttr "CLR_RODILLA_IZQ_1Cluster.msg" "CLR_RODILLA_1Set.ub[0]";
+connectAttr "tweak1.og[0]" "CLR_RODILLA_1GroupParts.ig";
+connectAttr "CLR_RODILLA_1GroupId.id" "CLR_RODILLA_1GroupParts.gi";
+connectAttr "groupId2.msg" "tweakSet1.gn" -na;
+connectAttr "CRV_REFR_RODILLA_IZQShape.iog.og[1]" "tweakSet1.dsm" -na;
+connectAttr "tweak1.msg" "tweakSet1.ub[0]";
+connectAttr "CRV_REFR_RODILLA_IZQShapeOrig.ws" "groupParts2.ig";
+connectAttr "groupId2.id" "groupParts2.gi";
+connectAttr "CLR_RODILLA_2GroupParts.og" "CLR_RODILLA_IZQ_2Cluster.ip[0].ig";
+connectAttr "CLR_RODILLA_2GroupId.id" "CLR_RODILLA_IZQ_2Cluster.ip[0].gi";
+connectAttr "CLR_RODILLA_IZQ_2.wm" "CLR_RODILLA_IZQ_2Cluster.ma";
+connectAttr "CLR_RODILLA_IZQ_2Shape.x" "CLR_RODILLA_IZQ_2Cluster.x";
+connectAttr "CLR_RODILLA_2GroupId.msg" "CLR_RODILLA_2Set.gn" -na;
+connectAttr "CRV_REFR_RODILLA_IZQShape.iog.og[2]" "CLR_RODILLA_2Set.dsm" -na;
+connectAttr "CLR_RODILLA_IZQ_2Cluster.msg" "CLR_RODILLA_2Set.ub[0]";
+connectAttr "CLR_RODILLA_IZQ_1Cluster.og[0]" "CLR_RODILLA_2GroupParts.ig";
+connectAttr "CLR_RODILLA_2GroupId.id" "CLR_RODILLA_2GroupParts.gi";
+connectAttr "CLR_CODO_1GroupParts.og" "CLR_CODO_IZQ_1Cluster.ip[0].ig";
+connectAttr "CLR_CODO_1GroupId.id" "CLR_CODO_IZQ_1Cluster.ip[0].gi";
+connectAttr "CLR_CODO_IZQ_1.wm" "CLR_CODO_IZQ_1Cluster.ma";
+connectAttr "CLR_CODO_IZQ_1Shape.x" "CLR_CODO_IZQ_1Cluster.x";
+connectAttr "groupParts4.og" "tweak2.ip[0].ig";
+connectAttr "groupId4.id" "tweak2.ip[0].gi";
+connectAttr "CLR_CODO_1GroupId.msg" "CLR_CODO_1Set.gn" -na;
+connectAttr "crv_refr_brazo_IZQShape.iog.og[0]" "CLR_CODO_1Set.dsm" -na;
+connectAttr "CLR_CODO_IZQ_1Cluster.msg" "CLR_CODO_1Set.ub[0]";
+connectAttr "tweak2.og[0]" "CLR_CODO_1GroupParts.ig";
+connectAttr "CLR_CODO_1GroupId.id" "CLR_CODO_1GroupParts.gi";
+connectAttr "groupId4.msg" "tweakSet2.gn" -na;
+connectAttr "crv_refr_brazo_IZQShape.iog.og[1]" "tweakSet2.dsm" -na;
+connectAttr "tweak2.msg" "tweakSet2.ub[0]";
+connectAttr "crv_refr_brazo_IZQShapeOrig.ws" "groupParts4.ig";
+connectAttr "groupId4.id" "groupParts4.gi";
+connectAttr "CLR_CODO_2GroupParts.og" "CLR_CODO_IZQ_2Cluster.ip[0].ig";
+connectAttr "CLR_CODO_2GroupId.id" "CLR_CODO_IZQ_2Cluster.ip[0].gi";
+connectAttr "CLR_CODO_IZQ_2.wm" "CLR_CODO_IZQ_2Cluster.ma";
+connectAttr "CLR_CODO_IZQ_2Shape.x" "CLR_CODO_IZQ_2Cluster.x";
+connectAttr "CLR_CODO_2GroupId.msg" "CLR_CODO_2Set.gn" -na;
+connectAttr "crv_refr_brazo_IZQShape.iog.og[2]" "CLR_CODO_2Set.dsm" -na;
+connectAttr "CLR_CODO_IZQ_2Cluster.msg" "CLR_CODO_2Set.ub[0]";
+connectAttr "CLR_CODO_IZQ_1Cluster.og[0]" "CLR_CODO_2GroupParts.ig";
+connectAttr "CLR_CODO_2GroupId.id" "CLR_CODO_2GroupParts.gi";
+connectAttr "CLR_RODILLA_1GroupParts1.og" "CLR_RODILLA_DER_1Cluster.ip[0].ig";
+connectAttr "CLR_RODILLA_1GroupId1.id" "CLR_RODILLA_DER_1Cluster.ip[0].gi";
+connectAttr "CLR_RODILLA_DER_1.wm" "CLR_RODILLA_DER_1Cluster.ma";
+connectAttr "CLR_RODILLA_DER_1Shape.x" "CLR_RODILLA_DER_1Cluster.x";
+connectAttr "groupParts6.og" "tweak3.ip[0].ig";
+connectAttr "groupId6.id" "tweak3.ip[0].gi";
+connectAttr "CLR_RODILLA_1GroupId1.msg" "CLR_RODILLA_1Set1.gn" -na;
+connectAttr "CRV_REFR_RODILLA_DERShape.iog.og[0]" "CLR_RODILLA_1Set1.dsm" -na;
+connectAttr "CLR_RODILLA_DER_1Cluster.msg" "CLR_RODILLA_1Set1.ub[0]";
+connectAttr "tweak3.og[0]" "CLR_RODILLA_1GroupParts1.ig";
+connectAttr "CLR_RODILLA_1GroupId1.id" "CLR_RODILLA_1GroupParts1.gi";
+connectAttr "groupId6.msg" "tweakSet3.gn" -na;
+connectAttr "CRV_REFR_RODILLA_DERShape.iog.og[1]" "tweakSet3.dsm" -na;
+connectAttr "tweak3.msg" "tweakSet3.ub[0]";
+connectAttr "CRV_REFR_RODILLA_DERShapeOrig.ws" "groupParts6.ig";
+connectAttr "groupId6.id" "groupParts6.gi";
+connectAttr "CLR_RODILLA_2GroupParts1.og" "CLR_RODILLA_DER_2Cluster.ip[0].ig";
+connectAttr "CLR_RODILLA_2GroupId1.id" "CLR_RODILLA_DER_2Cluster.ip[0].gi";
+connectAttr "CLR_RODILLA_DER_2.wm" "CLR_RODILLA_DER_2Cluster.ma";
+connectAttr "CLR_RODILLA_DER_2Shape.x" "CLR_RODILLA_DER_2Cluster.x";
+connectAttr "CLR_RODILLA_2GroupId1.msg" "CLR_RODILLA_2Set1.gn" -na;
+connectAttr "CRV_REFR_RODILLA_DERShape.iog.og[2]" "CLR_RODILLA_2Set1.dsm" -na;
+connectAttr "CLR_RODILLA_DER_2Cluster.msg" "CLR_RODILLA_2Set1.ub[0]";
+connectAttr "CLR_RODILLA_DER_1Cluster.og[0]" "CLR_RODILLA_2GroupParts1.ig";
+connectAttr "CLR_RODILLA_2GroupId1.id" "CLR_RODILLA_2GroupParts1.gi";
+connectAttr "CLR_CODO_1GroupParts1.og" "CLR_CODO_DER_1Cluster.ip[0].ig";
+connectAttr "CLR_CODO_1GroupId1.id" "CLR_CODO_DER_1Cluster.ip[0].gi";
+connectAttr "CLR_CODO_DER_1.wm" "CLR_CODO_DER_1Cluster.ma";
+connectAttr "CLR_CODO_DER_1Shape.x" "CLR_CODO_DER_1Cluster.x";
+connectAttr "groupParts8.og" "tweak4.ip[0].ig";
+connectAttr "groupId8.id" "tweak4.ip[0].gi";
+connectAttr "CLR_CODO_1GroupId1.msg" "CLR_CODO_1Set1.gn" -na;
+connectAttr "crv_refr_brazo_DERShape.iog.og[0]" "CLR_CODO_1Set1.dsm" -na;
+connectAttr "CLR_CODO_DER_1Cluster.msg" "CLR_CODO_1Set1.ub[0]";
+connectAttr "tweak4.og[0]" "CLR_CODO_1GroupParts1.ig";
+connectAttr "CLR_CODO_1GroupId1.id" "CLR_CODO_1GroupParts1.gi";
+connectAttr "groupId8.msg" "tweakSet4.gn" -na;
+connectAttr "crv_refr_brazo_DERShape.iog.og[1]" "tweakSet4.dsm" -na;
+connectAttr "tweak4.msg" "tweakSet4.ub[0]";
+connectAttr "crv_refr_brazo_DERShapeOrig.ws" "groupParts8.ig";
+connectAttr "groupId8.id" "groupParts8.gi";
+connectAttr "CLR_CODO_2GroupParts1.og" "CLR_CODO_DER_2Cluster.ip[0].ig";
+connectAttr "CLR_CODO_2GroupId1.id" "CLR_CODO_DER_2Cluster.ip[0].gi";
+connectAttr "CLR_CODO_DER_2.wm" "CLR_CODO_DER_2Cluster.ma";
+connectAttr "CLR_CODO_DER_2Shape.x" "CLR_CODO_DER_2Cluster.x";
+connectAttr "CLR_CODO_2GroupId1.msg" "CLR_CODO_2Set1.gn" -na;
+connectAttr "crv_refr_brazo_DERShape.iog.og[2]" "CLR_CODO_2Set1.dsm" -na;
+connectAttr "CLR_CODO_DER_2Cluster.msg" "CLR_CODO_2Set1.ub[0]";
+connectAttr "CLR_CODO_DER_1Cluster.og[0]" "CLR_CODO_2GroupParts1.ig";
+connectAttr "CLR_CODO_2GroupId1.id" "CLR_CODO_2GroupParts1.gi";
+connectAttr "DRIVER_COLUMNA_TOP.MATCH" "expression1.in[0]";
+connectAttr "CEJAS.VISIBILITY_PARPADOS" "GRP_CTRLS_CEJAS_visibility.i";
+connectAttr "CEJAS.VISIBILITY_PARPADOS" "GRP_CTRLS_PARPADOS_visibility.i";
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 connectAttr ":perspShape.msg" ":defaultRenderGlobals.sc";
 // End of RIGG_BASE.ma
