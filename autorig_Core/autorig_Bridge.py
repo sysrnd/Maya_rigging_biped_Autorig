@@ -109,7 +109,7 @@ class BridgeActions():
         uRig = UpdateRig()
         uRig.mainClavicle(uRig.clavicleList)
         uRig.mainFingers(uRig.fingers)
-        #uRig.mainHeadSquetch()
+        uRig.mainHeadSquetch()
 
         
         

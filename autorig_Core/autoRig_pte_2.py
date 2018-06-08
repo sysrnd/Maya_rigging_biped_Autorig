@@ -172,10 +172,6 @@ class autoRig_02():
 		self.multi(conexion = 'p', lst_01 = lista_01, lst_02 =lista_02)
 
 
-		cmds.select('DRIVER_INDEX_IZQ_1', 'DRIVER_MIDDLE_IZQ_1', 'DRIVER_CANCEL_IZQ_1', 'DRIVER_PINKY_IZQ_1','DRIVER_THUMB_IZQ_1','DRIVER_INDEX_DER_1', 'DRIVER_MIDDLE_DER_1', 
-			'DRIVER_CANCEL_DER_1', 'DRIVER_PINKY_DER_1','DRIVER_THUMB_DER_1')
-		cmds.makeIdentity( apply=True, t=1, r=1, s=1, n=0, pn=1) 
-
 		#Orient Constrain dedos
 		lista_01 = ['DRIVER_INDEX_IZQ_1','DRIVER_INDEX_IZQ_2','DRIVER_INDEX_IZQ_3','DRIVER_MIDDLE_IZQ_1','DRIVER_MIDDLE_IZQ_2','DRIVER_MIDDLE_IZQ_3','DRIVER_CANCEL_IZQ_1',
 		'DRIVER_CANCEL_IZQ_2','DRIVER_CANCEL_IZQ_3','DRIVER_PINKY_IZQ_1','DRIVER_PINKY_IZQ_2','DRIVER_PINKY_IZQ_3','DRIVER_THUMB_IZQ_1','DRIVER_THUMB_IZQ_2','DRIVER_THUMB_IZQ_3']
@@ -460,6 +456,94 @@ class autoRig_02():
 
 			self.multi(conexion = 'set', lst_01 = ['DRIVER_BUSTO_IZQ'], offset=6, ampliar_lst=0)
 			self.multi(conexion = 'set', lst_01 = ['DRIVER_BUSTO_DER'], offset=13, ampliar_lst=0)
+
+
+
+		# Crea el strech en piernas
+		loc_piernas_strech = []
+		for loc in range(1, 3):
+		    cmds.spaceLocator(n= 'LOCATOR_LEGS_' + str(loc)+'_IZQ')
+		    cmds.spaceLocator(n= 'LOCATOR_LEGS_' + str(loc)+'_DER')
+		    loc_piernas_strech.append('LOCATOR_LEGS_' + str(loc)+'_IZQ')
+		    loc_piernas_strech.append('LOCATOR_LEGS_' + str(loc)+'_DER')
+
+		cmds.group(loc_piernas_strech, n= 'GRP_STRECH_PIERNAS')
+
+		lista_01=['PIERNA_IZQ','DRIVER_PIE_IZQ']
+		self.multi(conexion='poc', lst_01=lista_01, lst_02=['LOCATOR_LEGS_1_IZQ','LOCATOR_LEGS_2_IZQ'], offset=0)
+
+		for element in range(1 , 3):
+			lado='IZQ'
+			if element == 2:
+				lado='DER'
+
+			PX = cmds.getAttr('LOCATOR_LEGS_1_' +lado +'.tx')
+			PY = cmds.getAttr('LOCATOR_LEGS_1_' +lado +'.ty')
+			PZ = cmds.getAttr('LOCATOR_LEGS_1_' +lado +'.tz')
+
+			PX2 = cmds.getAttr('LOCATOR_LEGS_2_' +lado +'.tx')
+			PY2 = cmds.getAttr('LOCATOR_LEGS_2_' +lado +'.ty')
+			PZ2 = cmds.getAttr('LOCATOR_LEGS_2_' +lado +'.tz')
+
+			cmds.distanceDimension( sp=(PX, PY, PZ), ep=(PX2, PY2, PZ2))
+			cmds.rename('distanceDimension'+str(1), 'distance_leg_'+lado)
+			cmds.parent('distance_leg_'+lado,'GRP_STRECH_PIERNAS')
+
+			cmds.shadingNode('condition', au=True, n='condition_'+lado)
+			cmds.shadingNode('multiplyDivide', au=True, n='multiply_'+lado)
+
+
+			lista_01=['distance_leg_'+lado+'.distance','distance_leg_'+lado+'.distance','multiply_'+lado+'.outputX']
+			lista_02=['multiply_'+lado+'.input1X','condition_'+lado+'.firstTerm','condition_'+lado+'.colorIfTrueR']
+			self.multi(conexion='cat', lst_01=lista_01, lst_02=lista_02, ampliar_lst=1)
+			cmds.setAttr('multiply_'+lado+'.operation', 2)
+			cmds.setAttr('condition_'+lado+'.operation',2)
+
+			basura=[]
+			for i in range(1 , 5):
+				cmds.spaceLocator(n= 'LOC_TEMP_LEGS_' + str(i)+lado)
+				basura.append('LOC_TEMP_LEGS_' + str(i)+lado)
+
+			lista_01=['PIERNA_'+lado,'RODILLA_'+lado,'RODILLA_'+lado,'DRIVER_PIE_'+lado]
+			self.multi(conexion='poc', lst_01=lista_01, lst_02=basura, offset=0, ampliar_lst=1)
+
+			for i in range(0 , 2):
+				nom= ['distance_leg_temp_01_','distance_leg_temp_02_']
+				PX = cmds.getAttr(basura[i] +'.tx')
+				PY = cmds.getAttr(basura[i] +'.ty')
+				PZ = cmds.getAttr(basura[i] +'.tz')
+
+				PX2 = cmds.getAttr(basura[i+1]  +'.tx')
+				PY2 = cmds.getAttr(basura[i+1]  +'.ty')
+				PZ2 = cmds.getAttr(basura[i+1]  +'.tz')
+
+				if i == 1:
+					PX2 = cmds.getAttr(basura[i+2]  +'.tx')
+					PY2 = cmds.getAttr(basura[i+2]  +'.ty')
+					PZ2 = cmds.getAttr(basura[i+2]  +'.tz')
+
+				cmds.distanceDimension( sp=(PX, PY, PZ), ep=(PX2, PY2, PZ2))
+				cmds.rename('distanceDimension'+str(1), nom[i]+lado)
+				
+			val_01 = cmds.getAttr('distance_leg_temp_01_'+lado+'.distance')
+			val_02 = cmds.getAttr('distance_leg_temp_02_'+lado+'.distance')
+
+			suma = val_01+val_02
+
+			cmds.setAttr('condition_'+lado+'.secondTerm', suma)
+			cmds.setAttr('multiply_'+lado+'.input2X', suma)
+
+
+			lista_01=['condition_'+lado+'.outColorR','condition_'+lado+'.outColorR']
+			lista_02=['PIERNA_'+lado+'.scaleX','RODILLA_'+lado+'.scaleX']
+			self.multi(conexion='cat', lst_01=lista_01, lst_02=lista_02, ampliar_lst=1)
+
+			cmds.delete(basura)
+			cmds.connectAttr('DRIVER_PIE_'+lado+'.strech', 'LOCATOR_LEGS_2_'+lado+'_pointConstraint1.DRIVER_PIE_'+lado+'W0')
+
+		cmds.parent('GRP_STRECH_PIERNAS','GRP_RIGG')
+
+		cmds.editDisplayLayerMembers( 'no_tocar', 'GRP_STRECH_PIERNAS')
 
 
 
