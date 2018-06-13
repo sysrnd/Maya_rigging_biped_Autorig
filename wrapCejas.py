@@ -12,7 +12,7 @@ def rename():
 				if wrapped == False:
 					print geo
 					geoParent = cmds.listRelatives(geo, p=True)[0]
-					geoParent = cmds.rename(geoParent, 'CEJAS_MD')
+					#geoParent = cmds.rename(geoParent, 'CEJAS_MD')
 					wrap(geoParent)
 
 					wrapped = True

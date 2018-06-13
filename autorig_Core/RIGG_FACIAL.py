@@ -12,6 +12,18 @@ class facial_class():
 		from Rigging.Maya_rigging_biped_Autorig.autorig_Core.autoRig_pte_2 import autoRig_02
 		pteDos = autoRig_02('nada', 'nada', 'nada')
 
+		for geo in cmds.ls(et='mesh'):
+		    if geo.find('CEJAS') != -1:
+		        if geo.find('_MD') != -1:
+		            cejas = cmds.listRelatives(geo, p=True)[0]
+
+		cabeza=''
+		for geo in cmds.ls(et='mesh'):
+		    if geo.find('CABEZA') != -1:
+		        if geo.find('_MD') != -1:
+		            cabeza = cmds.listRelatives(geo, p=True)[0]
+		           
+
 		#CREAR CLUSTERS CURVAS(COMIENZA)
 		cmds.group(em=True, n='GRP_DEFORMS_CURVS')
 		
@@ -102,13 +114,16 @@ class facial_class():
 			'STRETCH_BS','SQUASH_BS', 'VACIO1_BS', 'VACIO2_BS', 'VACIO3_BS', 'VACIO4_BS','VACIO5_BS', 'WIRE_BS', 'ROOT_BS')
 
 		cmds.blendShape(n='BLEND_GENERAL')
+		
 
-
-		cmds.select('ROOT_BS', 'CABEZA_MD')
+		cmds.select('ROOT_BS', cabeza)
 
 		cmds.blendShape(n='BLEND_ROOT')
 
+		cmds.select('CEJAS_WRAP_BS',cejas)
+		cmds.blendShape(n='BLEND_CEJAS')
 
+		cmds.setAttr('BLEND_CEJAS.CEJAS_WRAP_BS', 1)
 		cmds.setAttr('BLEND_GENERAL.WIRE_BS', 1)
 		cmds.setAttr('BLEND_ROOT.ROOT_BS', 1)
 
@@ -174,6 +189,9 @@ class facial_class():
 		#AGREGAR MIEMBROS AL GRUPO NO TOCAR (COMEINZA)
 		cmds.parent('GRP_BLENDSHAPES','GRP_GEO','GRP_DEFORMS_CURVS','GRP_RIGG')
 		cmds.editDisplayLayerMembers( 'no_tocar','GRP_CURVS_CARA', 'GRP_DEFORMS_CURVS')
+
+
+		#cmds.reorderDeformers( 'skinCluster3', 'BLEND_ROOT', 'GRP_RIGG|GRP_BLENDSHAPES|'+cabeza )
 
 
 		AXIS = ['X','Y','Z']

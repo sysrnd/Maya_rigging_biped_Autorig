@@ -103,8 +103,8 @@ class autoRig_02():
 		lista_01_FKW= ['PC_HOMBRO_IZQ_IK_FK','PC_CODO_IZQ_IK_FK','PC_CODO_SEC_IZQ_IK_FK','PC_MANO_IZQ_IK_FK']
 		lista_02_FKW= ['HOMBRO_IZQ_FKW1','CODO_IZQ_FKW1','CODO_SEC_IZQ_FKW1','MANO_IZQ_FKW1']
 		
-		lista_01_FK= ['HOMBRO_IZQ_FK','DRIVER_HOMBRO_IZQ_FK','DRIVER_CODO_IZQ_FK','DRIVER_MANO_IZQ_FK']
-		lista_02_FK= ['visibility','visibility','visibility','visibility']
+		lista_01_FK= ['HOMBRO_IZQ_FK','DRIVER_HOMBRO_IZQ_FK']
+		lista_02_FK= ['visibility','visibility']
 
 		#Cambia los atributos de visibilidad de los IK a '0', y los FK a '1', tambien apaga los constrains de los huesos IK
 		self.multi(conexion = 'set', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, attr=0)
@@ -206,6 +206,9 @@ class autoRig_02():
 		'DRIVER_COLUMNA_BOTTOM','DRIVER_ROOT','DRIVER_ROOT','MOVE_ALL','MOVE_ALL','MOVE_ALL','MASTER','MOVE_ALL','MOVE_ALL','MOVE_ALL','DRIVER_COLUMNA_TOP']
 		self.multi(conexion = 'p', lst_01 = lista_01, lst_02 =lista_02)
 
+		boca = ['DRIVER_LENGUA','DRIVER_DIENTES_BOTTOM']
+		self.freeze(obj = boca)
+
 		lista_01 = ['DRIVER_CINTURA','DRIVER_COLUMNA_BOTTOM','DRIVER_COLUMNA_MIDDLE','DRIVER_COLUMNA_TOP','DRIVER_CABEZA','DRIVER_BOCA','DRIVER_PINKY_SEC_IZQ','DRIVER_CLAVICULA_IZQ','DRIVER_CUELLO']
 		lista_02 = ['CINTURA','COLUMNA_BAJA','COLUMNA_MEDIA','COLUMNA_ALTA','CABEZA','MANDIBULA_INUTIL','PINKY_SEC_IZQ','CLAVICULA_IZQ','CUELLO']
 		self.multi(conexion = 'or', lst_01 = lista_01, lst_02 =lista_02)
@@ -221,7 +224,7 @@ class autoRig_02():
 		self.atributos(bloquear = 'ts', lst_drivers_block = lst_drivers_block_ts)
 
 		lst_drivers_block_s = ['DRIVER_LENGUA','DRIVER_DIENTES_TOP','DRIVER_DIENTES_BOTTOM','DRIVER_MANO_IZQ','DRIVER_ROOT','DRIVER_PIE_IZQ','MOVE_ALL',
-		'DRIVER_CLAVICULA_IZQ']
+		'DRIVER_CLAVICULA_IZQ','MASTER']
 		self.atributos(bloquear = 's', lst_drivers_block = lst_drivers_block_s)
 
 		lst_drivers_block_rs = ['DRIVER_CODO_IZQ','DRIVER_RODILLA_IZQ','DRIVER_TOE_FINGERS_IZQ','DRIVER_OJO_IZQ']
@@ -472,6 +475,9 @@ class autoRig_02():
 		lista_01=['PIERNA_IZQ','DRIVER_PIE_IZQ']
 		self.multi(conexion='poc', lst_01=lista_01, lst_02=['LOCATOR_LEGS_1_IZQ','LOCATOR_LEGS_2_IZQ'], offset=0)
 
+		self.multi(conexion='p', lst_01=['LOCATOR_LEGS_2_IZQ'], lst_02=['MOVE_ALL'])
+
+
 		for element in range(1 , 3):
 			lado='IZQ'
 			if element == 2:
@@ -491,6 +497,8 @@ class autoRig_02():
 
 			cmds.shadingNode('condition', au=True, n='condition_'+lado)
 			cmds.shadingNode('multiplyDivide', au=True, n='multiply_'+lado)
+			cmds.shadingNode('plusMinusAverage', au=True, n='plus_'+lado)
+			
 
 
 			lista_01=['distance_leg_'+lado+'.distance','distance_leg_'+lado+'.distance','multiply_'+lado+'.outputX']
@@ -504,8 +512,12 @@ class autoRig_02():
 				cmds.spaceLocator(n= 'LOC_TEMP_LEGS_' + str(i)+lado)
 				basura.append('LOC_TEMP_LEGS_' + str(i)+lado)
 
+
 			lista_01=['PIERNA_'+lado,'RODILLA_'+lado,'RODILLA_'+lado,'DRIVER_PIE_'+lado]
 			self.multi(conexion='poc', lst_01=lista_01, lst_02=basura, offset=0, ampliar_lst=1)
+
+			for x in xrange(0, len(basura)):
+				cmds.delete(basura[x]+'_pointConstraint1')
 
 			for i in range(0 , 2):
 				nom= ['distance_leg_temp_01_','distance_leg_temp_02_']
@@ -538,7 +550,18 @@ class autoRig_02():
 			lista_02=['PIERNA_'+lado+'.scaleX','RODILLA_'+lado+'.scaleX']
 			self.multi(conexion='cat', lst_01=lista_01, lst_02=lista_02, ampliar_lst=1)
 
-			cmds.delete(basura)
+			cmds.connectAttr('distance_leg_temp_01_'+lado+'Shape'+'.distance', 'plus_'+lado+'.input1D[0]')
+			cmds.connectAttr('distance_leg_temp_02_'+lado+'Shape'+'.distance', 'plus_'+lado+'.input1D[1]')
+
+			emparentar =cmds.group(basura, n= 'GRP_LOC_TEMP_PIE_' +lado)
+			cmds.parent(emparentar, 'MOVE_ALL')
+
+			lst_temp =['distance_leg_temp_01_'+lado,'distance_leg_temp_02_'+lado]
+			emparentar = cmds.group(lst_temp, n= 'GRP_distance_leg_'+lado)
+			cmds.parent(emparentar, 'GRP_RIGG')
+
+
+			cmds.editDisplayLayerMembers( 'no_tocar', basura,emparentar, 'LOCATOR_LEGS_2_IZQ','LOCATOR_LEGS_2_DER')
 			cmds.connectAttr('DRIVER_PIE_'+lado+'.strech', 'LOCATOR_LEGS_2_'+lado+'_pointConstraint1.DRIVER_PIE_'+lado+'W0')
 
 		cmds.parent('GRP_STRECH_PIERNAS','GRP_RIGG')
