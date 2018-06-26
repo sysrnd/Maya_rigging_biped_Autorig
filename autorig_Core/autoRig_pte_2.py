@@ -96,37 +96,7 @@ class autoRig_02():
 		self.multi(conexion = 'pac', lst_01 = lista_01, lst_02 =lista_02, lst_03 = lista_03)
 
 
-		lista_01_IK_FK= ['PC_HOMBRO_IZQ_IK_FK','PC_CODO_IZQ_IK_FK','PC_CODO_SEC_IZQ_IK_FK','PC_MANO_IZQ_IK_FK','crv_refr_brazo_IZQ','HOMBRO_IZQ_IK',
-		'DRIVER_CODO_IZQ','DRIVER_MANO_IZQ']
-		lista_02_IK_FK= ['HOMBRO_IZQ_IKW0','CODO_IZQ_IKW0','CODO_SEC_IZQ_IKW0','MANO_IZQ_IKW0','visibility','visibility','visibility','visibility']
-
-		lista_01_FKW= ['PC_HOMBRO_IZQ_IK_FK','PC_CODO_IZQ_IK_FK','PC_CODO_SEC_IZQ_IK_FK','PC_MANO_IZQ_IK_FK']
-		lista_02_FKW= ['HOMBRO_IZQ_FKW1','CODO_IZQ_FKW1','CODO_SEC_IZQ_FKW1','MANO_IZQ_FKW1']
 		
-		lista_01_FK= ['HOMBRO_IZQ_FK','DRIVER_HOMBRO_IZQ_FK']
-		lista_02_FK= ['visibility','visibility']
-
-		#Cambia los atributos de visibilidad de los IK a '0', y los FK a '1', tambien apaga los constrains de los huesos IK
-		self.multi(conexion = 'set', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, attr=0)
-		self.multi(conexion = 'set', lst_01 = lista_01_FK, lst_02 =lista_02_FK, attr=1)
-
-		#Crea los set Driven Key de visibilidad hacia los switch de DRIVER_COLUMNA_TOP.SWITCH_IK_FK_(IZQ_DER)
-		self.multi(conexion = 'sdk', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
-		self.multi(conexion = 'sdk', lst_01 = lista_01_FKW, lst_02 =lista_02_FKW, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_') 
-		self.multi(conexion = 'sdk', lst_01 = lista_01_FK, lst_02 =lista_02_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
-
-		#Cambia los atributos SWITCH_IK_FK_IZQ de DRIVER_COLUMNA_TOP a 1
-		self.multi(conexion = 'set', lst_01 = ['DRIVER_COLUMNA_TOP'], lst_02 =['SWITCH_IK_FK_IZQ'], attr=1)
-
-		#Cambia los atributos de visibilidad de los IK a '1', y los FK a '0', tambien apaga los constrains de los huesos FK
-		self.multi(conexion = 'set', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, attr=1)
-		self.multi(conexion = 'set', lst_01 = lista_01_FKW, lst_02 =lista_02_FKW, attr=0)
-		self.multi(conexion = 'set', lst_01 = lista_01_FK, lst_02 =lista_02_FK, attr=0)
-
-		#Crea los set Driven Key de visibilidad hacia los switch de DRIVER_COLUMNA_TOP.SWITCH_IK_FK_(IZQ_DER)
-		self.multi(conexion = 'sdk', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
-		self.multi(conexion = 'sdk', lst_01 = lista_01_FKW, lst_02 =lista_02_FKW, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
-		self.multi(conexion = 'sdk', lst_01 = lista_01_FK, lst_02 =lista_02_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
 
 
 		#CREAR IK BRAZOS, (COMIENZAN BRAZOS)
@@ -209,34 +179,15 @@ class autoRig_02():
 		boca = ['DRIVER_LENGUA','DRIVER_DIENTES_BOTTOM']
 		self.freeze(obj = boca)
 
-		lista_01 = ['DRIVER_CINTURA','DRIVER_COLUMNA_BOTTOM','DRIVER_COLUMNA_MIDDLE','DRIVER_COLUMNA_TOP','DRIVER_CABEZA','DRIVER_BOCA','DRIVER_PINKY_SEC_IZQ','DRIVER_CLAVICULA_IZQ','DRIVER_CUELLO']
-		lista_02 = ['CINTURA','COLUMNA_BAJA','COLUMNA_MEDIA','COLUMNA_ALTA','CABEZA','MANDIBULA_INUTIL','PINKY_SEC_IZQ','CLAVICULA_IZQ','CUELLO']
+		lista_01 = ['DRIVER_CINTURA','DRIVER_COLUMNA_BOTTOM','DRIVER_COLUMNA_MIDDLE','DRIVER_CABEZA','DRIVER_BOCA','DRIVER_PINKY_SEC_IZQ','DRIVER_CLAVICULA_IZQ','DRIVER_CUELLO']
+		lista_02 = ['CINTURA','COLUMNA_BAJA','COLUMNA_MEDIA','CABEZA','MANDIBULA_INUTIL','PINKY_SEC_IZQ','CLAVICULA_IZQ','CUELLO']
 		self.multi(conexion = 'or', lst_01 = lista_01, lst_02 =lista_02)
 
-		self.multi(conexion = 'pac', lst_01=['DRIVER_LENGUA','DRIVER_ROOT','DRIVER_DIENTES_TOP','DRIVER_DIENTES_BOTTOM'],lst_02=['LENGUA_2','ROOT','DIENTES_ARRIBA','DIENTES_BAJA'])
+		self.multi(conexion = 'pac', lst_01=['DRIVER_LENGUA','DRIVER_ROOT','DRIVER_DIENTES_TOP','DRIVER_DIENTES_BOTTOM','DRIVER_COLUMNA_TOP'],lst_02=['LENGUA_2','ROOT','DIENTES_ARRIBA','DIENTES_BAJA','COLUMNA_ALTA'])
 		self.multi(conexion = 'aim', lst_01 = ['DRIVER_OJO_IZQ'], lst_02 =['OJO_IZQ'])
 		self.multi(conexion = 'poc', lst_01 = ['DRIVER_MANO_IZQ'], lst_02 =['IK_BRAZO_IZQ'])
 
 
-		#BLOQUEAR Y OCULTAR ATRIBUTOS(COMIENZA)
-		lst_drivers_block_ts = ['DRIVER_TOE_IZQ','DRIVER_BALL_IZQ','DRIVER_HEEL_IZQ','DRIVER_MANO_IZQ_FK','DRIVER_CODO_IZQ_FK','DRIVER_HOMBRO_IZQ_FK','DRIVER_CINTURA','DRIVER_COLUMNA_BOTTOM'
-		,'DRIVER_COLUMNA_MIDDLE','DRIVER_COLUMNA_TOP','DRIVER_BOCA','DRIVER_CABEZA','DRIVER_CUELLO']
-		self.atributos(bloquear = 'ts', lst_drivers_block = lst_drivers_block_ts)
-
-		lst_drivers_block_s = ['DRIVER_LENGUA','DRIVER_DIENTES_TOP','DRIVER_DIENTES_BOTTOM','DRIVER_MANO_IZQ','DRIVER_ROOT','DRIVER_PIE_IZQ','MOVE_ALL',
-		'DRIVER_CLAVICULA_IZQ','MASTER']
-		self.atributos(bloquear = 's', lst_drivers_block = lst_drivers_block_s)
-
-		lst_drivers_block_rs = ['DRIVER_CODO_IZQ','DRIVER_RODILLA_IZQ','DRIVER_TOE_FINGERS_IZQ','DRIVER_OJO_IZQ']
-		self.atributos(bloquear = 'rs', lst_drivers_block = lst_drivers_block_rs)
-
-		lst_drivers_block_v = ['MASTER','DRIVER_THUMB_IZQ_1','DRIVER_THUMB_IZQ_2','DRIVER_THUMB_IZQ_3','DRIVER_INDEX_IZQ_1','DRIVER_INDEX_IZQ_2','DRIVER_INDEX_IZQ_3','DRIVER_MIDDLE_IZQ_1',
-		'DRIVER_MIDDLE_IZQ_2','DRIVER_MIDDLE_IZQ_3','DRIVER_CANCEL_IZQ_1','DRIVER_CANCEL_IZQ_2','DRIVER_CANCEL_IZQ_3','DRIVER_PINKY_IZQ_1','DRIVER_PINKY_IZQ_2','DRIVER_PINKY_IZQ_3']
-		self.atributos(bloquear = 'v', lst_drivers_block = lst_drivers_block_v)
-
-		# Bloquear X y Z de la rotacion en el FK codo
-		self.atributos(bloquear = 'r', lst_drivers_block = ['DRIVER_CODO_IZQ_FK','DRIVER_CODO_IZQ_FK'], eje_attr=['x', 'z'])
-		self.atributos(bloquear = 'tsr', lst_drivers_block = ['OJO_IZQ_REFERENCIA'])
 
 		#CAMBIA COLORES OVERRIDES 
 		lista_01 = ['DRIVER_THUMB_IZQ_1','DRIVER_INDEX_IZQ_1','DRIVER_MIDDLE_IZQ_1','DRIVER_CANCEL_IZQ_1','DRIVER_PINKY_SEC_IZQ','DRIVER_MANO_IZQ','DRIVER_CODO_IZQ',
@@ -478,6 +429,65 @@ class autoRig_02():
 		self.multi(conexion='p', lst_01=['LOCATOR_LEGS_2_IZQ'], lst_02=['MOVE_ALL'])
 
 
+		#Grupo drivers mano IK
+		cmds.group('DRIVER_MANO_IZQ','DRIVER_CODO_IZQ', n='GRP_DRIVERS_IK_IZQ')
+		cmds.group('DRIVER_MANO_DER ','DRIVER_CODO_DER', n='GRP_DRIVERS_IK_DER')
+
+		#Visibilidad switch IK / FK
+		self.multi(conexion = 'set', lst_01 = ['DRIVER_COLUMNA_TOP'], lst_02 =['SWITCH_IK_FK_IZQ'], attr=0)
+		lista_01_IK_FK= ['PC_HOMBRO_IZQ_IK_FK','PC_CODO_IZQ_IK_FK','PC_CODO_SEC_IZQ_IK_FK','PC_MANO_IZQ_IK_FK','crv_refr_brazo_IZQ','HOMBRO_IZQ_IK','GRP_DRIVERS_IK_IZQ']
+		lista_02_IK_FK= ['HOMBRO_IZQ_IKW0','CODO_IZQ_IKW0','CODO_SEC_IZQ_IKW0','MANO_IZQ_IKW0','visibility','visibility','visibility']
+
+		lista_01_FKW= ['PC_HOMBRO_IZQ_IK_FK','PC_CODO_IZQ_IK_FK','PC_CODO_SEC_IZQ_IK_FK','PC_MANO_IZQ_IK_FK']
+		lista_02_FKW= ['HOMBRO_IZQ_FKW1','CODO_IZQ_FKW1','CODO_SEC_IZQ_FKW1','MANO_IZQ_FKW1']
+		
+		lista_01_FK= ['HOMBRO_IZQ_FK','GRP_CTRL_CLAV_IZQ']
+		lista_02_FK= ['visibility','visibility']
+
+		#Cambia los atributos de visibilidad de los IK a '0', y los FK a '1', tambien apaga los constrains de los huesos IK
+		self.multi(conexion = 'set', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, attr=0)
+		self.multi(conexion = 'set', lst_01 = lista_01_FK, lst_02 =lista_02_FK, attr=1)
+
+		#Crea los set Driven Key de visibilidad hacia los switch de DRIVER_COLUMNA_TOP.SWITCH_IK_FK_(IZQ_DER)
+		self.multi(conexion = 'sdk', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
+		self.multi(conexion = 'sdk', lst_01 = lista_01_FKW, lst_02 =lista_02_FKW, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_') 
+		self.multi(conexion = 'sdk', lst_01 = lista_01_FK, lst_02 =lista_02_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
+
+		#Cambia los atributos SWITCH_IK_FK_IZQ de DRIVER_COLUMNA_TOP a 1
+		self.multi(conexion = 'set', lst_01 = ['DRIVER_COLUMNA_TOP'], lst_02 =['SWITCH_IK_FK_IZQ'], attr=1)
+
+		#Cambia los atributos de visibilidad de los IK a '1', y los FK a '0', tambien apaga los constrains de los huesos FK
+		self.multi(conexion = 'set', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, attr=1)
+		self.multi(conexion = 'set', lst_01 = lista_01_FKW, lst_02 =lista_02_FKW, attr=0)
+		self.multi(conexion = 'set', lst_01 = lista_01_FK, lst_02 =lista_02_FK, attr=0)
+
+		#Crea los set Driven Key de visibilidad hacia los switch de DRIVER_COLUMNA_TOP.SWITCH_IK_FK_(IZQ_DER)
+		self.multi(conexion = 'sdk', lst_01 = lista_01_IK_FK, lst_02 =lista_02_IK_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
+		self.multi(conexion = 'sdk', lst_01 = lista_01_FKW, lst_02 =lista_02_FKW, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
+		self.multi(conexion = 'sdk', lst_01 = lista_01_FK, lst_02 =lista_02_FK, solver='DRIVER_COLUMNA_TOP.SWITCH_IK_FK_')
+
+
+		#BLOQUEAR Y OCULTAR ATRIBUTOS(COMIENZA)
+		lst_drivers_block_ts = ['DRIVER_TOE_IZQ','DRIVER_BALL_IZQ','DRIVER_HEEL_IZQ','DRIVER_MANO_IZQ_FK','DRIVER_CODO_IZQ_FK','DRIVER_HOMBRO_IZQ_FK','DRIVER_CINTURA','DRIVER_COLUMNA_BOTTOM'
+		,'DRIVER_COLUMNA_MIDDLE','DRIVER_BOCA','DRIVER_CABEZA','DRIVER_CUELLO']
+		self.atributos(bloquear = 'ts', lst_drivers_block = lst_drivers_block_ts)
+
+		lst_drivers_block_s = ['DRIVER_LENGUA','DRIVER_DIENTES_TOP','DRIVER_DIENTES_BOTTOM','DRIVER_MANO_IZQ','DRIVER_ROOT','DRIVER_PIE_IZQ','MOVE_ALL',
+		'DRIVER_CLAVICULA_IZQ','MASTER','DRIVER_COLUMNA_TOP']
+		self.atributos(bloquear = 's', lst_drivers_block = lst_drivers_block_s)
+
+		lst_drivers_block_rs = ['DRIVER_CODO_IZQ','DRIVER_RODILLA_IZQ','DRIVER_TOE_FINGERS_IZQ','DRIVER_OJO_IZQ']
+		self.atributos(bloquear = 'rs', lst_drivers_block = lst_drivers_block_rs)
+
+		lst_drivers_block_v = ['MASTER','DRIVER_THUMB_IZQ_1','DRIVER_THUMB_IZQ_2','DRIVER_THUMB_IZQ_3','DRIVER_INDEX_IZQ_1','DRIVER_INDEX_IZQ_2','DRIVER_INDEX_IZQ_3','DRIVER_MIDDLE_IZQ_1',
+		'DRIVER_MIDDLE_IZQ_2','DRIVER_MIDDLE_IZQ_3','DRIVER_CANCEL_IZQ_1','DRIVER_CANCEL_IZQ_2','DRIVER_CANCEL_IZQ_3','DRIVER_PINKY_IZQ_1','DRIVER_PINKY_IZQ_2','DRIVER_PINKY_IZQ_3']
+		self.atributos(bloquear = 'v', lst_drivers_block = lst_drivers_block_v)
+
+		# Bloquear X y Z de la rotacion en el FK codo
+		self.atributos(bloquear = 'r', lst_drivers_block = ['DRIVER_CODO_IZQ_FK','DRIVER_CODO_IZQ_FK'], eje_attr=['x', 'z'])
+		self.atributos(bloquear = 'tsr', lst_drivers_block = ['OJO_IZQ_REFERENCIA'])
+
+
 		for element in range(1 , 3):
 			lado='IZQ'
 			if element == 2:
@@ -563,6 +573,9 @@ class autoRig_02():
 
 			cmds.editDisplayLayerMembers( 'no_tocar', basura,emparentar, 'LOCATOR_LEGS_2_IZQ','LOCATOR_LEGS_2_DER')
 			cmds.connectAttr('DRIVER_PIE_'+lado+'.strech', 'LOCATOR_LEGS_2_'+lado+'_pointConstraint1.DRIVER_PIE_'+lado+'W0')
+
+			cmds.connectAttr('DRIVER_PIE_'+lado+'.strech', 'LOCATOR_LEGS_1_'+lado+'_pointConstraint1.PIERNA_'+lado+'W0')
+
 
 		cmds.parent('GRP_STRECH_PIERNAS','GRP_RIGG')
 
